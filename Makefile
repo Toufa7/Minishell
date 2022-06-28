@@ -8,17 +8,20 @@ COMILING = gcc
 
 F_REMOVE = rm -rf
 
-FUNCTIONS = ft_split.c\
-			ft_substr.c\
-			ft_strlen.c\
-			ft_strstr.c\
+FUNCTIONS = Libft/ft_split.c\
+			Libft/ft_substr.c\
+			Libft/ft_strlen.c\
+			Libft/ft_strstr.c\
+			Libft/ft_strjoin.c\
+			pipes.c\
+			get_env_variables.c\
 
 OBJECTS = $(FUNCTIONS:.c=.o)
 
-all = $(NAME)
+all : $(NAME)
 
 $(NAME) : $(OBJECTS)
-			$(COMILING) $(FLAGS) $(OBJECTS) main.c -o $(NAME)
+			$(COMILING) -lreadline $(OBJECTS) main.c -o $(NAME)
 
 clean   :
 			$(F_REMOVE) $(OBJECTS)

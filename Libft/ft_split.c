@@ -1,4 +1,4 @@
-#include "mini.h"
+#include "libft.h"
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
@@ -17,7 +17,6 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	dst[i] = '\0';
 	return (len);
 }
-
 
 static int	count_words(const char *s, char c)
 {

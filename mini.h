@@ -7,16 +7,14 @@
 #include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+#include "./Libft/libft.h"
 
 #define GREEN "\033[32m"
 #define RESET "\033[0m"
 #define True 1
 
 
-
-char	**ft_split(char const *s, char c);
-size_t	ft_strlen(const char *s);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-char	*ft_strstr(const char *haystack, const char *needle);
+char    *get_env_variables(char **env, char *target);
+char    **pipes(char *str);
 
 #endif
