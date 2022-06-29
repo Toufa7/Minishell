@@ -1,0 +1,53 @@
+types : CMD,  RED_INPUT,  RED_OUTPUT,  APPEND,  HERE_DOC
+
+command = "< Makefile cat > k > r < pipes.c > d >> a << sd >> sd << sad a1 a2"
+
+type = RED_INPUT;
+
+Node
+{
+    int type;
+    char *data;
+    next;
+}
+
+Parse = ("Makefile", RED_INPUT) -> ("cat", CMD) -> ("k", RED_OUTPUT) -> ("r", RED_OUTPUT) -> ("pipes.c", RED_INPUT) 
+-> ("d", RED_OUTPUT) -> ("a", APPEND) -> (sd, "HERE_DOC") -> ("sd", APPEND) -> ("sad", HERE_DOC) -> ("a1", CMD) -> ("a2", CMD) ->  NULL;
+
+Argv = ["cat", "a1", "a2"];
+
+CMD
+{
+    char **ARGV;
+    int fd_in; //init -1
+    int fd_out; //init -1;
+}
+
+(CMD1) -> (CMD2) -> (CMD3) -> NULL;
+
+command : i=0 -----> len(command):
+    if (command[i] == ' ')
+        i++;
+        continue ;
+
+    if (command[i] == '>' && command[i + 1] == '>')
+        type = APPEND
+        i += 2
+
+    else if (command[i] == '>')
+        type = RED_OUTPUT
+        i++;
+
+    else if (command[i] == '<' && command[i + 1] == '<')
+        type = HERE_DOC
+        i += 2
+
+    else if (command[i] == '<')
+        type = RED_INPUT
+        i++;
+
+    else
+        token = get_token(command + i);
+        Parse.add(Node(type, token))
+        type = CMD
+        i += len(token);
