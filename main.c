@@ -1,24 +1,5 @@
 #include "mini.h"
 
-typedef struct s_parse
-{
-    char    *line;
-    char    **inspection;
-}   t_parse;
-
-
-char    *variable(char *str)
-{
-	int i = 0;
-	while (str[i])
-	{
-		if (str[i] == '$')
-			return (&str[i + 1]);
-		i++;
-	}
-	return (NULL);
-}
-
 int main(int ac, char **av, char **env)
 {
 	t_parse *parse;
@@ -35,10 +16,16 @@ int main(int ac, char **av, char **env)
 			while (parse->inspection[i][j])
 			{
 				if (parse->inspection[i][j] == '$')
-					printf("%s\n",getenv(variable(parse->inspection[i])));
+					printf("%s\t",get_env_variables(env, parse->inspection[i]));
+				if (parse->inspection[i][j] == '|')
+					printf("%s\t",pipes(parse->inspection[i]));
 				j++;
 			}
 			i++;
 		}
+		printf("\n");
 	}
 }
+
+// $USER     $HOME       $TERM     $XPC_FLAGS
+// cmd_1 |			cmd_2 	| "omar 	|  toufah"

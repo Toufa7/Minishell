@@ -1,3 +1,4 @@
+make --dry-run --always-make --keep-going --print-directory
 make: Entering directory `/Users/otoufah/Desktop/Minishell'
 cc    -c -o Libft/ft_split.o Libft/ft_split.c
 cc    -c -o Libft/ft_substr.o Libft/ft_substr.c

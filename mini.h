@@ -13,6 +13,12 @@
 #define RESET "\033[0m"
 #define True 1
 
+typedef struct s_parse
+{
+    char    *line;
+    char    **inspection;
+    
+}   t_parse;
 
 char    *get_env_variables(char **env, char *target);
 char    **pipes(char *str);

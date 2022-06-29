@@ -1,37 +1,45 @@
 #include "mini.h"
 
-char    **pipes(char *str)
+int space_index(char *str)
 {
-    int i = 0;
-    while (str[i] != '\0')
-    {
-        if (str[i] == '|')
-            return (ft_split(str, '|'));
+    int i;
+
+    i = 0;
+    while (str[i] == ' ')
         i++;
-    }
-    return (&str);
+    return (i);
 }
 
-// int main(int ac, char **av, char **env)
-// {
-//     while (True)
-//     {
-//         int i = 0;
-//         char *line = readline(GREEN "Mini-0.0$ " RESET);
-//         char **inspection = ft_split(line, ' ');
+char    *skip_spaces(char *str)
+{
+    int i;
+    int j;
+    char *after_spaces = malloc(sizeof(char) + ft_strlen(str) + 1);
 
-//         while (inspection[i])
-//         {
-//             int j = 0;
-//             while (inspection[i][j])
-//             {
-//                 if (inspection[i][j] == '|')
-//                 {
+    j = 0;
+    i = space_index(str);
+    while (str[i])
+    {
+        after_spaces[j] = str[i];
+        j++;
+        i++;
+    }
+	after_spaces[j] = '\0';
+    return (after_spaces);
+}
 
-//                 }
-//                 j++;
-//             }
-//             i++;
-//         }
-//     }
-// }
+char **pipes(char *str)
+{
+    int i = 0;
+    char pipe = '|';
+    while (str[i])
+    {
+        if (str[i] == pipe)
+        {
+            return (ft_split(str, pipe));
+        }
+        i++;
+    }
+    return (NULL);
+}
+
