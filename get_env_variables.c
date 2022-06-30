@@ -1,10 +1,5 @@
 #include "mini.h"
 
-void    printf_s(char *str)
-{
-    printf("--> %s\n",str);
-}
-
 void    printf_d(int str)
 {
     printf("%d\n",str);
@@ -25,6 +20,7 @@ char    *variable(char *str)
 
 char    *get_env_variables(char **env, char *target)
 {
+	char *walo = "";
 	int	i = 0;
     target = ft_strjoin(variable(target), "=");
 	while (env[i])
@@ -35,5 +31,5 @@ char    *get_env_variables(char **env, char *target)
         }
         i++;
 	}
-	return ("\n");
+	return ("walo");
 }
