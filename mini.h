@@ -14,17 +14,27 @@
 #define RESET "\033[0m"
 #define True 1
 
+typedef struct s_tokens
+{
+    char *token;
+    char *type;
+}   t_tokens;
 typedef struct s_parse
 {
-    char    *line;
-    char    *formated_input;
-    char    **splt_pipes;
-    char    **splt_spaces;
-    char    **only_args;
-    char    *type;
+    char        *line;
+    char        *formated_input;
+    char        **splt_pipes;
+    char        **splt_spaces;
+    char        **only_args;
+    char        *type;
+    t_tokens    *tokens; 
 }   t_parse;
+
+
 
 char    *get_env_variables(char **env, char *target);
 char    **pipes(char *str);
+char    *input_formating(char *str);
+void    input_analyse(t_tokens *tokens);
 
 #endif

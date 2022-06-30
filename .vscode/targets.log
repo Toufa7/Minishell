@@ -6,8 +6,11 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # PARTICULAR PURPOSE.
 
 # This program built for i386-apple-darwin11.3.0
+ 
+make: *** No rule to make target `Libft/ft_split.o', needed by `mini'.  Stop.
 
-# Make data base, printed on Thu Jun 30 14:19:35 2022
+
+# Make data base, printed on Thu Jun 30 19:41:26 2022
 
 # Variables
 
@@ -36,11 +39,11 @@ MAKEFILE_LIST :=  Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n0000jg00004br/T/vscode-ipc-7b4d4835-e727-437c-9df9-222ddc569230.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n0000jg00004br/T/vscode-ipc-5c83a8e9-988e-4cfc-a28e-e9b56ecbaec0.sock
 # environment
 VSCODE_CWD = /
 # environment
-Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.ScOwYeO2IR/Render
+Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.yCCwQKdj7u/Render
 # environment
 PATH = /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki
 # environment
@@ -54,7 +57,7 @@ ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.6VmJF0sMf3/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.RY3szrXkKH/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -80,7 +83,7 @@ ZSH = /Users/otoufah/.oh-my-zsh
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # makefile (from `Makefile', line 11)
-FUNCTIONS = Libft/ft_split.c Libft/ft_substr.c Libft/ft_strlen.c Libft/ft_strstr.c Libft/ft_strjoin.c get_env_variables.c input_formating.c pipes.c 
+FUNCTIONS = Libft/ft_split.c Libft/ft_substr.c Libft/ft_strlen.c Libft/ft_strstr.c Libft/ft_strjoin.c Libft/ft_strcmp.c get_env_variables.c input_formating.c pipes.c input_analyse.c 
 # automatic
 ^D = $(patsubst %/,%,$(dir $^))
 # environment
@@ -120,7 +123,7 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = com.microsoft.VSCode.1708
+XPC_SERVICE_NAME = com.microsoft.VSCode.3972
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
@@ -149,12 +152,12 @@ ADDI_FLAGS = -fsanitize=address
 .INCLUDE_DIRS = /usr/local/include
 # environment
 MAKELEVEL := 0
-# makefile (from `Makefile', line 20)
+# makefile (from `Makefile', line 22)
 OBJECTS = $(FUNCTIONS:.c=.o)
 # environment
 LANG = C
 # environment
-VSCODE_PID = 40825
+VSCODE_PID = 4973
 # variable set hash-table stats:
 # Load=72/1024=7%, Rehash=0, Collisions=2/100=2%
 
@@ -164,9 +167,9 @@ VSCODE_PID = 40825
 
 # Directories
 
-# . (device 16777227, inode 21081): 19 files, no impossibilities.
+# . (device 16777227, inode 21081): 16 files, no impossibilities.
 
-# 19 files, no impossibilities in 1 directories.
+# 16 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -176,12 +179,9 @@ VSCODE_PID = 40825
 
 # Not a target:
 get_env_variables.o:
-#  Implicit rule search has been done.
-#  Last modified 2022-06-30 13:17:28
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 all: mini
 #  Command-line target.
@@ -193,12 +193,9 @@ all: mini
 
 # Not a target:
 Libft/ft_strlen.o:
-#  Implicit rule search has been done.
-#  Last modified 2022-06-30 13:17:28
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 .SUFFIXES:
@@ -209,25 +206,21 @@ Libft/ft_strlen.o:
 # Not a target:
 Libft/ft_split.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-30 13:17:28
-#  File has been updated.
-#  Successfully updated.
+#  File does not exist.
+#  File has not been updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
 Libft/ft_strjoin.o:
-#  Implicit rule search has been done.
-#  Last modified 2022-06-30 13:17:28
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-30 14:18:59
+#  Last modified 2022-06-30 19:41:13
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -235,19 +228,23 @@ Makefile:
 
 # Not a target:
 input_formating.o:
-#  Implicit rule search has been done.
-#  File does not exist.
+#  Implicit rule search has not been done.
+#  Modification time never checked.
 #  File has not been updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 fclean: clean
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 31):
+#  commands to execute (from `Makefile', line 33):
 	$(F_REMOVE) $(OBJECTS) $(NAME)
 	
+
+# Not a target:
+input_analyse.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 pipes.o:
@@ -257,12 +254,9 @@ pipes.o:
 
 # Not a target:
 Libft/ft_substr.o:
-#  Implicit rule search has been done.
-#  Last modified 2022-06-30 13:17:28
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 .DEFAULT:
@@ -270,13 +264,13 @@ Libft/ft_substr.o:
 #  Modification time never checked.
 #  File has not been updated.
 
-mini: Libft/ft_split.o Libft/ft_substr.o Libft/ft_strlen.o Libft/ft_strstr.o Libft/ft_strjoin.o get_env_variables.o input_formating.o pipes.o
+mini: Libft/ft_split.o Libft/ft_substr.o Libft/ft_strlen.o Libft/ft_strstr.o Libft/ft_strjoin.o Libft/ft_strcmp.o get_env_variables.o input_formating.o pipes.o input_analyse.o
 #  Implicit rule search has not been done.
-#  File does not exist.
+#  Last modified 2022-06-30 19:41:17
 #  File has not been updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 25):
+#  commands to execute (from `Makefile', line 27):
 	$(COMILING) -lreadline $(OBJECTS) main.c -o $(NAME)
 	
 
@@ -289,21 +283,24 @@ clean:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 28):
+#  commands to execute (from `Makefile', line 30):
 	$(F_REMOVE) $(OBJECTS)
 	
 
 # Not a target:
+Libft/ft_strcmp.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
 Libft/ft_strstr.o:
-#  Implicit rule search has been done.
-#  Last modified 2022-06-30 13:17:28
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # files hash-table stats:
-# Load=16/1024=2%, Rehash=0, Collisions=2/41=5%
+# Load=18/1024=2%, Rehash=0, Collisions=2/45=4%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -315,9 +312,6 @@ Libft/ft_strstr.o:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
- 
-make: *** No rule to make target `input_formating.o', needed by `mini'.  Stop.
-
-# Finished Make data base on Thu Jun 30 14:19:35 2022
+# Finished Make data base on Thu Jun 30 19:41:26 2022
 
  
