@@ -44,8 +44,3 @@ char *input_formating(char *str)
     spcs[j] = '\0';
     return (spcs);
 }
-
-int main()
-{
-    printf("%s\n",input_formating("<<O|sa$n$ti|O>>"));
-}

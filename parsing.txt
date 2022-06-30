@@ -1,6 +1,6 @@
 types : CMD,  RED_INPUT,  RED_OUTPUT,  APPEND,  HERE_DOC
 
-command = "< Makefile cat > k > r <  | pipes.c > d >> a << sd >> sd << sad a1 a2"
+command = "< Makefile > cat > k -e > r <  | pipes.c > d >> a << sd >> sd << sad a1 a2"
 
 type = RED_INPUT;
 
@@ -44,4 +44,6 @@ command : i=0 -----> len(command):
     else if (command[i - 1] == "<")
         tokens[j].type = RED_INPUT
         i++;
+cat main.c > Makefile > out | ls -l << hla
+
 

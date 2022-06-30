@@ -28,53 +28,21 @@ char    *skip_spaces(char *str)
     return (after_spaces);
 }
 
-char **spliting_with_pipes(char *str)
-{
-    int i = 0;
-    char pipe = '|';
-    while (str[i])
-    {
-        if (str[i] == pipe)
-        {
-            return (ft_split(str, pipe));
-        }
-        i++;
-    }
-    return (NULL);
-}
-
-char    **spliting_with_spaces(char *str)
-{
-    int i = 0;
-    char space = ' ';
-    while (str[i])
-    {
-        if (str[i] == space)
-        {
-            return (ft_split(str, space));
-        }
-        i++;
-    }
-    return (NULL);
-}
-
-char    *input_analyse(char *str)
+t_tokens *spliting_with_spaces(char *str)
 {
     int i = -1;
-    while (str[++i])
-    {
-        if (str[0] == '<' && str[1] == '<')
-            return ("here_doc");
-        if (str[0] == '>' && str[1] == '>')
-            return ("append");
-        if (str[0] == '>')
-            return ("red_output");
-        if (str[0] == '<')
-            return ("red_input");
-    }
-    return ("arg");
+    t_tokens *tokens;
+    char **line = ft_split(str, ' ');
+    while (line[++i])
+        ;
+    tokens = malloc(sizeof(t_tokens) * (i + 1));
+    i = -1;
+    while (line[++i])
+        tokens[i].token = line[i];
+    tokens[i].token = NULL ;
+    free(line);
+    return (tokens);
 }
-
 
 int main(int ac, char **av, char **env)
 {
@@ -86,24 +54,15 @@ int main(int ac, char **av, char **env)
 		parse->line = readline(GREEN "Mini-0.0$ " RESET);
         parse->formated_input = input_formating(parse->line);
         add_history(parse->line);
-        parse->splt_pipes = spliting_with_pipes(parse->line);
+        parse->splt_pipes = ft_split(parse->formated_input, '|');
 		int i = -1;
 		while (parse->splt_pipes[++i])
 		{
-            parse->splt_spaces = spliting_with_spaces(parse->splt_pipes[i]);
+            parse->tokens = spliting_with_spaces(parse->splt_pipes[i]);
+            input_analyse(parse->tokens);
             int j = -1;
-            while (parse->splt_spaces[++j])
-            {
-                int o = -1;
-                if (input_analyse(parse->splt_spaces[j] == "arg"))
-                {
-                    int k = -1;
-                    while (parse->only_args[++k])
-                    {
-                        parse->only_args[k] = parse->splt_spaces[j];
-                    }
-                }
-            }
+            while (parse->tokens[++j].token)
+                printf("%s ---> %s\n", parse->tokens[j].token, parse->tokens[j].type);
 		}
 	}
 }
