@@ -2,6 +2,7 @@
 # define MINI_H
 
 #include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include <stdio.h>
@@ -16,8 +17,11 @@
 typedef struct s_parse
 {
     char    *line;
-    char    **inspection;
-    
+    char    *formated_input;
+    char    **splt_pipes;
+    char    **splt_spaces;
+    char    **only_args;
+    char    *type;
 }   t_parse;
 
 char    *get_env_variables(char **env, char *target);

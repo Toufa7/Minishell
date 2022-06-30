@@ -13,8 +13,9 @@ FUNCTIONS = Libft/ft_split.c\
 			Libft/ft_strlen.c\
 			Libft/ft_strstr.c\
 			Libft/ft_strjoin.c\
-			pipes.c\
 			get_env_variables.c\
+			input_formating.c\
+			pipes.c\
 
 OBJECTS = $(FUNCTIONS:.c=.o)
 
