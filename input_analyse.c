@@ -1,4 +1,4 @@
-#include "mini.h"
+#include "minishell.h"
 
 void    input_analyse(t_tokens *tokens)
 {
@@ -12,10 +12,10 @@ void    input_analyse(t_tokens *tokens)
     {
         if (ft_strcmp(tokens[i].token,red_input) == 0)
             tokens[i].type = "red_input";
-        else if (ft_strcmp(tokens[i].token,here_doc) == 0)
-            tokens[i].type = "here_doc";
         else if (ft_strcmp(tokens[i].token,red_out) == 0)
             tokens[i].type = "red_out";
+        else if (ft_strcmp(tokens[i].token,here_doc) == 0)
+            tokens[i].type = "here_doc";
         else if (ft_strcmp(tokens[i].token,append) == 0)
             tokens[i].type = "append";
         else
@@ -37,3 +37,4 @@ void    input_analyse(t_tokens *tokens)
             tokens[i].type = "command";
     }
 }
+

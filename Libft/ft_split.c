@@ -60,7 +60,7 @@ static char	**spliting(char **arr, char const *s, char c)
 	return (arr);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char *s, char c)
 {
 	char	**arr;
 
@@ -70,5 +70,6 @@ char	**ft_split(char const *s, char c)
 	if (!arr)
 		return (NULL);
 	spliting(arr, s, c);
+	free (s);
 	return (arr);
 }

@@ -1,9 +1,4 @@
-#include "mini.h"
-
-void    printf_d(int str)
-{
-    printf("%d\n",str);
-}
+#include "minishell.h"
 
 char    *variable(char *str)
 {
