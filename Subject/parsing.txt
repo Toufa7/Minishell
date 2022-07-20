@@ -6,7 +6,7 @@ type = RED_INPUT;
 
 Node
 {
-    int type;
+    char *type;
     char *data;
     next;
 }

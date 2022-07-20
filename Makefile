@@ -16,12 +16,12 @@ FUNCTIONS	=	Libft/ft_split.c\
 				Libft/ft_strcmp.c\
 				Libft/ft_strdup.c\
 				Libft/ft_calloc.c\
-				get_env_variables.c\
-				input_formating.c\
-				spliting_with_spaces.c\
-				input_analyse.c\
-				input_counter.c\
-				input_types.c\
+				Parsing/get_env_variables.c\
+				Parsing/input_formating.c\
+				Parsing/spliting_with_spaces.c\
+				Parsing/input_analyse.c\
+				Parsing/input_counter.c\
+				Parsing/input_types.c\
 
 OBJECTS 	= $(FUNCTIONS:.c=.o)
 
