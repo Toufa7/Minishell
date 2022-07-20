@@ -1,0 +1,54 @@
+types : CMD,  RED_INPUT,  RED_OUTPUT,  APPEND,  HERE_DOC
+
+command = "norminette < Makefile > ouput > k -e > r <  | cat file.txt > here >> a sd << wow file1"
+
+type = RED_INPUT;
+
+Node
+{
+    int type;
+    char *data;
+    next;
+}
+
+Parse = ("Makefile", RED_INPUT) -> ("cat", CMD) -> ("k", RED_OUTPUT) -> ("r", RED_OUTPUT) -> ("pipes.c", RED_INPUT) 
+-> ("d", RED_OUTPUT) -> ("a", APPEND) -> (sd, "HERE_DOC") -> ("sd", APPEND) -> ("sad", HERE_DOC) -> ("a1", CMD) -> ("a2", CMD) ->  NULL;
+
+Argv = ["cat", "a1", "a2"];
+
+CMD
+{
+    char **ARGV;
+    int fd_in; //init -1
+    int fd_out; //init -1;
+}
+
+(CMD1) -> (CMD2) -> (CMD3) -> NULL;
+
+command : i = 0 -----> len(command):
+
+    if (j == 0 && tokens[i] are not in ("<", ">", "<<", ">>"))
+        tokens[j].type = ARGS
+    else if (tokens[i - 1] == ">>")
+        tokens[j].type = APPEND
+        i += 2
+
+    else if (tokens[i] == ">")
+        tokens[j].type = RED_OUTPUT
+        i++;
+
+    else if (tokens[i - 1] == "<<)
+        tokens[j].type = HERE_DOC
+        i += 2
+
+    else if (command[i - 1] == "<")
+        tokens[j].type = RED_INPUT
+        i++;
+
+cat main.c > Makefile > out | ls -l << hla
+
+
+
+
+Case : everything in double qouates 
+How Does echo command works also export

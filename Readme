@@ -1,0 +1,12 @@
+# Built-in Functions
+
+A builtin (or builtin command, or shell builtin) is a command or function that is part of the shell itself.
+The command is "built-in" to the shell program — no external program is necessary to run the command, and a new process does not need to be created.
+
+
+
+# Environment list
+
+Each element of the list consists of a name and an associated value
+
+Env Variables are created with EXPORT 
