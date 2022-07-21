@@ -7,15 +7,15 @@ ADDI_FLAGS = -fsanitize=address
 F_REMOVE = rm -rf
 
 CFILE = minishell.c \
-		utils/ft_putstr_fd.c \
-		utils/ft_split.c \
-		utils/ft_substr.c \
-		utils/ft_strlen.c \
-		utils/ft_strstr.c \
-		utils/ft_strjoin.c \
-		utils/ft_strcmp.c \
-		utils/ft_strdup.c \
-		utils/ft_calloc.c \
+		Utils/ft_putstr_fd.c \
+		Utils/ft_split.c \
+		Utils/ft_substr.c \
+		Utils/ft_strlen.c \
+		Utils/ft_strstr.c \
+		Utils/ft_strjoin.c \
+		Utils/ft_strcmp.c \
+		Utils/ft_strdup.c \
+		Utils/ft_calloc.c \
 		Parsing/get_env_variables.c \
 		Parsing/input_formating.c \
 		Parsing/spliting_with_spaces.c \
