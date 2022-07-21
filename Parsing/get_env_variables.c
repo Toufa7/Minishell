@@ -120,4 +120,3 @@ int main(int ac, char **av, char **env)
 // echo lol"$USER"jsdhidcg$PWDuy
 // echo lol"$USER"jsdhidcg"$PWD"uy
 // echo lol"$USER"jsdhidcg'$PWD'uy
-// echo lol"$USER"jsdhidcg$PWDuy

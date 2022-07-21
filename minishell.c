@@ -6,9 +6,16 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/21 10:41:12 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/07/21 12:51:31 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/* 
+
+TODO: ✅❓
+	✅ duplicate environment variables
+	❓ link parsing part with execuaation
+*/
 
 #include "minishell.h"
 
@@ -22,11 +29,14 @@ void    looping(char **str)
 	}
 }
 
-int main()
+int main(int ac, char **av, char **env)
 {
+	(void) ac;
+	(void) av;
 	t_parse *parse;
 
 	parse = malloc(sizeof(t_parse));
+	env_dup(env);
 	while (TRUE)
 	{
 		parse->line = readline(GREEN "Mini-0.0$ " RESET);
@@ -46,8 +56,8 @@ int main()
 			{
 				printf("%s -> type %s\n",parse->tokens[x].token,parse->tokens[x].type);
 			}
-			printf("----out--- \n");
-			looping(parse->input->out_files);
+			printf("----Command--- \n");
+			looping(parse->input->command);
 		}
 	}
 }
