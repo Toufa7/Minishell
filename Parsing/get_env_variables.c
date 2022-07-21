@@ -54,16 +54,14 @@ char	*string_formating(char *str)
 
 char	*variable(char *str)
 {
-	int i;
-	int j;
-	int how = 0;
-	i = -1;
-	while (str[++i])
+	int	i;
+
+	i = 0;
+	while (str[i])
 	{
-		if (str[i] == '"')
-		{
-			how++;
-		}
+		if (str[i] == '$')
+			return (&str[i + 1]);
+		i++;
 	}
 	return (NULL);
 }
@@ -77,26 +75,27 @@ char	*get_env_variables(char **env, char *target)
 
 	i = -1;
 	s_format = string_formating(target);
-	printf("Format -> %s\n",s_format);
 	splt = ft_split(s_format,  ' ');
 	while (splt[++i])
 	{
-		target = ft_strjoin(variable(splt[i]), "=");
+		s_format = ft_strjoin(variable(splt[i]), "=");
 		j = -1;
 		while (env[++j])
 		{
-			if (ft_strstr(env[j], target))
-				printf("%s\n", (env[j] + ft_strlen(target)));
+			if (ft_strstr(env[j], s_format))
+			{
+				printf("%s\n", (env[j] + ft_strlen(s_format)));
+			}
 		}
 	}
 	return ("");
 }
 
-// int main(int ac, char **av, char **env)
-// {
-// 	while (1)
-// 	{
-// 		char *str = readline("");
-// 		printf("%s\n", get_env_variables(env ,str));
-// 	}
-// }
+int main(int ac, char **av, char **env)
+{
+	while (1)
+	{
+		char *str = readline("");
+		printf("%s\n", get_env_variables(env ,str));
+	}
+}
