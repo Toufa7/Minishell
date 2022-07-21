@@ -92,11 +92,11 @@ char	*get_env_variables(char **env, char *target)
 	return ("");
 }
 
-int main(int ac, char **av, char **env)
-{
-	while (1)
-	{
-		char *str = readline("");
-		printf("%s\n", get_env_variables(env ,str));
-	}
-}
+// int main(int ac, char **av, char **env)
+// {
+// 	while (1)
+// 	{
+// 		char *str = readline("");
+// 		printf("%s\n", get_env_variables(env ,str));
+// 	}
+// }

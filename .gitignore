@@ -2,3 +2,5 @@ test.c
 Minishell
 *.o
 /*/*.o
+/.vscode
+*/*.out

@@ -24,7 +24,7 @@ void    looping(char **str)
 
 int main()
 {
-	t_parse		*parse;
+	t_parse *parse;
 
 	parse = malloc(sizeof(t_parse));
 	while (TRUE)
@@ -46,7 +46,7 @@ int main()
 			{
 				printf("%s -> type %s\n",parse->tokens[x].token,parse->tokens[x].type);
 			}
-			printf("----Output Files--- \n");
+			printf("----out--- \n");
 			looping(parse->input->out_files);
 		}
 	}
