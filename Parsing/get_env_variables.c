@@ -12,6 +12,46 @@
 
 #include "../minishell.h"
 
+char	*string_formating(char *str)
+{
+	int 	i;
+	int 	j;
+	int		quotes;
+	char	*string;
+
+	i = -1;
+	quotes = 0;
+	while (str[++i])
+	{
+		if (str[i] == '"' || str[i] == '$')
+			quotes++;	
+	}
+	string = malloc(sizeof(char) * ft_strlen(str) + (quotes * 2) + 1); 
+	if (!string)
+		return (NULL);
+	i = -1;
+	j = -1;
+	while (str[++i])
+	{
+		if (str[i] == '"')
+		{
+			string[++j] = ' ';
+			string[++j] = str[i];
+			string[++j] = ' ';
+		}
+		else if (str[i] == '$')
+		{
+			string[++j] = ' ';
+			string[++j] = str[i];
+		}
+		else
+			string [++j] = str[i];
+	}
+	string[j + 1] = '\0';
+	free(str);
+	return (string);
+}
+
 char	*variable(char *str)
 {
 	int	i;
@@ -29,35 +69,32 @@ char	*variable(char *str)
 char	*get_env_variables(char **env, char *target)
 {
 	int	i;
+	int j;
+	char **splt;
+	char *s_format;
 
-	i = 0;
-	target = ft_strjoin(variable(target), "=");
-	while (env[i])
+	i = -1;
+	s_format = string_formating(target);
+	printf("Format -> %s\n",s_format);
+	splt = ft_split(s_format,  ' ');
+	while (splt[++i])
 	{
-		if (ft_strstr(env[i], target))
+		target = ft_strjoin(variable(splt[i]), "=");
+		j = -1;
+		while (env[++j])
 		{
-			return (env[i] + ft_strlen(target));
+			if (ft_strstr(env[j], target))
+				printf("%s\n", (env[j] + ft_strlen(target)));
 		}
-		i++;
 	}
-	return ("\n");
+	return ("");
 }
 
-/*
-
-
-  307  echo lol$USER jsdhidcg$TEMP
-  308  echo lol$USER jsdhidcg$PWD
-  309  echo lol$USER jsdhidcg'$PWD'
-  310  echo lol$USER jsdhidcg"$PWD"
-  311  echo lol$USERjsdhidcg$PWD
-  312* echo $USER
-  313  echo lol$USERjsdhidcg$PWDfu
-  314  echo $lol$USERjsdhidcg$PWDfu
-  315  echo "$lol$USERjsdhidcg$PWDuy"
-  316  echo $lol"$USER"jsdhidcg$PWDuy
-  317  echo lol"$USER"jsdhidcg$PWDuy
-  318  echo lol"$USER"jsdhidcg"$PWD"uy
-  319  echo lol"$USER"jsdhidcg'$PWD'uy
-  320  echo lol"$USER"jsdhidcg$PWDuy
-*/
+int main(int ac, char **av, char **env)
+{
+	while (1)
+	{
+		char *str = readline("");
+		printf("%s\n", get_env_variables(env ,str));
+	}
+}

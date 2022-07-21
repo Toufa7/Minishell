@@ -1,4 +1,4 @@
-#include "../Parsing/minishell.h"
+#include "../minishell.h"
 
 void    pwd(void)
 {

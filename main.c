@@ -46,7 +46,7 @@ int main()
 			{
 				printf("%s -> type %s\n",parse->tokens[x].token,parse->tokens[x].type);
 			}
-			printf("----out--- \n");
+			printf("----Output Files--- \n");
 			looping(parse->input->out_files);
 		}
 	}

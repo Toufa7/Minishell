@@ -1,6 +1,21 @@
-make --dry-run --keep-going --print-directory
+make --dry-run --always-make --keep-going --print-directory
 make: Entering directory `/Users/otoufah/Desktop/Minishell'
-make: Nothing to be done for `all'.
+cc    -c -o Libft/ft_split.o Libft/ft_split.c
  
+cc    -c -o Libft/ft_substr.o Libft/ft_substr.c
+cc    -c -o Libft/ft_strlen.o Libft/ft_strlen.c
+cc    -c -o Libft/ft_strstr.o Libft/ft_strstr.c
+cc    -c -o Libft/ft_strjoin.o Libft/ft_strjoin.c
+cc    -c -o Libft/ft_strcmp.o Libft/ft_strcmp.c
+cc    -c -o Libft/ft_strdup.o Libft/ft_strdup.c
+cc    -c -o Libft/ft_calloc.o Libft/ft_calloc.c
+cc    -c -o Parsing/get_env_variables.o Parsing/get_env_variables.c
+cc    -c -o Parsing/input_formating.o Parsing/input_formating.c
+ 
+cc    -c -o Parsing/spliting_with_spaces.o Parsing/spliting_with_spaces.c
+cc    -c -o Parsing/input_analyse.o Parsing/input_analyse.c
+cc    -c -o Parsing/input_counter.o Parsing/input_counter.c
+cc    -c -o Parsing/input_types.o Parsing/input_types.c
+gcc -fsanitize=address -Wall -Werror -Wextra -lreadline Libft/ft_split.o Libft/ft_substr.o Libft/ft_strlen.o Libft/ft_strstr.o Libft/ft_strjoin.o Libft/ft_strcmp.o Libft/ft_strdup.o Libft/ft_calloc.o Parsing/get_env_variables.o Parsing/input_formating.o Parsing/spliting_with_spaces.o Parsing/input_analyse.o Parsing/input_counter.o Parsing/input_types.o main.c -o Minishell 
 make: Leaving directory `/Users/otoufah/Desktop/Minishell'
  

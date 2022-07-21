@@ -37,3 +37,4 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	join[j] = '\0';
 	return (join);
 }
+

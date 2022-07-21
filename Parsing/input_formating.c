@@ -35,16 +35,14 @@ char	*input_formating(char *str)
 	j = 0;
 	while (str[++i])
 	{
-		if ((str[i] == '<' && str[i + 1] == '<')
-			|| (str[i] == '>' && str[i + 1] == '>'))
+		if ((str[i] == '<' && str[i + 1] == '<') || (str[i] == '>' && str[i + 1] == '>'))
 		{
 			spcs[j++] = ' ';
 			spcs[j++] = str[i];
 			spcs[j++] = str[i];
 			i++;
 		}
-		else if ((str[i] == '>' && str[i + 1] != '>') || (str[i] == '<'
-				&& str[i + 1] != '<') || str[i] == '|' || str[i] == '$')
+		else if ((str[i] == '>' && str[i + 1] != '>') || (str[i] == '<' && str[i + 1] != '<') || str[i] == '|' || str[i] == '$')
 		{
 			spcs[j++] = ' ';
 			spcs[j++] = str[i];

@@ -14,24 +14,32 @@
 
 char	*ft_strstr(const char *haystack, const char *needle)
 {
-	size_t		a;
-	size_t		b;
+	size_t		i;
+	size_t		j;
 	char		*hay;
 
 	hay = (char *)haystack;
+	if (!needle)
+		return (NULL);
 	if (needle[0] == 0)
 		return (hay);
-	a = 0;
-	while (hay[a])
+	i = 0;
+	while (hay[i])
 	{
-		b = 0;
-		while (hay[a + b] == needle[b])
+		j = 0;
+		while (hay[i + j] == needle[j])
 		{
-			if (needle[b + 1] == 0)
-				return (&hay[a]);
-			b++;
+			if (needle[j + 1] == 0)
+				return (&hay[i]);
+			j++;
 		}
-		a++;
+		i++;
 	}
 	return (NULL);
 }
+
+// int main()
+// {
+// 	printf("%s\n",ft_strstr("TMPDIR=/var/folders/zz/zyxvpxvq6csfxvn_n0000jg00004br/T/",NULL));
+// }
+
