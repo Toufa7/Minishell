@@ -12,52 +12,82 @@
 
 #include "../minishell.h"
 
-char	*variable(char *str)
+char	*string_formating(char *str)
 {
-	int	i;
-
-	i = 0;
-	while (str[i])
+	int i;
+	int j;
+	int how = 0;
+	i = -1;
+	while (str[++i])
 	{
-		if (str[i] == '$')
-			return (&str[i + 1]);
-		i++;
-	}
-	return (NULL);
-}
-
-char	*get_env_variables(char **env, char *target)
-{
-	int	i;
-
-	i = 0;
-	target = ft_strjoin(variable(target), "=");
-	while (env[i])
-	{
-		if (ft_strstr(env[i], target))
+		if (str[i] == '"')
 		{
-			return (env[i] + ft_strlen(target));
+			how++;
 		}
-		i++;
 	}
-	return ("\n");
+	char *new = malloc(sizeof(char ) * ft_strlen(str) + (how * 2) + 1);
+	if (!new)
+		return (NULL);
+	i = -1;
+	j = -1;
+	while (str[++i])
+	{
+		if (str[i] == '"')
+		{
+			new[++j] = ' ';
+			while (str[i] != '"')
+				new[++j] = str[i];
+			new[++j] = ' ';
+		}
+		else
+			new[++j] = str[i];
+	}
+	return (new);
 }
 
-/*
 
+// char	*variable(char *str)
+// {
+// 	int	i;
 
-  307  echo lol$USER jsdhidcg$TEMP
-  308  echo lol$USER jsdhidcg$PWD
-  309  echo lol$USER jsdhidcg'$PWD'
-  310  echo lol$USER jsdhidcg"$PWD"
-  311  echo lol$USERjsdhidcg$PWD
-  312* echo $USER
-  313  echo lol$USERjsdhidcg$PWDfu
-  314  echo $lol$USERjsdhidcg$PWDfu
-  315  echo "$lol$USERjsdhidcg$PWDuy"
-  316  echo $lol"$USER"jsdhidcg$PWDuy
-  317  echo lol"$USER"jsdhidcg$PWDuy
-  318  echo lol"$USER"jsdhidcg"$PWD"uy
-  319  echo lol"$USER"jsdhidcg'$PWD'uy
-  320  echo lol"$USER"jsdhidcg$PWDuy
-*/
+// 	i = 0;
+// 	while (str[i])
+// 	{
+// 		if (str[i] == '$')
+// 			return (&str[i + 1]);
+// 		i++;
+// 	}
+// 	return (NULL);
+// }
+
+// char	*get_env_variables(char **env, char *target)
+// {
+// 	int	i;
+// 	int j;
+// 	char **splt;
+// 	char *pwd;
+
+// 	i = -1;
+// 	splt = ft_split(target, ' ');
+// 	while (splt[++i])
+// 	{
+// 		target = ft_strjoin(variable(splt[i]), "=");
+// 		printf("Target -> %s\n", target);
+// 		j = -1;
+// 		while (env[++j])
+// 		{
+// 			if (ft_strstr(env[j], target))
+// 				printf("%s\n", (env[j] + ft_strlen(target)));
+// 		}
+// 	}
+// 	return ("");
+// }
+
+int main(int ac, char **av, char **env)
+{
+	while (1)
+	{
+		char *str = readline("");
+		printf("%s\n", string_formating(str));
+	}
+}
