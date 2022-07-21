@@ -3,8 +3,7 @@
 
 void    echo(char *str)
 {
-
-
+	(void) str;
 }
 
 
