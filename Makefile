@@ -1,6 +1,6 @@
 NAME = Minishell
 
-CFLAGS = gcc -lreadline
+CFLAGS = gcc -Wall -Werror -Wextra -lreadline
 
 ADDI_FLAGS = -fsanitize=address
 
