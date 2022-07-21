@@ -3,14 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   get_env_variables.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: otoufah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:32:28 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/21 12:52:35 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/07/02 22:32:29 by otoufah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+/*
+FIXME:
+	$PWD problem greping OLDPWD
+*/ 
 
 char	*string_formating(char *str)
 {
@@ -54,10 +59,10 @@ char	*string_formating(char *str)
 
 char	*variable(char *str)
 {
-	int i;
-	int how = 0;
-	i = -1;
-	while (str[++i])
+	int	i;
+
+	i = 0;
+	while (str[i])
 	{
 		if (str[i] == '$')
 			return (&str[i + 1]);
@@ -78,6 +83,7 @@ char	*get_env_variables(char **env, char *target)
 	splt = ft_split(s_format,  ' ');
 	while (splt[++i])
 	{
+		printf("Variable -> %s\n",variable(splt[i]));
 		s_format = ft_strjoin(variable(splt[i]), "=");
 		j = -1;
 		while (env[++j])
@@ -85,6 +91,7 @@ char	*get_env_variables(char **env, char *target)
 			if (ft_strstr(env[j], s_format))
 			{
 				printf("%s\n", (env[j] + ft_strlen(s_format)));
+				break;
 			}
 		}
 	}
@@ -99,3 +106,19 @@ int main(int ac, char **av, char **env)
 		printf("%s\n", get_env_variables(env ,str));
 	}
 }
+
+
+// echo lol$USER jsdhidcg$TEMP
+// echo lol$USER jsdhidcg$PWD
+// echo lol$USER jsdhidcg'$PWD'
+// echo lol$USER jsdhidcg"$PWD"
+// echo lol$USERjsdhidcg$PWD
+// echo $USER
+// echo lol$USERjsdhidcg$PWDfu
+// echo $lol$USERjsdhidcg$PWDfu
+// echo "$lol$USERjsdhidcg$PWDuy"
+// echo $lol"$USER"jsdhidcg$PWDuy
+// echo lol"$USER"jsdhidcg$PWDuy
+// echo lol"$USER"jsdhidcg"$PWD"uy
+// echo lol"$USER"jsdhidcg'$PWD'uy
+// echo lol"$USER"jsdhidcg$PWDuy
