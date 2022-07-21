@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/21 10:29:56 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/07/21 12:46:23 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 # define TRUE 1
 # define FALSE 0
 # define PATH_MAX  4096
+
+char	**genv;
 
 typedef struct s_tokens
 {
@@ -76,9 +78,11 @@ void		input_types(t_parse	*parse);
 
 void    cd(char *path);
 void    pwd(void);
+void	env();
 
 // ----------- Shared Functions ------------------
 
+void	env_dup(char **env);
 void	ft_putstr_fd(char *s, int fd);
 char	**ft_split(char *s, char c);
 size_t	ft_strlen(const char *s);

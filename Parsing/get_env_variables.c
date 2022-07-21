@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_env_variables.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: otoufah <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:32:28 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/02 22:32:29 by otoufah          ###   ########.fr       */
+/*   Updated: 2022/07/21 11:40:21 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ char	*string_formating(char *str)
 char	*variable(char *str)
 {
 	int i;
-	int j;
 	int how = 0;
 	i = -1;
 	while (str[++i])

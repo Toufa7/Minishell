@@ -7,6 +7,7 @@ ADDI_FLAGS = -fsanitize=address
 F_REMOVE = rm -rf
 
 CFILE = minishell.c \
+		Utils/env_dup.c \
 		Utils/ft_putstr_fd.c \
 		Utils/ft_split.c \
 		Utils/ft_substr.c \
@@ -33,7 +34,7 @@ CFILE = minishell.c \
 all: $(NAME)
 
 $(NAME): $(CFILE)
-		$(CFLAGS) $(CFILE) $(ADDI_FLAGS) -o $(NAME) 
+		$(CFLAGS) $(CFILE) -o $(NAME) 
 
 clean:
 	rm -rf $(NAME)
