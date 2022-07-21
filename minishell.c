@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: otoufah <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/03 14:44:38 by otoufah          ###   ########.fr       */
+/*   Updated: 2022/07/21 10:41:12 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void    looping(char **str)
 
 int main()
 {
-	t_parse *parse;
+	t_parse		*parse;
 
 	parse = malloc(sizeof(t_parse));
 	while (TRUE)
@@ -50,11 +50,4 @@ int main()
 			looping(parse->input->out_files);
 		}
 	}
-	// 	int j = -1;
-	// 	while (parse->tokens[++j].token)
-	// 	{
-	// 		input_counter(parse->tokens, &parse->tokens[j]);
-	// 	}
-	// 	printf ("Commands -> %zu\n", parse->tokens->cmd);
-	// }
 }

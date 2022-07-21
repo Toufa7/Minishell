@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: otoufah <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/02 22:39:44 by otoufah          ###   ########.fr       */
+/*   Updated: 2022/07/21 10:29:56 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdio.h>
+# include <errno.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include "./Libft/libft.h"
 
 # define GREEN "\033[32m"
 # define RESET "\033[0m"
@@ -61,6 +61,8 @@ typedef struct s_parse
 	t_input		*input;
 }	t_parse;
 
+// ----------- Parsing --------------------------
+
 char		*get_env_variables(char	**env, char	*target);
 char		**pipes(char	*str);
 char		*input_formating(char	*str);
@@ -69,5 +71,22 @@ t_tokens	*spliting_with_spaces(char	*str);
 void		input_counter(t_tokens	*counter, t_tokens	*tokens);
 void		initializer(t_tokens	*tokens);
 void		input_types(t_parse	*parse);
+
+// ----------- Execution -------------------------
+
+void    cd(char *path);
+void    pwd(void);
+
+// ----------- Shared Functions ------------------
+
+void	ft_putstr_fd(char *s, int fd);
+char	**ft_split(char *s, char c);
+size_t	ft_strlen(const char *s);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_strstr(const char *haystack, const char *needle);
+char	*ft_strjoin(char const *s1, char const *s2);
+int		ft_strcmp(const char *s1, const char *s2);
+char	*ft_strdup(const char *s1);
+void	*ft_calloc(size_t count, size_t size);
 
 #endif

@@ -1,42 +1,45 @@
-NAME		= Minishell
+NAME = Minishell
 
-FLAGS		= -Wall -Werror -Wextra -lreadline
+CFLAGS = gcc -Wall -Werror -Wextra -lreadline
 
-ADDI_FLAGS	= -fsanitize=address
+ADDI_FLAGS = -fsanitize=address
 
-COMPILING	= gcc
+F_REMOVE = rm -rf
 
-F_REMOVE	= rm -rf
+CFILE = minishell.c \
+		utils/ft_putstr_fd.c \
+		utils/ft_split.c \
+		utils/ft_substr.c \
+		utils/ft_strlen.c \
+		utils/ft_strstr.c \
+		utils/ft_strjoin.c \
+		utils/ft_strcmp.c \
+		utils/ft_strdup.c \
+		utils/ft_calloc.c \
+		Parsing/get_env_variables.c \
+		Parsing/input_formating.c \
+		Parsing/spliting_with_spaces.c \
+		Parsing/input_analyse.c \
+		Parsing/input_counter.c \
+		Parsing/input_types.c \
+		Execution/Builtins/cd.c \
+		Execution/Builtins/echo.c \
+		Execution/Builtins/env.c \
+		Execution/Builtins/exit.c \
+		Execution/Builtins/export.c \
+		Execution/Builtins/pwd.c \
+		Execution/Builtins/unset.c \
 
-FUNCTIONS	=	Libft/ft_split.c\
-				Libft/ft_substr.c\
-				Libft/ft_strlen.c\
-				Libft/ft_strstr.c\
-				Libft/ft_strjoin.c\
-				Libft/ft_strcmp.c\
-				Libft/ft_strdup.c\
-				Libft/ft_calloc.c\
-				Parsing/get_env_variables.c\
-				Parsing/input_formating.c\
-				Parsing/spliting_with_spaces.c\
-				Parsing/input_analyse.c\
-				Parsing/input_counter.c\
-				Parsing/input_types.c\
+all: $(NAME)
 
-OBJECTS 	= $(FUNCTIONS:.c=.o)
+$(NAME): $(CFILE)
+		$(CFLAGS) $(CFILE) $(ADDI_FLAGS) -o $(NAME) 
 
+clean:
+	rm -rf $(NAME)
 
-all 	: $(NAME)
+fclean: clean
 
-$(NAME) : $(OBJECTS)
-		$(COMPILING) $(ADDI_FLAGS) $(FLAGS) $(OBJECTS) main.c -o $(NAME) 
+re: fclean all
 
-clean   :
-		$(F_REMOVE) $(OBJECTS)
-			
-fclean  : clean
-		$(F_REMOVE) $(OBJECTS) $(NAME)
-
-re      : fclean all
-
-.PHONY 	: all clean fclean re
+.PHONY: all clean fclean re

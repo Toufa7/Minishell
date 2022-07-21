@@ -54,14 +54,16 @@ char	*string_formating(char *str)
 
 char	*variable(char *str)
 {
-	int	i;
-
-	i = 0;
-	while (str[i])
+	int i;
+	int j;
+	int how = 0;
+	i = -1;
+	while (str[++i])
 	{
-		if (str[i] == '$')
-			return (&str[i + 1]);
-		i++;
+		if (str[i] == '"')
+		{
+			how++;
+		}
 	}
 	return (NULL);
 }
