@@ -12,6 +12,11 @@
 
 #include "../minishell.h"
 
+/*
+FIXME:
+	$PWD problem greping OLDPWD
+*/ 
+
 char	*string_formating(char *str)
 {
 	int 	i;
@@ -85,6 +90,7 @@ char	*get_env_variables(char **env, char *target)
 			if (ft_strstr(env[j], s_format))
 			{
 				printf("%s\n", (env[j] + ft_strlen(s_format)));
+				break;
 			}
 		}
 	}
@@ -99,3 +105,19 @@ int main(int ac, char **av, char **env)
 		printf("%s\n", get_env_variables(env ,str));
 	}
 }
+
+
+// echo lol$USER jsdhidcg$TEMP
+// echo lol$USER jsdhidcg$PWD
+// echo lol$USER jsdhidcg'$PWD'
+// echo lol$USER jsdhidcg"$PWD"
+// echo lol$USERjsdhidcg$PWD
+// echo $USER
+// echo lol$USERjsdhidcg$PWDfu
+// echo $lol$USERjsdhidcg$PWDfu
+// echo "$lol$USERjsdhidcg$PWDuy"
+// echo $lol"$USER"jsdhidcg$PWDuy
+// echo lol"$USER"jsdhidcg$PWDuy
+// echo lol"$USER"jsdhidcg"$PWD"uy
+// echo lol"$USER"jsdhidcg'$PWD'uy
+// echo lol"$USER"jsdhidcg$PWDuy
