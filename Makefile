@@ -6,7 +6,7 @@ ADDI_FLAGS = -fsanitize=address
 
 F_REMOVE = rm -rf
 
-CFILE = minishell.c \
+CFILE = minishell.c\
 		Utils/env_dup.c \
 		Utils/ft_putstr_fd.c \
 		Utils/ft_split.c \
@@ -15,8 +15,10 @@ CFILE = minishell.c \
 		Utils/ft_strstr.c \
 		Utils/ft_strjoin.c \
 		Utils/ft_strcmp.c \
+		Utils/ft_strncmp.c \
 		Utils/ft_strdup.c \
 		Utils/ft_calloc.c \
+		Utils/ft_strchr.c \
 		Parsing/get_env_variables.c \
 		Parsing/input_formating.c \
 		Parsing/spliting_with_spaces.c \

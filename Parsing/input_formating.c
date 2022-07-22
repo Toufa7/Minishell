@@ -24,8 +24,7 @@ char	*input_formating(char *str)
 	allo = 0;
 	while (str[++k])
 	{
-		if ((str[k] == '<' && str[k + 1] != '<') || (str[k] == '>'
-				&& str[k + 1] != '>') || str[k] == '|' || str[k] == '$')
+		if ((str[k] == '<' && str[k + 1] != '<') || (str[k] == '>' && str[k + 1] != '>') || str[k] == '|')
 			allo++;
 	}
 	spcs = malloc(sizeof(char) * (ft_strlen(str) + (allo * 2) + 1));
@@ -42,7 +41,7 @@ char	*input_formating(char *str)
 			spcs[j++] = str[i];
 			i++;
 		}
-		else if ((str[i] == '>' && str[i + 1] != '>') || (str[i] == '<' && str[i + 1] != '<') || str[i] == '|' || str[i] == '$')
+		else if ((str[i] == '>' && str[i + 1] != '>') || (str[i] == '<' && str[i + 1] != '<') || str[i] == '|')
 		{
 			spcs[j++] = ' ';
 			spcs[j++] = str[i];
@@ -55,3 +54,13 @@ char	*input_formating(char *str)
 	free(str);
 	return (spcs);
 }
+
+
+// int main(int ac, char **av, char **env)
+// {
+// 	while (1)
+// 	{
+// 		char *str = readline("");
+// 		printf("%s\n", input_formating(str));
+// 	}
+// }

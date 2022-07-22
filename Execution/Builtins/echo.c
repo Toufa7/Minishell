@@ -16,7 +16,7 @@ echo $? = The shell obtained status of grep (shell built-in)
 
 which 'command' == get command's path
 4 8
-echo lol$USER jsdhidcg$TEMP
+echo 
 echo lol$USER jsdhidcg$PWD
 echo lol$USER jsdhidcg'$PWD'
 echo lol$USER jsdhidcg"$PWD"

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_env_variables.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: otoufah <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:32:28 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/02 22:32:29 by otoufah          ###   ########.fr       */
+/*   Updated: 2022/07/22 10:18:11 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,31 @@ char	*string_formating(char *str)
 	return (string);
 }
 
+// int		till_this(char *str)
+// {
+// 	int i = 0;
+// 	while (str[i])
+// 	{
+// 		printf("This is str -> %s\n",str);
+// 		printf("lenght -> %d\n",i);
+// 		if ((str[i] != 'a' && str[i] != 'z') || (str[i] != 'A' && str[i] != 'Z') || str[i] != '_')
+// 			return (i);
+// 		i++;
+// 	}
+// 	return (0);
+// }
+
 char	*variable(char *str)
 {
 	int	i;
 
 	i = 0;
-	while (str[i])
+	while (str[i] != '.')
 	{
-		if (str[i] == '$')
+		if (str[i] == '$' && str[i + 1])
 			return (&str[i + 1]);
+		else
+			return (NULL);
 		i++;
 	}
 	return (NULL);
@@ -84,6 +100,7 @@ char	*get_env_variables(char **env, char *target)
 	while (splt[++i])
 	{
 		s_format = ft_strjoin(variable(splt[i]), "=");
+		printf("s_format -> %s\n",s_format);
 		j = -1;
 		while (env[++j])
 		{
@@ -97,14 +114,15 @@ char	*get_env_variables(char **env, char *target)
 	return ("");
 }
 
-int main(int ac, char **av, char **env)
-{
-	while (1)
-	{
-		char *str = readline("");
-		printf("%s\n", get_env_variables(env ,str));
-	}
-}
+// int main(int ac, char **av, char **env)
+// {
+// 	while (1)
+// 	{
+// 		char *str = readline("");
+// 		add_history(str);
+// 		printf("%s\n", get_env_variables(env ,str));
+// 	}
+// }
 
 
 //	echo lol$USER jsdhidcg$TEMP

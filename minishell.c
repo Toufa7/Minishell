@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/* 
+/*
 
 TODO: ✅❓
 	✅ duplicate environment variables
@@ -20,6 +20,27 @@ TODO: ✅❓
 
 #include "minishell.h"
 
+char	*replace_spaces_with_x(char *str)
+{
+	int i = -1;
+
+	char *dup = malloc(sizeof(char) * ft_strlen(str + 1));
+	while (str[++i])
+	{
+		if (str[i] == '"')
+		{
+			if (str[i] == ' ')
+				dup[i] = '*';
+			else
+				dup[i] = str[i];
+		}
+		else
+			dup[i] =  str[i];
+	}
+	dup[i] = '\0';
+	return (dup);
+
+}
 void    looping(char **str)
 {
 	int i = 0;
@@ -41,6 +62,8 @@ int main(int ac, char **av, char **env)
 	while (TRUE)
 	{
 		parse->line = readline(GREEN "Mini-0.0$ " RESET);
+		replace_spaces_with_x(parse->line);
+		printf("Line -> %s\n",parse->line);
 		add_history(parse->line);
 		parse->formated_input = input_formating(parse->line);
 		parse->splt_pipes = ft_split(parse->formated_input, '|');

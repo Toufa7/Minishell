@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/21 12:46:23 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/07/22 09:49:22 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct s_input
 	char	**in_files;
 	char	**out_files;
 	char	**app_outfile;
-	char	**doc_infile;
+	char	**delimiter;
 	char	**command;
 }	t_input;
 
@@ -85,6 +85,7 @@ void	env();
 
 void	env_dup(char **env);
 void	ft_putstr_fd(char *s, int fd);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	**ft_split(char *s, char c);
 size_t	ft_strlen(const char *s);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
@@ -93,5 +94,5 @@ char	*ft_strjoin(char const *s1, char const *s2);
 int		ft_strcmp(const char *s1, const char *s2);
 char	*ft_strdup(const char *s1);
 void	*ft_calloc(size_t count, size_t size);
-
+char	*ft_strchr(const char *s, int c);
 #endif

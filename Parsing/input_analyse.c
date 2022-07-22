@@ -48,7 +48,7 @@ void	input_analyse(t_tokens *tokens)
 		else if (ft_strcmp(tokens[i - 1].type, "append") == 0)
 			tokens[i].type = "app_outfile";
 		else if (ft_strcmp(tokens[i - 1].type, "here_doc") == 0)
-			tokens[i].type = "doc_infile";
+			tokens[i].type = "delimiter";
 		else if (ft_strcmp(tokens[i].type, "None") == 0)
 			tokens[i].type = "command";
 	}

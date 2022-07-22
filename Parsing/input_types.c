@@ -17,7 +17,7 @@ void	var_init(t_input *input)
 	input->in_files = ft_calloc(1, sizeof(char *));
 	input->out_files = ft_calloc(1, sizeof(char *));
 	input->app_outfile = ft_calloc(1, sizeof(char *));
-	input->doc_infile = ft_calloc(1, sizeof(char *));
+	input->delimiter = ft_calloc(1, sizeof(char *));
 	input->command = ft_calloc(1, sizeof(char *));
 }
 
@@ -53,8 +53,8 @@ void	input_types(t_parse *parse)
 		if (ft_strcmp(parse->tokens[i].type, "outfile") == 0)
 			parse->input->out_files = ft_realloc(parse->input->out_files,
 					parse->tokens[i].token);
-		else if (ft_strcmp(parse->tokens[i].type, "doc_infile") == 0)
-			parse->input->doc_infile = ft_realloc(parse->input->doc_infile,
+		else if (ft_strcmp(parse->tokens[i].type, "delimiter") == 0)
+			parse->input->delimiter = ft_realloc(parse->input->delimiter,
 					parse->tokens[i].token);
 		else if (ft_strcmp(parse->tokens[i].type, "app_outfile") == 0)
 			parse->input->app_outfile = ft_realloc(parse->input->app_outfile,

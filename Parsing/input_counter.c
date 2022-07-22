@@ -43,6 +43,6 @@ void	input_counter(t_tokens *counter, t_tokens *tokens)
 		counter->out_file++;
 	else if (ft_strcmp(tokens->type, "app_outfile") == 0)
 		counter->app_file++;
-	else if (ft_strcmp(tokens->type, "doc_infile") == 0)
+	else if (ft_strcmp(tokens->type, "delimiter") == 0)
 		counter->doc_file++;
 }
