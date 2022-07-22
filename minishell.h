@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/22 11:43:08 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/07/22 15:46:10 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,13 @@ void    cd(char *path);
 void    pwd(void);
 void	env();
 void    echo(char **argv);
+void    mexit(char **argv);
 
 // ----------- Shared Functions ------------------
 
 void	env_dup(char **env);
 void	ft_putstr_fd(char *s, int fd);
+int		ft_atoi(const char *str);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	**ft_split(char *s, char c);
 size_t	ft_strlen(const char *s);

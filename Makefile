@@ -9,6 +9,7 @@ F_REMOVE = rm -rf
 CFILE = test.c \
 		Utils/env_dup.c \
 		Utils/ft_putstr_fd.c \
+		Utils/ft_atoi.c \
 		Utils/ft_split.c \
 		Utils/ft_substr.c \
 		Utils/ft_strlen.c \
