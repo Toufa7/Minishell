@@ -6,9 +6,15 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/22 09:49:22 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/07/22 16:18:07 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/*
+TODO:
+	char	*heredoc_limiter;
+*/
+
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -28,6 +34,10 @@
 # define TRUE 1
 # define FALSE 0
 # define PATH_MAX  4096
+
+typedef int bool;
+#define true 1
+#define false 0
 
 char	**genv;
 
@@ -80,11 +90,14 @@ void		input_types(t_parse	*parse);
 void    cd(char *path);
 void    pwd(void);
 void	env();
+void    echo(char **argv);
+void    mexit(char **argv);
 
 // ----------- Shared Functions ------------------
 
 void	env_dup(char **env);
 void	ft_putstr_fd(char *s, int fd);
+int		ft_atoi(const char *str);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	**ft_split(char *s, char c);
 size_t	ft_strlen(const char *s);
