@@ -15,6 +15,7 @@
 TODO: ✅❓
 	✅ duplicate environment variables
 	❓ link parsing part with execuaation
+	All tokens are in a double pointer in input struct parse->input->x;
 */
 
 #include "minishell.h"
@@ -56,8 +57,6 @@ int main(int ac, char **av, char **env)
 			{
 				printf("%s -> type %s\n",parse->tokens[x].token,parse->tokens[x].type);
 			}
-			printf("----Command--- \n");
-			looping(parse->input->command);
 		}
 	}
 }
