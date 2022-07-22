@@ -18,24 +18,32 @@
 // }
 
 
+void    just_replace(char *str, char *dup, char alpha)
+{
+    int i = -1;
+    while (str[++i] != '"')
+    {
+        if (str[i] == alpha)
+            dup[i] = '~';
+        else
+            dup[i] = str[i];
+    }
+}
+
 char	*replace_spaces_with_x(char *str)
 {
 	int i = -1;
-
 	char *dup = malloc(sizeof(char) * ft_strlen(str + 1));
+    if (!dup)
+        return (NULL);
 	while (str[++i])
 	{
 		if (str[i] == '"')
 		{
-            int j = i + 1;
-            while (str[j] != '"')
+            int j = i;
+            while (str[++j] != '"')
             {
-                printf("********\n");
-                if (str[j] == ' ')
-                    dup[j] = '~';
-                else
- 			        dup[i] =  str[i];
-                j++;
+                just_replace(str, dup, ' ');
             }
 		}
 		else
@@ -48,14 +56,8 @@ char	*replace_spaces_with_x(char *str)
 
 int main()
 {
-    printf("%s\n",replace_spaces_with_x(readline("")));
+    while (1)
+    {
+        printf("%s\n",replace_spaces_with_x(readline("")));
+    }
 }
-
-Makefile
-Parsing/get_env_variables.c
-Parsing/input_analyse.c
-Parsing/input_counter.c
-Parsing/input_formating.c
-Parsing/input_types.c
-Parsing/spliting_with_spaces.c 
-minishell.h
