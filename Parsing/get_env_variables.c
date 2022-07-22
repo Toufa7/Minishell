@@ -107,16 +107,28 @@ int main(int ac, char **av, char **env)
 }
 
 
-// echo lol$USER jsdhidcg$TEMP
-// echo lol$USER jsdhidcg$PWD
-// echo lol$USER jsdhidcg'$PWD'
-// echo lol$USER jsdhidcg"$PWD"
-// echo lol$USERjsdhidcg$PWD
-// echo $USER
-// echo lol$USERjsdhidcg$PWDfu
-// echo $lol$USERjsdhidcg$PWDfu
-// echo "$lol$USERjsdhidcg$PWDuy"
-// echo $lol"$USER"jsdhidcg$PWDuy
-// echo lol"$USER"jsdhidcg$PWDuy
-// echo lol"$USER"jsdhidcg"$PWD"uy
-// echo lol"$USER"jsdhidcg'$PWD'uy
+//	echo lol$USER jsdhidcg$TEMP
+//	echo lol$USER jsdhidcg$PWD
+//	echo lol$USER jsdhidcg'$PWD'
+//	echo lol$USER jsdhidcg"$PWD"
+//	echo lol$USERjsdhidcg$PWD
+//	echo $USER
+//	echo lol$USERjsdhidcg$PWDfu
+//	echo $lol$USERjsdhidcg$PWDfu
+//	echo "$lol$USERjsdhidcg$PWDuy"
+//	echo $lol"$USER"jsdhidcg$PWDuy
+//	echo lol"$USER"jsdhidcg$PWDuy
+//	echo lol"$USER"jsdhidcg"$PWD"uy
+//	echo lol"$USER"jsdhidcg'$PWD'uy
+//	echo '$USER$LESS$LESS'
+//	echo $USUS
+//	echo '$USER'
+//	echo $USER.oussama
+//	echo $USERvcdwvw.oussama
+//	echo $USERvcdwvw_oussama
+//	echo $USERvcdwvw2oussama
+//	echo $USERvcdwvwy\oussama
+//	echo $USER\oussama
+//	echo $USER;oussama
+//	echo $USER[oussama
+//	echo $USER,oussama
