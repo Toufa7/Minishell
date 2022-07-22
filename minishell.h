@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/22 09:49:22 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/07/22 11:43:08 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@
 # define TRUE 1
 # define FALSE 0
 # define PATH_MAX  4096
+
+typedef int bool;
+#define true 1
+#define false 0
 
 char	**genv;
 
@@ -79,6 +83,7 @@ void		input_types(t_parse	*parse);
 void    cd(char *path);
 void    pwd(void);
 void	env();
+void    echo(char **argv);
 
 // ----------- Shared Functions ------------------
 
