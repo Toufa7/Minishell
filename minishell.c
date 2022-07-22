@@ -1,22 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/21 12:51:31 by abouchfa         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-/* 
-
-TODO: ✅❓
-	✅ duplicate environment variables
-	❓ link parsing part with execuaation
-*/
-
 #include "minishell.h"
 
 void    looping(char **str)
