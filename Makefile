@@ -1,12 +1,12 @@
 NAME = Minishell
 
-CFLAGS = gcc -Wall -Werror -Wextra -lreadline
+C_FLAGS = gcc -Wall -Werror -Wextra -lreadline
 
 ADDI_FLAGS = -fsanitize=address
 
 F_REMOVE = rm -rf
 
-CFILE = minishell.c\
+CFILE = test.c \
 		Utils/env_dup.c \
 		Utils/ft_putstr_fd.c \
 		Utils/ft_atoi.c \
@@ -36,8 +36,8 @@ CFILE = minishell.c\
 
 all: $(NAME)
 
-$(NAME): $(CFILE)
-		$(CFLAGS) $(CFILE) -o $(NAME) 
+$(NAME): $(C_FILES)
+		$(C_FLAGS) $(ADDI_FLAGS) $(C_FILES) -o $(NAME) 
 
 clean:
 	rm -rf $(NAME)
