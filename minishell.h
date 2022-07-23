@@ -10,14 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-<<<<<<< HEAD
 /*
 TODO:
 	✅ char	*heredoc_limiter;
 */
 
-=======
->>>>>>> d9db7ee002d7bd65297b922c875029c81baf1641
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -34,7 +31,8 @@ TODO:
 # define GREEN "\033[32m"
 # define RESET "\033[0m"
 # define PATH_MAX  4096
-
+# define SUCCESS	0
+# define FAILURE	1
 typedef int bool;
 # define true 1
 # define false 0
@@ -79,8 +77,8 @@ typedef struct s_parse
 // ----------- Parsing --------------------------
 
 char		**pipes(char	*str);
+char		*handling_quotes(char *str);
 char		*input_formating(char	*str);
-char		*handling_double_quotes(char *str);
 char		*getting_back_original_input(char *str);
 char		*get_env_variables(char	**env, char	*target);
 void		input_types(t_parse	*parse);
