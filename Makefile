@@ -10,6 +10,8 @@ C_FILES = test.c \
 		Utils/env_dup.c \
 		Utils/ft_putstr_fd.c \
 		Utils/ft_atoi.c \
+		Utils/gnl.c \
+		Utils/ft_strnstr.c \
 		Utils/ft_split.c \
 		Utils/ft_substr.c \
 		Utils/ft_strlen.c \
@@ -21,11 +23,16 @@ C_FILES = test.c \
 		Utils/ft_calloc.c \
 		Utils/ft_strchr.c \
 		Parsing/get_env_variables.c \
+		Parsing/handling_double_quotes.c \
 		Parsing/input_formating.c \
 		Parsing/spliting_with_spaces.c \
 		Parsing/input_analyse.c \
 		Parsing/input_counter.c \
 		Parsing/input_types.c \
+		Execution/pipex/pipex.c \
+		Execution/pipex/execution_func.c \
+		Execution/pipex/helper_funcs.c \
+		Execution/pipex/input_validation_funcs.c \
 		Execution/Builtins/mcd.c \
 		Execution/Builtins/mecho.c \
 		Execution/Builtins/menv.c \

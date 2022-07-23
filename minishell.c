@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/22 19:02:41 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/07/23 17:21:51 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int main(int ac, char **av)
 
 	parse = malloc(sizeof(t_parse));
 	// env_dup(env);
-	while (TRUE)
+	while (true)
 	{
 		parse->line = readline(GREEN "Mini-0.0$ " RESET);
 		parse->line_double_quotes = handling_double_quotes(parse->line);
