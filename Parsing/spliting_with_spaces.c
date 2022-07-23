@@ -12,23 +12,6 @@
 
 #include "../minishell.h"
 
-char    *handling_quotes(char *str)
-{
-    int i = -1;
-    char *dup = malloc(sizeof(char) * ft_strlen(str) + 1);
-    if (!dup)
-        return (NULL);
-    while (str[++i])
-    {
-        if (str[i] == ' ')
-            dup[i] = '%';
-        else
-            dup[i] = str[i];
-    }
-    dup[i] = '\0';
-    return (dup);
-}
-
 t_tokens	*spliting_with_spaces(char *str)
 {
 	int			i;

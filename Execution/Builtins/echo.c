@@ -34,33 +34,5 @@ void    echo(char **argv)
 	if (!new_line)
 		ft_putstr_fd("\n", 1);
 }
-<<<<<<< HEAD
 
 
-
-/*
-
-echo $$ =  Display PID of shell
-
-echo $? = The shell obtained status of grep (shell built-in)
-
-which 'command' == get command's path
-4 8
-echo 
-echo lol$USER jsdhidcg$PWD
-echo lol$USER jsdhidcg'$PWD'
-echo lol$USER jsdhidcg"$PWD"
-echo lol$USERjsdhidcg$PWD
-echo $USER
-echo lol$USERjsdhidcg$PWDfu
-echo $lol$USERjsdhidcg$PWDfu
-echo "$lol$USERjsdhidcg$PWDuy"
-echo $lol"$USER"jsdhidcg$PWDuy
-echo lol"$USER"jsdhidcg$PWDuy
-echo lol"$USER"jsdhidcg"$PWD"uy
-echo lol"$USER"jsdhidcg'$PWD'uy
-echo lol"$USER"jsdhidcg$PWDuy
-
-*/
-=======
->>>>>>> 52df6307705b6b982477149da97c4566d31a4ed1

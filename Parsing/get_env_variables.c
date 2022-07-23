@@ -17,6 +17,22 @@ FIXME:
 	$PWD problem greping OLDPWD
 */ 
 
+int	ft_isalpha(int c)
+{
+	if ((c >= 65 && c <= 90) || ((c >= 97 && c <= 122)))
+		return (1);
+	else
+		return (0);
+}
+
+int	ft_isdigit(int c)
+{
+	if (c >= 48 && c <= 57)
+		return (1);
+	else
+		return (0);
+}
+
 char	*string_formating(char *str)
 {
 	int 	i;
@@ -57,19 +73,13 @@ char	*string_formating(char *str)
 	return (string);
 }
 
-// int		till_this(char *str)
-// {
-// 	int i = 0;
-// 	while (str[i])
-// 	{
-// 		printf("This is str -> %s\n",str);
-// 		printf("lenght -> %d\n",i);
-// 		if ((str[i] != 'a' && str[i] != 'z') || (str[i] != 'A' && str[i] != 'Z') || str[i] != '_')
-// 			return (i);
-// 		i++;
-// 	}
-// 	return (0);
-// }
+int		till_this(char *str)
+{
+	int i = 0;
+	while (ft_isalpha(str[i]) == 0 || ft_isdigit(str[i]) == 0)
+		i++;
+	return (i);
+}
 
 char	*variable(char *str)
 {
@@ -114,15 +124,15 @@ char	*get_env_variables(char **env, char *target)
 	return ("");
 }
 
-// int main(int ac, char **av, char **env)
-// {
-// 	while (1)
-// 	{
-// 		char *str = readline("");
-// 		add_history(str);
-// 		printf("%s\n", get_env_variables(env ,str));
-// 	}
-// }
+int main(int ac, char **av, char **env)
+{
+	while (1)
+	{
+		char *str = readline("");
+		add_history(str);
+		printf("%d\n", till_this(str));
+	}
+}
 
 
 //	echo lol$USER jsdhidcg$TEMP

@@ -16,31 +16,11 @@ TODO: ✅❓
 	✅ duplicate environment variables
 	❓ link parsing part with execuaation
 	All tokens are in a double pointer in input struct parse->input->x;
+	system("leaks a.out");
 */
 
 #include "minishell.h"
 
-char	*replace_spaces_with_x(char *str)
-{
-	int i = -1;
-
-	char *dup = malloc(sizeof(char) * ft_strlen(str + 1));
-	while (str[++i])
-	{
-		if (str[i] == '"')
-		{
-			if (str[i] == ' ')
-				dup[i] = '*';
-			else
-				dup[i] = str[i];
-		}
-		else
-			dup[i] =  str[i];
-	}
-	dup[i] = '\0';
-	return (dup);
-
-}
 void    looping(char **str)
 {
 	int i = 0;
@@ -51,21 +31,21 @@ void    looping(char **str)
 	}
 }
 
-int main(int ac, char **av, char **env)
+int main(int ac, char **av)
 {
 	(void) ac;
 	(void) av;
 	t_parse *parse;
 
 	parse = malloc(sizeof(t_parse));
-	env_dup(env);
+	// env_dup(env);
 	while (TRUE)
 	{
 		parse->line = readline(GREEN "Mini-0.0$ " RESET);
-		replace_spaces_with_x(parse->line);
-		printf("Line -> %s\n",parse->line);
-		add_history(parse->line);
-		parse->formated_input = input_formating(parse->line);
+		parse->line_double_quotes = handling_double_quotes(parse->line);
+		add_history(parse->line_double_quotes);
+		parse->formated_input = input_formating(parse->line_double_quotes);
+		printf("Formated String -> %s\n",parse->formated_input);
 		parse->splt_pipes = ft_split(parse->formated_input, '|');
 		int i = -1;
 		while (parse->splt_pipes[++i])

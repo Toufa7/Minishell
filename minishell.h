@@ -12,9 +12,8 @@
 
 /*
 TODO:
-	char	*heredoc_limiter;
+	✅ char	*heredoc_limiter;
 */
-
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -36,8 +35,8 @@ TODO:
 # define PATH_MAX  4096
 
 typedef int bool;
-#define true 1
-#define false 0
+# define true 1
+# define false 0
 
 char	**genv;
 
@@ -58,32 +57,36 @@ typedef struct s_tokens
 
 typedef struct s_input
 {
+	char	**command;
 	char	**in_files;
+	char	**delimiter;
 	char	**out_files;
 	char	**app_outfile;
-	char	**delimiter;
-	char	**command;
 }	t_input;
 
 typedef struct s_parse
 {
 	char		*line;
-	char		*formated_input;
 	char		**splt_pipes;
-	t_tokens	*tokens;
+	char		*orginal_string;
+	char		*formated_input;
+	char		*line_double_quotes;
 	t_input		*input;
+	t_tokens	*tokens;
 }	t_parse;
 
 // ----------- Parsing --------------------------
 
-char		*get_env_variables(char	**env, char	*target);
 char		**pipes(char	*str);
 char		*input_formating(char	*str);
-void		input_analyse(t_tokens	*tokens);
-t_tokens	*spliting_with_spaces(char	*str);
-void		input_counter(t_tokens	*counter, t_tokens	*tokens);
-void		initializer(t_tokens	*tokens);
+char		*handling_double_quotes(char *str);
+char		*getting_back_original_input(char *str);
+char		*get_env_variables(char	**env, char	*target);
 void		input_types(t_parse	*parse);
+void		initializer(t_tokens	*tokens);
+void		input_analyse(t_tokens	*tokens);
+void		input_counter(t_tokens	*counter, t_tokens	*tokens);
+t_tokens	*spliting_with_spaces(char	*str);
 
 // ----------- Execution -------------------------
 

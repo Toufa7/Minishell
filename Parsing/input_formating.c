@@ -39,6 +39,7 @@ char	*input_formating(char *str)
 			spcs[j++] = ' ';
 			spcs[j++] = str[i];
 			spcs[j++] = str[i];
+			spcs[j++] = ' ';
 			i++;
 		}
 		else if ((str[i] == '>' && str[i + 1] != '>') || (str[i] == '<' && str[i + 1] != '<') || str[i] == '|')
