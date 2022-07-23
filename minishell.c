@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/21 12:51:31 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/07/22 19:02:41 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,27 +59,27 @@ int main(int ac, char **av, char **env)
 
 	parse = malloc(sizeof(t_parse));
 	env_dup(env);
-	while (TRUE)
+	while (true)
 	{
 		parse->line = readline(GREEN "Mini-0.0$ " RESET);
-		replace_spaces_with_x(parse->line);
-		printf("Line -> %s\n",parse->line);
+		//replace_spaces_with_x(parse->line);
+		//printf("Line -> %s\n",parse->line);
 		add_history(parse->line);
 		parse->formated_input = input_formating(parse->line);
 		parse->splt_pipes = ft_split(parse->formated_input, '|');
 		int i = -1;
 		while (parse->splt_pipes[++i])
 		{
-			printf("Pipeline -> %d\n", i + 1);
+			//printf("Pipeline -> %d\n", i + 1);
 			parse->tokens = spliting_with_spaces(parse->splt_pipes[i]);
 			input_analyse(parse->tokens);
 			initializer(parse->tokens);
 			input_types(parse);
-			int x = -1;
-			while (parse->tokens[++x].token)
-			{
-				printf("%s -> type %s\n",parse->tokens[x].token,parse->tokens[x].type);
-			}
+			// int x = -1;
+			// while (parse->tokens[++x].token)
+			// {
+			// 	printf("%s -> type %s\n",parse->tokens[x].token,parse->tokens[x].type);
+			// }
 		}
 	}
 }

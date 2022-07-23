@@ -1,6 +1,6 @@
 #include "../../minishell.h"
 
-void    pwd(void)
+void    mpwd(void)
 {
     char    buff[PATH_MAX];
 

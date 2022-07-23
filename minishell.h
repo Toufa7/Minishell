@@ -6,15 +6,9 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/22 16:18:07 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/07/22 19:01:44 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/*
-TODO:
-	char	*heredoc_limiter;
-*/
-
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -31,8 +25,6 @@ TODO:
 
 # define GREEN "\033[32m"
 # define RESET "\033[0m"
-# define TRUE 1
-# define FALSE 0
 # define PATH_MAX  4096
 
 typedef int bool;
@@ -87,10 +79,10 @@ void		input_types(t_parse	*parse);
 
 // ----------- Execution -------------------------
 
-void    cd(char *path);
-void    pwd(void);
-void	env();
-void    echo(char **argv);
+void    mcd(char *path);
+void    mpwd(void);
+void	menv();
+void    mmecho(char **argv);
 void    mexit(char **argv);
 
 // ----------- Shared Functions ------------------
