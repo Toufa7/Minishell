@@ -1,6 +1,6 @@
 #include "../../minishell.h"
 
-void	env()
+void	menv()
 {
 	int	i;
 

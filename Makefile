@@ -6,7 +6,7 @@ ADDI_FLAGS = -fsanitize=address
 
 F_REMOVE = rm -rf
 
-CFILE = test.c \
+C_FILES = test.c \
 		Utils/env_dup.c \
 		Utils/ft_putstr_fd.c \
 		Utils/ft_atoi.c \

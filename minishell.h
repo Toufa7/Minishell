@@ -6,18 +6,10 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/22 19:01:44 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/07/23 16:56:24 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-<<<<<<< HEAD
-/*
-TODO:
-	✅ char	*heredoc_limiter;
-*/
-
-=======
->>>>>>> d9db7ee002d7bd65297b922c875029c81baf1641
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
