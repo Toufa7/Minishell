@@ -1,10 +1,5 @@
 #include "../minishell.h"
 
-/*
-FIXME:
-	❓ Fix this function always use adddress sanitizer
-*/
-
 void	env_dup(char **env)
 {
 	int	i;
@@ -13,7 +8,7 @@ void	env_dup(char **env)
 
 	while (env[i])
 		i++;
-	genv = malloc((sizeof(char **) * i) + 1);
+	genv = malloc((sizeof(char **) * (i + 1)));
 	i = -1;
 	while (env[++i])
 		genv[i] = ft_strdup(env[i]);

@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:32:28 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/22 10:18:11 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/07/23 16:56:30 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,16 +125,16 @@ char	*get_env_variables(char **env, char *target)
 	return ("");
 }
 
-int main(int ac, char **av, char **env)
-{
-	while (1)
-	{
-		char *str = readline("");
-		add_history(str);
-		printf("%s\n", get_env_variables(env, str));
-		// printf("%d\n", till_this(str));
-	}
-}
+// int main(int ac, char **av, char **env)
+// {
+// 	while (1)
+// 	{
+// 		char *str = readline("");
+// 		add_history(str);
+// 		printf("%s\n", get_env_variables(env, str));
+// 		// printf("%d\n", till_this(str));
+// 	}
+// }
 
 //	echo lol$USER jsdhidcg$TEMP
 //	echo lol$USER jsdhidcg$PWD

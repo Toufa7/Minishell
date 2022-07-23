@@ -6,15 +6,18 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/22 19:01:44 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/07/23 17:20:46 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+<<<<<<< HEAD
 /*
 TODO:
 	✅ char	*heredoc_limiter;
 */
 
+=======
+>>>>>>> 7cf0cb26556575f534ddd9666d23dfc9ff8d6534
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -74,6 +77,20 @@ typedef struct s_parse
 	t_tokens	*tokens;
 }	t_parse;
 
+typedef struct s_pipe_data
+{
+	char	*infile_path;
+	int		infile_status;
+	char	*outfile_path;
+	char	**cmds_names;
+	char	**cmds_paths;
+	int		cmds_size;
+	int		is_heredoc;
+	char	*heredoc_limiter;
+	int		cmd_pipe_fds[2];
+	int		here_doc_pipe_fds[2];
+}	t_pipe_data;
+
 // ----------- Parsing --------------------------
 
 char		**pipes(char	*str);
@@ -95,9 +112,21 @@ void	menv();
 void    mmecho(char **argv);
 void    mexit(char **argv);
 
+void	execution(int argc, char *argv[], char *envp[]);
+void	get_herdoc(t_pipe_data *pipe_data);
+void	ft_free_str(char *str);
+void	ft_free_arr(char **arr);
+char	*get_cmd(char *str);
+void	validate_cmd(char *cmd, char **cmd_path, char **exec_programs_dirs);
+int		validate_infile(char *infile_path);
+void	child_process(int i, int input_fd,
+			t_pipe_data *pipe_data, char *envp[]);
+
 // ----------- Shared Functions ------------------
 
 void	env_dup(char **env);
+char	*get_next_line(int fd);
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 void	ft_putstr_fd(char *s, int fd);
 int		ft_atoi(const char *str);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
