@@ -10,14 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-<<<<<<< HEAD
 /*
 TODO:
 	✅ char	*heredoc_limiter;
 */
 
-=======
->>>>>>> 7cf0cb26556575f534ddd9666d23dfc9ff8d6534
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
