@@ -1,5 +1,10 @@
 #include "../minishell.h"
 
+/*
+FIXME:
+	fix this function always use adddress sanitizer
+*/
+
 void	env_dup(char **env)
 {
 	int	i;
