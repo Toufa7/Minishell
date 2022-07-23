@@ -6,34 +6,33 @@ ADDI_FLAGS = -fsanitize=address
 
 F_REMOVE = rm -rf
 
-C_FILES =	minishell.c\
-			Utils/env_dup.c \
-			Utils/ft_putstr_fd.c \
-			Utils/ft_atoi.c \
-			Utils/ft_split.c \
-			Utils/ft_substr.c \
-			Utils/ft_strlen.c \
-			Utils/ft_strstr.c \
-			Utils/ft_strjoin.c \
-			Utils/ft_strcmp.c \
-			Utils/ft_strncmp.c \
-			Utils/ft_strdup.c \
-			Utils/ft_calloc.c \
-			Utils/ft_strchr.c \
-			Parsing/get_env_variables.c \
-			Parsing/input_formating.c \
-			Parsing/spliting_with_spaces.c \
-			Parsing/input_analyse.c \
-			Parsing/input_counter.c \
-			Parsing/input_types.c \
-			Parsing/handling_double_quotes.c \
-			Execution/Builtins/cd.c \
-			Execution/Builtins/echo.c \
-			Execution/Builtins/env.c \
-			Execution/Builtins/exit.c \
-			Execution/Builtins/export.c \
-			Execution/Builtins/pwd.c \
-			Execution/Builtins/unset.c \
+CFILE = test.c \
+		Utils/env_dup.c \
+		Utils/ft_putstr_fd.c \
+		Utils/ft_atoi.c \
+		Utils/ft_split.c \
+		Utils/ft_substr.c \
+		Utils/ft_strlen.c \
+		Utils/ft_strstr.c \
+		Utils/ft_strjoin.c \
+		Utils/ft_strcmp.c \
+		Utils/ft_strncmp.c \
+		Utils/ft_strdup.c \
+		Utils/ft_calloc.c \
+		Utils/ft_strchr.c \
+		Parsing/get_env_variables.c \
+		Parsing/input_formating.c \
+		Parsing/spliting_with_spaces.c \
+		Parsing/input_analyse.c \
+		Parsing/input_counter.c \
+		Parsing/input_types.c \
+		Execution/Builtins/mcd.c \
+		Execution/Builtins/mecho.c \
+		Execution/Builtins/menv.c \
+		Execution/Builtins/mexit.c \
+		Execution/Builtins/mexport.c \
+		Execution/Builtins/mpwd.c \
+		Execution/Builtins/munset.c \
 
 all: $(NAME)
 

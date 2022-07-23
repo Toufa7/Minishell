@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/21 12:51:31 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/07/22 19:02:41 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,16 @@ int main(int ac, char **av)
 		int i = -1;
 		while (parse->splt_pipes[++i])
 		{
-			printf("Pipeline -> %d\n", i + 1);
+			//printf("Pipeline -> %d\n", i + 1);
 			parse->tokens = spliting_with_spaces(parse->splt_pipes[i]);
 			input_analyse(parse->tokens);
 			initializer(parse->tokens);
 			input_types(parse);
-			int x = -1;
-			while (parse->tokens[++x].token)
-			{
-				printf("%s -> type %s\n",parse->tokens[x].token,parse->tokens[x].type);
-			}
+			// int x = -1;
+			// while (parse->tokens[++x].token)
+			// {
+			// 	printf("%s -> type %s\n",parse->tokens[x].token,parse->tokens[x].type);
+			// }
 		}
 	}
 }
