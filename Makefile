@@ -38,7 +38,7 @@ C_FILES = 	minishell.c \
 all: $(NAME)
 
 $(NAME): $(C_FILES)
-		$(C_FLAGS) $(ADDI_FLAGS) $(C_FILES) -o $(NAME) 
+		$(C_FLAGS) $(C_FILES) -o $(NAME) 
 
 clean:
 	rm -rf $(NAME)

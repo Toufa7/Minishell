@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/23 17:21:51 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/07/24 16:34:47 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,24 +21,24 @@ TODO: ✅❓
 
 #include "minishell.h"
 
-void    looping(char **str)
+void    looping(char *prefix, char **str)
 {
 	int i = 0;
 	while (str[i])
 	{
-		printf("%s\n", str[i]);
+		printf("%s %s\n", prefix, str[i]);
 		i++;
 	}
 }
 
-int main(int ac, char **av)
+int main(int ac, char **av, char **env)
 {
 	(void) ac;
 	(void) av;
 	t_parse *parse;
 
 	parse = malloc(sizeof(t_parse));
-	// env_dup(env);
+	env_dup(env);
 	while (TRUE)
 	{
 		parse->line = readline(GREEN "Mini-0.0$ " RESET);
