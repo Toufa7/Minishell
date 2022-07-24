@@ -1,6 +1,6 @@
 #include "../minishell.h"
 
-int	get_var_index(char *var)
+int	get_var_index(char *var, int n)
 {
 	int	j;
 	int	i;
@@ -9,7 +9,7 @@ int	get_var_index(char *var)
 	i = -1;
 	while (genv[++j])
 	{
-		if (ft_strncmp(genv[j] , var, 7) == 0)
+		if (ft_strncmp(genv[j] , var, n) == 0)
 		{
 			i = j;
 			break;

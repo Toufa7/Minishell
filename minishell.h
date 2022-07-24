@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/24 18:06:37 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/07/24 18:23:11 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ void	child_process(int i, int input_fd,
 
 char	**ft_realloc(char **input, char *str);
 void	env_dup(char **env);
-int		get_var_index(char *var);
+int		get_var_index(char *var, int n);
 char	*get_next_line(int fd);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 void	ft_putstr_fd(char *s, int fd);

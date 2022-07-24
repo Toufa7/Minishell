@@ -1,6 +1,6 @@
 #include "../../minishell.h"
 
-int	get_var_index(char *var)
+int	get_var_index(char *var, int n)
 {
 	int	j;
 	int	i;
@@ -9,7 +9,7 @@ int	get_var_index(char *var)
 	i = -1;
 	while (genv[++j])
 	{
-		if (ft_strncmp(genv[j] , var, 7) == 0)
+		if (ft_strncmp(genv[j] , var, n) == 0)
 		{
 			i = j;
 			break;
@@ -26,7 +26,7 @@ void    mcd(char *path)
 	i = -1;
 	if (getcwd(buff, sizeof(buff)) != NULL)
 	{
-		i = get_var_index("OLDPWD=");
+		i = get_var_index("OLDPWD=", 7);
 		if (i != -1)
 		{
 			free(genv[i]);
@@ -39,7 +39,7 @@ void    mcd(char *path)
 		ft_putstr_fd(strerror(errno), 2);
 	if (getcwd(buff, sizeof(buff)) != NULL)
 	{
-		i = get_var_index("PWD=");
+		i = get_var_index("PWD=", 4);
 		if (i != -1)
 		{
 			free(genv[i]);
