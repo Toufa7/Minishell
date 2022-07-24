@@ -1,4 +1,5 @@
 test.c
+minishell.c
 Minishell
 .DS_Store
 *.o

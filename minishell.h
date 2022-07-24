@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/23 17:20:46 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/07/24 14:43:20 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ TODO:
 # define RESET "\033[0m"
 
 # define PATH_MAX  4096
-// # define SUCCESS	0
-// # define FAILURE	1
+# define SUCCESS	0
+# define FAILURE	1
 
 // # define	STDIN_FILENO	0
 // # define	STDOUT_FILENO	1
