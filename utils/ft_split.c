@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 17:43:44 by abouchfa          #+#    #+#             */
-/*   Updated: 2022/07/24 18:32:07 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/07/24 18:35:49 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,13 +84,4 @@ char	**ft_split(char const *s, char c)
 		collect_words(arr, (char *) s, c, length);
 	arr[length] = 0;
 	return (arr);
-}
-int main()
-{
-        char *str = "$USER $PWD";
-        char **ola = ft_split(str, ' ');
-        for (int i = 0; ola[i]; i++)
-        {
-                printf("%s\n",ola[i]);
-        }
 }
