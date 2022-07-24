@@ -6,14 +6,14 @@ void mexit(char **argv)
 	int		j;
 	int		i;
 
-	isarg_digit = true;
+	isarg_digit = TRUE;
 	j = -1;
 	i = 0;
 	while (argv[i][++j])
 	{
 		if (!(argv[i][j] >= '0' && argv[i][j] <= '9'))
 		{
-			isarg_digit = false;
+			isarg_digit = FALSE;
 			break;
 		}
 	}

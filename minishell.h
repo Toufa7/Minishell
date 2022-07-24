@@ -30,12 +30,19 @@ TODO:
 
 # define GREEN "\033[32m"
 # define RESET "\033[0m"
+
 # define PATH_MAX  4096
-# define SUCCESS	0
-# define FAILURE	1
+// # define SUCCESS	0
+// # define FAILURE	1
+
+// # define	STDIN_FILENO	0
+// # define	STDOUT_FILENO	1
+// # define	STDERR_FILENO	2
+
 typedef int bool;
-# define true 1
-# define false 0
+
+# define TRUE 1
+# define FALSE 0
 
 char	**genv;
 
@@ -61,6 +68,7 @@ typedef struct s_input
 	char	**delimiter;
 	char	**out_files;
 	char	**app_outfile;
+	char	**options;
 }	t_input;
 
 typedef struct s_parse
