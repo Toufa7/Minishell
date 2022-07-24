@@ -5,83 +5,92 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/02 20:05:01 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/21 10:22:30 by abouchfa         ###   ########.fr       */
+/*   Created: 2021/11/02 17:43:44 by abouchfa          #+#    #+#             */
+/*   Updated: 2022/07/24 18:32:07 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
-{
-	size_t	i;
-	size_t	len;
-
-	i = 0;
-	len = ft_strlen(src);
-	if (!dstsize)
-		return (len);
-	while (src[i] && (i < dstsize - 1))
-	{
-		dst[i] = src[i];
-		i++;
-	}
-	dst[i] = '\0';
-	return (len);
-}
-
-static int	count_words(const char *s, char c)
+static void	ft_strncpy(char *dest, char *src, int n)
 {
 	int	i;
-	int	count;
 
+	i = -1;
+	while (++i < n)
+		dest[i] = src[i];
+	dest[i] = 0;
+}
+
+static void	collect_words(char **arr, char *str, char c, int len)
+{
+	int	index;
+	int	i;
+	int	n;
+
+	index = 0;
 	i = 0;
-	count = 0;
-	while (s[i] != '\0')
+	while (index < len)
 	{
-		if ((i == 0 && s[i] != c) || (s[i - 1] == c && s[i] != c))
-			count++;
+		while (str[i] == c && str[i])
+			i++;
+		n = i;
+		while (str[i] != c && str[i])
+			i++;
+		n = i - n;
+		arr[index] = malloc(sizeof(char) * (n + 1));
+		if (!arr[index])
+		{
+			while (index--)
+				free(arr[index]);
+			free(arr);
+			break ;
+		}
+		ft_strncpy(arr[index], str + i - n, n);
+		index++;
+	}
+}
+
+static int	words_counter(char *str, char c)
+{
+	int	words;
+	int	i;
+
+	words = 0;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != c)
+			words++;
+		while (str[i] != c && str[i + 1])
+			i++;
 		i++;
 	}
-	return (count);
+	return (words);
 }
 
-static char	**spliting(char **arr, char const *s, char c)
-{
-	int		i;
-	int		j;
-	int		len;
-
-	i = 0;
-	j = 0;
-	while (s[i])
-	{
-		while (s[i] == c)
-			i++;
-		len = i;
-		while (s[len] && s[len] != c)
-			len++;
-		if (s[i])
-		{
-			arr[j] = malloc((len - i + 1) * sizeof(char));
-			ft_strlcpy(arr[j++], s + i, len - i + 1);
-		}
-		i = len;
-	}
-	arr[j] = 0;
-	return (arr);
-}
-
-char	**ft_split(char *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	char	**arr;
+	int		length;
 
 	if (!s)
 		return (NULL);
-	arr = malloc((count_words(s, c) + 1) * sizeof(char *));
+	length = words_counter((char *) s, c);
+	arr = malloc((length + 1) * sizeof(char *));
 	if (!arr)
-		return (NULL);
-	spliting(arr, s, c);
-	free (s);
+		return (0);
+	if (length)
+		collect_words(arr, (char *) s, c, length);
+	arr[length] = 0;
 	return (arr);
+}
+int main()
+{
+        char *str = "$USER $PWD";
+        char **ola = ft_split(str, ' ');
+        for (int i = 0; ola[i]; i++)
+        {
+                printf("%s\n",ola[i]);
+        }
 }
