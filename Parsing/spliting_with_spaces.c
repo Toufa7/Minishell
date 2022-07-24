@@ -23,12 +23,9 @@ t_tokens	*spliting_with_spaces(char *str)
 	while (line[i])
 		i++;
 	tokens = malloc(sizeof(t_tokens) * (i + 1));
-	i = 0;
-	while (line[i])
-	{
+	i = -1;
+	while (line[++i])
 		tokens[i].token = line[i];
-		i++;
-	}
 	tokens[i].token = NULL ;
 	return (tokens);
 }

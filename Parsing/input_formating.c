@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_formating.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: otoufah <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:55:08 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/02 22:55:09 by otoufah          ###   ########.fr       */
+/*   Updated: 2022/07/22 11:35:11 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ char	*input_formating(char *str)
 	allo = 0;
 	while (str[++k])
 	{
-		if ((str[k] == '<' && str[k + 1] != '<') || (str[k] == '>'
-				&& str[k + 1] != '>') || str[k] == '|' || str[k] == '$')
+		if ((str[k] == '<' && str[k + 1] != '<') || (str[k] == '>' && str[k + 1] != '>') || str[k] == '|')
 			allo++;
 	}
 	spcs = malloc(sizeof(char) * (ft_strlen(str) + (allo * 2) + 1));
@@ -40,9 +39,10 @@ char	*input_formating(char *str)
 			spcs[j++] = ' ';
 			spcs[j++] = str[i];
 			spcs[j++] = str[i];
+			spcs[j++] = ' ';
 			i++;
 		}
-		else if ((str[i] == '>' && str[i + 1] != '>') || (str[i] == '<' && str[i + 1] != '<') || str[i] == '|' || str[i] == '$')
+		else if ((str[i] == '>' && str[i + 1] != '>') || (str[i] == '<' && str[i + 1] != '<') || str[i] == '|')
 		{
 			spcs[j++] = ' ';
 			spcs[j++] = str[i];
@@ -55,3 +55,13 @@ char	*input_formating(char *str)
 	free(str);
 	return (spcs);
 }
+
+
+// int main(int ac, char **av, char **env)
+// {
+// 	while (1)
+// 	{
+// 		char *str = readline("");
+// 		printf("%s\n", input_formating(str));
+// 	}
+// }

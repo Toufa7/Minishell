@@ -17,29 +17,12 @@ void	var_init(t_input *input)
 	input->in_files = ft_calloc(1, sizeof(char *));
 	input->out_files = ft_calloc(1, sizeof(char *));
 	input->app_outfile = ft_calloc(1, sizeof(char *));
-	input->doc_infile = ft_calloc(1, sizeof(char *));
+	input->delimiter = ft_calloc(1, sizeof(char *));
 	input->command = ft_calloc(1, sizeof(char *));
+	input->options = ft_calloc(1, sizeof(char *));
 }
 
-char	**ft_realloc(char **input, char *str)
-{
-	int		i;
-	char	**new_input;
 
-	i = 0;
-	while (input[i])
-		i++;
-	new_input = calloc(i + 2, sizeof(char *));
-	i = 0;
-	while (input[i])
-	{
-		new_input[i] = input[i];
-		i++;
-	}
-	new_input[i] = str;
-	free(input);
-	return (new_input);
-}
 
 void	input_types(t_parse *parse)
 {
@@ -53,15 +36,16 @@ void	input_types(t_parse *parse)
 		if (ft_strcmp(parse->tokens[i].type, "outfile") == 0)
 			parse->input->out_files = ft_realloc(parse->input->out_files,
 					parse->tokens[i].token);
-		else if (ft_strcmp(parse->tokens[i].type, "doc_infile") == 0)
-			parse->input->doc_infile = ft_realloc(parse->input->doc_infile,
+		else if (ft_strcmp(parse->tokens[i].type, "delimiter") == 0)
+			parse->input->delimiter = ft_realloc(parse->input->delimiter,
 					parse->tokens[i].token);
 		else if (ft_strcmp(parse->tokens[i].type, "app_outfile") == 0)
 			parse->input->app_outfile = ft_realloc(parse->input->app_outfile,
 					parse->tokens[i].token);
 		else if (ft_strcmp(parse->tokens[i].type, "command") == 0)
-			parse->input->command = ft_realloc(parse->input->command,
-					parse->tokens[i].token);
+			parse->input->command = ft_realloc(parse->input->command, parse->tokens[i].token);
+		else if (ft_strcmp(parse->tokens[i].type, "option") == 0)
+			parse->input->options = ft_realloc(parse->input->options, parse->tokens[i].token);
 		i++;
 	}
 }

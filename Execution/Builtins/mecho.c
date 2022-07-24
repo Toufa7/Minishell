@@ -1,6 +1,6 @@
 #include "../../minishell.h"
 
-void    echo(char **argv)
+void    mecho(char **argv)
 {
 	bool new_line;
 	bool valid_arg;
@@ -34,5 +34,3 @@ void    echo(char **argv)
 	if (!new_line)
 		ft_putstr_fd("\n", 1);
 }
-
-

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_env_variables.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: otoufah <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:32:28 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/02 22:32:29 by otoufah          ###   ########.fr       */
+/*   Updated: 2022/07/23 16:56:30 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,22 @@
 FIXME:
 	$PWD problem greping OLDPWD
 */ 
+
+// int	ft_isalpha(int c)
+// {
+// 	if ((c >= 65 && c <= 90) || ((c >= 97 && c <= 122)))
+// 		return (1);
+// 	else
+// 		return (0);
+// }
+
+// int	ft_isdigit(int c)
+// {
+// 	if (c >= 48 && c <= 57)
+// 		return (1);
+// 	else
+// 		return (0);
+// }
 
 char	*string_formating(char *str)
 {
@@ -31,6 +47,7 @@ char	*string_formating(char *str)
 		if (str[i] == '"' || str[i] == '$')
 			quotes++;	
 	}
+	printf("nb quotes : %d\n", quotes);
 	string = malloc(sizeof(char) * ft_strlen(str) + (quotes * 2) + 1); 
 	if (!string)
 		return (NULL);
@@ -46,14 +63,15 @@ char	*string_formating(char *str)
 		}
 		else if (str[i] == '$')
 		{
-			string[++j] = ' ';
 			string[++j] = str[i];
+			string[++j] = ' ';
 		}
 		else
 			string [++j] = str[i];
 	}
 	string[j + 1] = '\0';
 	free(str);
+	printf("Formated String -> %s\n",string);
 	return (string);
 }
 
@@ -79,18 +97,17 @@ char	*get_env_variables(char **env, char *target)
 	char *s_format;
 
 	i = -1;
-	s_format = string_formating(target);
-	splt = ft_split(s_format,  ' ');
+	splt = ft_split(string_formating(target),  ' ');
 	while (splt[++i])
 	{
-		s_format = ft_strjoin(variable(splt[i]), "=");
+		target = ft_strjoin(variable(splt[i]), "=");
 		j = -1;
 		while (env[++j])
 		{
-			if (ft_strstr(env[j], s_format))
+			if (ft_strstr(env[j], target))
 			{
-				printf("%s\n", (env[j] + ft_strlen(s_format)));
-				break;
+				printf("%s\n", (env[j] + ft_strlen(target)));
+					break;
 			}
 		}
 	}
@@ -99,25 +116,14 @@ char	*get_env_variables(char **env, char *target)
 
 int main(int ac, char **av, char **env)
 {
+	(void)ac;
+	(void)av;
 	while (1)
 	{
-		char *str = readline("");
-		printf("%s\n", get_env_variables(env ,str));
+		char *str = get_env_variables(env ,readline(""));
+		printf("%s\n",str);
 	}
 }
 
 
-// echo lol$USER jsdhidcg$TEMP
-// echo lol$USER jsdhidcg$PWD
-// echo lol$USER jsdhidcg'$PWD'
-// echo lol$USER jsdhidcg"$PWD"
-// echo lol$USERjsdhidcg$PWD
-// echo $USER
-// echo lol$USERjsdhidcg$PWDfu
-// echo $lol$USERjsdhidcg$PWDfu
-// echo "$lol$USERjsdhidcg$PWDuy"
-// echo $lol"$USER"jsdhidcg$PWDuy
-// echo lol"$USER"jsdhidcg$PWDuy
-// echo lol"$USER"jsdhidcg"$PWD"uy
-// echo lol"$USER"jsdhidcg'$PWD'uy
-// echo lol"$USER"jsdhidcg$PWDuy
+

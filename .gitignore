@@ -1,6 +1,9 @@
 test.c
+minishell.c
 Minishell
+.DS_Store
 *.o
+*.out
 /*/*.o
 /.vscode
 */*.out
