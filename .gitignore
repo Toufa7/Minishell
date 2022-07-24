@@ -2,6 +2,7 @@ test.c
 minishell.c
 Minishell
 .DS_Store
+*/.DS_Store
 *.o
 *.out
 /*/*.o
