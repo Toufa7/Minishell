@@ -32,7 +32,8 @@ void    mcd(char *path)
 			free(genv[i]);
 			genv[i] = ft_strjoin("OLDPWD=", buff);
 		}
-		else 
+		else
+			genv = ft_realloc(genv, ft_strjoin("OLDPWD=", buff));
 	}
     if (chdir(path) != 0)
 		ft_putstr_fd(strerror(errno), 2);
@@ -44,5 +45,7 @@ void    mcd(char *path)
 			free(genv[i]);
 			genv[i] = ft_strjoin("PWD=", buff);
 		}
+		else
+			genv = ft_realloc(genv, ft_strjoin("PWD=", buff));
 	}
 }

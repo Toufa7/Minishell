@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/24 17:41:07 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/07/24 18:06:37 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,6 @@ void	child_process(int i, int input_fd,
 			t_pipe_data *pipe_data, char *envp[]);
 
 // ----------- Shared Functions ------------------
-
 
 char	**ft_realloc(char **input, char *str);
 void	env_dup(char **env);

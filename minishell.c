@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/24 16:34:47 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/07/24 18:13:42 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ TODO: ✅❓
 
 #include "minishell.h"
 
-void    looping(char *prefix, char **str)
+void    looping(char **str)
 {
 	int i = 0;
 	while (str[i])
 	{
-		printf("%s %s\n", prefix, str[i]);
+		printf("%s\n", str[i]);
 		i++;
 	}
 }
@@ -53,10 +53,9 @@ int main(int ac, char **av, char **env)
 			input_analyse(parse->tokens);
 			initializer(parse->tokens);
 			input_types(parse);
-			// int x = -1;
-			// while (parse->tokens[++x].token)
-				// printf("%s -> type %s\n",parse->tokens[x].token, parse->tokens[x].type);
-			looping(parse->input->options);
+			int x = -1;
+			while (parse->tokens[++x].token)
+				printf("%s -> type %s\n",parse->tokens[x].token, parse->tokens[x].type);
 		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:32:28 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/23 16:56:30 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/07/24 18:14:07 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,6 @@ FIXME:
 	$PWD problem greping OLDPWD
 */ 
 
-<<<<<<< HEAD
-// int	ft_isalpha(int c)
-// {
-// 	if ((c >= 65 && c <= 90) || ((c >= 97 && c <= 122)))
-// 		return (1);
-// 	else
-// 		return (0);
-// }
-
-// int	ft_isdigit(int c)
-// {
-// 	if (c >= 48 && c <= 57)
-// 		return (1);
-// 	else
-// 		return (0);
-// }
-=======
 int	ft_isalpha(int c)
 {
 	if ((c >= 65 && c <= 90) || ((c >= 97 && c <= 122)))
@@ -49,7 +32,6 @@ int	ft_isdigit(int c)
 	else
 		return (0);
 }
->>>>>>> bcf8e2cd257b7df216aee19117a7e90bf34da3ff
 
 char	*string_formating(char *str)
 {
@@ -88,12 +70,7 @@ char	*string_formating(char *str)
 			string [++j] = str[i];
 	}
 	string[j + 1] = '\0';
-<<<<<<< HEAD
-	free(str);
-	printf("Formated String -> %s\n",string);
-=======
 	// free(str);
->>>>>>> bcf8e2cd257b7df216aee19117a7e90bf34da3ff
 	return (string);
 }
 
@@ -137,11 +114,7 @@ char	*get_env_variables(char **env, char *target)
 		{
 			if (ft_strstr(env[j], target))
 			{
-<<<<<<< HEAD
-				printf("%s\n", (env[j] + ft_strlen(target)));
-=======
 				printf("%s\n", (env[j] + ft_strlen(s_format)));
->>>>>>> bcf8e2cd257b7df216aee19117a7e90bf34da3ff
 					break;
 			}
 		}
@@ -149,25 +122,16 @@ char	*get_env_variables(char **env, char *target)
 	return ("");
 }
 
-int main(int ac, char **av, char **env)
-{
-	(void)ac;
-	(void)av;
-	while (1)
-	{
-<<<<<<< HEAD
-		char *str = get_env_variables(env ,readline(""));
-		printf("%s\n",str);
-	}
-}
-
-
-
-=======
-		printf("%s\n", get_env_variables(env, readline("")));
-		// printf("%d\n", till_this(str));
-	}
-}
+// int main(int ac, char **av, char **env)
+// {
+// 	(void)ac;
+// 	(void)av;
+// 	while (1)
+// 	{
+// 		printf("%s\n", get_env_variables(env, readline("")));
+// 		// printf("%d\n", till_this(str));
+// 	}
+// }
 
 //	echo lol$USER jsdhidcg$TEMP
 //	echo lol$USER jsdhidcg$PWD
@@ -194,4 +158,3 @@ int main(int ac, char **av, char **env)
 //	echo $USER;oussama
 //	echo $USER[oussama
 //	echo $USER,oussama
->>>>>>> bcf8e2cd257b7df216aee19117a7e90bf34da3ff
