@@ -39,27 +39,23 @@ int main(int ac, char **av)
 
 	parse = malloc(sizeof(t_parse));
 	// env_dup(env);
-	while (true)
+	while (TRUE)
 	{
 		parse->line = readline(GREEN "Mini-0.0$ " RESET);
-		parse->line_double_quotes = handling_double_quotes(parse->line);
+		parse->line_double_quotes = handling_quotes(parse->line);
 		add_history(parse->line_double_quotes);
 		parse->formated_input = input_formating(parse->line_double_quotes);
-		printf("Formated String -> %s\n",parse->formated_input);
 		parse->splt_pipes = ft_split(parse->formated_input, '|');
 		int i = -1;
 		while (parse->splt_pipes[++i])
 		{
-			//printf("Pipeline -> %d\n", i + 1);
 			parse->tokens = spliting_with_spaces(parse->splt_pipes[i]);
 			input_analyse(parse->tokens);
 			initializer(parse->tokens);
 			input_types(parse);
-			// int x = -1;
-			// while (parse->tokens[++x].token)
-			// {
-			// 	printf("%s -> type %s\n",parse->tokens[x].token,parse->tokens[x].type);
-			// }
+			int x = -1;
+			while (parse->tokens[++x].token)
+				printf("%s -> type %s\n",parse->tokens[x].token, parse->tokens[x].type);
 		}
 	}
 }

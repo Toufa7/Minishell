@@ -75,10 +75,11 @@ char	*string_formating(char *str)
 
 int		till_this(char *str)
 {
-	int i = 0;
-	while (ft_isalpha(str[i]) == 0 || ft_isdigit(str[i]) == 0)
-		i++;
-	return (i);
+	int i = -1;
+	while (str[++i])
+		if (str[i] < 'a' && str[i] > 'z')
+			return (i);
+	return (-1);
 }
 
 char	*variable(char *str)
@@ -130,10 +131,10 @@ char	*get_env_variables(char **env, char *target)
 // 	{
 // 		char *str = readline("");
 // 		add_history(str);
-// 		printf("%d\n", till_this(str));
+// 		printf("%s\n", get_env_variables(env, str));
+// 		// printf("%d\n", till_this(str));
 // 	}
 // }
-
 
 //	echo lol$USER jsdhidcg$TEMP
 //	echo lol$USER jsdhidcg$PWD
