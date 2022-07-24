@@ -124,6 +124,8 @@ void	child_process(int i, int input_fd,
 
 // ----------- Shared Functions ------------------
 
+
+char	**ft_realloc(char **input, char *str);
 void	env_dup(char **env);
 int		get_var_index(char *var);
 char	*get_next_line(int fd);

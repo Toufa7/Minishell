@@ -17,6 +17,23 @@ FIXME:
 	$PWD problem greping OLDPWD
 */ 
 
+<<<<<<< HEAD
+// int	ft_isalpha(int c)
+// {
+// 	if ((c >= 65 && c <= 90) || ((c >= 97 && c <= 122)))
+// 		return (1);
+// 	else
+// 		return (0);
+// }
+
+// int	ft_isdigit(int c)
+// {
+// 	if (c >= 48 && c <= 57)
+// 		return (1);
+// 	else
+// 		return (0);
+// }
+=======
 int	ft_isalpha(int c)
 {
 	if ((c >= 65 && c <= 90) || ((c >= 97 && c <= 122)))
@@ -32,6 +49,7 @@ int	ft_isdigit(int c)
 	else
 		return (0);
 }
+>>>>>>> bcf8e2cd257b7df216aee19117a7e90bf34da3ff
 
 char	*string_formating(char *str)
 {
@@ -47,6 +65,7 @@ char	*string_formating(char *str)
 		if (str[i] == '"' || str[i] == '$')
 			quotes++;	
 	}
+	printf("nb quotes : %d\n", quotes);
 	string = malloc(sizeof(char) * ft_strlen(str) + (quotes * 2) + 1); 
 	if (!string)
 		return (NULL);
@@ -62,14 +81,19 @@ char	*string_formating(char *str)
 		}
 		else if (str[i] == '$')
 		{
-			string[++j] = ' ';
 			string[++j] = str[i];
+			string[++j] = ' ';
 		}
 		else
 			string [++j] = str[i];
 	}
 	string[j + 1] = '\0';
+<<<<<<< HEAD
+	free(str);
+	printf("Formated String -> %s\n",string);
+=======
 	// free(str);
+>>>>>>> bcf8e2cd257b7df216aee19117a7e90bf34da3ff
 	return (string);
 }
 
@@ -104,17 +128,20 @@ char	*get_env_variables(char **env, char *target)
 	char *s_format;
 
 	i = -1;
-	s_format = string_formating(target);
-	splt = ft_split(s_format,  ' ');
+	splt = ft_split(string_formating(target),  ' ');
 	while (splt[++i])
 	{
-		s_format = ft_strjoin(variable(splt[i]), "=");
+		target = ft_strjoin(variable(splt[i]), "=");
 		j = -1;
 		while (env[++j])
 		{
-			if (ft_strstr(env[j], s_format))
+			if (ft_strstr(env[j], target))
 			{
+<<<<<<< HEAD
+				printf("%s\n", (env[j] + ft_strlen(target)));
+=======
 				printf("%s\n", (env[j] + ft_strlen(s_format)));
+>>>>>>> bcf8e2cd257b7df216aee19117a7e90bf34da3ff
 					break;
 			}
 		}
@@ -124,8 +151,19 @@ char	*get_env_variables(char **env, char *target)
 
 int main(int ac, char **av, char **env)
 {
+	(void)ac;
+	(void)av;
 	while (1)
 	{
+<<<<<<< HEAD
+		char *str = get_env_variables(env ,readline(""));
+		printf("%s\n",str);
+	}
+}
+
+
+
+=======
 		printf("%s\n", get_env_variables(env, readline("")));
 		// printf("%d\n", till_this(str));
 	}
@@ -156,3 +194,4 @@ int main(int ac, char **av, char **env)
 //	echo $USER;oussama
 //	echo $USER[oussama
 //	echo $USER,oussama
+>>>>>>> bcf8e2cd257b7df216aee19117a7e90bf34da3ff

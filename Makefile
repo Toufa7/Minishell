@@ -20,6 +20,7 @@ C_FILES = 	minishell.c \
 			Utils/ft_strdup.c \
 			Utils/ft_calloc.c \
 			Utils/ft_strchr.c \
+			Utils/ft_realloc.c \
 			Parsing/get_env_variables.c \
 			Parsing/input_formating.c \
 			Parsing/spliting_with_spaces.c \
