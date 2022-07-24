@@ -19,6 +19,7 @@ void	var_init(t_input *input)
 	input->app_outfile = ft_calloc(1, sizeof(char *));
 	input->delimiter = ft_calloc(1, sizeof(char *));
 	input->command = ft_calloc(1, sizeof(char *));
+	input->options = ft_calloc(1, sizeof(char *));
 }
 
 char	**ft_realloc(char **input, char *str)
@@ -60,8 +61,9 @@ void	input_types(t_parse *parse)
 			parse->input->app_outfile = ft_realloc(parse->input->app_outfile,
 					parse->tokens[i].token);
 		else if (ft_strcmp(parse->tokens[i].type, "command") == 0)
-			parse->input->command = ft_realloc(parse->input->command,
-					parse->tokens[i].token);
+			parse->input->command = ft_realloc(parse->input->command, parse->tokens[i].token);
+		else if (ft_strcmp(parse->tokens[i].type, "option") == 0)
+			parse->input->options = ft_realloc(parse->input->options, parse->tokens[i].token);
 		i++;
 	}
 }
