@@ -69,30 +69,28 @@ char	*string_formating(char *str)
 			string [++j] = str[i];
 	}
 	string[j + 1] = '\0';
-	free(str);
+	// free(str);
 	return (string);
 }
 
-int		till_this(char *str)
-{
-	int i = -1;
-	while (str[++i])
-		if (str[i] < 'a' && str[i] > 'z')
-			return (i);
-	return (-1);
-}
+// int		till_this(char *str)
+// {
+// 	int i = -1;
+// 	while (str[++i])
+// 		if (str[i] < 'a' && str[i] > 'z') || 
+// 			return (i);
+// 	return (-1);
+// }
 
 char	*variable(char *str)
 {
 	int	i;
 
 	i = 0;
-	while (str[i] != '.')
+	while (str[i])
 	{
-		if (str[i] == '$' && str[i + 1])
+		if (str[i] == '$')
 			return (&str[i + 1]);
-		else
-			return (NULL);
 		i++;
 	}
 	return (NULL);
@@ -111,30 +109,27 @@ char	*get_env_variables(char **env, char *target)
 	while (splt[++i])
 	{
 		s_format = ft_strjoin(variable(splt[i]), "=");
-		printf("s_format -> %s\n",s_format);
 		j = -1;
 		while (env[++j])
 		{
 			if (ft_strstr(env[j], s_format))
 			{
 				printf("%s\n", (env[j] + ft_strlen(s_format)));
-				break;
+					break;
 			}
 		}
 	}
 	return ("");
 }
 
-// int main(int ac, char **av, char **env)
-// {
-// 	while (1)
-// 	{
-// 		char *str = readline("");
-// 		add_history(str);
-// 		printf("%s\n", get_env_variables(env, str));
-// 		// printf("%d\n", till_this(str));
-// 	}
-// }
+int main(int ac, char **av, char **env)
+{
+	while (1)
+	{
+		printf("%s\n", get_env_variables(env, readline("")));
+		// printf("%d\n", till_this(str));
+	}
+}
 
 //	echo lol$USER jsdhidcg$TEMP
 //	echo lol$USER jsdhidcg$PWD

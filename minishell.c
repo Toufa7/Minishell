@@ -53,9 +53,10 @@ int main(int ac, char **av, char **env)
 			input_analyse(parse->tokens);
 			initializer(parse->tokens);
 			input_types(parse);
-			int x = -1;
-			while (parse->tokens[++x].token)
-				printf("%s -> type %s\n",parse->tokens[x].token, parse->tokens[x].type);
+			// int x = -1;
+			// while (parse->tokens[++x].token)
+				// printf("%s -> type %s\n",parse->tokens[x].token, parse->tokens[x].type);
+			looping(parse->input->options);
 		}
 	}
 }
