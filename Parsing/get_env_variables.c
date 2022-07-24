@@ -68,8 +68,8 @@ char	*string_formating(char *str)
 		else
 			string [++j] = str[i];
 	}
-	string[j] = '\0';
-	free(str);
+	string[j + 1] = '\0';
+	// free(str);
 	return (string);
 }
 
@@ -77,7 +77,7 @@ char	*string_formating(char *str)
 // {
 // 	int i = -1;
 // 	while (str[++i])
-// 		if (str[i] < 'a' && str[i] > 'z')
+// 		if (str[i] < 'a' && str[i] > 'z') || 
 // 			return (i);
 // 	return (-1);
 // }
@@ -87,18 +87,16 @@ char	*variable(char *str)
 	int	i;
 
 	i = 0;
-	while (str[i] != '.')
+	while (str[i])
 	{
-		if (str[i] == '$' && str[i + 1])
+		if (str[i] == '$')
 			return (&str[i + 1]);
-		else
-			return (NULL);
 		i++;
 	}
 	return (NULL);
 }
 
-char	*get_env_variables(char *target)
+char	*get_env_variables(char **env, char *target)
 {
 	int	i;
 	int j;
@@ -108,17 +106,16 @@ char	*get_env_variables(char *target)
 	i = -1;
 	s_format = string_formating(target);
 	splt = ft_split(s_format,  ' ');
-	printf("%s\n",splt[0]);
 	while (splt[++i])
 	{
 		s_format = ft_strjoin(variable(splt[i]), "=");
 		j = -1;
-		while (genv[++j])
+		while (env[++j])
 		{
-			if (ft_strstr(genv[j], s_format))
+			if (ft_strstr(env[j], s_format))
 			{
-				printf("%s\n", (genv[j] + ft_strlen(s_format)));
-				break;
+				printf("%s\n", (env[j] + ft_strlen(s_format)));
+					break;
 			}
 		}
 	}
@@ -127,8 +124,11 @@ char	*get_env_variables(char *target)
 
 int main(int ac, char **av, char **env)
 {
-	env_dup(env);
-	printf("%s\n", get_env_variables("$USER"));
+	while (1)
+	{
+		printf("%s\n", get_env_variables(env, readline("")));
+		// printf("%d\n", till_this(str));
+	}
 }
 
 //	echo lol$USER jsdhidcg$TEMP
