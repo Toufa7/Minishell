@@ -61,7 +61,11 @@ echo $? = The shell obtained status of grep (shell built-in)
 
 which 'command' == get command's path
 4 8
+<<<<<<< HEAD
 echo lol$USER jsdhidcg$TEMP
+=======
+echo 
+>>>>>>> bcf8e2cd257b7df216aee19117a7e90bf34da3ff
 echo lol$USER jsdhidcg$PWD
 echo lol$USER jsdhidcg'$PWD'
 echo lol$USER jsdhidcg"$PWD"
@@ -74,6 +78,7 @@ echo $lol"$USER"jsdhidcg$PWDuy
 echo lol"$USER"jsdhidcg$PWDuy
 echo lol"$USER"jsdhidcg"$PWD"uy
 echo lol"$USER"jsdhidcg'$PWD'uy
+<<<<<<< HEAD
 echo '$USER$LESS$LESS'
 echo $USUS
 echo '$USER'
@@ -86,3 +91,6 @@ echo $USER\oussama
 echo $USER;oussama
 echo $USER[oussama
 echo $USER,oussama
+=======
+echo lol"$USER"jsdhidcg$PWDuy
+>>>>>>> bcf8e2cd257b7df216aee19117a7e90bf34da3ff

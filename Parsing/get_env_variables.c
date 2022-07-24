@@ -17,6 +17,7 @@ FIXME:
 	$PWD problem greping OLDPWD
 */ 
 
+<<<<<<< HEAD
 // int	ft_isalpha(int c)
 // {
 // 	if ((c >= 65 && c <= 90) || ((c >= 97 && c <= 122)))
@@ -32,6 +33,23 @@ FIXME:
 // 	else
 // 		return (0);
 // }
+=======
+int	ft_isalpha(int c)
+{
+	if ((c >= 65 && c <= 90) || ((c >= 97 && c <= 122)))
+		return (1);
+	else
+		return (0);
+}
+
+int	ft_isdigit(int c)
+{
+	if (c >= 48 && c <= 57)
+		return (1);
+	else
+		return (0);
+}
+>>>>>>> bcf8e2cd257b7df216aee19117a7e90bf34da3ff
 
 char	*string_formating(char *str)
 {
@@ -70,10 +88,23 @@ char	*string_formating(char *str)
 			string [++j] = str[i];
 	}
 	string[j + 1] = '\0';
+<<<<<<< HEAD
 	free(str);
 	printf("Formated String -> %s\n",string);
+=======
+	// free(str);
+>>>>>>> bcf8e2cd257b7df216aee19117a7e90bf34da3ff
 	return (string);
 }
+
+// int		till_this(char *str)
+// {
+// 	int i = -1;
+// 	while (str[++i])
+// 		if (str[i] < 'a' && str[i] > 'z') || 
+// 			return (i);
+// 	return (-1);
+// }
 
 char	*variable(char *str)
 {
@@ -106,7 +137,11 @@ char	*get_env_variables(char **env, char *target)
 		{
 			if (ft_strstr(env[j], target))
 			{
+<<<<<<< HEAD
 				printf("%s\n", (env[j] + ft_strlen(target)));
+=======
+				printf("%s\n", (env[j] + ft_strlen(s_format)));
+>>>>>>> bcf8e2cd257b7df216aee19117a7e90bf34da3ff
 					break;
 			}
 		}
@@ -120,6 +155,7 @@ int main(int ac, char **av, char **env)
 	(void)av;
 	while (1)
 	{
+<<<<<<< HEAD
 		char *str = get_env_variables(env ,readline(""));
 		printf("%s\n",str);
 	}
@@ -127,3 +163,35 @@ int main(int ac, char **av, char **env)
 
 
 
+=======
+		printf("%s\n", get_env_variables(env, readline("")));
+		// printf("%d\n", till_this(str));
+	}
+}
+
+//	echo lol$USER jsdhidcg$TEMP
+//	echo lol$USER jsdhidcg$PWD
+//	echo lol$USER jsdhidcg'$PWD'
+//	echo lol$USER jsdhidcg"$PWD"
+//	echo lol$USERjsdhidcg$PWD
+//	echo $USER
+//	echo lol$USERjsdhidcg$PWDfu
+//	echo $lol$USERjsdhidcg$PWDfu
+//	echo "$lol$USERjsdhidcg$PWDuy"
+//	echo $lol"$USER"jsdhidcg$PWDuy
+//	echo lol"$USER"jsdhidcg$PWDuy
+//	echo lol"$USER"jsdhidcg"$PWD"uy
+//	echo lol"$USER"jsdhidcg'$PWD'uy
+//	echo '$USER$LESS$LESS'
+//	echo $USUS
+//	echo '$USER'
+//	echo $USER.oussama
+//	echo $USERvcdwvw.oussama
+//	echo $USERvcdwvw_oussama
+//	echo $USERvcdwvw2oussama
+//	echo $USERvcdwvwy\oussama
+//	echo $USER\oussama
+//	echo $USER;oussama
+//	echo $USER[oussama
+//	echo $USER,oussama
+>>>>>>> bcf8e2cd257b7df216aee19117a7e90bf34da3ff
