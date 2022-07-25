@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:32:28 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/24 18:14:07 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/07/25 10:55:01 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,6 @@
 FIXME:
 	$PWD problem greping OLDPWD
 */ 
-
-int	ft_isalpha(int c)
-{
-	if ((c >= 65 && c <= 90) || ((c >= 97 && c <= 122)))
-		return (1);
-	else
-		return (0);
-}
-
-int	ft_isdigit(int c)
-{
-	if (c >= 48 && c <= 57)
-		return (1);
-	else
-		return (0);
-}
 
 char	*string_formating(char *str)
 {

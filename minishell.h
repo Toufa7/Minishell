@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/24 18:32:40 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/07/24 21:04:15 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ void    mpwd(void);
 void	menv();
 void    mmecho(char **argv);
 void    mexit(char **argv);
+void	munset(char **argv);
 
 void	execution(int argc, char *argv[], char *envp[]);
 void	get_herdoc(t_pipe_data *pipe_data);
@@ -141,5 +142,7 @@ int		ft_strcmp(const char *s1, const char *s2);
 char	*ft_strdup(const char *s1);
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_strchr(const char *s, int c);
+int		ft_isalpha(int c);
+int		ft_isdigit(int c);
 
 #endif
