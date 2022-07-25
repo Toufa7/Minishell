@@ -16,6 +16,6 @@ char	**ft_realloc(char **input, char *str)
 		i++;
 	}
 	new_input[i] = str;
-	free(input);
+	free_arr(input);
 	return (new_input);
 }

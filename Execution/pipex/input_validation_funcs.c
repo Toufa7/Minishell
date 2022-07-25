@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 19:09:57 by abouchfa          #+#    #+#             */
-/*   Updated: 2022/07/23 17:13:52 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/07/25 15:44:31 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*put_cmd_status(int status, char *cmd_path, char *cmd)
 			ft_putstr_fd(" :command not found\n", 2);
 		else
 			ft_putstr_fd(" :permission denied\n", 2);
-		ft_free_str(cmd_path);
+		free_str(cmd_path);
 		return (NULL);
 	}
 	else
@@ -41,7 +41,7 @@ char	*get_cmd_path(char *cmd, char **exec_programs_dirs)
 	temp = NULL;
 	while (exec_programs_dirs[++i] && cmd[0] && status)
 	{
-		ft_free_str(cmd_path);
+		free_str(cmd_path);
 		temp = ft_strjoin(exec_programs_dirs[i], "/");
 		cmd_path = ft_strjoin(temp, cmd);
 		if (access(cmd_path, F_OK))
@@ -50,7 +50,7 @@ char	*get_cmd_path(char *cmd, char **exec_programs_dirs)
 			status = 2;
 		else
 			status = 0;
-		ft_free_str(temp);
+		free_str(temp);
 	}
 	return (put_cmd_status(status, cmd_path, cmd));
 }

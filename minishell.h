@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/25 14:38:46 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/07/25 15:44:42 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,6 @@ void	mexport(char **argv);
 
 void	execution(int argc, char *argv[], char *envp[]);
 void	get_herdoc(t_pipe_data *pipe_data);
-void	ft_free_str(char *str);
-void	ft_free_arr(char **arr);
 char	*get_cmd(char *str);
 void	validate_cmd(char *cmd, char **cmd_path, char **exec_programs_dirs);
 int		validate_infile(char *infile_path);
@@ -126,6 +124,11 @@ void	child_process(int i, int input_fd,
 
 // ----------- Shared Functions ------------------
 
+<<<<<<< HEAD
+=======
+void	free_str(char *str);
+void	free_arr(char **arr);
+>>>>>>> ebaf0f28a11e84a2535df0c28b5a02be12b77dbb
 int		validate_var_name(char *var);
 char	**ft_realloc(char **input, char *str);
 void	env_dup(char **env);

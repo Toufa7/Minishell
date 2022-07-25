@@ -1,22 +1,5 @@
 #include "../../minishell.h"
 
-void	ft_free_str(char *str)
-{
-	if (str)
-		free(str);
-}
-
-void	ft_free_arr(char **arr)
-{
-	int	i;
-
-	i = -1;
-	while (arr && arr[++i])
-		ft_free_str(arr[i]);
-	if (arr)
-		free(arr);
-}
-
 void	get_herdoc(t_pipe_data *pipe_data)
 {
 	char	*line;
@@ -28,11 +11,11 @@ void	get_herdoc(t_pipe_data *pipe_data)
 		{
 			write(pipe_data->here_doc_pipe_fds[1], line, ft_strlen(line));
 			write(pipe_data->here_doc_pipe_fds[1], "\n", 1);
-			ft_free_str(line);
+			free_str(line);
 		}
 		line = get_next_line(0);
 	}
-	ft_free_str(line);
+	free_str(line);
 }
 
 char	*get_cmd(char *str)
