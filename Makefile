@@ -11,6 +11,7 @@ C_FILES = 	minishell.c \
 			Utils/get_var_index.c \
 			Utils/ft_putstr_fd.c \
 			Utils/ft_atoi.c \
+			Utils/ft_strncpy.c \
 			Utils/ft_split.c \
 			Utils/ft_substr.c \
 			Utils/ft_strlen.c \
