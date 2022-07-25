@@ -97,7 +97,7 @@ char		**pipes(char	*str);
 char		*handling_quotes(char *str);
 char		*input_formating(char	*str);
 char		*getting_back_original_input(char *str);
-char		*get_env_variables(char	**env, char	*target);
+char		*get_env_variables(char	*target);
 void		input_types(t_parse	*parse);
 void		initializer(t_tokens	*tokens);
 void		input_analyse(t_tokens	*tokens);

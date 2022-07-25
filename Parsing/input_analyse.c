@@ -35,8 +35,11 @@ void	input_analyse(t_tokens *tokens)
 	append = ">>";
 	option = "-";
 	i = -1;
+	int j = 0;
 	while (tokens[++i].token)
 	{
+		while (tokens[i].token[j] == '"')
+			j++;
 		if (ft_strcmp(tokens[i].token, red_input) == 0)
 			tokens[i].type = "red_input";
 		else if (ft_strcmp(tokens[i].token, red_out) == 0)
@@ -45,8 +48,6 @@ void	input_analyse(t_tokens *tokens)
 			tokens[i].type = "here_doc";
 		else if (ft_strcmp(tokens[i].token, append) == 0)
 			tokens[i].type = "append";
-		else if (ft_chrcmp(tokens[i].token[0], option[0]) == 0)
-			tokens[i].type = "option";
 		else
 			tokens[i].type = "None";
 		if (i == 0 && ft_strcmp(tokens[0].type, "None") == 0)
@@ -61,6 +62,8 @@ void	input_analyse(t_tokens *tokens)
 			tokens[i].type = "app_outfile";
 		else if (ft_strcmp(tokens[i - 1].type, "here_doc") == 0)
 			tokens[i].type = "delimiter";
+		else if (ft_chrcmp(tokens[i].token[j], option[0]) == 0)
+			tokens[i].type = "option";
 		else if (ft_strcmp(tokens[i].type, "None") == 0)
 			tokens[i].type = "command";
 	}
