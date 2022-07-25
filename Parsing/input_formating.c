@@ -24,6 +24,7 @@ char	*input_formating(char *str)
 	int		k;
 	int		allo;
 	char	*spcs;
+	char 	sing;
 
 	k = -1;
 	allo = 0;
@@ -39,6 +40,15 @@ char	*input_formating(char *str)
 	j = 0;
 	while (str[++i])
 	{
+		if (str[i] == '"' || str[i] == '\'')
+		{
+			sing = str[i];
+			spcs[j++] = str[i];
+			while (str[++i] != sing && str[i])
+			{
+				spcs[j++] = str[i];
+			}
+		}
 		if ((str[i] == '<' && str[i + 1] == '<') || (str[i] == '>' && str[i + 1] == '>'))
 		{
 			spcs[j++] = ' ';
@@ -62,11 +72,11 @@ char	*input_formating(char *str)
 }
 
 
-int main(int ac, char **av, char **env)
-{
-	while (1)
-	{
-		char *str = readline("");
-		printf("%s\n", input_formating(str));
-	}
-}
+// int main(int ac, char **av, char **env)
+// {
+// 	while (1)
+// 	{
+// 		char *str = readline("");
+// 		printf("%s\n", input_formating(str));
+// 	}
+// }

@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/24 14:43:20 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/07/24 21:04:15 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,7 @@ TODO:
 # define SUCCESS	0
 # define FAILURE	1
 
-// # define	STDIN_FILENO	0
-// # define	STDOUT_FILENO	1
-// # define	STDERR_FILENO	2
-
 typedef int bool;
-
 # define TRUE 1
 # define FALSE 0
 
@@ -102,7 +97,7 @@ char		**pipes(char	*str);
 char		*handling_quotes(char *str);
 char		*input_formating(char	*str);
 char		*getting_back_original_input(char *str);
-char		*get_env_variables(char	**env, char	*target);
+char		*get_env_variables(char	*target);
 void		input_types(t_parse	*parse);
 void		initializer(t_tokens	*tokens);
 void		input_analyse(t_tokens	*tokens);
@@ -116,6 +111,7 @@ void    mpwd(void);
 void	menv();
 void    mmecho(char **argv);
 void    mexit(char **argv);
+void	munset(char **argv);
 
 void	execution(int argc, char *argv[], char *envp[]);
 void	get_herdoc(t_pipe_data *pipe_data);
@@ -129,15 +125,15 @@ void	child_process(int i, int input_fd,
 
 // ----------- Shared Functions ------------------
 
-
 char	**ft_realloc(char **input, char *str);
 void	env_dup(char **env);
+int		get_var_index(char *var, int n);
 char	*get_next_line(int fd);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 void	ft_putstr_fd(char *s, int fd);
 int		ft_atoi(const char *str);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
-char	**ft_split(char *s, char c);
+char	**ft_split(char const *s, char c);
 size_t	ft_strlen(const char *s);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strstr(const char *haystack, const char *needle);
@@ -146,4 +142,7 @@ int		ft_strcmp(const char *s1, const char *s2);
 char	*ft_strdup(const char *s1);
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_strchr(const char *s, int c);
+int		ft_isalpha(int c);
+int		ft_isdigit(int c);
+
 #endif

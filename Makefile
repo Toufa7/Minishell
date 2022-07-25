@@ -8,6 +8,7 @@ F_REMOVE = rm -rf
 
 C_FILES = 	minishell.c \
 			Utils/env_dup.c \
+			Utils/get_var_index.c \
 			Utils/ft_putstr_fd.c \
 			Utils/ft_atoi.c \
 			Utils/ft_split.c \
@@ -21,6 +22,8 @@ C_FILES = 	minishell.c \
 			Utils/ft_calloc.c \
 			Utils/ft_strchr.c \
 			Utils/ft_realloc.c \
+			Utils/ft_isalpha.c \
+			Utils/ft_isdigit.c \
 			Parsing/get_env_variables.c \
 			Parsing/input_formating.c \
 			Parsing/spliting_with_spaces.c \
@@ -39,7 +42,7 @@ C_FILES = 	minishell.c \
 all: $(NAME)
 
 $(NAME): $(C_FILES)
-		$(C_FLAGS) $(C_FILES) -o $(NAME) 
+		$(C_FLAGS) $(ADDI_FLAGS) $(C_FILES) -o $(NAME) 
 
 clean:
 	rm -rf $(NAME)

@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/23 17:21:51 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/07/24 18:13:42 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@ void    looping(char **str)
 	}
 }
 
-int main(int ac, char **av)
+int main(int ac, char **av, char **env)
 {
 	(void) ac;
 	(void) av;
 	t_parse *parse;
 
 	parse = malloc(sizeof(t_parse));
-	// env_dup(env);
+	env_dup(env);
 	while (TRUE)
 	{
 		parse->line = readline(GREEN "Mini-0.0$ " RESET);
@@ -53,10 +53,9 @@ int main(int ac, char **av)
 			input_analyse(parse->tokens);
 			initializer(parse->tokens);
 			input_types(parse);
-			// int x = -1;
-			// while (parse->tokens[++x].token)
-				// printf("%s -> type %s\n",parse->tokens[x].token, parse->tokens[x].type);
-			looping(parse->input->options);
+			int x = -1;
+			while (parse->tokens[++x].token)
+				printf("%s -> type %s\n",parse->tokens[x].token, parse->tokens[x].type);
 		}
 	}
 }
