@@ -6,21 +6,11 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 17:43:44 by abouchfa          #+#    #+#             */
-/*   Updated: 2022/07/24 18:35:49 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/07/25 11:34:30 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-static void	ft_strncpy(char *dest, char *src, int n)
-{
-	int	i;
-
-	i = -1;
-	while (++i < n)
-		dest[i] = src[i];
-	dest[i] = 0;
-}
 
 static void	collect_words(char **arr, char *str, char c, int len)
 {

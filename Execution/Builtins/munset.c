@@ -11,16 +11,13 @@ void	munset(char **argv)
 	i = -1;
 	while (argv[++i])
 	{
-		j = -1;
-		while (argv[i][++j])
+		j = validate_var_name(argv[i]);
+		if (argv[i][j])
 		{
-			if (!(ft_isalpha(argv[i][j]) || (ft_isdigit(argv[i][j]) && j != 0)))
-			{
-				ft_putstr_fd("unset: '", 2);
-				ft_putstr_fd(argv[i], 2);
-				ft_putstr_fd("': not a valid identifier\n", 2);
-				break;
-			}
+			ft_putstr_fd("unset: '", 2);
+			ft_putstr_fd(argv[i], 2);
+			ft_putstr_fd("': not a valid identifier\n", 2);
+			continue;
 		}
 		var_index = get_var_index(argv[i], ft_strlen(argv[i]));
 		if (!argv[i][j] && var_index != -1)
