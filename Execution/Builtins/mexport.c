@@ -44,8 +44,8 @@ char	*get_val(char *str)
 
 /*
 	-1: invalid op
-	0: Create var
-	1: Add to var
+	 0: Create var
+	 1: Add to var
 */
 
 int get_op_type(char *str)
@@ -60,15 +60,38 @@ int get_op_type(char *str)
 	return (type);
 }
 
+void	add_var_to_envp(int op_type, char *key, char *new_val)
+{
+	char	*final_val;
+	char	*old_val;
+	int		var_index;
+
+	var_index = get_var_index(key, ft_strlen(key));
+	if (var_index != -1 && op_type == 1)
+	{
+		old_val = get_val(genv[var_index]);
+		final_val = ft_strjoin(old_val, new_val);
+		free_str(old_val);
+	}
+	else
+		final_val = new_val;
+	if (var_index != -1)
+	{
+		free_str(genv[var_index]);
+		genv[var_index] = final_val;
+	}
+	else
+		ft_realloc(genv, final_val);
+	if (var_index != -1 && op_type == 1)
+		free_str(final_val);
+}
+
 void	mexport(char **argv)
 {
 	char	*key;
 	char	*val;
 	int		op_type;
-	int		var_index;
 	int		i;
-	// int		j;
-	// int		k;
 
 	i = -1;
 	op_type = -1;
@@ -89,34 +112,8 @@ void	mexport(char **argv)
 			ft_putstr_fd("': not a valid identifier\n", 2);
 			continue;
 		}
-		var_index = get_var_index(key, ft_strlen(key));
-		// j = -1;
-		// while (argv[i][++j])
-		// {
-		// 	if (!(ft_isalpha(argv[i][j]) || (ft_isdigit(argv[i][j]) && j != 0)))
-		// 	{
-		// 		ft_putstr_fd("unset: '", 2);
-		// 		ft_putstr_fd(argv[i], 2);
-		// 		ft_putstr_fd("': not a valid identifier\n", 2);
-		// 		break;
-		// 	}
-		// }
-		// var_index = get_var_index(argv[i], ft_strlen(argv[i]));
-		// if (!argv[i][j] && var_index != -1)
-		// {
-		// 	j = 0;
-		// 	tmp = genv;
-		// 	while (genv[j])	
-		// 		j++;
-		// 	genv = malloc((sizeof(char **) * j));
-		// 	j = -1;
-		// 	k = 0;
-		// 	while (tmp[++j])
-		// 	{
-		// 		if (var_index != j)
-		// 			genv[k++] = ft_strdup(tmp[j]);
-		// 	}
-		// 	genv[k] = NULL;
-		// }
+		add_var_to_envp(op_type, key, val);
 	}
+	free_str(key);
+	free_str(val);
 }

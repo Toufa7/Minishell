@@ -8,6 +8,7 @@ F_REMOVE = rm -rf
 
 C_FILES = 	test.c \
 			Utils/validate_var_name.c \
+			Utils/free_funcs.c \
 			Utils/env_dup.c \
 			Utils/get_var_index.c \
 			Utils/ft_putstr_fd.c \

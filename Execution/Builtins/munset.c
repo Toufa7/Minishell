@@ -37,4 +37,5 @@ void	munset(char **argv)
 			genv[k] = NULL;
 		}
 	}
+	free_arr(tmp);
 }

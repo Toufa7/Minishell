@@ -21,9 +21,9 @@ void	validate_input(t_pipe_data *pipe_data, char *path_var)
 			validate_cmd(cmd, pipe_data->cmds_paths + i, exec_programs_dirs);
 		else
 			pipe_data->cmds_paths[i] = NULL;
-		ft_free_str(cmd);
+		free_str(cmd);
 	}
-	ft_free_arr(exec_programs_dirs);
+	free_arr(exec_programs_dirs);
 }
 
 void	driver(t_pipe_data *pipe_data, char *envp[])
