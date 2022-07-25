@@ -12,6 +12,11 @@
 
 #include "../minishell.h"
 
+/*
+FIXME:
+	? "" Treat antything in as double or single quotes as one argument
+*/
+
 char	*input_formating(char *str)
 {
 	int		i;
@@ -57,11 +62,11 @@ char	*input_formating(char *str)
 }
 
 
-// int main(int ac, char **av, char **env)
-// {
-// 	while (1)
-// 	{
-// 		char *str = readline("");
-// 		printf("%s\n", input_formating(str));
-// 	}
-// }
+int main(int ac, char **av, char **env)
+{
+	while (1)
+	{
+		char *str = readline("");
+		printf("%s\n", input_formating(str));
+	}
+}
