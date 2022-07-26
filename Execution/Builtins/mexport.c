@@ -73,8 +73,6 @@ void	create_final_var(int op_type, char *key, char *new_val)
 	if (var_index != -1 && op_type == 1)
 	{
 		old_val = get_val(genv[var_index], TRUE);
-		printf("\n\n-------> oldval: %s \n", old_val);
-		printf("-------> newval: %s \n", new_val);
 		final_val = ft_strjoin(old_val, new_val);
 		free_str(old_val);
 	}
@@ -84,14 +82,13 @@ void	create_final_var(int op_type, char *key, char *new_val)
 		final_var = ft_strjoin(key, final_val);
 	else
 		final_var = ft_strdup(key);
-	printf("------> fnv: %s\n\n", final_var);
 	if (var_index != -1)
 	{
 		free_str(genv[var_index]);
 		genv[var_index] = final_var;
 	}
 	else
-		add_var_to_env(final_var);
+		genv = ft_realloc(genv, final_var);
 	if (var_index != -1 && op_type == 1)
 		free_str(final_val);
 }

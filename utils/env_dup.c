@@ -12,4 +12,5 @@ void	env_dup(char **env)
 	i = -1;
 	while (env[++i])
 		genv[i] = ft_strdup(env[i]);
+	genv[i] = NULL;
 }
