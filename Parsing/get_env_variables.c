@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:32:28 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/23 16:56:30 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/07/26 17:43:53 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ char	*get_env_variables(char *target)
 	char **splt;
 
 	i = -1;
-	int k = 0;
+	size_t k = 0;
 	splt = ft_split(string_formating(target),  ' ');
 	while (splt[++i])
 	{

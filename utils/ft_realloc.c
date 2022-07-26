@@ -1,21 +1,18 @@
 #include "../minishell.h"
 
-char	**ft_realloc(char **input, char *str)
+void	ft_realloc(char **input, char *str)
 {
 	int		i;
-	char	**new_input;
+	char	**tmp;
 
 	i = 0;
-	while (input[i])
+	tmp = input;
+	while (tmp[i])
 		i++;
-	new_input = ft_calloc(i + 2, sizeof(char **));
-	i = 0;
-	while (input[i])
-	{
-		new_input[i] = input[i];
-		i++;
-	}
-	new_input[i] = str;
-	free_arr(input);
-	return (new_input);
+	input = ft_calloc(i + 2, sizeof(char **));
+	i = -1;
+	while (tmp[++i])
+		input[i] = tmp[i];
+	input[i] = str;
+	free_arr(tmp);
 }
