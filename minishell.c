@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/26 21:01:18 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/07/26 21:42:59 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,10 @@ int main(int ac, char **av, char **env)
 			input_analyse(parse->tokens);
 			initializer(parse->tokens);
 			input_types(parse);
-			// looping(parse->input->options);
 			int x = -1;
 			while (parse->tokens[++x].token)
 				printf("%s -> type %s\n",parse->tokens[x].token, parse->tokens[x].type);
 		}
+		parse->input->size = i;
 	}
 }

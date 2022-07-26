@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/26 20:38:20 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/07/26 21:41:34 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_tokens
 
 typedef struct s_input
 {
+	int		size;
 	char	**command;
 	char	**in_files;
 	char	**delimiter;
