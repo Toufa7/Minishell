@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:52:21 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/26 21:02:13 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/07/26 21:37:40 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ void	input_analyse(t_tokens *tokens)
 		else if (ft_strcmp(tokens[i - 1].type, "here_doc") == 0)
 			tokens[i].type = "delimiter";
 		else if (ft_chrcmp(tokens[i].token[j], option[0]) == 0 || ft_strcmp(tokens[i - 1].type, "command"))
+			tokens[i].type = "option";
+		else if (ft_strcmp(tokens[i - 1].type, "command") == 0 || ft_strcmp(tokens[i - 1].type, "option") == 0)
 			tokens[i].type = "option";
 		else if (ft_strcmp(tokens[i].type, "None") == 0)
 			tokens[i].type = "command";
