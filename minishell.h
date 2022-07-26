@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/25 15:44:42 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/07/26 15:13:26 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ void	child_process(int i, int input_fd,
 // ----------- Shared Functions ------------------
 
 void	free_str(char *str);
+void	add_var_to_env(char *var);
 void	free_arr(char **arr);
 int		validate_var_name(char *var);
 char	**ft_realloc(char **input, char *str);

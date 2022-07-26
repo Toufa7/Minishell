@@ -6,8 +6,9 @@ ADDI_FLAGS = -fsanitize=address
 
 F_REMOVE = rm -rf
 
-C_FILES = 	test.c \
+C_FILES = 	Minishell.c \
 			Utils/validate_var_name.c \
+			Utils/add_var_to_env.c \
 			Utils/free_funcs.c \
 			Utils/env_dup.c \
 			Utils/get_var_index.c \

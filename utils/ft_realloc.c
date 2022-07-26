@@ -8,7 +8,7 @@ char	**ft_realloc(char **input, char *str)
 	i = 0;
 	while (input[i])
 		i++;
-	new_input = calloc(i + 2, sizeof(char *));
+	new_input = ft_calloc(i + 2, sizeof(char **));
 	i = 0;
 	while (input[i])
 	{
