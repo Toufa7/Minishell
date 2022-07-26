@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:36:38 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/26 19:11:04 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/07/26 21:02:22 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void input_types(t_parse *parse)
 			parse->input->command = ft_realloc(parse->input->command, parse->tokens[i].token);
 		else if (ft_strcmp(parse->tokens[i].type, "option") == 0)
 			parse->input->options = ft_realloc(parse->input->options, parse->tokens[i].token);
-		else if (ft_strcmp(parse->tokens[i].type, "arguments") == 0)
-			parse->input->arguments = ft_realloc(parse->input->out_files, parse->tokens[i].token);
+		// else if (ft_strcmp(parse->tokens[i].type, "arguments") == 0)
+		// 	parse->input->options = ft_realloc(parse->input->out_files, parse->tokens[i].token);
 		i++;
 	}
 }
