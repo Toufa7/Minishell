@@ -2,7 +2,7 @@ NAME = Minishell
 
 C_FLAGS = gcc -Wall -Werror -Wextra -lreadline
 
-ADDI_FLAGS = -fsanitize=address
+ADDI_FLAGS = -fsanitize=address -g
 
 F_REMOVE = rm -rf
 

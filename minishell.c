@@ -31,6 +31,11 @@ void    looping(char **str)
 	}
 }
 
+void	signals(void)
+{
+	signal(SIGTSTP, NULL);
+}
+
 int main(int ac, char **av, char **env)
 {
 	(void) ac;
@@ -41,6 +46,7 @@ int main(int ac, char **av, char **env)
 	env_dup(env);
 	while (TRUE)
 	{
+		signals();
 		parse->line = readline(GREEN "Mini-0.0$ " RESET);
 		parse->line_double_quotes = handling_quotes(parse->line);
 		add_history(parse->line_double_quotes);

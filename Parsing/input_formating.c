@@ -14,7 +14,7 @@
 
 /*
 FIXME:
-	? "" Treat antything in as double or single quotes as one argument
+	? "" o
 */
 
 char	*input_formating(char *str)

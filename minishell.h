@@ -124,9 +124,12 @@ void	child_process(int i, int input_fd,
 
 // ----------- Shared Functions ------------------
 
+<<<<<<< HEAD
+=======
 void	free_str(char *str);
 void	add_var_to_env(char *var);
 void	free_arr(char **arr);
+>>>>>>> ebaf0f28a11e84a2535df0c28b5a02be12b77dbb
 int		validate_var_name(char *var);
 char	**ft_realloc(char **input, char *str);
 void	env_dup(char **env);

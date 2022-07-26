@@ -17,21 +17,21 @@ FIXME:
 	$PWD problem greping OLDPWD
 */ 
 
-// int	ft_isalpha(int c)
-// {
-// 	if ((c >= 65 && c <= 90) || ((c >= 97 && c <= 122)))
-// 		return (1);
-// 	else
-// 		return (0);
-// }
+int	untill_this(char *var)
+{
+	int	i;
 
-// int	ft_isdigit(int c)
-// {
-// 	if (c >= 48 && c <= 57)
-// 		return (1);
-// 	else
-// 		return (0);
-// }
+	i = -1;
+	while (var[++i])
+	{
+		while (var[i] == '$')
+			i++;
+		if (!(ft_isalpha(var[i]) || (ft_isdigit(var[i]) && i != 0) || var[i] == '_'))
+			break;
+	}
+	return (i);
+}
+
 
 char	*string_formating(char *str)
 {
@@ -55,7 +55,6 @@ char	*string_formating(char *str)
 		else if (str[i] == '|')
 			pipe++;
 	}
-	// printf("nb quotes : %d nb dollars : %d\n", quotes, dollar);
 	string = malloc(sizeof(char) * ft_strlen(str) + (quotes * 2) + dollar + pipe + 1); 
 	if (!string)
 		return (NULL);
@@ -63,13 +62,13 @@ char	*string_formating(char *str)
 	j = -1;
 	while (str[++i])
 	{
-		if (str[i] == '"')
+		if (str[i] == '"' && i != 0)
 		{
 			string[++j] = ' ';
 			string[++j] = str[i];
 			string[++j] = ' ';
 		}
-		else if (str[i] == '$' || str[i] == '|')
+		else if ((str[i] == '$' && i != 0) || (str[i] == '$' && str[i - 1] != '"') || str[i] == '|')
 		{
 			string[++j] = ' ';
 			string[++j] = str[i];
@@ -78,32 +77,27 @@ char	*string_formating(char *str)
 			string [++j] = str[i];
 	}
 	string[j + 1] = '\0';
-	// printf("Formated String -> %s\n", string);
-	// free(str);
+	free(str);
 	return (string);
 }
 
-// int		till_this(char *str)
-// {
-// 	int i = -1;
-// 	while (str[++i])
-// 		if (str[i] < 'a' && str[i] > 'z') || 
-// 			return (i);
-// 	return (-1);
-// }
-
-char	*variable(char *str)
+char    *valid_input(char *str)
 {
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '$')
-			return (&str[i + 1]);
-		i++;
-	}
-	return (NULL);
+    int i = 0;
+    int j = 0;
+    char *var;
+    var = malloc(sizeof(char) * ft_strlen(str - (ft_strlen(str) - untill_this(str))) + 1);
+    while (str[i] && j < untill_this(str) - 1)
+    {
+        while (str[i] == '$')
+            i++;
+        var[j] = str[i];
+        j++;
+        i++;
+    }
+    var[j] = '\0';
+    free(str);
+    return (var);
 }
 
 char	*get_env_variables(char *target)
@@ -113,13 +107,21 @@ char	*get_env_variables(char *target)
 	char **splt;
 
 	i = -1;
+	int k = 0;
 	splt = ft_split(string_formating(target),  ' ');
 	while (splt[++i])
 	{
-		target = ft_strjoin(variable(splt[i]), "=");
+		while (splt[i][k] == '"')
+		{
+			k++;
+			if (k == ft_strlen(splt[i]))
+				i++;
+		}
+		target = ft_strjoin(valid_input(splt[i]), "=");
 		j = -1;
 		while (genv[++j])
 		{
+			printf("Target -> %s\n",target);
 			if (ft_strstr(genv[j], target))
 			{
 				printf("%s\n", (genv[j] + ft_strlen(target)));
@@ -130,12 +132,13 @@ char	*get_env_variables(char *target)
 	return ("");
 }
 
+
 // int main(int a, char **b, char **env)
 // {
 // 	env_dup(env);
 // 	while (1)
 // 	{
 // 		char *s = readline("");
-// 		printf("%s\n",get_env_variables(s));
+// 		printf("%s", get_env_variables(s));
 // 	}
 // }
