@@ -65,7 +65,7 @@ void	input_analyse(t_tokens *tokens)
 		else if (ft_chrcmp(tokens[i].token[j], option[0]) == 0)
 			tokens[i].type = "option";
 		else if (ft_strcmp(tokens[i - 1].type, "command") == 0 || ft_strcmp(tokens[i - 1].type, "option") == 0)
-			tokens[i].type = "arguments";
+			tokens[i].type = "option";
 		else if (ft_strcmp(tokens[i].type, "None") == 0)
 			tokens[i].type = "command";
 	}
