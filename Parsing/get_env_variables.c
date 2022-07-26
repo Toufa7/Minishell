@@ -124,12 +124,12 @@ char	*get_env_variables(char *target)
 }
 
 
-int main(int a, char **b, char **env)
-{
-	env_dup(env);
-	while (1)
-	{
-		char *s = readline("");
-		printf("%s", get_env_variables(s));
-	}
-}
+// int main(int a, char **b, char **env)
+// {
+// 	env_dup(env);
+// 	while (1)
+// 	{
+// 		char *s = readline("");
+// 		printf("%s", get_env_variables(s));
+// 	}
+// }

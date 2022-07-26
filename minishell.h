@@ -65,6 +65,7 @@ typedef struct s_input
 	char	**out_files;
 	char	**app_outfile;
 	char	**options;
+	char	**arguments;
 }	t_input;
 
 typedef struct s_parse
