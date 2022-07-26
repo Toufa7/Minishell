@@ -1,12 +1,12 @@
 NAME = Minishell
 
-C_FLAGS = gcc -Wall -Werror -Wextra -lreadline
+C_FLAGS = gcc -lreadline
 
 ADDI_FLAGS = -fsanitize=address -g
 
 F_REMOVE = rm -rf
 
-C_FILES = 	test.c \
+C_FILES = 	minishell.c \
 			Utils/validate_var_name.c \
 			Utils/free_funcs.c \
 			Utils/env_dup.c \

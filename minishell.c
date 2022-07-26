@@ -31,9 +31,15 @@ void    looping(char **str)
 	}
 }
 
-void	signals(void)
+char	*is_there(char *str)
 {
-	signal(SIGTSTP, NULL);
+	int i = -1;
+	while (str[++i])
+	{
+		if (str[i] == '$')
+			return ("in");
+	}
+	return ("out");
 }
 
 int main(int ac, char **av, char **env)
@@ -41,12 +47,12 @@ int main(int ac, char **av, char **env)
 	(void) ac;
 	(void) av;
 	t_parse *parse;
+	int sig; 
 
 	parse = malloc(sizeof(t_parse));
 	env_dup(env);
 	while (TRUE)
 	{
-		signals();
 		parse->line = readline(GREEN "Mini-0.0$ " RESET);
 		parse->line_double_quotes = handling_quotes(parse->line);
 		add_history(parse->line_double_quotes);
@@ -55,6 +61,10 @@ int main(int ac, char **av, char **env)
 		int i = -1;
 		while (parse->splt_pipes[++i])
 		{
+			if (ft_strcmp(is_there(parse->splt_pipes[i]),"in") == 0)
+			{
+				exit(1);
+			}
 			parse->tokens = spliting_with_spaces(parse->splt_pipes[i]);
 			input_analyse(parse->tokens);
 			initializer(parse->tokens);

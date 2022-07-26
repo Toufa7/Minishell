@@ -34,7 +34,8 @@ TODO:
 # define PATH_MAX  4096
 # define SUCCESS	0
 # define FAILURE	1
-
+# define sing_quotes 39
+# define doubles_quotes 34
 typedef int bool;
 # define TRUE 1
 # define FALSE 0
@@ -113,7 +114,6 @@ void    mmecho(char **argv);
 void    mexit(char **argv);
 void	munset(char **argv);
 void	mexport(char **argv);
-
 void	execution(int argc, char *argv[], char *envp[]);
 void	get_herdoc(t_pipe_data *pipe_data);
 char	*get_cmd(char *str);
@@ -124,11 +124,6 @@ void	child_process(int i, int input_fd,
 
 // ----------- Shared Functions ------------------
 
-<<<<<<< HEAD
-=======
-void	free_str(char *str);
-void	free_arr(char **arr);
->>>>>>> ebaf0f28a11e84a2535df0c28b5a02be12b77dbb
 int		validate_var_name(char *var);
 char	**ft_realloc(char **input, char *str);
 void	env_dup(char **env);
@@ -150,5 +145,7 @@ void	*ft_calloc(size_t count, size_t size);
 char	*ft_strchr(const char *s, int c);
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
+void	free_str(char *str);
+void	free_arr(char **arr);
 
 #endif

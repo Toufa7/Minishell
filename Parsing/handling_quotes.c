@@ -7,9 +7,9 @@ int		counting_quotes(char *str, char specify)
 	int double_q = 0;
 	while (str[++i])
 	{
-		if (str[i] == 34)
+		if (str[i] == doubles_quotes)
 			double_q++;
-		if (str[i] == 39)
+		if (str[i] == sing_quotes)
 			single_q++;
 	}
 	if (specify == 'S')
@@ -46,13 +46,13 @@ char	*handling_quotes(char *str)
 	checking_quotes(str);
 	while (str[++i])
 	{
-		if (str[i] == 34 || str[i] == 39)
+		if (str[i] == doubles_quotes || str[i] == sing_quotes)
 		{
 			j = i;
-			if (str[j] == 34 || str[j] == 39)
+			if (str[j] == doubles_quotes || str[j] == sing_quotes)
 				dup[j] = str[j];
 			j = j + 1;
-			while (str[j] != 34 && str[j] != 39)
+			while (str[j] != doubles_quotes && str[j] != sing_quotes)
 			{
 				if (str[j] == ' ')
 					dup[j] = '~';
@@ -60,7 +60,7 @@ char	*handling_quotes(char *str)
 					dup[j] = str[j];
 				j++;
 			}
-			if (str[j] == 34 || str[j] == 39)
+			if (str[j] == doubles_quotes || str[j] == sing_quotes)
 				dup[j] = str[j];
 			i = j;
 		}
