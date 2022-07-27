@@ -1,6 +1,6 @@
 NAME = Minishell
 
-C_FLAGS = gcc -Wall -Werror -Wextra -lreadline
+C_FLAGS = gcc brew link --force readline -Wall -Werror -Wextra -lreadline
 
 ADDI_FLAGS = -fsanitize=address -g
 
