@@ -65,6 +65,8 @@ typedef struct s_input
 	char	**out_files;
 	char	**app_outfile;
 	char	**options;
+	char	**env_var;
+	int		parse_error;
 }	t_input;
 
 typedef struct s_parse
@@ -151,3 +153,6 @@ void	free_str(char *str);
 void	free_arr(char **arr);
 
 #endif
+
+
+// FOEIUWGHFEEUHOFUOIU

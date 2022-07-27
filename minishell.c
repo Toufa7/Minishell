@@ -31,23 +31,11 @@ void    looping(char **str)
 	}
 }
 
-char	*is_there(char *str)
-{
-	int i = -1;
-	while (str[++i])
-	{
-		if (str[i] == '$')
-			return ("in");
-	}
-	return ("out");
-}
-
 int main(int ac, char **av, char **env)
 {
 	(void) ac;
 	(void) av;
 	t_parse *parse;
-	int sig; 
 
 	parse = malloc(sizeof(t_parse));
 	env_dup(env);
@@ -61,17 +49,14 @@ int main(int ac, char **av, char **env)
 		int i = -1;
 		while (parse->splt_pipes[++i])
 		{
-			if (ft_strcmp(is_there(parse->splt_pipes[i]),"in") == 0)
-			{
-				exit(1);
-			}
 			parse->tokens = spliting_with_spaces(parse->splt_pipes[i]);
 			input_analyse(parse->tokens);
 			initializer(parse->tokens);
 			input_types(parse);
-			int x = -1;
-			while (parse->tokens[++x].token)
-				printf("%s -> type %s\n",parse->tokens[x].token, parse->tokens[x].type);
+			for (int j = -1;parse->tokens[++j].token;)
+			{
+				printf("%s	->	Type	->	%s\n",parse->tokens[j].token, parse->tokens[j].type);
+			}
 		}
 	}
 }
