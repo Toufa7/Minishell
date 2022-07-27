@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/26 19:18:08 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/07/26 21:42:59 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,6 @@ int main(int ac, char **av, char **env)
 				printf("%s	->	Type	->	%s\n",parse->tokens[j].token, parse->tokens[j].type);
 			}
 		}
+		parse->input->size = i;
 	}
 }
