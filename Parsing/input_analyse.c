@@ -75,10 +75,10 @@ void	input_analyse(t_tokens *tokens)
 			tokens[i].type = "app_outfile";
 		else if (ft_strcmp(tokens[i - 1].type, "here_doc") == 0)
 			tokens[i].type = "delimiter";
-		else if (ft_chrcmp(tokens[i].token[j], option[0]) == 0 || ft_strcmp(tokens[i - 1].type, "command"))
+		else if (ft_strcmp(tokens[i - 1].type, "command") == 0)
 			tokens[i].type = "option";
-		// else if (ft_strcmp(tokens[i - 1].type, "command") == 0 || ft_strcmp(tokens[i - 1].type, "option") == 0)
-		// 	tokens[i].type = "option";
+		else if (ft_chrcmp(tokens[i].token[j], option[0]) == 0)
+			tokens[i].type = "option";
 		else if (ft_strcmp(tokens[i].type, "None") == 0)
 			tokens[i].type = "command";
 	}
