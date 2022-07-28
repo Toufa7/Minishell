@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/26 21:41:34 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/07/27 13:44:15 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,10 @@ typedef struct s_pipe_data
 {
 	char	*infile_path;
 	int		infile_status;
-	char	*outfile_path;
-	char	**cmds_names;
-	char	**cmds_paths;
-	int		cmds_size;
-	int		is_heredoc;
 	char	*heredoc_limiter;
+	char	*outfile_path;
+	char	*cmd_name;
+	char	*cmd_path;
 	int		cmd_pipe_fds[2];
 	int		here_doc_pipe_fds[2];
 }	t_pipe_data;

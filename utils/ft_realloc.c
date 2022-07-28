@@ -10,7 +10,7 @@ char	**ft_realloc(char **input, char *str)
 	tmp = input;
 	while (tmp && tmp[i])
 		i++;
-	new_input = ft_calloc(i + 2, sizeof(char **));
+	new_input = ft_calloc(i + 2, sizeof(char *));
 	i = -1;
 	while (tmp && tmp[++i])
 		new_input[i] = ft_strdup(tmp[i]);

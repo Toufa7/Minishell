@@ -26,7 +26,7 @@ void	munset(char **argv)
 			tmp = genv;
 			while (genv[j])	
 				j++;
-			genv = malloc((sizeof(char **) * j));
+			genv = malloc((sizeof(char *) * j));
 			j = -1;
 			k = 0;
 			while (tmp[++j])

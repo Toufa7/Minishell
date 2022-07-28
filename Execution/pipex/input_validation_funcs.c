@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 19:09:57 by abouchfa          #+#    #+#             */
-/*   Updated: 2022/07/25 15:44:31 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/07/27 13:53:41 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ char	*get_cmd_path(char *cmd, char **exec_programs_dirs)
 	return (put_cmd_status(status, cmd_path, cmd));
 }
 
-void	validate_cmd(char *cmd, char **cmd_path, char **exec_programs_dirs)
+void	validate_cmd(t_pipe_data *pipe_data, t_input *input, char	**execs_paths)
 {
-	if (ft_strchr(cmd, '/'))
+	if (ft_strchr(input->command, '/') || !execs_paths)
 	{
-		if (!access(cmd, F_OK) && !access(cmd, X_OK))
-			*cmd_path = ft_strdup(cmd);
+		if (!access(input->command, F_OK) && !access(cmd, X_OK))
+			pipe_data->cmd_path = ft_strdup(cmd);
 		else
 		{
 			*cmd_path = NULL;

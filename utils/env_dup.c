@@ -8,7 +8,7 @@ void	env_dup(char **env)
 
 	while (env[i])
 		i++;
-	genv = ft_calloc(i + 1, sizeof(char **));
+	genv = ft_calloc(i + 1, sizeof(char *));
 	i = -1;
 	while (env[++i])
 		genv[i] = ft_strdup(env[i]);

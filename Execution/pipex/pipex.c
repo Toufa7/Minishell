@@ -1,28 +1,29 @@
 #include "../../minishell.h"
 
-void	validate_input(t_pipe_data *pipe_data, char *path_var)
+void	validate_input(t_pipe_data *pipe_data, t_input *input)
 {
+	int		i;
 	char	*cmd;
 	char	**exec_programs_dirs;
-	int		i;
+	char	*path_var;
 
 	i = -1;
-	cmd = NULL;
-	if (!pipe_data->is_heredoc)
-		pipe_data->infile_status = validate_infile(pipe_data->infile_path);
-	else
-		pipe_data->infile_status = 0;
-	exec_programs_dirs = ft_split(path_var, ':');
-	i = -1;
-	while (++i < pipe_data->cmds_size)
+	exec_programs_dirs = NULL;
+	path_var = NULL;
+	while (genv[++i])
 	{
-		cmd = get_cmd(pipe_data->cmds_names[i]);
-		if (i != 0 || pipe_data->infile_status || pipe_data->is_heredoc)
-			validate_cmd(cmd, pipe_data->cmds_paths + i, exec_programs_dirs);
-		else
-			pipe_data->cmds_paths[i] = NULL;
-		free_str(cmd);
+		path_var = ft_strnstr(genv[i], "PATH=", 5);
+		if (path_var)
+		{
+			path_var = path_var + 5;
+			break;
+		}
 	}
+	if (pipe_data->infile_path)
+		pipe_data->infile_status = validate_infile(pipe_data->infile_path);
+	if (path_var)
+		exec_programs_dirs = ft_split(path_var, ':');
+	validate_cmd(pipe_data, input);
 	free_arr(exec_programs_dirs);
 }
 
@@ -72,42 +73,30 @@ void	check_heredoc(t_pipe_data *pipe_data, char *argv[], int argc)
 	}
 }
 
-void	set_pipe_data(t_pipe_data *pipe_data,
-		int argc, char *argv[], char *envp[])
+void	set_pipe_data(t_pipe_data *pipe_data, t_input *input, int index)
 {
-	char	*path_var;
-	int		i;
-
-	path_var = NULL;
-	pipe_data->outfile_path = argv[argc - 1];
-	pipe_data->cmds_names = malloc((pipe_data->cmds_size) * sizeof(char **));
-	pipe_data->cmds_paths = malloc((pipe_data->cmds_size) * sizeof(char **));
-	if (!pipe_data->cmds_names || !pipe_data->cmds_paths)
-		exit(errno);
-	i = -1;
-	while (++i < pipe_data->cmds_size)
-		pipe_data->cmds_names[i] = argv[argc - pipe_data->cmds_size + i - 1];
-	i = -1;
-	while (envp[++i])
-	{
-		path_var = ft_strnstr(envp[i], "PATH=", 5);
-		if (path_var)
-			break ;
-	}
-	if (!path_var)
-		exit(errno);
-	path_var = path_var + 5;
-	validate_input(pipe_data, path_var);
+	pipe_data->cmd_name = input->command[index];
+	pipe_data->infile_path = input->in_files[index];
+	pipe_data->heredoc_limiter = input->delimiter[index];
+	pipe_data->cmd_name = input->command[index];
+	pipe_data->outfile_path = input->out_files[index];
+	validate_input(pipe_data, input);
 }
 
-void	execution(int argc, char *argv[], char *envp[])
+void	execution(int argc, char *argv[], char *envp[], t_input *input)
 {
 	t_pipe_data	*pipe_data;
+	int			i;
 
 	pipe_data = malloc(sizeof(t_pipe_data));
 	if (!pipe_data)
 		exit(errno);
+	i = -1;
+	while (++i < input->size)
+	{
+		if (input->delimiter[i])
+			set_pipe_data(pipe_data, input, index);
+	}
 	check_heredoc(pipe_data, argv, argc);
-	set_pipe_data(pipe_data, argc, argv, envp);
 	driver(pipe_data, envp);
 }
