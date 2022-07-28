@@ -46,6 +46,7 @@ void	input_analyse(t_tokens *tokens)
 	append = ">>";
 	option = "-";
 	i = -1;
+	int cmd = 0;
 	int j = 0;
 	while (tokens[++i].token)
 	{
@@ -61,25 +62,26 @@ void	input_analyse(t_tokens *tokens)
 			tokens[i].type = "here_doc";
 		else if (ft_strcmp(tokens[i].token, append) == 0)
 			tokens[i].type = "append";
-		else
-			tokens[i].type = "None";
-		if (i == 0 && ft_strcmp(tokens[0].type, "None") == 0)
-			tokens[i].type = "command";
-		else if (i == 0)
-			continue ;
-		else if (ft_strcmp(tokens[i - 1].type, "red_input") == 0)
+		// else
+		// 	tokens[i].type = "None";
+		// else if (i == 0)
+		// 	continue ;
+		else if (i > 0 && (ft_strcmp(tokens[i - 1].type, "red_input") == 0))
 			tokens[i].type = "infile";
-		else if (ft_strcmp(tokens[i - 1].type, "red_out") == 0)
+		else if (i > 0 && (ft_strcmp(tokens[i - 1].type, "red_out") == 0))
 			tokens[i].type = "outfile";
-		else if (ft_strcmp(tokens[i - 1].type, "append") == 0)
+		else if (i > 0 && (ft_strcmp(tokens[i - 1].type, "append") == 0))
 			tokens[i].type = "app_outfile";
-		else if (ft_strcmp(tokens[i - 1].type, "here_doc") == 0)
+		else if (i > 0 && (ft_strcmp(tokens[i - 1].type, "here_doc") == 0))
 			tokens[i].type = "delimiter";
-		else if (ft_strcmp(tokens[i - 1].type, "command") == 0)
+		else if (i > 0 && cmd == 1)
 			tokens[i].type = "option";
-		else if (ft_chrcmp(tokens[i].token[j], option[0]) == 0)
-			tokens[i].type = "option";
-		else if (ft_strcmp(tokens[i].type, "None") == 0)
+		// else if (i > 0 && (ft_strcmp(tokens[i].type, "None") == 0))
+		// 	tokens[i].type = "command";
+		else
+		{
+			cmd = 1;
 			tokens[i].type = "command";
+		}
 	}
 }
