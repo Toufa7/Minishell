@@ -21,3 +21,18 @@ $secret = "FOEIUWGHFEEUHOFUOIU";
 <!-- 
 Natas8
 DBfUBfqQG69KvJvJ1iAbMoIpwSNQ9bWe -->
+
+
+<?php
+  
+$str = "3d3d516343746d4d6d6c315669563362";
+
+$newstr = pack("H*", $str);
+
+$rev = strrev($newstr);
+
+$deco = base64_decode($rev);
+
+echo $deco;
+
+?>
