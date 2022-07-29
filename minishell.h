@@ -107,7 +107,7 @@ void		initializer(t_tokens	*tokens);
 void		input_analyse(t_tokens	*tokens);
 void		input_counter(t_tokens	*counter, t_tokens	*tokens);
 t_tokens	*spliting_with_spaces(char	*str);
-
+int		stop_executing(t_parse *parse);
 // ----------- Execution -------------------------
 
 void    mcd(char *path);

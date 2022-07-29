@@ -55,6 +55,7 @@ int main(int ac, char **av, char **env)
 			input_types(parse);
 			for (int j = -1;parse->tokens[++j].token;)
 			{
+				printf("Error -> %d\n", stop_executing(parse));
 				printf("%s	->	Type	->	%s\n",parse->tokens[j].token, parse->tokens[j].type);
 			}
 		}
