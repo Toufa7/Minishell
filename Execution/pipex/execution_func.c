@@ -1,16 +1,24 @@
 #include "../../minishell.h"
 
-void	first_cmd_prep(t_pipe_data *pipe_data)
+void	setup_outfile(t_pipe_data *pipe_data)
 {
-	int	fd;
+	char	*path;
+	int		fd;
 
-	if (pipe_data->infile_status)
+	path = NULL;
+	if (pipe_data->app_infile_path)
+		path = pipe_data->app_infile_path;
+	else if (pipe_data->red_outfile_path)
+		path = pipe_data->red_outfile_path;
+	if (!access(path, F_OK) && !access(path, R_OK))	
 	{
-		fd = open(pipe_data->infile_path, O_RDONLY);
+		fd = open(path, O_RDONLY);
 		dup2(fd, 0);
+		dup2(pipe_data->cmd_pipe_fds[1], 1);
 		close(fd);
 	}
-	dup2(pipe_data->cmd_pipe_fds[1], 1);
+	else
+		perror(path);
 }
 
 void	ith_cmd_prep(int i, t_pipe_data *pipe_data, int input_fd)
@@ -20,10 +28,10 @@ void	ith_cmd_prep(int i, t_pipe_data *pipe_data, int input_fd)
 	if (i + 1 == pipe_data->cmds_size)
 	{
 		if (pipe_data->is_heredoc)
-			fd = open(pipe_data->outfile_path,
+			fd = open(pipe_data->red_outfile_path,
 					O_CREAT | O_WRONLY | O_APPEND, 0777);
 		else
-			fd = open(pipe_data->outfile_path,
+			fd = open(pipe_data->red_outfile_path,
 					O_CREAT | O_WRONLY | O_TRUNC, 0777);
 		dup2(fd, 1);
 		close(fd);
@@ -51,13 +59,13 @@ void	exec_cmd(char *cmd, char *cmd_path, char **envp)
 	}
 }
 
-void	child_process(int i, int input_fd, t_pipe_data *pipe_data, char *envp[])
+void	child_process(int i, int input_fd, t_pipe_data *pipe_data, t_input *input)
 {
 	if (fork() == 0)
 	{
 		if (i != 0)
 			ith_cmd_prep(i, pipe_data, input_fd);
-		else if (pipe_data->infile_status)
+		if (pipe_data->infile_status)
 			first_cmd_prep(pipe_data);
 		else if (pipe_data->is_heredoc)
 		{

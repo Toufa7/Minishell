@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 19:09:57 by abouchfa          #+#    #+#             */
-/*   Updated: 2022/07/27 13:53:41 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/07/29 19:45:59 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,20 +55,17 @@ char	*get_cmd_path(char *cmd, char **exec_programs_dirs)
 	return (put_cmd_status(status, cmd_path, cmd));
 }
 
-void	validate_cmd(t_pipe_data *pipe_data, t_input *input, char	**execs_paths)
+void	validate_cmd(t_pipe_data *pipe_data, char	**execps_paths)
 {
-	if (ft_strchr(input->command, '/') || !execs_paths)
+	if (ft_strchr(pipe_data->cmd_name, '/') || !execps_paths)
 	{
-		if (!access(input->command, F_OK) && !access(cmd, X_OK))
-			pipe_data->cmd_path = ft_strdup(cmd);
+		if (!access(pipe_data->cmd_name, F_OK) && !access(pipe_data->cmd_name, X_OK))
+			pipe_data->cmd_path = pipe_data->cmd_name;
 		else
-		{
-			*cmd_path = NULL;
-			perror(cmd);
-		}
+			perror(pipe_data->cmd_name);
 	}
 	else
-		*cmd_path = get_cmd_path(cmd, exec_programs_dirs);
+		pipe_data->cmd_path = get_cmd_path(pipe_data->cmd_name, execps_paths);
 }
 
 int	validate_infile(char *infile_path)

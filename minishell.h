@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/27 13:44:15 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/07/30 15:52:07 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,12 @@ typedef struct s_tokens
 
 typedef struct s_input
 {
-	int		size;
 	char	**command;
 	char	**in_files;
 	char	**delimiter;
 	char	**out_files;
 	char	**app_outfile;
 	char	**options;
-	char	**env_var;
 	int		parse_error;
 }	t_input;
 
@@ -84,9 +82,9 @@ typedef struct s_parse
 typedef struct s_pipe_data
 {
 	char	*infile_path;
-	int		infile_status;
+	char	*app_infile_path;
 	char	*heredoc_limiter;
-	char	*outfile_path;
+	char	*red_outfile_path;
 	char	*cmd_name;
 	char	*cmd_path;
 	int		cmd_pipe_fds[2];
@@ -115,13 +113,12 @@ void    mmecho(char **argv);
 void    mexit(char **argv);
 void	munset(char **argv);
 void	mexport(char **argv);
-void	execution(int argc, char *argv[], char *envp[]);
+void	execution(t_input *input);
 void	get_herdoc(t_pipe_data *pipe_data);
 char	*get_cmd(char *str);
-void	validate_cmd(char *cmd, char **cmd_path, char **exec_programs_dirs);
+void	validate_cmd(t_pipe_data *pipe_data, char	**execps_paths);
 int		validate_infile(char *infile_path);
-void	child_process(int i, int input_fd,
-			t_pipe_data *pipe_data, char *envp[]);
+void	child_process(int i, int input_fd, t_pipe_data *pipe_data);
 
 // ----------- Shared Functions ------------------
 
