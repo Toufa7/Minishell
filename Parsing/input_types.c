@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-void var_init(t_input *input)
+void	var_init(t_input *input)
 {
 	input->in_files = NULL;
 	input->out_files = NULL;
@@ -23,9 +23,9 @@ void var_init(t_input *input)
 	input->env_var = NULL;
 }
 
-void input_types(t_parse *parse)
+void	input_types(t_parse *parse)
 {
-	int i;
+	int	i;
 
 	parse->input = malloc(sizeof(t_input));
 	var_init(parse->input);

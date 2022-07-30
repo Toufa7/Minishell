@@ -25,14 +25,16 @@ void	checking_quotes(char *str)
 	if (counting_quotes(str, 'D') % 2 != 0)
 	{
 		printf("Unclosed Doubles Quotes\n");
-		// rl_on_new_line();
-		// rl_replace_line("", 0);
-		// rl_redisplay();
+        printf("\n");
+        rl_on_new_line();
+        rl_replace_line("", 0);
+        rl_redisplay();
+		// exit(0);
 	}
-	if (counting_quotes(str, 'S') % 2 != 0)
+	else if (counting_quotes(str, 'S') % 2 != 0)
 	{
 		printf("Unclosed Singles Quotes\n");
-		exit(FAILURE);
+		exit(EXIT_FAILURE);
 	}
 }
 
@@ -42,8 +44,8 @@ char	*handling_quotes(char *str)
 	int		j;
 	char	*dup;
 	dup = malloc(sizeof(char) * (ft_strlen(str) + 1));
-	if (!dup)
-		return (NULL);
+	// if (!dup)
+	// 	return (NULL);
 	i = -1;
 	checking_quotes(str);
 	while (str[++i])

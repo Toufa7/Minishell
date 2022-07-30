@@ -13,6 +13,7 @@
 /*
 TODO:
 	✅ char	*heredoc_limiter;
+	Adding array of s_input in ordre to deal with only arguments passsed to one pipe
 */
 
 #ifndef MINISHELL_H
@@ -32,12 +33,10 @@ TODO:
 # define RESET "\033[0m"
 
 # define PATH_MAX  4096
-# define SUCCESS	0
-# define FAILURE	1
 # define sing_quotes 39
 # define doubles_quotes 34
 typedef int bool;
-# define TRUE 1
+# define TRUE 1 
 # define FALSE 0
 
 char	**genv;
@@ -52,14 +51,16 @@ typedef struct s_tokens
 	size_t	app;
 	size_t	in_file;
 	size_t	out_file;
-	size_t	doc_file;
+	size_t	delimiter;
 	size_t	app_file;
 	size_t	cmd;
+	size_t	env_var;
 }	t_tokens;
 
 typedef struct s_input
 {
 	int		size;
+	
 	char	**command;
 	char	**in_files;
 	char	**delimiter;
@@ -107,7 +108,7 @@ void		initializer(t_tokens	*tokens);
 void		input_analyse(t_tokens	*tokens);
 void		input_counter(t_tokens	*counter, t_tokens	*tokens);
 t_tokens	*spliting_with_spaces(char	*str);
-int		stop_executing(t_parse *parse);
+int			stop_executing(t_parse *parse);
 // ----------- Execution -------------------------
 
 void    mcd(char *path);

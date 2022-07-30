@@ -16,7 +16,7 @@ TODO: ✅❓
 	✅ duplicate environment variables
 	❓ link parsing part with execuaation
 	All tokens are in a double pointer in input struct parse->input->x;
-	system("leaks a.out");
+	system("leaks Minishell");
 */
 
 #include "minishell.h"
@@ -24,6 +24,8 @@ TODO: ✅❓
 void    looping(char **str)
 {
 	int i = 0;
+	if (!str)
+		return ;
 	while (str[i])
 	{
 		printf("%s\n", str[i]);
@@ -49,16 +51,22 @@ int main(int ac, char **av, char **env)
 		int i = -1;
 		while (parse->splt_pipes[++i])
 		{
+			printf("Pipes -> %d\n",i + 1);
 			parse->tokens = spliting_with_spaces(parse->splt_pipes[i]);
 			input_analyse(parse->tokens);
 			initializer(parse->tokens);
 			input_types(parse);
-			for (int j = -1;parse->tokens[++j].token;)
+			printf("\n	Delimiters Are	\n");
+			looping(parse->input->delimiter);
+			// for (int j = -1;parse->tokens[++j].token;)
+			// {
+			// 	printf("%s	->	Type	->	%s\n",parse->tokens[j].token, parse->tokens[j].type);
+			// }
+			for (int j = 0; parse->tokens[j].token;j++)
 			{
-				printf("Error -> %d\n", stop_executing(parse));
-				printf("%s	->	Type	->	%s\n",parse->tokens[j].token, parse->tokens[j].type);
+				input_counter(parse->tokens, &parse->tokens[j]);
 			}
+			printf("	Nbr of Delimiter %zu\n",parse->tokens->delimiter);
 		}
-		parse->input->size = i;
 	}
 }
