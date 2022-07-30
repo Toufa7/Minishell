@@ -33,6 +33,17 @@ void    looping(char **str)
 	}
 }
 
+void	control_c(int sig)
+{
+	if (sig == SIGINT)
+	{
+		printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
+}
+
 int main(int ac, char **av, char **env)
 {
 	(void) ac;
@@ -43,7 +54,11 @@ int main(int ac, char **av, char **env)
 	env_dup(env);
 	while (TRUE)
 	{
+		signal(SIGINT, control_c); // Ctrl+C
+		signal(SIGQUIT, SIG_IGN); // Ctrl + Backslash
 		parse->line = readline(GREEN "Mini-0.0$ " RESET);
+		if (!parse->line) // Ctrl + D 
+			exit(0);
 		parse->line_double_quotes = handling_quotes(parse->line);
 		add_history(parse->line_double_quotes);
 		parse->formated_input = input_formating(parse->line_double_quotes);
@@ -51,13 +66,10 @@ int main(int ac, char **av, char **env)
 		int i = -1;
 		while (parse->splt_pipes[++i])
 		{
-			printf("Pipes -> %d\n",i + 1);
 			parse->tokens = spliting_with_spaces(parse->splt_pipes[i]);
 			input_analyse(parse->tokens);
 			initializer(parse->tokens);
 			input_types(parse);
-			printf("\n	Delimiters Are	\n");
-			looping(parse->input->delimiter);
 			// for (int j = -1;parse->tokens[++j].token;)
 			// {
 			// 	printf("%s	->	Type	->	%s\n",parse->tokens[j].token, parse->tokens[j].type);
@@ -66,7 +78,7 @@ int main(int ac, char **av, char **env)
 			{
 				input_counter(parse->tokens, &parse->tokens[j]);
 			}
-			printf("	Nbr of Delimiter %zu\n",parse->tokens->delimiter);
+			printf("%zu\n",parse->tokens->delimiter);
 		}
 	}
 }
