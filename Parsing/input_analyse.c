@@ -12,14 +12,6 @@
 
 #include "../minishell.h"
 
-int	ft_chrcmp(const char s1, const char s2)
-{
-	if (s1 != s2)
-		return (s1 - s2);
-	else
-		return (0);
-}
-
 char	*is_there(char *str)
 {
 	int i = -1;
@@ -62,10 +54,6 @@ void	input_analyse(t_tokens *tokens)
 			tokens[i].type = "here_doc";
 		else if (ft_strcmp(tokens[i].token, append) == 0)
 			tokens[i].type = "append";
-		// else
-		// 	tokens[i].type = "None";
-		// else if (i == 0)
-		// 	continue ;
 		else if (i > 0 && (ft_strcmp(tokens[i - 1].type, "red_input") == 0))
 			tokens[i].type = "infile";
 		else if (i > 0 && (ft_strcmp(tokens[i - 1].type, "red_out") == 0))
@@ -76,8 +64,6 @@ void	input_analyse(t_tokens *tokens)
 			tokens[i].type = "delimiter";
 		else if (i > 0 && cmd == 1)
 			tokens[i].type = "option";
-		// else if (i > 0 && (ft_strcmp(tokens[i].type, "None") == 0))
-		// 	tokens[i].type = "command";
 		else
 		{
 			cmd = 1;

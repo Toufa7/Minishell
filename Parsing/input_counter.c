@@ -20,9 +20,10 @@ void	initializer(t_tokens	*tokens)
 	tokens->app = 0;
 	tokens->in_file = 0;
 	tokens->out_file = 0;
-	tokens->doc_file = 0;
+	tokens->delimiter = 0;
 	tokens->app_file = 0;
 	tokens->cmd = 0;
+	tokens->env_var = 0;
 }
 
 void	input_counter(t_tokens *counter, t_tokens *tokens)
@@ -44,5 +45,7 @@ void	input_counter(t_tokens *counter, t_tokens *tokens)
 	else if (ft_strcmp(tokens->type, "app_outfile") == 0)
 		counter->app_file++;
 	else if (ft_strcmp(tokens->type, "delimiter") == 0)
-		counter->doc_file++;
+		counter->delimiter++;
+	else if (ft_strcmp(tokens->type, "env_var") == 0)
+		counter->env_var++;
 }

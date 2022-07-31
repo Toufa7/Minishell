@@ -59,7 +59,7 @@ void	exec_cmd(char *cmd, char *cmd_path, char **envp)
 	}
 }
 
-void	child_process(int i, int input_fd, t_pipe_data *pipe_data, t_input *input)
+void	child_process(int i, int input_fd, t_pipe_data *pipe_data, t_pipe_data *pipe_data)
 {
 	if (fork() == 0)
 	{

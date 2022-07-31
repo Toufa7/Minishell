@@ -1,6 +1,6 @@
 #include "../../minishell.h"
 
-void	validate_input(t_pipe_data *pipe_data, t_input *input)
+void	validate_input(t_pipe_data *pipe_data)
 {
 	int		i;
 	char	*cmd;
@@ -20,53 +20,71 @@ void	validate_input(t_pipe_data *pipe_data, t_input *input)
 			break;
 		}
 	}
-	validate_infile(pipe_data->infile_path);		
+	validate_infile(pipe_data->in_files);		
 	validate_cmd(pipe_data, execps_paths);
 	free_arr(execps_paths);
 }
 
-void	set_pipe_data(t_pipe_data *pipe_data, t_input *input, int index)
+
+void	herdoc(t_pipe_data **pipe_data)
 {
-	pipe_data->cmd_name = input->command[index];
-	pipe_data->infile_path = input->in_files[index];
-	pipe_data->heredoc_limiter = input->delimiter[index];
-	pipe_data->cmd_name = input->command[index];
-	pipe_data->red_outfile_path = input->out_files[index];
-	pipe_data->app_infile_path = input->app_outfile[index];
-	validate_input(pipe_data, input);
+	char	*line;
+	int		i;
+	int		j;
+
+	i = -1;
+	while (pipe_data[++i])
+	{
+		j = -1;
+		if (pipe_data[i]->delimiter)
+		{
+			while (pipe_data[i]->delimiter[++j])
+			{
+				pipe(pipe_data[i]->here_doc_pipe_fds);
+				line = get_next_line(0);
+				while (line == NULL || ft_strcmp(line, pipe_data[i]->delimiter[j]))
+				{
+					if (line)
+					{
+						write(pipe_data[i]->here_doc_pipe_fds[1], line, ft_strlen(line));
+						write(pipe_data[i]->here_doc_pipe_fds[1], "\n", 1);
+						free_str(line);
+					}
+					line = get_next_line(0);
+				}
+				free_str(line);
+			}
+			
+		}
+	}
 }
 
-void	execution(t_input *input)
+void	execution(t_pipe_data **pipe_data)
 {
-	t_pipe_data	*pipe_data;
 	int			i;
+	int			j;
 	int			input_fd;
+	t_pipe_data	*pipe_data;
 
 	i = -1;
 	input_fd = -1;
 	pipe_data = malloc(sizeof(t_pipe_data));
 	if (!pipe_data)
 		exit(errno);
-	while (++i < input->size)
+	while (pipe_data[++i])
 	{
-		if (input->delimiter[i])
-		{
-			set_pipe_data(pipe_data, input, i);
-			pipe(pipe_data->here_doc_pipe_fds);
-			get_herdoc(pipe_data);
-			if (i + 1 != input->size)
-				pipe(pipe_data->cmd_pipe_fds);
-			child_process(i, input_fd, pipe_data);
-			close(pipe_data->here_doc_pipe_fds[1]);
-			close(pipe_data->here_doc_pipe_fds[0]);
-			close(pipe_data->cmd_pipe_fds[1]);
-			if (input_fd != -1)
-				close(input_fd);
-			input_fd = pipe_data->cmd_pipe_fds[0];
-		}
+		if (pipe_data[i + 1])
+			pipe(pipe_data[i]->cmd_pipe_fds);
+		child_process(i, input_fd, pipe_data[i]);
+		close(pipe_data[i]->here_doc_pipe_fds[1]);
+		close(pipe_data[i]->here_doc_pipe_fds[0]);
+		close(pipe_data[i]->cmd_pipe_fds[1]);
+		if (input_fd != -1)
+			close(input_fd);
+		input_fd = pipe_data[i]->cmd_pipe_fds[0];
 	}
 	close(input_fd);
 	i = -1;
-	while (++i < input->size)
+	while (pipe_data[++i])
 		wait(NULL);
 }

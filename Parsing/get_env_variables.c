@@ -12,6 +12,16 @@
 
 #include "../minishell.h"
 
+void	green(void)
+{
+	printf("\033[0;32m");
+}
+
+void	reset(void)
+{
+	printf("\033[0m");
+}
+
 int	untill_this(char *var)
 {
 	int	i;
@@ -56,11 +66,19 @@ char	*string_formating(char *str)
 			string[++j] = str[i];
 			string[++j] = ' ';
 		}
-		else if ((str[i] == '$' && str[i - 1] != ' '))
-			string[++j] = str[i];			
-		else if ((str[i] == '$' && str[i - 1] != sing_quotes) || str[i] == '|')
+		else if ((str[i] == '$' && i != 0) || str[i] == '|')
 		{
 			string[++j] = ' ';
+			string[++j] = str[i];
+		}
+		else if (str[i] == sing_quotes)
+		{
+			string[++j] = str[i++];
+			while (str[i] != sing_quotes)
+			{
+				string[++j] = str[i];
+				i++;
+			}
 			string[++j] = str[i];
 		}
 		else
@@ -109,16 +127,19 @@ char	*get_env_variables(char *target)
 				i++;
 		}
 		target = ft_strjoin(valid_input(splt[i]), "=");
-		printf("Target -> %s\n", target);
+		// printf("Target -> %s\n", target);
 		j = -1;
 		while (genv[++j])
 		{
 			if (ft_strncmp(target, genv[j], ft_strlen(target)) == 0)
 			{
-				printf("%s\n", (genv[j] + ft_strlen(target)));
+				green();
+				printf("	->	%s\n", (genv[j] + ft_strlen(target)));
+				reset();
 					break;
 			}
 		}
+		free_str(target);
 	}
 	return ("");
 }
@@ -129,7 +150,8 @@ char	*get_env_variables(char *target)
 // 	env_dup(env);
 // 	while (1)
 // 	{
-// 		char *s = readline("");
+// 		char *s = get_next_line(0);
 // 		printf("%s", get_env_variables(s));
+// 		system("leaks a.out");
 // 	}
 // }

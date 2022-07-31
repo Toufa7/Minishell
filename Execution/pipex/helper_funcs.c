@@ -1,11 +1,11 @@
 #include "../../minishell.h"
 
-void	get_herdoc(t_pipe_data *pipe_data)
+void	get_herdoc(t_pipe_data *pipe_data, char *lim)
 {
 	char	*line;
 
 	line = get_next_line(0);
-	while (line == NULL || ft_strcmp(line, pipe_data->heredoc_limiter))
+	while (line == NULL || ft_strcmp(line, lim))
 	{
 		if (line)
 		{
