@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/31 14:43:49 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/07/31 14:47:40 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,17 @@ void    looping(char **str)
 	}
 }
 
+void	control_c(int sig)
+{
+	if (sig == SIGINT)
+	{
+		printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
+}
+
 int main(int ac, char **av, char **env)
 {
 	(void) ac;
@@ -43,7 +54,11 @@ int main(int ac, char **av, char **env)
 	env_dup(env);
 	while (TRUE)
 	{
+		signal(SIGINT, control_c); // Ctrl+C
+		signal(SIGQUIT, SIG_IGN); // Ctrl + Backslash
 		parse->line = readline(GREEN "Mini-0.0$ " RESET);
+		if (!parse->line) // Ctrl + D 
+			exit(0);
 		parse->line_double_quotes = handling_quotes(parse->line);
 		add_history(parse->line_double_quotes);
 		parse->formated_input = input_formating(parse->line_double_quotes);
@@ -64,6 +79,7 @@ int main(int ac, char **av, char **env)
 				printf("0----- > %s\n", get_env_variables(parse->tokens[j].token));
 			}
 			parse->pipe_data[i] = get_pipe_data(parse);
+			printf("%zu\n",parse->tokens->delimiter);
 		}
 		mecho(parse->pipe_data[0]->options);
 		// i = -1;
@@ -71,10 +87,3 @@ int main(int ac, char **av, char **env)
 		// {
 		// 	int j = -1;
 		// 	printf("cmd: %s\n", parse->pipe_data[i]->command);
-		// 	printf ("delimiters: ");
-		// 	while (parse->pipe_data[i]->delimiter[++j])
-		// 		printf ("%s ", parse->pipe_data[i]->delimiter[j]);
-		// 	printf("\n------------------\n");
-		// }
-	}
-}
