@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/31 14:47:40 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/07/31 14:49:24 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,16 +70,16 @@ int main(int ac, char **av, char **env)
 		i = -1;
 		while (parse->splt_pipes[++i])
 		{
-			int j = -1;
 			parse->tokens = spliting_with_spaces(parse->splt_pipes[i]);
 			input_analyse(parse->tokens);
 			initializer(parse->tokens);
-			while (parse->tokens[++j].token)
-			{
-				printf("0----- > %s\n", get_env_variables(parse->tokens[j].token));
-			}
 			parse->pipe_data[i] = get_pipe_data(parse);
-			printf("%zu\n",parse->tokens->delimiter);
+			// int j = -1;
+			// while (parse->tokens[++j].token)
+			// {
+			// 	printf("0----- > %s\n", get_env_variables(parse->tokens[j].token));
+			// }
+			// printf("%zu\n",parse->tokens->delimiter);
 		}
 		mecho(parse->pipe_data[0]->options);
 		// i = -1;
@@ -87,3 +87,5 @@ int main(int ac, char **av, char **env)
 		// {
 		// 	int j = -1;
 		// 	printf("cmd: %s\n", parse->pipe_data[i]->command);
+	}
+}
