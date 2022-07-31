@@ -28,7 +28,7 @@ void	checking_quotes(char *str)
 {
 	if (counting_quotes(str, 'D') % 2 != 0)
 	{
-		printf("Unclosed Doubles Quotes\n");
+		printf("Unclosed Doubles Quotes");
 		printf("\n");
 		rl_on_new_line();
 		rl_replace_line("", 0);
@@ -36,8 +36,11 @@ void	checking_quotes(char *str)
 	}
 	else if (counting_quotes(str, 'S') % 2 != 0)
 	{
-		printf("Unclosed Singles Quotes\n");
-		exit(EXIT_FAILURE);
+		printf("Unclosed Singles Quotes");
+		printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
 	}
 }
 

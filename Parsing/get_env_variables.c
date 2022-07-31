@@ -108,7 +108,7 @@ char	*valid_input(char *str)
 	return (var);
 }
 
-char	*get_env_variables(char *target)
+void	get_env_variables(char *target)
 {
 	int		i;
 	int		j;
@@ -132,13 +132,14 @@ char	*get_env_variables(char *target)
 		{
 			if (ft_strncmp(target, genv[j], ft_strlen(target)) == 0)
 			{
-				printf("	->	%s\n",(genv[j] + ft_strlen(target)));
+				ft_putstr_fd(genv[j] + ft_strlen(target), 1);
+				printf("\n");
 				break ;
 			}
 		}
 		free_str(target);
 	}
-	return ("");
+	return ;
 }
 
 // int main(int a, char **b, char **env)
@@ -148,6 +149,5 @@ char	*get_env_variables(char *target)
 // 	{
 // 		char *s = get_next_line(0);
 // 		printf("%s", get_env_variables(s));
-// 		system("leaks a.out");
 // 	}
 // }

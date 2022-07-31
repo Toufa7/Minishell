@@ -68,6 +68,7 @@ int main(int ac, char **av, char **env)
 			i++;
 		parse->pipe_data = ft_calloc(i + 1, sizeof(t_pipe_data *));
 		i = -1;
+		///////////////////////////////////////////////////////
 		while (parse->splt_pipes[++i])
 		{
 			parse->tokens = spliting_with_spaces(parse->splt_pipes[i]);
@@ -77,11 +78,10 @@ int main(int ac, char **av, char **env)
 			int j = -1;
 			while (parse->tokens[++j].token)
 			{
-				printf("0----- > %s\n", get_env_variables(parse->tokens[j].token));
+				get_env_variables(parse->tokens[j].token);
 			}
-			printf("%zu\n",parse->tokens->delimiter);
 		}
-		mecho(parse->pipe_data[0]->options);
+		// mecho(parse->pipe_data[0]->options);
 		// i = -1;
 		// while (parse->pipe_data[++i])
 		// {
