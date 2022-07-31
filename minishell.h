@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/31 14:38:36 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/07/31 15:00:03 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void    mexit(char **argv);
 void	munset(char **argv);
 void	mexport(char **argv);
 void	execution(t_pipe_data *pipe_data);
-void	get_herdoc(t_pipe_data *pipe_data);
+void	get_herdoc(t_pipe_data *pipe_data, char *lim);
 char	*get_cmd(char *str);
 void	validate_cmd(t_pipe_data *pipe_data, char	**execps_paths);
 int		validate_infile(char *infile_path);

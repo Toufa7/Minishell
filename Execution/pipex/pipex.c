@@ -26,65 +26,54 @@ void	validate_input(t_pipe_data *pipe_data)
 }
 
 
-void	herdoc(t_pipe_data **pipe_data)
+void	herdoc(t_pipe_data **pipes_data)
 {
 	char	*line;
 	int		i;
 	int		j;
 
 	i = -1;
-	while (pipe_data[++i])
+	while (pipes_data[++i])
 	{
 		j = -1;
-		if (pipe_data[i]->delimiter)
+		if (pipes_data[i]->delimiter)
 		{
-			while (pipe_data[i]->delimiter[++j])
+			while (pipes_data[i]->delimiter[++j])
 			{
-				pipe(pipe_data[i]->here_doc_pipe_fds);
-				line = get_next_line(0);
-				while (line == NULL || ft_strcmp(line, pipe_data[i]->delimiter[j]))
+				if (j > 0)
 				{
-					if (line)
-					{
-						write(pipe_data[i]->here_doc_pipe_fds[1], line, ft_strlen(line));
-						write(pipe_data[i]->here_doc_pipe_fds[1], "\n", 1);
-						free_str(line);
-					}
-					line = get_next_line(0);
+					close(pipes_data[i]->here_doc_pipe_fds[1]);
+					close(pipes_data[i]->here_doc_pipe_fds[0]);
 				}
-				free_str(line);
+				pipe(pipes_data[i]->here_doc_pipe_fds);
+				get_herdoc(pipes_data[i], pipes_data[i]->delimiter[j]);
 			}
-			
 		}
 	}
 }
 
-void	execution(t_pipe_data **pipe_data)
+void	execution(t_pipe_data **pipes_data)
 {
 	int			i;
 	int			j;
 	int			input_fd;
-	t_pipe_data	*pipe_data;
 
 	i = -1;
 	input_fd = -1;
-	pipe_data = malloc(sizeof(t_pipe_data));
-	if (!pipe_data)
-		exit(errno);
-	while (pipe_data[++i])
+	while (pipes_data[++i])
 	{
-		if (pipe_data[i + 1])
-			pipe(pipe_data[i]->cmd_pipe_fds);
-		child_process(i, input_fd, pipe_data[i]);
-		close(pipe_data[i]->here_doc_pipe_fds[1]);
-		close(pipe_data[i]->here_doc_pipe_fds[0]);
-		close(pipe_data[i]->cmd_pipe_fds[1]);
+		if (pipes_data[i + 1])
+			pipe(pipes_data[i]->cmd_pipe_fds);
+		child_process(i, input_fd, pipes_data[i]);
+		close(pipes_data[i]->here_doc_pipe_fds[1]);
+		close(pipes_data[i]->here_doc_pipe_fds[0]);
+		close(pipes_data[i]->cmd_pipe_fds[1]);
 		if (input_fd != -1)
 			close(input_fd);
-		input_fd = pipe_data[i]->cmd_pipe_fds[0];
+		input_fd = pipes_data[i]->cmd_pipe_fds[0];
 	}
 	close(input_fd);
 	i = -1;
-	while (pipe_data[++i])
+	while (pipes_data[++i])
 		wait(NULL);
 }
