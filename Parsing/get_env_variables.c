@@ -142,12 +142,12 @@ void	get_env_variables(char *target)
 	return ;
 }
 
-// int main(int a, char **b, char **env)
-// {
-// 	env_dup(env);
-// 	while (1)
-// 	{
-// 		char *s = get_next_line(0);
-// 		printf("%s", get_env_variables(s));
-// 	}
-// }
+int main(int a, char **b, char **env)
+{
+	env_dup(env);
+	while (1)
+	{
+		char *s = get_next_line(0);
+		get_env_variables(s);
+	}
+}
