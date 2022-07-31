@@ -21,16 +21,15 @@ char	*input_formating(char *str)
 {
 	int		i;
 	int		j;
-	int		k;
 	int		allo;
-	char	*spcs;
 	char 	sing;
+	char	*spcs;
 
-	k = -1;
+	i = -1;
 	allo = 0;
-	while (str[++k])
+	while (str[++i])
 	{
-		if ((str[k] == '<' && str[k + 1] != '<') || (str[k] == '>' && str[k + 1] != '>') || str[k] == '|')
+		if ((str[i] == '<' && str[i + 1] != '<') || (str[i] == '>' && str[i + 1] != '>') || str[i] == '|')
 			allo++;
 	}
 	spcs = malloc(sizeof(char) * (ft_strlen(str) + (allo * 2) + 1));

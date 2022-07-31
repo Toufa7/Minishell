@@ -45,6 +45,10 @@ typedef struct s_tokens
 {
 	char	*token;
 	char	*type;
+	char	*cmp_red_in;
+	char	*cmp_h_doc;
+	char	*cmp_red_out;
+	char	*cmp_append;
 	size_t	red_in;
 	size_t	red_out;
 	size_t	here_do;

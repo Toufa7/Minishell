@@ -1,10 +1,14 @@
 #include "../minishell.h"
 
-int		counting_quotes(char *str, char specify)
+int	counting_quotes(char *str, char specify)
 {
-	int i = -1;
-	int single_q = 0;
-	int double_q = 0;
+	int	i;
+	int	single_q;
+	int	double_q;
+
+	i = -1;
+	single_q = 0;
+	double_q = 0;
 	while (str[++i])
 	{
 		if (str[i] == doubles_quotes)
@@ -25,11 +29,10 @@ void	checking_quotes(char *str)
 	if (counting_quotes(str, 'D') % 2 != 0)
 	{
 		printf("Unclosed Doubles Quotes\n");
-        printf("\n");
-        rl_on_new_line();
-        rl_replace_line("", 0);
-        rl_redisplay();
-		// exit(0);
+		printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
 	}
 	else if (counting_quotes(str, 'S') % 2 != 0)
 	{
@@ -43,9 +46,10 @@ char	*handling_quotes(char *str)
 	int		i;
 	int		j;
 	char	*dup;
+
 	dup = malloc(sizeof(char) * (ft_strlen(str) + 1));
-	// if (!dup)
-	// 	return (NULL);
+	if (!dup)
+		return (NULL);
 	i = -1;
 	checking_quotes(str);
 	while (str[++i])

@@ -12,16 +12,6 @@
 
 #include "../minishell.h"
 
-void	green(void)
-{
-	printf("\033[0;32m");
-}
-
-void	reset(void)
-{
-	printf("\033[0m");
-}
-
 int	untill_this(char *var)
 {
 	int	i;
@@ -31,20 +21,27 @@ int	untill_this(char *var)
 	{
 		while (var[i] == '$')
 			i++;
-		if (!(ft_isalpha(var[i]) || (ft_isdigit(var[i]) && i != 0) || var[i] == '_'))
-			break;
+		if (!(ft_isalpha(var[i]) || (ft_isdigit(var[i]) && i != 0)
+				|| var[i] == '_'))
+			break ;
 	}
 	return (i);
 }
 
 char	*string_formating(char *str)
 {
-	int 	i = -1;
-	int 	j = -1;
-	int		quotes = 0;
-	int		dollar = 0;
-	int		pipe = 0;
+	int		i;
+	int		j;
+	int		quotes;
+	int		dollar;
+	int		pipe;
 	char	*string;
+
+	i = -1;
+	j = -1;
+	quotes = 0;
+	dollar = 0;
+	pipe = 0;
 	while (str[++i])
 	{
 		if (str[i] == '"')
@@ -54,7 +51,7 @@ char	*string_formating(char *str)
 		else if (str[i] == '|')
 			pipe++;
 	}
-	string = malloc(sizeof(char) * ft_strlen(str) + (quotes * 2) + dollar + pipe + 1); 
+	string = malloc(sizeof(char) * ft_strlen(str) + (quotes * 2) + dollar + pipe + 1);
 	if (!string)
 		return (NULL);
 	i = -1;
@@ -85,39 +82,42 @@ char	*string_formating(char *str)
 			string [++j] = str[i];
 	}
 	string[j + 1] = '\0';
-	printf("formated_string -> |%s|\n",string);
 	free(str);
 	return (string);
 }
 
-char    *valid_input(char *str)
+char	*valid_input(char *str)
 {
-    int i = 0;
-    int j = 0;
-    char *var;
-    var = malloc(sizeof(char) * ft_strlen(str - (ft_strlen(str) - untill_this(str))) + 1);
-    while (str[i] && j < untill_this(str) - 1)
-    {
-        while (str[i] == '$')
-            i++;
-        var[j] = str[i];
-        j++;
-        i++;
-    }
-    var[j] = '\0';
-    free(str);
-    return (var);
+	int		i;
+	int		j;
+	char	*var;
+
+	i = 0;
+	j = 0;
+	var = malloc(sizeof(char) * ft_strlen(str - (ft_strlen(str) - untill_this(str))) + 1);
+	while (str[i] && j < untill_this(str) - 1)
+	{
+		while (str[i] == '$')
+			i++;
+		var[j] = str[i];
+		j++;
+		i++;
+	}
+	var[j] = '\0';
+	free(str);
+	return (var);
 }
 
 char	*get_env_variables(char *target)
 {
-	int	i;
-	int j;
-	char **splt;
+	int		i;
+	int		j;
+	int		k;
+	char	**splt;
 
 	i = -1;
-	size_t k = 0;
-	splt = ft_split(string_formating(target),  ' ');
+	k = 0;
+	splt = ft_split(string_formating(target), ' ');
 	while (splt[++i])
 	{
 		while (splt[i][k] == '"')
@@ -127,23 +127,19 @@ char	*get_env_variables(char *target)
 				i++;
 		}
 		target = ft_strjoin(valid_input(splt[i]), "=");
-		// printf("Target -> %s\n", target);
 		j = -1;
 		while (genv[++j])
 		{
 			if (ft_strncmp(target, genv[j], ft_strlen(target)) == 0)
 			{
-				green();
-				printf("	->	%s\n", (genv[j] + ft_strlen(target)));
-				reset();
-					break;
+				printf("	->	%s\n",(genv[j] + ft_strlen(target)));
+				break ;
 			}
 		}
 		free_str(target);
 	}
 	return ("");
 }
-
 
 // int main(int a, char **b, char **env)
 // {
