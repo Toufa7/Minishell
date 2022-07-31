@@ -24,7 +24,8 @@ void    mecho(char **argv)
 				new_line = TRUE;
 		}
 	}
-	//j--;
+	if (!valid_arg)
+		j--;
 	while(argv[j])
 	{
 		ft_putstr_fd(argv[j++], 1);
