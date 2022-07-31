@@ -57,7 +57,7 @@ int main(int ac, char **av, char **env)
 		signal(SIGINT, control_c); // Ctrl+C
 		signal(SIGQUIT, SIG_IGN); // Ctrl + Backslash
 		parse->line = readline(GREEN "Mini-0.0$ " RESET);
-		if (!parse->line) // Ctrl + D 
+		if (!parse->line || ft_strcmp(parse->line, "exit") == 0) // Ctrl + D 
 			exit(0);
 		parse->line_double_quotes = handling_quotes(parse->line);
 		add_history(parse->line_double_quotes);
@@ -74,12 +74,12 @@ int main(int ac, char **av, char **env)
 			input_analyse(parse->tokens);
 			initializer(parse->tokens);
 			parse->pipe_data[i] = get_pipe_data(parse);
-			// int j = -1;
-			// while (parse->tokens[++j].token)
-			// {
-			// 	printf("0----- > %s\n", get_env_variables(parse->tokens[j].token));
-			// }
-			// printf("%zu\n",parse->tokens->delimiter);
+			int j = -1;
+			while (parse->tokens[++j].token)
+			{
+				printf("0----- > %s\n", get_env_variables(parse->tokens[j].token));
+			}
+			printf("%zu\n",parse->tokens->delimiter);
 		}
 		mecho(parse->pipe_data[0]->options);
 		// i = -1;

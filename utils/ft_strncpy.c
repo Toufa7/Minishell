@@ -1,3 +1,5 @@
+#include "../minishell.h"
+
 void	ft_strncpy(char *dest, char *src, int n)
 {
 	int	i;

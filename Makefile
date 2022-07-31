@@ -2,6 +2,8 @@ NAME = Minishell
 
 C_FLAGS = gcc -Wall -Werror -Wextra -lreadline
 
+C_READLINE_POMS = -L /goinfre/otoufah/otoufah/.brew/opt/readline/lib -I /goinfre/otoufah/otoufah/.brew/opt/readline/include
+
 C_READLINE = -L /goinfre/abouchfa/.brew/opt/readline/lib -I /goinfre/abouchfa/.brew/opt/readline/include
 
 ADDI_FLAGS = -fsanitize=address -g
@@ -48,7 +50,7 @@ C_FILES = 	minishell.c \
 all: $(NAME)
 
 $(NAME): $(C_FILES)
-		$(C_FLAGS) $(ADDI_FLAGS) $(C_READLINE) $(C_FILES) -o $(NAME) 
+		$(C_FLAGS) $(ADDI_FLAGS) $(C_READLINE_POMS) $(C_FILES) -o $(NAME) 
 
 clean:
 	rm -rf $(NAME)
