@@ -57,7 +57,7 @@ int main(int ac, char **av, char **env)
 		signal(SIGINT, control_c); // Ctrl+C
 		signal(SIGQUIT, SIG_IGN); // Ctrl + Backslash
 		parse->line = readline(GREEN "Mini-0.0$ " RESET);
-		if (!parse->line) // Ctrl + D 
+		if (!parse->line || ft_strcmp(parse->line, "exit") == 0) // Ctrl + D 
 			exit(0);
 		parse->line_double_quotes = handling_quotes(parse->line);
 		add_history(parse->line_double_quotes);
@@ -74,11 +74,10 @@ int main(int ac, char **av, char **env)
 			// {
 			// 	printf("%s	->	Type	->	%s\n",parse->tokens[j].token, parse->tokens[j].type);
 			// }
-			for (int j = 0; parse->tokens[j].token;j++)
-			{
-				input_counter(parse->tokens, &parse->tokens[j]);
-			}
-			printf("%zu\n",parse->tokens->delimiter);
+			// for (int j = 0; parse->tokens[j].token;j++)
+			// {
+			// 	input_counter(parse->tokens, &parse->tokens[j]);
+			// }
 		}
 	}
 }
