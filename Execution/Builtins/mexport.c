@@ -15,7 +15,7 @@ char	*get_key(char *str)
 	}
 	if (i > 0)
 	{
-		key = malloc(sizeof(char *) * (i + 1));
+		key = malloc(sizeof(char) * (i + 1));
 		ft_strncpy(key, str, i);
 	}
 	return key;
@@ -36,7 +36,7 @@ char	*get_val(char *str, bool include_eqs)
 	{
 		while (str[i + j])
 			j++;
-		val = malloc(sizeof(char *) * (j + 1));
+		val = malloc(sizeof(char) * (j + 1));
 		if (!include_eqs)
 			i++;
 		ft_strncpy(val, str + i, j);

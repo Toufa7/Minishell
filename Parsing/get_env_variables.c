@@ -123,7 +123,7 @@ char	*get_env_variables(char *target)
 		while (splt[i][k] == '"')
 		{
 			k++;
-			if (k == ft_strlen(splt[i]))
+			if ((size_t)k == ft_strlen(splt[i]))
 				i++;
 		}
 		target = ft_strjoin(valid_input(splt[i]), "=");

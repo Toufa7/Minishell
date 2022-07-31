@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/26 21:42:59 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/07/31 14:49:24 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 TODO: ✅❓
 	✅ duplicate environment variables
 	❓ link parsing part with execuaation
-	All tokens are in a double pointer in input struct parse->input->x;
+	All tokens are in a double pointer in pipe_data struct parse->pipe_data->x;
 	system("leaks Minishell");
 */
 
@@ -63,21 +63,29 @@ int main(int ac, char **av, char **env)
 		add_history(parse->line_double_quotes);
 		parse->formated_input = input_formating(parse->line_double_quotes);
 		parse->splt_pipes = ft_split(parse->formated_input, '|');
-		int i = -1;
+		int i = 0;
+		while (parse->splt_pipes[i])
+			i++;
+		parse->pipe_data = ft_calloc(i + 1, sizeof(t_pipe_data *));
+		i = -1;
 		while (parse->splt_pipes[++i])
 		{
 			parse->tokens = spliting_with_spaces(parse->splt_pipes[i]);
 			input_analyse(parse->tokens);
 			initializer(parse->tokens);
-			input_types(parse);
-			// for (int j = -1;parse->tokens[++j].token;)
-			// {
-			// 	printf("%s	->	Type	->	%s\n",parse->tokens[j].token, parse->tokens[j].type);
-			// }
-			// for (int j = 0; parse->tokens[j].token;j++)
-			// {
-			// 	input_counter(parse->tokens, &parse->tokens[j]);
-			// }
+			parse->pipe_data[i] = get_pipe_data(parse);
+			int j = -1;
+			while (parse->tokens[++j].token)
+			{
+				printf("0----- > %s\n", get_env_variables(parse->tokens[j].token));
+			}
+			printf("%zu\n",parse->tokens->delimiter);
 		}
+		mecho(parse->pipe_data[0]->options);
+		// i = -1;
+		// while (parse->pipe_data[++i])
+		// {
+		// 	int j = -1;
+		// 	printf("cmd: %s\n", parse->pipe_data[i]->command);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/26 21:41:34 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/07/31 14:38:36 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,19 +61,19 @@ typedef struct s_tokens
 	size_t	env_var;
 }	t_tokens;
 
-typedef struct s_input
+typedef struct s_pipe_data
 {
-	int		size;
-	
-	char	**command;
+	char	*command;
+	char	*cmd_path;
 	char	**in_files;
 	char	**delimiter;
 	char	**out_files;
 	char	**app_outfile;
 	char	**options;
-	char	**env_var;
+	int		cmd_pipe_fds[2];
+	int		here_doc_pipe_fds[2];
 	int		parse_error;
-}	t_input;
+}	t_pipe_data;
 
 typedef struct s_parse
 {
@@ -82,23 +82,9 @@ typedef struct s_parse
 	char		*orginal_string;
 	char		*formated_input;
 	char		*line_double_quotes;
-	t_input		*input;
+	t_pipe_data		**pipe_data;
 	t_tokens	*tokens;
 }	t_parse;
-
-typedef struct s_pipe_data
-{
-	char	*infile_path;
-	int		infile_status;
-	char	*outfile_path;
-	char	**cmds_names;
-	char	**cmds_paths;
-	int		cmds_size;
-	int		is_heredoc;
-	char	*heredoc_limiter;
-	int		cmd_pipe_fds[2];
-	int		here_doc_pipe_fds[2];
-}	t_pipe_data;
 
 // ----------- Parsing --------------------------
 
@@ -107,7 +93,7 @@ char		*handling_quotes(char *str);
 char		*input_formating(char	*str);
 char		*getting_back_original_input(char *str);
 char		*get_env_variables(char	*target);
-void		input_types(t_parse	*parse);
+t_pipe_data		*get_pipe_data(t_parse	*parse);
 void		initializer(t_tokens	*tokens);
 void		input_analyse(t_tokens	*tokens);
 void		input_counter(t_tokens	*counter, t_tokens	*tokens);
@@ -118,24 +104,23 @@ int			stop_executing(t_parse *parse);
 void    mcd(char *path);
 void    mpwd(void);
 void	menv();
-void    mmecho(char **argv);
+void    mecho(char **argv);
 void    mexit(char **argv);
 void	munset(char **argv);
 void	mexport(char **argv);
-void	execution(int argc, char *argv[], char *envp[]);
+void	execution(t_pipe_data *pipe_data);
 void	get_herdoc(t_pipe_data *pipe_data);
 char	*get_cmd(char *str);
-void	validate_cmd(char *cmd, char **cmd_path, char **exec_programs_dirs);
+void	validate_cmd(t_pipe_data *pipe_data, char	**execps_paths);
 int		validate_infile(char *infile_path);
-void	child_process(int i, int input_fd,
-			t_pipe_data *pipe_data, char *envp[]);
+void	child_process(int i, int input_fd, t_pipe_data *pipe_data);
 
 // ----------- Shared Functions ------------------
 
 void	free_str(char *str);
 void	free_arr(char **arr);
 int		validate_var_name(char *var);
-char	**ft_realloc(char **input, char *str);
+char	**ft_realloc(char **pipe_data, char *str);
 void	env_dup(char **env);
 int		get_var_index(char *var, int n);
 char	*get_next_line(int fd);

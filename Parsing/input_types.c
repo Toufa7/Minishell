@@ -6,44 +6,43 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:36:38 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/26 21:37:46 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/07/31 12:36:58 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	var_init(t_input *input)
+void	var_init(t_pipe_data *pipe_data)
 {
-	input->in_files = NULL;
-	input->out_files = NULL;
-	input->app_outfile = NULL;
-	input->delimiter = NULL;
-	input->command = NULL;
-	input->options = NULL;
-	input->env_var = NULL;
+	pipe_data->in_files = NULL;
+	pipe_data->out_files = NULL;
+	pipe_data->app_outfile = NULL;
+	pipe_data->delimiter = NULL;
+	pipe_data->command = NULL;
+	pipe_data->options = NULL;
 }
 
-void	input_types(t_parse *parse)
+t_pipe_data	*get_pipe_data(t_parse *parse)
 {
-	int	i;
+	t_pipe_data	*pipe_data;
+	int		i;
 
-	parse->input = malloc(sizeof(t_input));
-	var_init(parse->input);
+	pipe_data = malloc(sizeof(t_pipe_data));
+	var_init(pipe_data);
 	i = 0;
 	while (parse->tokens[i].token)
 	{
-		if (ft_strcmp(parse->tokens[i].type, "outfile") == 0)
-			parse->input->out_files = ft_realloc(parse->input->out_files, parse->tokens[i].token);
+		if (ft_strcmp(parse->tokens[i].type, "command") == 0)
+			pipe_data->command = parse->tokens[i].token;
+		else if (ft_strcmp(parse->tokens[i].type, "outfile") == 0)
+			pipe_data->out_files = ft_realloc(pipe_data->out_files, parse->tokens[i].token);
 		else if (ft_strcmp(parse->tokens[i].type, "delimiter") == 0)
-			parse->input->delimiter = ft_realloc(parse->input->delimiter, parse->tokens[i].token);
+			pipe_data->delimiter = ft_realloc(pipe_data->delimiter, parse->tokens[i].token);
 		else if (ft_strcmp(parse->tokens[i].type, "app_outfile") == 0)
-			parse->input->app_outfile = ft_realloc(parse->input->app_outfile, parse->tokens[i].token);
-		else if (ft_strcmp(parse->tokens[i].type, "command") == 0)
-			parse->input->command = ft_realloc(parse->input->command, parse->tokens[i].token);
-		else if (ft_strcmp(parse->tokens[i].type, "option") == 0)
-			parse->input->options = ft_realloc(parse->input->options, parse->tokens[i].token);
-		else if (ft_strcmp(parse->tokens[i].type, "env_var") == 0)
-			parse->input->env_var = ft_realloc(parse->input->env_var, parse->tokens[i].token);
+			pipe_data->app_outfile = ft_realloc(pipe_data->app_outfile, parse->tokens[i].token);
+		else if (ft_strcmp(parse->tokens[i].type, "option") == 0 || ft_strcmp(parse->tokens[i].type, "env_var") == 0)
+			pipe_data->options = ft_realloc(pipe_data->options, parse->tokens[i].token);
 		i++;
 	}
+	return pipe_data;
 }
