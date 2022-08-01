@@ -147,13 +147,17 @@ char	*get_env_variables(char *target)
 	return ("");
 }
 
-int main(int a, char **b, char **env)
-{
-	env_dup(env);
-	while (1)
-	{
-		char *s = readline("");
-		printf("%s\n", get_env_variables(s));
-		// system("leaks a.out");
-	}
-}
+// int main(int a, char **b, char **env)
+// {
+// 	env_dup(env);
+// 	while (1)
+// 	{
+// 		char *s = readline("");
+// 		printf("%s\n", get_env_variables(s));
+// 		// system("leaks a.out");
+// 	}
+// }
+
+
+
+

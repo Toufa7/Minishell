@@ -36,7 +36,10 @@ t_pipe_data	*get_pipe_data(t_parse *parse)
 	while (parse->tokens[i].token)
 	{
 		if (ft_strcmp(parse->tokens[i].type, "command") == 0)
+		{
 			pipe_data->command = parse->tokens[i].token;
+			pipe_data->options = ft_realloc(pipe_data->options, parse->tokens[i].token);
+		}
 		else if (ft_strcmp(parse->tokens[i].type, "outfile") == 0)
 			pipe_data->out_files = ft_realloc(pipe_data->out_files, parse->tokens[i].token);
 		else if (ft_strcmp(parse->tokens[i].type, "delimiter") == 0)
