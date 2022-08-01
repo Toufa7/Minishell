@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/01 12:54:24 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/01 16:03:41 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ int main(int ac, char **av, char **env)
 		// signal(SIGINT, control_c); // Ctrl+C
 		// signal(SIGQUIT, SIG_IGN); // Ctrl + Backslash
 		parse->line = readline(GREEN "Mini-0.0$ " RESET);
-		if (!parse->line || ft_strcmp(parse->line, "exit") == 0) // Ctrl + D 
-			exit(0);
+		// if (!parse->line || ft_strcmp(parse->line, "exit") == 0) // Ctrl + D 
+		// 	exit(0);
 		parse->line_double_quotes = handling_quotes(parse->line);
 		add_history(parse->line_double_quotes);
 		parse->formated_input = input_formating(parse->line_double_quotes);
@@ -68,7 +68,6 @@ int main(int ac, char **av, char **env)
 			i++;
 		parse->pipe_data = ft_calloc(i + 1, sizeof(t_pipe_data *));
 		i = -1;
-		///////////////////////////////////////////////////////
 		while (parse->splt_pipes[++i])
 		{
 			parse->tokens = spliting_with_spaces(parse->splt_pipes[i]);

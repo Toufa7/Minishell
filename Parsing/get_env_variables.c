@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:32:28 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/01 12:27:43 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/01 15:42:36 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ char	*string_formating(char *str)
 			string [++j] = str[i];
 	}
 	string[j + 1] = '\0';
-	printf("Formated String -> %s\n", string);
 	free(str);
 	return (string);
 }
@@ -131,14 +130,12 @@ char	*get_env_variables(char *target)
 				i++;
 		}
 		target = ft_strjoin(valid_input(splt[i]), "=");
-		printf("Target -> %s\n",target);
 		j = -1;
 		while (global_data.envp[++j])
 		{
 			if (ft_strncmp(target, global_data.envp[j], ft_strlen(target)) == 0)
 			{
-				// return (ft_strdup(global_data.envp[j] + ft_strlen(target)));
-				printf("%s\n", global_data.envp[j] + ft_strlen(target));
+				return (global_data.envp[j] + ft_strlen(target));
 				break ;
 			}
 		}
