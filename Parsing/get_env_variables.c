@@ -95,10 +95,11 @@ char	*valid_input(char *str)
 	i = 0;
 	j = 0;
 	var = malloc(sizeof(char) * ft_strlen(str - (ft_strlen(str) - untill_this(str))) + 1);
-	while (str[i] && j < untill_this(str) - 1)
+	while (str[i] && j < untill_this(str))
 	{
-		while (str[i] == '$')
+		while (str[i] == '$'){
 			i++;
+		}
 		var[j] = str[i];
 		j++;
 		i++;
@@ -108,7 +109,7 @@ char	*valid_input(char *str)
 	return (var);
 }
 
-void	get_env_variables(char *target)
+char	*get_env_variables(char *target)
 {
 	int		i;
 	int		j;
@@ -132,22 +133,22 @@ void	get_env_variables(char *target)
 		{
 			if (ft_strncmp(target, genv[j], ft_strlen(target)) == 0)
 			{
-				ft_putstr_fd(genv[j] + ft_strlen(target), 1);
+				return (genv[j] + ft_strlen(target));
 				printf("\n");
 				break ;
 			}
 		}
-		free_str(target);
+		// free_str(target);
 	}
-	return ;
+	return ("");
 }
 
-int main(int a, char **b, char **env)
-{
-	env_dup(env);
-	while (1)
-	{
-		char *s = get_next_line(0);
-		get_env_variables(s);
-	}
-}
+// int main(int a, char **b, char **env)
+// {
+// 	env_dup(env);
+// 	while (1)
+// 	{
+// 		char *s = readline("");
+// 		get_env_variables(s);
+// 	}
+// }

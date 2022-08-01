@@ -38,9 +38,9 @@ void	control_c(int sig)
 	if (sig == SIGINT)
 	{
 		printf("\n");
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
+		// rl_on_new_line();
+		// rl_replace_line("", 0);
+		// rl_redisplay();
 	}
 }
 
@@ -75,13 +75,8 @@ int main(int ac, char **av, char **env)
 			input_analyse(parse->tokens);
 			initializer(parse->tokens);
 			parse->pipe_data[i] = get_pipe_data(parse);
-			int j = -1;
-			while (parse->tokens[++j].token)
-			{
-				get_env_variables(parse->tokens[j].token);
-			}
 		}
-		// mecho(parse->pipe_data[0]->options);
+		mecho(parse->pipe_data[0]->options);
 		// i = -1;
 		// while (parse->pipe_data[++i])
 		// {
