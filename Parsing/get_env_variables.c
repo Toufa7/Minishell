@@ -157,4 +157,3 @@ char	*get_env_variables(char *target)
 
 
 
-

@@ -106,7 +106,7 @@ void	pipe_files_prep(t_pipe_data *pipe_data)
 
 void	exec_cmd(t_pipe_data *pipe_data)
 {
-	printf("---> %s\n", pipe_data->in_files[0]);
+	// printf("---> %s\n", pipe_data->in_files[0]);
 	if (execve(pipe_data->cmd_path, pipe_data->options, global_data.envp) == -1)
 	{
 		ft_putstr_fd(strerror(errno), 2);
