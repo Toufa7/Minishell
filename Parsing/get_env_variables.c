@@ -82,6 +82,7 @@ char	*string_formating(char *str)
 			string [++j] = str[i];
 	}
 	string[j + 1] = '\0';
+	printf("Formated String -> %s\n", string);
 	free(str);
 	return (string);
 }
@@ -130,12 +131,14 @@ char	*get_env_variables(char *target)
 				i++;
 		}
 		target = ft_strjoin(valid_input(splt[i]), "=");
+		printf("Target -> %s\n",target);
 		j = -1;
 		while (global_data.envp[++j])
 		{
 			if (ft_strncmp(target, global_data.envp[j], ft_strlen(target)) == 0)
 			{
-				return (global_data.envp[j] + ft_strlen(target));
+				// return (ft_strdup(global_data.envp[j] + ft_strlen(target)));
+				printf("%s\n", global_data.envp[j] + ft_strlen(target));
 				break ;
 			}
 		}
@@ -144,13 +147,13 @@ char	*get_env_variables(char *target)
 	return ("");
 }
 
-// int main(int a, char **b, char **env)
-// {
-// 	env_dup(env);
-// 	while (1)
-// 	{
-// 		char *s = get_next_line(0);
-// 		printf("%s", get_env_variables(s));
-// 		// system("leaks a.out");
-// 	}
-// }
+int main(int a, char **b, char **env)
+{
+	env_dup(env);
+	while (1)
+	{
+		char *s = readline("");
+		printf("%s\n", get_env_variables(s));
+		// system("leaks a.out");
+	}
+}
