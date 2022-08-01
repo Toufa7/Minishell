@@ -29,21 +29,3 @@ void	get_herdoc(t_pipe_data *pipe_data)
 	}
 }
 
-char	*get_cmd(char *str)
-{
-	char	*cmd;
-	int		i;
-	int		j;
-
-	i = 0;
-	while (str[i] && str[i] != ' ')
-		i++;
-	cmd = malloc(sizeof(char) * i + 1);
-	if (!cmd)
-		return (NULL);
-	j = -1;
-	while (++j < i)
-		cmd[j] = str[j];
-	cmd[j] = 0;
-	return (cmd);
-}

@@ -31,6 +31,8 @@ C_FILES = 	minishell.c \
 			Utils/ft_realloc.c \
 			Utils/ft_isalpha.c \
 			Utils/ft_isdigit.c \
+			Utils/gnl.c \
+			Utils/ft_strnstr.c \
 			Parsing/get_env_variables.c \
 			Parsing/input_formating.c \
 			Parsing/spliting_with_spaces.c \
@@ -46,6 +48,9 @@ C_FILES = 	minishell.c \
 			Builtins/mexport.c \
 			Builtins/mpwd.c \
 			Builtins/munset.c \
+			Execution/pipex.c \
+			Execution/input_validation_funcs.c \
+			Execution/helper_funcs.c \
 
 all: $(NAME)
 
