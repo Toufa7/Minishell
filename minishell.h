@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/01 12:08:09 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/01 12:42:31 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,9 +118,8 @@ void	munset(char **argv);
 void	mexport(char **argv);
 void	execution(t_pipe_data **pipe_data);
 void	get_herdoc(t_pipe_data *pipe_data);
-char	*get_cmd(char *str);
+char	*get_cmd_path(char *cmd, char **exec_programs_dirs);
 int		validate_infile(char *infile_path);
-void	child_process(int i, int input_fd, t_pipe_data *pipe_data);
 
 // ----------- Shared Functions ------------------
 

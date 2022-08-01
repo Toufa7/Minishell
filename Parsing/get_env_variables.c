@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:32:28 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/01 12:25:08 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/01 12:27:43 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ char	*get_env_variables(char *target)
 				break ;
 			}
 		}
-		// free_str(target);
+		free_str(target);
 	}
 	return ("");
 }

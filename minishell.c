@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/01 12:20:36 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/01 12:54:24 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int main(int ac, char **av, char **env)
 	t_parse *parse;
 
 	parse = malloc(sizeof(t_parse));
-	//global_data = malloc(sizeof(t_global_data));
 	env_dup(env);
 	while (TRUE)
 	{
@@ -77,11 +76,6 @@ int main(int ac, char **av, char **env)
 			initializer(parse->tokens);
 			parse->pipe_data[i] = get_pipe_data(parse);
 		}
-		mecho(parse->pipe_data[0]->options);
-		// i = -1;
-		// while (parse->pipe_data[++i])
-		// {
-		// 	int j = -1;
-		// 	printf("cmd: %s\n", parse->pipe_data[i]->command);
+		execution(parse->pipe_data);
 	}
 }
