@@ -97,7 +97,7 @@ typedef struct s_parse
 // ----------- Parsing --------------------------
 
 char		**pipes(char	*str);
-char		*handling_quotes(char *str);
+char	*handling_quotes(char *str, char replaced, char replace_by);
 char		*input_formating(char	*str);
 char		*getting_back_original_input(char *str);
 char	*get_env_variables(char *target);

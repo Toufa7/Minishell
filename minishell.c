@@ -44,6 +44,15 @@ void	control_c(int sig)
 	}
 }
 
+void	getting_back(char **str)
+{
+	int i = -1;
+	while (str[++i])
+	{
+		str[i] = handling_quotes(str[i], -1, ' ');
+	}
+}
+
 int main(int ac, char **av, char **env)
 {
 	(void) ac;
@@ -59,10 +68,11 @@ int main(int ac, char **av, char **env)
 		parse->line = readline(GREEN "Mini-0.0$ " RESET);
 		if (!parse->line || ft_strcmp(parse->line, "exit") == 0) // Ctrl + D 
 			exit(0);
-		parse->line_double_quotes = handling_quotes(parse->line);
+		parse->line_double_quotes = handling_quotes(parse->line, ' ', -1);
 		add_history(parse->line_double_quotes);
 		parse->formated_input = input_formating(parse->line_double_quotes);
 		parse->splt_pipes = ft_split(parse->formated_input, '|');
+		getting_back(parse->splt_pipes);
 		int i = 0;
 		while (parse->splt_pipes[i])
 			i++;

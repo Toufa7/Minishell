@@ -28,120 +28,44 @@ int	untill_this(char *var)
 	return (i);
 }
 
-char	*string_formating(char *str)
+char	*until_dollar(char *str, int start)
 {
-	int		i;
-	int		j;
-	int		quotes;
-	int		dollar;
-	int		pipe;
-	char	*string;
+	int i = start;
 
-	i = -1;
-	j = -1;
-	quotes = 0;
-	dollar = 0;
-	pipe = 0;
-	while (str[++i])
-	{
-		if (str[i] == '"')
-			quotes++;	
-		else if (str[i] == '$')
-			dollar++;
-		else if (str[i] == '|')
-			pipe++;
-	}
-	string = malloc(sizeof(char) * ft_strlen(str) + (quotes * 2) + dollar + pipe + 1);
-	if (!string)
-		return (NULL);
-	i = -1;
-	while (str[++i])
-	{
-		if (str[i] == '"' && i != 0)
-		{
-			string[++j] = ' ';
-			string[++j] = str[i];
-			string[++j] = ' ';
-		}
-		else if ((str[i] == '$' && i != 0) || str[i] == '|')
-		{
-			string[++j] = ' ';
-			string[++j] = str[i];
-		}
-		else if (str[i] == sing_quotes)
-		{
-			string[++j] = str[i++];
-			while (str[i] != sing_quotes)
-			{
-				string[++j] = str[i];
-				i++;
-			}
-			string[++j] = str[i];
-		}
-		else
-			string [++j] = str[i];
-	}
-	string[j + 1] = '\0';
-	free(str);
-	return (string);
-}
-
-char	*valid_input(char *str)
-{
-	int		i;
-	int		j;
-	char	*var;
-
-	i = 0;
-	j = 0;
-	if (!str)
-		return ("");
-	var = malloc(sizeof(char) * ft_strlen(str - (ft_strlen(str) - untill_this(str))) + 1);
-	while (str[i] && j < untill_this(str))
-	{
-		while (str[i] == '$'){
-			i++;
-		}
-		var[j] = str[i];
-		j++;
+	while (str[i] && str[i] != '$')
 		i++;
-	}
-	var[j] = '\0';
-	free(str);
-	return (var);
+	return (ft_substr(str, start, i));
 }
 
 char	*get_env_variables(char *target)
 {
-	int		i;
 	int		j;
-	int		k;
-	char	**splt;
+	char	*test = "";
+	char	*tmp;
 
-	i = -1;
-	k = 0;
-	splt = ft_split(string_formating(target), ' ');
-	while (splt[++i])
+	j = 0;
+	while (target[j])
 	{
-		while (splt[i][k] == '"')
+		if (target[j] == '$')
 		{
-			k++;
-			if ((size_t)k == ft_strlen(splt[i]))
-				i++;
+			tmp = ft_substr(target , j + 1, untill_this(target) - 1);
+			test = ft_strjoin(test, getenv(tmp));
+			printf("Test -> %s\n",test);
+			j += untill_this(target + j) - 1;
+			printf("j through ->%d\n",j);
 		}
-		target = ft_strjoin(valid_input(splt[i]), "=");
-		j = -1;
-		while (global_data.envp[++j])
+		else
 		{
-			if (ft_strncmp(target, global_data.envp[j], ft_strlen(target)) == 0)
-			{
-				return (global_data.envp[j] + ft_strlen(target));
-				break ;
-			}
+			tmp = until_dollar(target, j);
+			printf("%s\n", tmp);
+
+			j += ft_strlen(tmp);
+			printf("j -> %d\n",j);
+			test = ft_strjoin(test, tmp);
 		}
-		free_str(target);
 	}
-	return ("");
+	// free_str(target);
+	return test;
 }
 
 // int main(int a, char **b, char **env)
@@ -151,9 +75,8 @@ char	*get_env_variables(char *target)
 // 	{
 // 		char *s = readline("");
 // 		printf("%s\n", get_env_variables(s));
-// 		// system("leaks a.out");
+
 // 	}
 // }
 
-
-
+// e
