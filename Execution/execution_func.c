@@ -41,23 +41,23 @@
 // 	dup2(input_fd, 0);
 // }
 
-void	exec_cmd(char *cmd, char *cmd_path, char **envp)
-{
-	char	**argv;
+// void	exec_cmd(char *cmd, char *cmd_path, char **envp)
+// {
+// 	char	**argv;
 
-	argv = NULL;
-	if (ft_strchr(cmd, '\''))
-		argv = ft_split(cmd, '\'');
-	else
-		argv = ft_split(cmd, ' ');
-	if (!cmd_path)
-		exit(errno);
-	else if (execve(cmd_path, argv, envp) == -1)
-	{
-		ft_putstr_fd(strerror(errno), 2);
-		exit(errno);
-	}
-}
+// 	argv = NULL;
+// 	if (ft_strchr(cmd, '\''))
+// 		argv = ft_split(cmd, '\'');
+// 	else
+// 		argv = ft_split(cmd, ' ');
+// 	if (!cmd_path)
+// 		exit(errno);
+// 	else if (execve(cmd_path, argv, envp) == -1)
+// 	{
+// 		ft_putstr_fd(strerror(errno), 2);
+// 		exit(errno);
+// 	}
+// }
 
 // void	child_process(int i, int input_fd, t_pipe_data *pipe_data, t_pipe_data *pipe_data)
 // {

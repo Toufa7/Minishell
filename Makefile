@@ -50,7 +50,6 @@ C_FILES = 	minishell.c \
 			Builtins/munset.c \
 			Execution/pipex.c \
 			Execution/input_validation_funcs.c \
-			Execution/helper_funcs.c \
 
 all: $(NAME)
 

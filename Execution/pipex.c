@@ -1,5 +1,42 @@
 #include "../minishell.h"
 
+void ft_close(int n, int s)
+{
+	(void) s;
+	//printf("---> n: %i | s: %i\n", n, s);
+	if (n > 2)
+		close(n);
+}
+
+void	get_herdoc(t_pipe_data *pipe_data)
+{
+	char	*line;
+	int		j;
+
+	j = -1;
+	while (pipe_data->delimiter[++j])
+	{
+		if (j > 0)
+		{
+			ft_close(global_data.here_doc_pipe_fds[1], 4);
+			ft_close(global_data.here_doc_pipe_fds[0], 4);
+		}
+		pipe(global_data.here_doc_pipe_fds);
+		line = get_next_line(0);
+		while (line == NULL || ft_strcmp(line, pipe_data->delimiter[j]))
+		{
+			if (line)
+			{
+				write(global_data.here_doc_pipe_fds[1], line, ft_strlen(line));
+				write(global_data.here_doc_pipe_fds[1], "\n", 1);
+				free_str(line);
+			}
+			line = get_next_line(0);
+		}
+		free_str(line);
+	}
+}
+
 void	validate_cmd(t_pipe_data *pipe_data)
 {
 	int		i;
@@ -44,7 +81,7 @@ void	pipe_files_prep(t_pipe_data *pipe_data)
 			fd = open(pipe_data->in_files[i], O_RDONLY);
 			pipe_data->in_fd_set = TRUE;
 			dup2(fd, 0);
-			close(fd);
+			ft_close(fd, 8);
 		}
 	}
 	i = -1;
@@ -54,7 +91,7 @@ void	pipe_files_prep(t_pipe_data *pipe_data)
 					O_CREAT | O_WRONLY | O_APPEND, 0777);
 		dup2(fd, 1);
 		pipe_data->out_fd_set = TRUE;
-		close(fd);
+		ft_close(fd, 9);
 	}
 	i = -1;
 	while (pipe_data->out_files && pipe_data->out_files[++i])
@@ -63,7 +100,7 @@ void	pipe_files_prep(t_pipe_data *pipe_data)
 					O_CREAT | O_WRONLY | O_TRUNC, 0777);
 		dup2(fd, 1);
 		pipe_data->out_fd_set = TRUE;
-		close(fd);
+		ft_close(fd, 10);
 	}
 }
 
@@ -80,33 +117,32 @@ void	exec_pipe(t_pipe_data *pipe_data, bool is_last)
 {
 	validate_cmd(pipe_data);
 	if (!pipe_data->cmd_path)
-		exit(errno);
+		return ;
 	if (!is_last)
 		pipe(global_data.cmd_pipe_fds);
 	if (fork() == 0)
 	{
 		pipe_files_prep(pipe_data);
 		if (pipe_data->is_herdoc)
-			get_herdoc(pipe_data);
-		if (pipe_data->is_herdoc)
 		{
+			get_herdoc(pipe_data);
 			dup2(global_data.here_doc_pipe_fds[0], 0);
-			close(global_data.here_doc_pipe_fds[1]);
-			close(global_data.here_doc_pipe_fds[0]);
+			ft_close(global_data.here_doc_pipe_fds[1], 7);
+			ft_close(global_data.here_doc_pipe_fds[0], 6);
 		}
 		else if (!pipe_data->in_fd_set && global_data.pre_pipe_infd != -1)
 			dup2(global_data.pre_pipe_infd, 0);
 		if (!is_last && !pipe_data->out_fd_set)
 			dup2(global_data.cmd_pipe_fds[1], 1);
-		close(global_data.cmd_pipe_fds[1]);
-		close(global_data.cmd_pipe_fds[0]);
+		ft_close(global_data.cmd_pipe_fds[1], 5);
+		ft_close(global_data.cmd_pipe_fds[0], 4);
 		if (global_data.pre_pipe_infd != -1)
-			close(global_data.pre_pipe_infd);
+			ft_close(global_data.pre_pipe_infd, 3);
 		exec_cmd(pipe_data);
 	}
-	close(global_data.cmd_pipe_fds[1]);
+	ft_close(global_data.cmd_pipe_fds[1], 5);
 	if (global_data.pre_pipe_infd != -1)
-			close(global_data.pre_pipe_infd);
+			ft_close(global_data.pre_pipe_infd, 2);
 	global_data.pre_pipe_infd = global_data.cmd_pipe_fds[0];
 }
 
@@ -125,7 +161,7 @@ void	execution(t_pipe_data **pipes_data)
 		if (!pipes_data[i]->is_herdoc)
 			exec_pipe(pipes_data[i], !pipes_data[i + 1]);
 	if (global_data.pre_pipe_infd != -1)
-		close(global_data.pre_pipe_infd);
+		ft_close(global_data.pre_pipe_infd, 1);
 	i = -1;
 	while (pipes_data[++i])
 		wait(NULL);
