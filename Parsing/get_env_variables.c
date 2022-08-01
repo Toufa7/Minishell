@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:32:28 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/26 17:43:53 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/01 12:17:54 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ char	*valid_input(char *str)
 
 	i = 0;
 	j = 0;
+	if (!str)
+		return ("");
 	var = malloc(sizeof(char) * ft_strlen(str - (ft_strlen(str) - untill_this(str))) + 1);
 	while (str[i] && j < untill_this(str) - 1)
 	{
@@ -128,15 +130,15 @@ char	*get_env_variables(char *target)
 		}
 		target = ft_strjoin(valid_input(splt[i]), "=");
 		j = -1;
-		while (genv[++j])
+		while (global_data.envp[++j])
 		{
-			if (ft_strncmp(target, genv[j], ft_strlen(target)) == 0)
+			if (ft_strncmp(target, global_data.envp[j], ft_strlen(target)) == 0)
 			{
-				printf("	->	%s\n",(genv[j] + ft_strlen(target)));
+				return (ft_strdup(global_data.envp[j] + ft_strlen(target)));
 				break ;
 			}
 		}
-		free_str(target);
+		// free_str(target);
 	}
 	return ("");
 }
@@ -148,6 +150,6 @@ char	*get_env_variables(char *target)
 // 	{
 // 		char *s = get_next_line(0);
 // 		printf("%s", get_env_variables(s));
-// 		system("leaks a.out");
+// 		// system("leaks a.out");
 // 	}
 // }

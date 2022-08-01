@@ -1,4 +1,4 @@
-#include "../../minishell.h"
+#include "../minishell.h"
 
 void	setup_outfile(t_pipe_data *pipe_data)
 {

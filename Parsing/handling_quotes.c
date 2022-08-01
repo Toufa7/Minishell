@@ -30,9 +30,9 @@ void	checking_quotes(char *str)
 	{
 		printf("Unclosed Doubles Quotes\n");
 		printf("\n");
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
+		// rl_on_new_line();
+		// rl_replace_line("", 0);
+		// rl_redisplay();
 	}
 	else if (counting_quotes(str, 'S') % 2 != 0)
 	{

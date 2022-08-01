@@ -4,7 +4,7 @@ C_FLAGS = gcc -Wall -Werror -Wextra -lreadline
 
 C_READLINE_POMS = -L /goinfre/otoufah/otoufah/.brew/opt/readline/lib -I /goinfre/otoufah/otoufah/.brew/opt/readline/include
 
-C_READLINE = -L /goinfre/abouchfa/.brew/opt/readline/lib -I /goinfre/abouchfa/.brew/opt/readline/include
+C_READLINE_ABOU = -L /goinfre/abouchfa/.brew/opt/readline/lib -I /goinfre/abouchfa/.brew/opt/readline/include
 
 ADDI_FLAGS = -fsanitize=address -g
 
@@ -39,18 +39,18 @@ C_FILES = 	minishell.c \
 			Parsing/input_types.c \
 			Parsing/handling_quotes.c \
 			Parsing/stop_executing.c \
-			Execution/Builtins/mcd.c \
-			Execution/Builtins/mecho.c \
-			Execution/Builtins/menv.c \
-			Execution/Builtins/mexit.c \
-			Execution/Builtins/mexport.c \
-			Execution/Builtins/mpwd.c \
-			Execution/Builtins/munset.c \
+			Builtins/mcd.c \
+			Builtins/mecho.c \
+			Builtins/menv.c \
+			Builtins/mexit.c \
+			Builtins/mexport.c \
+			Builtins/mpwd.c \
+			Builtins/munset.c \
 
 all: $(NAME)
 
 $(NAME): $(C_FILES)
-		$(C_FLAGS) $(ADDI_FLAGS) $(C_READLINE_POMS) $(C_FILES) -o $(NAME) 
+		$(C_FLAGS) $(ADDI_FLAGS) $(C_FILES) -o $(NAME) 
 
 clean:
 	rm -rf $(NAME)

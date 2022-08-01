@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/31 14:49:24 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/01 12:20:36 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ void	control_c(int sig)
 	if (sig == SIGINT)
 	{
 		printf("\n");
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
+		// rl_on_new_line();
+		// rl_replace_line("", 0);
+		// rl_redisplay();
 	}
 }
 
@@ -51,6 +51,7 @@ int main(int ac, char **av, char **env)
 	t_parse *parse;
 
 	parse = malloc(sizeof(t_parse));
+	//global_data = malloc(sizeof(t_global_data));
 	env_dup(env);
 	while (TRUE)
 	{
@@ -74,12 +75,6 @@ int main(int ac, char **av, char **env)
 			input_analyse(parse->tokens);
 			initializer(parse->tokens);
 			parse->pipe_data[i] = get_pipe_data(parse);
-			int j = -1;
-			while (parse->tokens[++j].token)
-			{
-				printf("0----- > %s\n", get_env_variables(parse->tokens[j].token));
-			}
-			printf("%zu\n",parse->tokens->delimiter);
 		}
 		mecho(parse->pipe_data[0]->options);
 		// i = -1;

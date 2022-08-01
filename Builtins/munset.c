@@ -1,4 +1,4 @@
-#include "../../minishell.h"
+#include "../minishell.h"
 
 void	munset(char **argv)
 {
@@ -23,18 +23,18 @@ void	munset(char **argv)
 		if (!argv[i][j] && var_index != -1)
 		{
 			j = 0;
-			tmp = genv;
-			while (genv[j])	
+			tmp = global_data.envp;
+			while (global_data.envp[j])	
 				j++;
-			genv = malloc((sizeof(char *) * j));
+			global_data.envp = malloc((sizeof(char *) * j));
 			j = -1;
 			k = 0;
 			while (tmp[++j])
 			{
 				if (var_index != j)
-					genv[k++] = ft_strdup(tmp[j]);
+					global_data.envp[k++] = ft_strdup(tmp[j]);
 			}
-			genv[k] = NULL;
+			global_data.envp[k] = NULL;
 		}
 	}
 	free_arr(tmp);

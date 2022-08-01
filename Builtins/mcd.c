@@ -1,4 +1,4 @@
-#include "../../minishell.h"
+#include "../minishell.h"
 
 void    mcd(char *path)
 {
@@ -11,11 +11,11 @@ void    mcd(char *path)
 		i = get_var_index("OLDPWD=", 7);
 		if (i != -1)
 		{
-			free(genv[i]);
-			genv[i] = ft_strjoin("OLDPWD=", buff);
+			free(global_data.envp[i]);
+			global_data.envp[i] = ft_strjoin("OLDPWD=", buff);
 		}
 		else
-			genv = ft_realloc(genv,ft_strjoin("OLDPWD=", buff));
+			global_data.envp = ft_realloc(global_data.envp,ft_strjoin("OLDPWD=", buff));
 	}
     if (chdir(path) != 0)
 		ft_putstr_fd(strerror(errno), 2);
@@ -24,10 +24,10 @@ void    mcd(char *path)
 		i = get_var_index("PWD=", 4);
 		if (i != -1)
 		{
-			free(genv[i]);
-			genv[i] = ft_strjoin("PWD=", buff);
+			free(global_data.envp[i]);
+			global_data.envp[i] = ft_strjoin("PWD=", buff);
 		}
 		else
-			genv = ft_realloc(genv,ft_strjoin("PWD=", buff));
+			global_data.envp = ft_realloc(global_data.envp,ft_strjoin("PWD=", buff));
 	}
 }

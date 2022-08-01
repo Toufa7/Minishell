@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/31 15:00:03 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/01 12:08:09 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ typedef int bool;
 # define TRUE 1 
 # define FALSE 0
 
-char	**genv;
 
 typedef struct s_tokens
 {
@@ -61,6 +60,14 @@ typedef struct s_tokens
 	size_t	env_var;
 }	t_tokens;
 
+typedef struct s_global_data
+{
+	char	**envp;
+	int		cmd_pipe_fds[2];
+	int		here_doc_pipe_fds[2];
+	int		pre_pipe_infd;
+}	t_global_data;
+
 typedef struct s_pipe_data
 {
 	char	*command;
@@ -70,9 +77,10 @@ typedef struct s_pipe_data
 	char	**out_files;
 	char	**app_outfile;
 	char	**options;
-	int		cmd_pipe_fds[2];
-	int		here_doc_pipe_fds[2];
 	int		parse_error;
+	bool	out_fd_set;
+	bool	in_fd_set;
+	bool	is_herdoc;
 }	t_pipe_data;
 
 typedef struct s_parse
@@ -108,10 +116,9 @@ void    mecho(char **argv);
 void    mexit(char **argv);
 void	munset(char **argv);
 void	mexport(char **argv);
-void	execution(t_pipe_data *pipe_data);
-void	get_herdoc(t_pipe_data *pipe_data, char *lim);
+void	execution(t_pipe_data **pipe_data);
+void	get_herdoc(t_pipe_data *pipe_data);
 char	*get_cmd(char *str);
-void	validate_cmd(t_pipe_data *pipe_data, char	**execps_paths);
 int		validate_infile(char *infile_path);
 void	child_process(int i, int input_fd, t_pipe_data *pipe_data);
 
@@ -142,6 +149,9 @@ int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 void	free_str(char *str);
 void	free_arr(char **arr);
+
+
+t_global_data global_data;
 
 #endif
 

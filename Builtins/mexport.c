@@ -1,4 +1,4 @@
-#include "../../minishell.h"
+#include "../minishell.h"
 
 char	*get_key(char *str)
 {
@@ -72,7 +72,7 @@ void	create_final_var(int op_type, char *key, char *new_val)
 	var_index = get_var_index(key, ft_strlen(key));
 	if (var_index != -1 && op_type == 1)
 	{
-		old_val = get_val(genv[var_index], TRUE);
+		old_val = get_val(global_data.envp[var_index], TRUE);
 		final_val = ft_strjoin(old_val, new_val);
 		free_str(old_val);
 	}
@@ -84,11 +84,11 @@ void	create_final_var(int op_type, char *key, char *new_val)
 		final_var = ft_strdup(key);
 	if (var_index != -1)
 	{
-		free_str(genv[var_index]);
-		genv[var_index] = final_var;
+		free_str(global_data.envp[var_index]);
+		global_data.envp[var_index] = final_var;
 	}
 	else
-		genv = ft_realloc(genv, final_var);
+		global_data.envp = ft_realloc(global_data.envp, final_var);
 	if (var_index != -1 && op_type == 1)
 		free_str(final_val);
 }
