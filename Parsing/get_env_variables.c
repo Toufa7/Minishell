@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:32:28 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/01 12:17:54 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/01 12:25:08 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,11 @@ char	*valid_input(char *str)
 	if (!str)
 		return ("");
 	var = malloc(sizeof(char) * ft_strlen(str - (ft_strlen(str) - untill_this(str))) + 1);
-	while (str[i] && j < untill_this(str) - 1)
+	while (str[i] && j < untill_this(str))
 	{
-		while (str[i] == '$')
+		while (str[i] == '$'){
 			i++;
+		}
 		var[j] = str[i];
 		j++;
 		i++;
@@ -134,7 +135,7 @@ char	*get_env_variables(char *target)
 		{
 			if (ft_strncmp(target, global_data.envp[j], ft_strlen(target)) == 0)
 			{
-				return (ft_strdup(global_data.envp[j] + ft_strlen(target)));
+				return (global_data.envp[j] + ft_strlen(target));
 				break ;
 			}
 		}

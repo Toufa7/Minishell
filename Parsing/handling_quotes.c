@@ -28,7 +28,7 @@ void	checking_quotes(char *str)
 {
 	if (counting_quotes(str, 'D') % 2 != 0)
 	{
-		printf("Unclosed Doubles Quotes\n");
+		printf("Unclosed Doubles Quotes");
 		printf("\n");
 		// rl_on_new_line();
 		// rl_replace_line("", 0);
@@ -36,8 +36,11 @@ void	checking_quotes(char *str)
 	}
 	else if (counting_quotes(str, 'S') % 2 != 0)
 	{
-		printf("Unclosed Singles Quotes\n");
-		exit(EXIT_FAILURE);
+		printf("Unclosed Singles Quotes");
+		printf("\n");
+		// rl_on_new_line();
+		// rl_replace_line("", 0);
+		// rl_redisplay();
 	}
 }
 
@@ -86,7 +89,7 @@ char	*getting_back_original_input(char *str)
 	int		j;
 	char	*dup;
 
-	dup = malloc(sizeof(char) * (ft_strlen(str) + 1));
+	dup = malloc(sizeof(char) * (ft_strlen(str) + 646));
 	if (!dup)
 		return (NULL);
 	i = -1;
@@ -120,6 +123,6 @@ char	*getting_back_original_input(char *str)
 // {
 // 	while (1)
 // 	{
-// 		printf("%s\n",handling_quotes(readline("")));
+// 		printf("%s\n", handling_quotes(readline("")));
 // 	}
 // }

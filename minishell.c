@@ -69,6 +69,7 @@ int main(int ac, char **av, char **env)
 			i++;
 		parse->pipe_data = ft_calloc(i + 1, sizeof(t_pipe_data *));
 		i = -1;
+		///////////////////////////////////////////////////////
 		while (parse->splt_pipes[++i])
 		{
 			parse->tokens = spliting_with_spaces(parse->splt_pipes[i]);
