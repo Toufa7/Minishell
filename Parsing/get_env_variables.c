@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:32:28 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/01 15:42:36 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/02 12:46:03 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,17 @@ char	*get_env_variables(char *target)
 		{
 			tmp = ft_substr(target , j + 1, untill_this(target) - 1);
 			test = ft_strjoin(test, getenv(tmp));
-			printf("Test -> %s\n",test);
+			//printf("Test -> %s\n",test);
 			j += untill_this(target + j) - 1;
-			printf("j through ->%d\n",j);
+			//printf("j through ->%d\n",j);
 		}
 		else
 		{
 			tmp = until_dollar(target, j);
-			printf("%s\n", tmp);
+			//printf("%s\n", tmp);
 
 			j += ft_strlen(tmp);
-			printf("j -> %d\n",j);
+			//printf("j -> %d\n",j);
 			test = ft_strjoin(test, tmp);
 		}
 	}

@@ -48,7 +48,7 @@ C_FILES = 	minishell.c \
 			Builtins/mexport.c \
 			Builtins/mpwd.c \
 			Builtins/munset.c \
-			Execution/pipex.c \
+			Execution/execution.c \
 			Execution/input_validation_funcs.c \
 
 all: $(NAME)
