@@ -39,7 +39,7 @@ char	*get_cmd_path(char *cmd, char **exec_programs_dirs)
 	status = 1;
 	cmd_path = NULL;
 	temp = NULL;
-	while (exec_programs_dirs[++i] && cmd[0] && status)
+	while (exec_programs_dirs[++i] && cmd && cmd[0] && status)
 	{
 		free_str(cmd_path);
 		temp = ft_strjoin(exec_programs_dirs[i], "/");
