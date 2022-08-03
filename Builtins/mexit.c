@@ -21,14 +21,14 @@ void mexit(char **argv)
 		i++;
 	if (!isarg_digit)
 	{
-		ft_putstr_fd("exit: ", 2);
+		ft_putstr_fd("exit\nexit: ", 2);
 		ft_putstr_fd(argv[0], 2);
 		ft_putstr_fd(": numeric argument required\n", 2);
 		exit(255);
 	}
 	else if (i > 1)
 	{
-		ft_putstr_fd("exit: too many arguments\n", 2);
+		ft_putstr_fd("exit\nexit: too many arguments\n", 2);
 		return;
 	}
 	else

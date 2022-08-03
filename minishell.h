@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/03 12:40:59 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/03 12:42:11 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ typedef struct s_pipe_data
 	char	**delimiter;
 	char	**out_files;
 	char	**app_outfile;
-	char	**options;
+	char	**argv;
 	int		parse_error;
 	bool	out_fd_set;
 	bool	in_fd_set;

@@ -107,7 +107,7 @@ void	pipe_files_prep(t_pipe_data *pipe_data)
 void	exec_cmd(t_pipe_data *pipe_data)
 {
 	//printf("---> %s\n", pipe_data->command);
-	if (execve(pipe_data->cmd_path, pipe_data->options, global_data.envp) == -1)
+	if (execve(pipe_data->cmd_path, pipe_data->argv, global_data.envp) == -1)
 	{
 		ft_putstr_fd(strerror(errno), 2);
 		exit(errno);
@@ -116,20 +116,21 @@ void	exec_cmd(t_pipe_data *pipe_data)
 
 bool	check_builtin(t_pipe_data *pipe_data)
 {
+	//printf("cmd: %s\n", pipe_data->command);
 	if (!ft_strcmp("cd", pipe_data->command))
-		mcd(*(pipe_data->options + 1));
+		mcd(*(pipe_data->argv + 1));
 	else if (!ft_strcmp("echo", pipe_data->command))
-		mecho(pipe_data->options + 1);
+		mecho(pipe_data->argv + 1);
 	else if (!ft_strcmp("env", pipe_data->command))
-		menv(pipe_data->options + 1);
+		menv(pipe_data->argv + 1);
 	else if (!ft_strcmp("exit", pipe_data->command))
-		mexit(pipe_data->options + 1);
+		mexit(pipe_data->argv + 1);
 	else if (!ft_strcmp("export", pipe_data->command))
-		mexport(pipe_data->options + 1);
+		mexport(pipe_data->argv + 1);
 	else if (!ft_strcmp("pwd", pipe_data->command))
 		mpwd();
 	else if (!ft_strcmp("unset", pipe_data->command))
-		munset(pipe_data->options + 1);
+		munset(pipe_data->argv + 1);
 	else
 		return FALSE;
 	return TRUE;
@@ -137,31 +138,35 @@ bool	check_builtin(t_pipe_data *pipe_data)
 
 void	exec_pipe(t_pipe_data *pipe_data, int index)
 {
-	validate_cmd(pipe_data);
-	if (!pipe_data->cmd_path)
-		return ;
+	//printf("cmd: %s | size: %i\n", pipe_data->command, global_data.size);
 	pipe_files_prep(pipe_data);
-	if (global_data.size > index + 1)
-		pipe(global_data.cmd_pipe_fds);
-	if ((global_data.size != 1 || !check_builtin(pipe_data)) && fork() == 0)
+	if (global_data.size != 1 || !check_builtin(pipe_data))
 	{
-		if (pipe_data->is_herdoc)
+		validate_cmd(pipe_data);
+		if (!pipe_data->cmd_path)
+			return ;
+		if (global_data.size > index + 1)
+			pipe(global_data.cmd_pipe_fds);
+		if (fork() == 0)
 		{
-			get_herdoc(pipe_data);
-			dup2(global_data.here_doc_pipe_fds[0], 0);
-			ft_close(global_data.here_doc_pipe_fds[1], 7);
-			ft_close(global_data.here_doc_pipe_fds[0], 6);
+			if (pipe_data->is_herdoc)
+			{
+				get_herdoc(pipe_data);
+				dup2(global_data.here_doc_pipe_fds[0], 0);
+				ft_close(global_data.here_doc_pipe_fds[1], 7);
+				ft_close(global_data.here_doc_pipe_fds[0], 6);
+			}
+			else if (!pipe_data->in_fd_set)
+				dup2(global_data.pre_pipe_infd, 0);
+			if (global_data.size > index + 1 && !pipe_data->out_fd_set)
+				dup2(global_data.cmd_pipe_fds[1], 1);
+			ft_close(global_data.cmd_pipe_fds[1], 5);
+			ft_close(global_data.cmd_pipe_fds[0], 4);
+			ft_close(global_data.pre_pipe_infd, 3);
+			if (check_builtin(pipe_data))
+				exit(0);
+			exec_cmd(pipe_data);
 		}
-		else if (!pipe_data->in_fd_set)
-			dup2(global_data.pre_pipe_infd, 0);
-		if (global_data.size > index + 1 && !pipe_data->out_fd_set)
-			dup2(global_data.cmd_pipe_fds[1], 1);
-		ft_close(global_data.cmd_pipe_fds[1], 5);
-		ft_close(global_data.cmd_pipe_fds[0], 4);
-		ft_close(global_data.pre_pipe_infd, 3);
-		if (check_builtin(pipe_data))
-			exit(0);
-		exec_cmd(pipe_data);
 	}
 	ft_close(global_data.cmd_pipe_fds[1], 5);
 	ft_close(global_data.pre_pipe_infd, 2);
