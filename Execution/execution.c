@@ -121,7 +121,7 @@ bool	check_builtin(t_pipe_data *pipe_data)
 	else if (!ft_strcmp("echo", pipe_data->command))
 		mecho(pipe_data->options + 1);
 	else if (!ft_strcmp("env", pipe_data->command))
-		menv();
+		menv(pipe_data->options + 1);
 	else if (!ft_strcmp("exit", pipe_data->command))
 		mexit(pipe_data->options + 1);
 	else if (!ft_strcmp("export", pipe_data->command))

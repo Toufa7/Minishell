@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/03 12:19:08 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/03 12:40:59 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int			stop_executing(t_parse *parse);
 
 void    mcd(char *path);
 void    mpwd(void);
-void	menv();
+void	menv(char **argv);
 void    mecho(char **argv);
 void    mexit(char **argv);
 void	munset(char **argv);
