@@ -24,6 +24,8 @@ void	initializer(t_tokens	*tokens)
 	tokens->app_file = 0;
 	tokens->cmd = 0;
 	tokens->env_var = 0;
+	tokens->total = 0;
+	tokens->option = 0;
 }
 
 void	input_counter(t_tokens *counter, t_tokens *tokens)
@@ -45,7 +47,17 @@ void	input_counter(t_tokens *counter, t_tokens *tokens)
 	else if (ft_strcmp(tokens->type, "app_outfile") == 0)
 		counter->app_file++;
 	else if (ft_strcmp(tokens->type, "delimiter") == 0)
+	{
 		counter->delimiter++;
+		if (counter->delimiter > 16)
+		{
+			ft_putstr_fd("Mini-0.0: maximum heredoc", 2);
+			exit(2);
+		}
+	}
 	else if (ft_strcmp(tokens->type, "env_var") == 0)
 		counter->env_var++;
+	else if (ft_strcmp(tokens->type, "option") == 0)
+		counter->option++;
+	counter->total = counter->red_in + counter->option + counter->red_out + counter->here_do + counter->app + counter->cmd + counter->in_file + counter->out_file + counter->app_file + counter->delimiter;
 }
