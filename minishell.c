@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/03 08:15:50 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/03 19:03:12 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,11 @@ int main(int ac, char **av, char **env)
 			input_analyse(parse->tokens);
 			initializer(parse->tokens);
 			counting(parse);
-			stop_executing(parse);
 			parse->pipe_data[i] = get_pipe_data(parse);
 		}
-		execution(parse->pipe_data);
+		if (parse_error(parse))
+			ft_putstr_fd("syntax error near unexpected token\n", 2);
+		else
+			execution(parse->pipe_data);
 	}
 }

@@ -106,13 +106,8 @@ void	pipe_files_prep(t_pipe_data *pipe_data)
 
 void	exec_cmd(t_pipe_data *pipe_data)
 {
-<<<<<<< HEAD
 	//printf("---> %s\n", pipe_data->command);
 	if (execve(pipe_data->cmd_path, pipe_data->argv, global_data.envp) == -1)
-=======
-
-	if (execve(pipe_data->cmd_path, pipe_data->options, global_data.envp) == -1)
->>>>>>> 1e3184cf14eb10139116e90013a1ff286fe5b061
 	{
 		ft_putstr_fd(strerror(errno), 2);
 		exit(errno);

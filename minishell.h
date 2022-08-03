@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/03 12:42:11 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/03 19:01:39 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void		initializer(t_tokens	*tokens);
 void		input_analyse(t_tokens	*tokens);
 void		input_counter(t_tokens	*counter, t_tokens	*tokens);
 t_tokens	*spliting_with_spaces(char	*str);
-void		stop_executing(t_parse *parse);
+bool		parse_error(t_parse *parse);
 
 // ----------- Execution -------------------------
 
