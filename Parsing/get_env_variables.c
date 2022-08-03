@@ -19,10 +19,9 @@ int	untill_this(char *var)
 	i = -1;
 	while (var[++i])
 	{
-		while (var[i] == '$')
+		while (var[i] == '$' || var[i] == doubles_quotes)
 			i++;
-		if (!(ft_isalpha(var[i]) || (ft_isdigit(var[i]) && i != 0)
-				|| var[i] == '_'))
+		if (!(ft_isalpha(var[i]) || (ft_isdigit(var[i]) && i != 0) || var[i] == '_'))
 			break ;
 	}
 	return (i);
@@ -37,6 +36,8 @@ char	*until_dollar(char *str, int start)
 	return (ft_substr(str, start, i));
 }
 
+
+
 char	*get_env_variables(char *target)
 {
 	int		j;
@@ -48,19 +49,21 @@ char	*get_env_variables(char *target)
 	{
 		if (target[j] == '$')
 		{
+			if ((target[j + 1] == '?') && (target[j + 2] == '\0'))
+			{
+				int stat;
+				wait(&stat);
+				int hola = WEXITSTATUS(stat);
+				printf("%d\n",hola);
+			}
 			tmp = ft_substr(target , j + 1, untill_this(target) - 1);
 			test = ft_strjoin(test, getenv(tmp));
-			//printf("Test -> %s\n",test);
-			j += untill_this(target + j) - 1;
-			//printf("j through ->%d\n",j);
+			j += untill_this(target + j);
 		}
 		else
 		{
 			tmp = until_dollar(target, j);
-			//printf("%s\n", tmp);
-
 			j += ft_strlen(tmp);
-			//printf("j -> %d\n",j);
 			test = ft_strjoin(test, tmp);
 		}
 	}
@@ -78,5 +81,3 @@ char	*get_env_variables(char *target)
 
 // 	}
 // }
-
-// e

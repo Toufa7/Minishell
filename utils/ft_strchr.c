@@ -6,6 +6,8 @@ char	*ft_strchr(const char *s, int c)
 	unsigned char	alpha;
 	char			*string;
 
+	if (!s || !c)
+		return (NULL); 
 	string = (char *)s;
 	alpha = c;
 	i = 0;

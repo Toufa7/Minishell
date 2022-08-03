@@ -33,6 +33,16 @@ void    looping(char **str)
 	}
 }
 
+
+void	counting(t_parse *parse)
+{
+	int j = -1;
+	while (parse->tokens[++j].token)
+	{
+		input_counter(parse->tokens, &parse->tokens[j]);
+	}
+}
+
 void	control_c(int sig)
 {
 	if (sig == SIGINT)
@@ -83,6 +93,8 @@ int main(int ac, char **av, char **env)
 			parse->tokens = spliting_with_spaces(parse->splt_pipes[i]);
 			input_analyse(parse->tokens);
 			initializer(parse->tokens);
+			counting(parse);
+			stop_executing(parse);
 			parse->pipe_data[i] = get_pipe_data(parse);
 		}
 		execution(parse->pipe_data);

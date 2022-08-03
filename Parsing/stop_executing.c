@@ -6,23 +6,32 @@ TODO:
 */
 
 
-// int stop_executing(t_parse *parse)
-// {
-//     // int i = -1;
-    
-//     // parse->pipe_data->parse_error = 0;
-//     // while (parse->tokens[++i].type)
-//     // {
-//     //     // if (ft_strcmp(parse->tokens[i].type, "red_out") == 0 && !parse->pipe_data->out_files)
-//     //     //     parse->pipe_data->parse_error = 1;
-//     //     // else if (ft_strcmp(parse->tokens[i].type, "append") == 0 && !parse->pipe_data->app_outfile)             
-//     //     //     parse->pipe_data->parse_error = 1;    
-//     //     // else if (ft_strcmp(parse->tokens[i].type, "red_input") && !parse->pipe_data->command) 
-//     // }      
-//     // return (parse->pipe_data->parse_error);
-//     printf("Commands   ->  %zu\n",parse->tokens->cmd);
-//     return (0);
-// }
+void    stop_executing(t_parse *parse)
+{
+    global_data.err = 0;
+    int i = 0;
+    while ((size_t )i < parse->tokens->total && parse->tokens[i].token)
+    {
+        // printf("Next -> %s\n",parse->tokens[i].type);
+
+        if ((!parse->tokens[i + 1].token && (ft_strcmp(parse->tokens[i].type, "red_out") == 0)) || (ft_strcmp(parse->tokens[i].type, "red_out") == 0 && ft_strcmp(parse->tokens[i + 1].type, "outfile") != 0))
+        {
+            global_data.err = 1;
+            printf("Error\n");
+        }
+        // else if (!parse->tokens[i + 1].token || (ft_strcmp(parse->tokens[i].type, "append") == 0 && ft_strcmp(parse->tokens[i + 1].type, "app_outfile") != 0))          
+        // {
+        //     global_data.err = 1;
+        //     printf("Error\n");
+        // }
+        // else if (!parse->tokens[i + 1].token || (ft_strcmp(parse->tokens[i].type, "here_doc") == 0 && ft_strcmp(parse->tokens[i + 1].type, "delimiter") != 0))
+        // {
+        //     global_data.err = 1;
+        //     printf("Error\n");
+        // }
+        i++;
+    }
+}
 
 
 
