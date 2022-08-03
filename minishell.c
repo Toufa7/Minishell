@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/01 16:03:41 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/03 08:15:50 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ int main(int ac, char **av, char **env)
 	env_dup(env);
 	while (TRUE)
 	{
-		// signal(SIGINT, control_c); // Ctrl+C
-		// signal(SIGQUIT, SIG_IGN); // Ctrl + Backslash
+		signal(SIGINT, control_c); // Ctrl+C
+		signal(SIGQUIT, SIG_IGN); // Ctrl + Backslash
 		parse->line = readline(GREEN "Mini-0.0$ " RESET);
 		if (!parse->line || ft_strcmp(parse->line, "exit") == 0) // Ctrl + D 
 			exit(0);

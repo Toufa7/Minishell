@@ -24,7 +24,7 @@ void    mecho(char **argv)
 				new_line = TRUE;
 		}
 	}
-	if (!valid_arg)
+	if (!valid_arg || i == 1)
 		j--;
 	while(argv[j])
 	{

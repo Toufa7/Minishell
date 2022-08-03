@@ -33,6 +33,7 @@ C_FILES = 	minishell.c \
 			Utils/ft_isdigit.c \
 			Utils/gnl.c \
 			Utils/ft_strnstr.c \
+			Utils/get_var_val.c \
 			Parsing/get_env_variables.c \
 			Parsing/input_formating.c \
 			Parsing/spliting_with_spaces.c \
@@ -54,7 +55,7 @@ C_FILES = 	minishell.c \
 all: $(NAME)
 
 $(NAME): $(C_FILES)
-		$(C_FLAGS) $(ADDI_FLAGS) $(C_FILES) -o $(NAME) 
+		$(C_FLAGS) $(ADDI_FLAGS) $(C_READLINE_ABOU) $(C_FILES) -o $(NAME) 
 
 clean:
 	rm -rf $(NAME)

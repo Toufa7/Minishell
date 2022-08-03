@@ -106,6 +106,7 @@ void	pipe_files_prep(t_pipe_data *pipe_data)
 
 void	exec_cmd(t_pipe_data *pipe_data)
 {
+	//printf("---> %s\n", pipe_data->command);
 	if (execve(pipe_data->cmd_path, pipe_data->options, global_data.envp) == -1)
 	{
 		ft_putstr_fd(strerror(errno), 2);
@@ -113,16 +114,37 @@ void	exec_cmd(t_pipe_data *pipe_data)
 	}
 }
 
-void	exec_pipe(t_pipe_data *pipe_data, bool is_last)
+bool	check_builtin(t_pipe_data *pipe_data)
+{
+	if (!ft_strcmp("cd", pipe_data->command))
+		mcd(*(pipe_data->options + 1));
+	else if (!ft_strcmp("echo", pipe_data->command))
+		mecho(pipe_data->options + 1);
+	else if (!ft_strcmp("env", pipe_data->command))
+		menv();
+	else if (!ft_strcmp("exit", pipe_data->command))
+		mexit(pipe_data->options + 1);
+	else if (!ft_strcmp("export", pipe_data->command))
+		mexport(pipe_data->options + 1);
+	else if (!ft_strcmp("pwd", pipe_data->command))
+		mpwd();
+	else if (!ft_strcmp("unset", pipe_data->command))
+		munset(pipe_data->options + 1);
+	else
+		return FALSE;
+	return TRUE;
+}
+
+void	exec_pipe(t_pipe_data *pipe_data, int index)
 {
 	validate_cmd(pipe_data);
 	if (!pipe_data->cmd_path)
 		return ;
-	if (!is_last)
+	pipe_files_prep(pipe_data);
+	if (global_data.size > index + 1)
 		pipe(global_data.cmd_pipe_fds);
-	if (fork() == 0)
+	if ((global_data.size != 1 || !check_builtin(pipe_data)) && fork() == 0)
 	{
-		pipe_files_prep(pipe_data);
 		if (pipe_data->is_herdoc)
 		{
 			get_herdoc(pipe_data);
@@ -130,19 +152,19 @@ void	exec_pipe(t_pipe_data *pipe_data, bool is_last)
 			ft_close(global_data.here_doc_pipe_fds[1], 7);
 			ft_close(global_data.here_doc_pipe_fds[0], 6);
 		}
-		else if (!pipe_data->in_fd_set && global_data.pre_pipe_infd != -1)
+		else if (!pipe_data->in_fd_set)
 			dup2(global_data.pre_pipe_infd, 0);
-		if (!is_last && !pipe_data->out_fd_set)
+		if (global_data.size > index + 1 && !pipe_data->out_fd_set)
 			dup2(global_data.cmd_pipe_fds[1], 1);
 		ft_close(global_data.cmd_pipe_fds[1], 5);
 		ft_close(global_data.cmd_pipe_fds[0], 4);
-		if (global_data.pre_pipe_infd != -1)
-			ft_close(global_data.pre_pipe_infd, 3);
+		ft_close(global_data.pre_pipe_infd, 3);
+		if (check_builtin(pipe_data))
+			exit(0);
 		exec_cmd(pipe_data);
 	}
 	ft_close(global_data.cmd_pipe_fds[1], 5);
-	if (global_data.pre_pipe_infd != -1)
-			ft_close(global_data.pre_pipe_infd, 2);
+	ft_close(global_data.pre_pipe_infd, 2);
 	global_data.pre_pipe_infd = global_data.cmd_pipe_fds[0];
 }
 
@@ -152,16 +174,17 @@ void	execution(t_pipe_data **pipes_data)
 
 	i = -1;
 	global_data.pre_pipe_infd = -1;
-	global_data.pre_pipe_infd = -1;
+	global_data.size = 0;
+	while (pipes_data[global_data.size])
+		global_data.size++;
 	while (pipes_data[++i])
 		if (pipes_data[i]->is_herdoc)
-			exec_pipe(pipes_data[i], !pipes_data[i + 1]);
+			exec_pipe(pipes_data[i], i);
 	i = -1;
 	while (pipes_data[++i])
 		if (!pipes_data[i]->is_herdoc)
-			exec_pipe(pipes_data[i], !pipes_data[i + 1]);
-	if (global_data.pre_pipe_infd != -1)
-		ft_close(global_data.pre_pipe_infd, 1);
+			exec_pipe(pipes_data[i], i);
+	ft_close(global_data.pre_pipe_infd, 1);
 	i = -1;
 	while (pipes_data[++i])
 		wait(NULL);

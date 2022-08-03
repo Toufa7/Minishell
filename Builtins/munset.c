@@ -19,7 +19,7 @@ void	munset(char **argv)
 			ft_putstr_fd("': not a valid identifier\n", 2);
 			continue;
 		}
-		var_index = get_var_index(argv[i], ft_strlen(argv[i]));
+		var_index = get_var_index(argv[i]);
 		if (!argv[i][j] && var_index != -1)
 		{
 			j = 0;

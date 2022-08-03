@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/01 12:42:31 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/03 12:19:08 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_tokens
 typedef struct s_global_data
 {
 	char	**envp;
+	int		size;
 	int		cmd_pipe_fds[2];
 	int		here_doc_pipe_fds[2];
 	int		pre_pipe_infd;
@@ -125,10 +126,11 @@ int		validate_infile(char *infile_path);
 
 void	free_str(char *str);
 void	free_arr(char **arr);
+char	*get_var_val(char *var, bool include_eqs);
 int		validate_var_name(char *var);
 char	**ft_realloc(char **pipe_data, char *str);
 void	env_dup(char **env);
-int		get_var_index(char *var, int n);
+int		get_var_index(char *var);
 char	*get_next_line(int fd);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 void	ft_putstr_fd(char *s, int fd);

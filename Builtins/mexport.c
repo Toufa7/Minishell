@@ -69,10 +69,10 @@ void	create_final_var(int op_type, char *key, char *new_val)
 	char	*old_val;
 	int		var_index;
 
-	var_index = get_var_index(key, ft_strlen(key));
+	var_index = get_var_index(key);
 	if (var_index != -1 && op_type == 1)
 	{
-		old_val = get_val(global_data.envp[var_index], TRUE);
+		old_val = get_val(key, TRUE);
 		final_val = ft_strjoin(old_val, new_val);
 		free_str(old_val);
 	}
@@ -107,7 +107,7 @@ void	mexport(char **argv)
 		key = get_key(argv[i]);
 		if (key)
 			op_type = get_op_type(argv[i] + ft_strlen(key));
-		val = get_val(argv[i], op_type == 0);
+		val = get_val(key, op_type == 0);
 		if (!key || op_type == -1)
 		{
 			ft_putstr_fd("export: '", 2);
