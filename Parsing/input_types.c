@@ -27,12 +27,12 @@ void	var_init(t_pipe_data *pipe_data)
 
 t_pipe_data	*get_pipe_data(t_parse *parse)
 {
+	int			i;
 	t_pipe_data	*pipe_data;
-	int		i;
 
+	i = 0;
 	pipe_data = malloc(sizeof(t_pipe_data));
 	var_init(pipe_data);
-	i = 0;
 	while (parse->tokens[i].token)
 	{
 		if (ft_strcmp(parse->tokens[i].type, "command") == 0)

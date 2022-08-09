@@ -39,7 +39,6 @@ typedef int bool;
 # define TRUE 1 
 # define FALSE 0
 
-
 typedef struct s_tokens
 {
 	char	*token;
@@ -94,18 +93,18 @@ typedef struct s_parse
 	char		*orginal_string;
 	char		*formated_input;
 	char		*line_double_quotes;
-	t_pipe_data		**pipe_data;
+	t_pipe_data	**pipe_data;
 	t_tokens	*tokens;
 }	t_parse;
 
 // ----------- Parsing --------------------------
 
 char		**pipes(char	*str);
-char	*handling_quotes(char *str, char replaced, char replace_by);
+char		*handling_quotes(char *str, char replaced, char replace_by);
 char		*input_formating(char	*str);
 char		*getting_back_original_input(char *str);
-char	*get_env_variables(char *target);
-t_pipe_data		*get_pipe_data(t_parse	*parse);
+char		*get_env_variables(char *target);
+t_pipe_data	*get_pipe_data(t_parse	*parse);
 void		initializer(t_tokens	*tokens);
 void		input_analyse(t_tokens	*tokens);
 void		input_counter(t_tokens	*counter, t_tokens	*tokens);
