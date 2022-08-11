@@ -63,7 +63,8 @@ typedef struct s_tokens
 
 typedef struct s_global_data
 {
-	int 	err;
+	int 	exit_status;
+	bool 	parse_error;
 	char	**envp;
 	int		size;
 	int		cmd_pipe_fds[2];
@@ -80,7 +81,7 @@ typedef struct s_pipe_data
 	char	**out_files;
 	char	**app_outfile;
 	char	**argv;
-	int		parse_error;
+	bool	parse_error;
 	bool	out_fd_set;
 	bool	in_fd_set;
 	bool	is_herdoc;
@@ -100,7 +101,7 @@ typedef struct s_parse
 // ----------- Parsing --------------------------
 
 char		**pipes(char	*str);
-char		*handling_quotes(char *str, char replaced, char replace_by);
+char	*handling_quotes(char *str, char replaced, char replace_by);
 char		*input_formating(char	*str);
 char		*getting_back_original_input(char *str);
 char		*get_env_variables(char *target);
