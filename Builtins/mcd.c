@@ -12,7 +12,6 @@ void	print_error(char *path)
 void    mcd(char *path)
 {
 	char    buff[PATH_MAX];
-	char	*home_path;
 	int		i;
 
 	i = -1;
@@ -27,18 +26,10 @@ void    mcd(char *path)
 		else
 			global_data.envp = ft_realloc(global_data.envp, ft_strjoin("OLDPWD=", buff));
 	}
-	if (path && ft_strcmp(path, "~"))
-	{
-    	if (chdir(path) != 0)
-			print_error(path);
-	}
 	else
-	{
-		home_path = get_var_val("HOME", FALSE);
-		if (chdir(home_path) != 0)
-			print_error(path);
-		free_str(home_path);
-	}
+		ft_putstr_fd("cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory\n", 2);
+    if (chdir(path) != 0)
+		print_error(path);
 	if (getcwd(buff, sizeof(buff)) != NULL)
 	{
 		i = get_var_index("PWD=");

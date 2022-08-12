@@ -1,6 +1,6 @@
 #include "../minishell.h"
 
-char	*get_var_val(char *key, bool include_eqs)
+char	*get_var_val(int var_index, bool include_eqs)
 {
 	char	*val;
 	char	*var;
@@ -10,7 +10,7 @@ char	*get_var_val(char *key, bool include_eqs)
 	i = 0;
 	j = 0;
 	val = NULL;
-	var = global_data.envp[get_var_index(key)];
+	var = global_data.envp[var_index];
 	while(var[i] && var[i] != '=')
 		i++;
 	if (var[i])
