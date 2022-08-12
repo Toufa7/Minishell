@@ -11,6 +11,7 @@ ADDI_FLAGS = -fsanitize=address -g
 F_REMOVE = rm -rf
 
 C_FILES = 	minishell.c \
+			Utils/ft_itoa.c \
 			Utils/counting_quotes.c \
 			Utils/validate_var_name.c \
 			Utils/free_funcs.c \

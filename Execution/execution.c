@@ -110,6 +110,7 @@ void	exec_cmd(t_pipe_data *pipe_data)
 	if (execve(pipe_data->cmd_path, pipe_data->argv, global_data.envp) == -1)
 	{
 		ft_putstr_fd(strerror(errno), 2);
+		ft_putstr_fd("\n", 2);
 		exit(errno);
 	}
 }
@@ -122,7 +123,7 @@ bool	check_builtin(t_pipe_data *pipe_data)
 	else if (!ft_strcmp("echo", pipe_data->command))
 		mecho(pipe_data->argv + 1);
 	else if (!ft_strcmp("env", pipe_data->command))
-		menv(pipe_data->argv + 1, NULL);
+		menv(pipe_data->argv + 1, NULL, FALSE);
 	else if (!ft_strcmp("exit", pipe_data->command))
 		mexit(pipe_data->argv + 1);
 	else if (!ft_strcmp("export", pipe_data->command))

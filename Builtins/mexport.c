@@ -67,17 +67,16 @@ int get_op_type(char *str)
 
 void	create_final_var(int op_type, char *key, char *new_val)
 {
-	printf("key: %s | opt: %i | val: %s\n", key, op_type,new_val);
+	//printf("3: key: %s | opt: %i | val: %s\n", key, op_type,new_val);
 	char	*final_var;
 	char	*final_val;
 	char	*old_val;
 	int		var_index;
 
-	old_val = get_var_val(key, TRUE);
 	var_index = get_var_index(key);
 	if (var_index != -1 && (op_type == 1 || op_type == 2))
 	{
-		printf("old_v: %s\n", old_val);
+		old_val = get_var_val(var_index, TRUE);
 		final_val = ft_strjoin(old_val, new_val);
 		if (!final_val)
 			final_val = ft_strdup(old_val);
@@ -100,22 +99,13 @@ void	create_final_var(int op_type, char *key, char *new_val)
 		free_str(final_val);
 }
 
-bool	check_errors(char *str, char *key, char *val, int *op_type)
+bool	check_errors(char *str, char **key, char **val, int *op_type)
 {
-	if (counting_quotes(str, 'D') % 2 != 0)
-	{
-		ft_putstr_fd("Unclosed Doubles Quotes\n", 2);
-		return FALSE;
-	}
-	else if (counting_quotes(str, 'S') % 2 != 0)
-	{
-		ft_putstr_fd("Unclosed Singles Quotes\n", 2);
-		return FALSE;
-	}
-	key = get_key(str);
+	*key = get_key(str);
 	if (key)
-		*op_type = get_op_type(str + ft_strlen(key));
-	val = get_val(str, *op_type == 0);
+		*op_type = get_op_type(str + ft_strlen(*key));
+	*val = get_val(str, *op_type == 0);
+	//printf("1: key: %s | opt: %i | val: %s\n", *key, *op_type, *val);
 	if (!key || *op_type == -1)
 	{
 		ft_putstr_fd("export: '", 2);
@@ -139,13 +129,16 @@ void	mexport(char **argv)
 	val = NULL;
 	if (!argv || !*argv)
 	{
-		menv(NULL, "declare -x ");
+		menv(NULL, "declare -x ", TRUE);
 		return ;
 	}
 	while (argv[++i])
 	{
-		if (check_errors(argv[i], key, val, &op_type))
+		if (check_errors(argv[i], &key, &val, &op_type))
+		{
+			printf("2: key: %s | opt: %i | val: %s\n", key, op_type,val);
 			create_final_var(op_type, key, val);
+		}
 	}
 	free_str(key);
 	free_str(val);

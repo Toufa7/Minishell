@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/06 10:17:21 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/12 11:25:12 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ bool		parse_error(t_parse *parse);
 
 void    mcd(char *path);
 void    mpwd(void);
-void	menv(char **argv, char *prefix);
+void	menv(char **argv, char *prefix, bool is_export);
 void    mecho(char **argv);
 void    mexit(char **argv);
 void	munset(char **argv);
@@ -130,8 +130,9 @@ int		validate_infile(char *infile_path);
 
 int		counting_quotes(char *str, char qtype);
 void	free_str(char *str);
+char	*ft_itoa(int n);
 void	free_arr(char **arr);
-char	*get_var_val(char *var, bool include_eqs);
+char	*get_var_val(int var_index, bool include_eqs);
 int		validate_var_name(char *var);
 char	**ft_realloc(char **pipe_data, char *str);
 void	env_dup(char **env);

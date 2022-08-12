@@ -9,6 +9,7 @@ void	munset(char **argv)
 	int		k;
 
 	i = -1;
+	tmp = NULL;
 	while (argv[++i])
 	{
 		j = validate_var_name(argv[i]);

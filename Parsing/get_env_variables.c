@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:32:28 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/02 12:46:03 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/12 11:30:06 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,26 @@ char	*get_env_variables(char *target)
 	{
 		if (target[i] == '$')
 		{
-			variable = ft_substr(target + i + 1, 0, validate_var_name(target + i + 1));
-			output = ft_strjoin(output, getenv(variable));
-			i += validate_var_name(target + i + 1) + 1;
+			if (target[i + 1] == '?')
+			{
+				variable = ft_itoa(global_data.exit_status);
+				output = ft_strjoin(output, variable);
+				i += 2;
+			}
+			else
+			{
+				variable = ft_substr(target + i + 1, 0, validate_var_name(target + i + 1));
+				output = ft_strjoin(output, getenv(variable));
+				i += validate_var_name(target + i + 1) + 1;
+			}
 		}
 		else
 		{
 			variable = until_dollar(target + i);
 			i += ft_strlen(variable);
 			output = ft_strjoin(output, variable);
-			
 		}
+		free_str(variable);
 	}
 	free_str(target);
 	return output;
