@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/11 11:39:37 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/12 11:25:12 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ typedef struct s_tokens
 
 typedef struct s_global_data
 {
-	int 	err;
+	int 	exit_status;
+	bool 	parse_error;
 	char	**envp;
 	int		size;
 	int		cmd_pipe_fds[2];
@@ -80,7 +81,7 @@ typedef struct s_pipe_data
 	char	**out_files;
 	char	**app_outfile;
 	char	**argv;
-	int		parse_error;
+	bool	parse_error;
 	bool	out_fd_set;
 	bool	in_fd_set;
 	bool	is_herdoc;
@@ -100,7 +101,7 @@ typedef struct s_parse
 // ----------- Parsing --------------------------
 
 char		**pipes(char	*str);
-char		*handling_quotes(char *str, char replaced, char replace_by);
+char	*handling_quotes(char *str, char replaced, char replace_by);
 char		*input_formating(char	*str);
 char		*getting_back_original_input(char *str);
 char		*get_env_variables(char *target);
@@ -129,6 +130,7 @@ int		validate_infile(char *infile_path);
 
 int		counting_quotes(char *str, char qtype);
 void	free_str(char *str);
+char	*ft_itoa(int n);
 void	free_arr(char **arr);
 char	*get_var_val(int var_index, bool include_eqs);
 int		validate_var_name(char *var);

@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/11 10:35:49 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/12 11:28:32 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int main(int ac, char **av, char **env)
 	t_parse *parse;
 
 	parse = malloc(sizeof(t_parse));
+	global_data.exit_status = 0;
 	env_dup(env);
 	while (TRUE)
 	{
@@ -79,26 +80,29 @@ int main(int ac, char **av, char **env)
 		if (!parse->line || ft_strcmp(parse->line, "exit") == 0) // Ctrl + D 
 			exit(0);
 		parse->line_double_quotes = handling_quotes(parse->line, ' ', -1);
-		add_history(parse->line_double_quotes);
-		parse->formated_input = input_formating(parse->line_double_quotes);
-		parse->splt_pipes = ft_split(parse->formated_input, '|');
-		getting_back(parse->splt_pipes);
-		int i = 0;
-		while (parse->splt_pipes[i])
-			i++;
-		parse->pipe_data = ft_calloc(i + 1, sizeof(t_pipe_data *));
-		i = -1;
-		while (parse->splt_pipes[++i])
+		if (!global_data.parse_error)
 		{
-			parse->tokens = spliting_with_spaces(parse->splt_pipes[i]);
-			input_analyse(parse->tokens);
-			initializer(parse->tokens);
-			counting(parse);
-			parse->pipe_data[i] = get_pipe_data(parse);
-		}
-		if (parse_error(parse))
-			ft_putstr_fd("syntax error near unexpected token\n", 2);
-		else
+			add_history(parse->line_double_quotes);
+			parse->formated_input = input_formating(parse->line_double_quotes);
+			parse->splt_pipes = ft_split(parse->formated_input, '|');
+			getting_back(parse->splt_pipes);
+			int i = 0;
+			while (parse->splt_pipes[i])
+				i++;
+			parse->pipe_data = ft_calloc(i + 1, sizeof(t_pipe_data *));
+			i = -1;
+			while (parse->splt_pipes[++i])
+			{
+				parse->tokens = spliting_with_spaces(parse->splt_pipes[i]);
+				input_analyse(parse->tokens);
+				initializer(parse->tokens);
+				counting(parse);
+				parse->pipe_data[i] = get_pipe_data(parse);
+			}
+			if (parse_error(parse))
+				ft_putstr_fd("syntax error near unexpected token\n", 2);
+			else
 			execution(parse->pipe_data);
+		}
 	}
 }

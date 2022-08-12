@@ -2,7 +2,7 @@ NAME = Minishell
 
 C_FLAGS = gcc -Wall -Werror -Wextra -lreadline
 
-C_READLINE_POMS = -L /goinfre/otoufah/otoufah/.brew/opt/readline/lib -I /goinfre/otoufah/otoufah/.brew/opt/readline/include
+C_READLINE_POMS = -L /Users/otoufah/homebrew/opt/readline/lib -I /Users/otoufah/homebrew/opt/readline/include
 
 C_READLINE_ABOU = -L /goinfre/abouchfa/.brew/opt/readline/lib -I /goinfre/abouchfa/.brew/opt/readline/include
 
@@ -11,6 +11,7 @@ ADDI_FLAGS = -fsanitize=address -g
 F_REMOVE = rm -rf
 
 C_FILES = 	minishell.c \
+			Utils/ft_itoa.c \
 			Utils/counting_quotes.c \
 			Utils/validate_var_name.c \
 			Utils/free_funcs.c \

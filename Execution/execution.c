@@ -177,8 +177,6 @@ void	execution(t_pipe_data **pipes_data)
 {
 	int		i;
 
-	if (global_data.err == 1)
-		return ;
 	i = -1;
 	global_data.pre_pipe_infd = -1;
 	global_data.size = 0;
