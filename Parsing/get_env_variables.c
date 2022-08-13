@@ -12,12 +12,19 @@
 
 #include "../minishell.h"
 
-char	*until_dollar(char *str)
+char	*until_dollar(char *str, int *quot)
 {
 	int i = 0;
-
+	if (str[i] == '$')
+		return (ft_strdup("$"));
 	while (str[i] && str[i] != '$')
+	{
 		i++;
+		if (!*quot && (str[i] == sing_quotes))
+			*quot = sing_quotes;
+		else if(*quot && (str[i] == *quot))
+			*quot = 0;
+	}
 	return (ft_substr(str, 0, i));
 }
 
@@ -26,12 +33,16 @@ char	*get_env_variables(char *target)
 	int		i;
 	char	*output;
 	char	*variable;
-
+	int		expa = 0;
 	i = 0;
 	output = ft_strdup("");
 	while (target[i])
 	{
-		if (target[i] == '$')
+		if (!expa && target[i] == sing_quotes)
+			expa = sing_quotes;
+		else if (expa && target[i] == expa)
+			expa = 0;
+		if (target[i] == '$' && !expa)
 		{
 			if (target[i + 1] == '?')
 			{
@@ -48,7 +59,7 @@ char	*get_env_variables(char *target)
 		}
 		else
 		{
-			variable = until_dollar(target + i);
+			variable = until_dollar(target + i, &expa);
 			i += ft_strlen(variable);
 			output = ft_strjoin(output, variable);
 		}
@@ -58,16 +69,6 @@ char	*get_env_variables(char *target)
 	return output;
 }
 
-
-// int main(int a, char **b, char **env)
-// {
-// 	env_dup(env);
-// 	while (1)
-// 	{
-// 		char *s = readline("");
-// 		printf("%s\n", get_env_variables(s));
-// 	}
-// }
 
 
 

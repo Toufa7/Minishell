@@ -68,7 +68,7 @@ int main(int ac, char **av, char **env)
 	(void) ac;
 	(void) av;
 	t_parse *parse;
-
+	// char	*remove_quotes;
 	parse = malloc(sizeof(t_parse));
 	global_data.exit_status = 0;
 	env_dup(env);
@@ -77,12 +77,17 @@ int main(int ac, char **av, char **env)
 		signal(SIGINT, control_c); // Ctrl+C
 		signal(SIGQUIT, SIG_IGN); // Ctrl + Backslash
 		parse->line = readline(GREEN "Mini-0.0$ " RESET);
+		add_history(parse->line);
 		if (!parse->line || ft_strcmp(parse->line, "exit") == 0) // Ctrl + D 
 			exit(0);
+		// remove_quotes = hello_quotes(parse->line);
+		// printf("Input was -> %s ||| and becomes -> %s\n",parse->line,remove_quotes);
+		// printf("%s\n",remove_quotes);
+		// exit(0);
 		parse->line_double_quotes = handling_quotes(parse->line, ' ', -1);
 		if (!global_data.parse_error)
 		{
-			add_history(parse->line_double_quotes);
+			// add_history(parse->line_double_quotes);
 			parse->formated_input = input_formating(parse->line_double_quotes);
 			parse->splt_pipes = ft_split(parse->formated_input, '|');
 			getting_back(parse->splt_pipes);
