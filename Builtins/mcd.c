@@ -7,6 +7,7 @@ void	print_error(char *path)
 	ft_putstr_fd(": ", 2);
 	ft_putstr_fd(strerror(errno), 2);
 	ft_putstr_fd("\n", 2);
+	global_data.errnoc = errno;
 }
 
 void    mcd(char *path)

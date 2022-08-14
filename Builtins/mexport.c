@@ -111,6 +111,7 @@ bool	check_errors(char *str, char **key, char **val, int *op_type)
 		ft_putstr_fd("export: '", 2);
 		ft_putstr_fd(str, 2);
 		ft_putstr_fd("': not a valid identifier\n", 2);
+		global_data.errnoc = 1;
 		return FALSE;
 	}
 	return TRUE;

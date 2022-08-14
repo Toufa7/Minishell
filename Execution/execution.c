@@ -61,7 +61,10 @@ void	validate_cmd(t_pipe_data *pipe_data)
 		if (!access(pipe_data->command, F_OK) && !access(pipe_data->command, X_OK))
 			pipe_data->cmd_path = pipe_data->command;
 		else
+		{
 			perror(pipe_data->command);
+			global_data.errnoc = errno;
+		}
 	}
 	else
 		pipe_data->cmd_path = get_cmd_path(pipe_data->command, execps_paths);
@@ -101,17 +104,6 @@ void	pipe_files_prep(t_pipe_data *pipe_data)
 		dup2(fd, 1);
 		pipe_data->out_fd_set = TRUE;
 		ft_close(fd, 10);
-	}
-}
-
-void	exec_cmd(t_pipe_data *pipe_data)
-{
-	//printf("---> %s\n", pipe_data->command);
-	if (execve(pipe_data->cmd_path, pipe_data->argv, global_data.envp) == -1)
-	{
-		ft_putstr_fd(strerror(errno), 2);
-		ft_putstr_fd("\n", 2);
-		exit(errno);
 	}
 }
 
@@ -166,7 +158,13 @@ void	exec_pipe(t_pipe_data *pipe_data, int index)
 			ft_close(global_data.pre_pipe_infd, 3);
 			if (check_builtin(pipe_data))
 				exit(0);
-			exec_cmd(pipe_data);
+			execve(pipe_data->cmd_path, pipe_data->argv, global_data.envp);
+		}
+		if (!errno)
+		{
+			ft_putstr_fd(strerror(errno), 2);
+			ft_putstr_fd("\n", 2);
+			global_data.errnoc = errno;
 		}
 	}
 	ft_close(global_data.cmd_pipe_fds[1], 5);

@@ -6,15 +6,17 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/12 11:28:32 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/14 11:02:39 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
 
 TODO: ✅❓
-	✅ duplicate environment variables
-	❓ link parsing part with execuaation
+	update exit status
+	BAD Address error
+	error when giving dir as cmd
+	pwd in a removed dir and unseted path
 	All tokens are in a double pointer in pipe_data struct parse->pipe_data->x;
 	system("leaks Minishell");
 */
@@ -70,10 +72,10 @@ int main(int ac, char **av, char **env)
 	t_parse *parse;
 
 	parse = malloc(sizeof(t_parse));
-	global_data.exit_status = 0;
 	env_dup(env);
 	while (TRUE)
 	{
+		global_data.errnoc = 0;
 		signal(SIGINT, control_c); // Ctrl+C
 		signal(SIGQUIT, SIG_IGN); // Ctrl + Backslash
 		parse->line = readline(GREEN "Mini-0.0$ " RESET);
@@ -100,7 +102,10 @@ int main(int ac, char **av, char **env)
 				parse->pipe_data[i] = get_pipe_data(parse);
 			}
 			if (parse_error(parse))
+			{
 				ft_putstr_fd("syntax error near unexpected token\n", 2);
+				global_data.errnoc = 258;
+			}
 			else
 			execution(parse->pipe_data);
 		}
