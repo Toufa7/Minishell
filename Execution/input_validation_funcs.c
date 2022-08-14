@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 19:09:57 by abouchfa          #+#    #+#             */
-/*   Updated: 2022/08/13 12:27:51 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/14 15:15:01 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*put_cmd_status(int status, char *cmd_path, char *cmd)
 			ft_putstr_fd(" :command not found\n", 2);
 		else
 			ft_putstr_fd(" :permission denied\n", 2);
-		global_data.errnoc = 127;
+		global_data.errno_cp = 127;
 		free_str(cmd_path);
 		return (NULL);
 	}
@@ -61,6 +61,6 @@ int	validate_infile(char *infile_path)
 	if (!access(infile_path, F_OK) && !access(infile_path, R_OK))
 		return (1);
 	perror(infile_path);
-	global_data.errnoc = errno;
+	global_data.errno_cp = errno;
 	return (0);
 }

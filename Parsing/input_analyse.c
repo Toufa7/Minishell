@@ -42,14 +42,12 @@ void	input_analyse(t_tokens *tokens)
 	{
 		while (tokens[i].token[j] == '"')
 			j++;
-		if (ft_strcmp(tokens[i].token, tokens->cmp_red_in) == 0)
+		if (ft_strcmp(tokens[i].token, tokens->cmp_h_doc) == 0)
+			tokens[i].type = "here_doc";
+		else if (ft_strcmp(tokens[i].token, tokens->cmp_red_in) == 0)
 			tokens[i].type = "red_input";
 		else if (ft_strcmp(tokens[i].token, tokens->cmp_red_out) == 0)
-		{
 			tokens[i].type = "red_out";
-		}
-		else if (ft_strcmp(tokens[i].token, tokens->cmp_h_doc) == 0)
-			tokens[i].type = "here_doc";
 		else if (ft_strcmp(tokens[i].token, tokens->cmp_append) == 0)
 			tokens[i].type = "append";
 		else if (ft_strcmp(is_there(tokens[i].token), "in") == 0)

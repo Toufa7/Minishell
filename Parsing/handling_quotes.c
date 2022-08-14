@@ -5,15 +5,16 @@ bool	checking_quotes(char *str)
 	if (counting_quotes(str, 'D') % 2 != 0)
 	{
 		ft_putstr_fd("Unclosed Doubles Quotes\n", 2);
-		global_data.errnoc = 1;
+		global_data.errno_cp = 1;
 		rl_on_new_line();
 		rl_replace_line("", 0);
+
 		return (TRUE);
 	}
 	else if (counting_quotes(str, 'S') % 2 != 0)
 	{
 		ft_putstr_fd("Unclosed Singles Quotes\n", 2);
-		global_data.errnoc = 1;
+		global_data.errno_cp = 1;
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		return (TRUE);

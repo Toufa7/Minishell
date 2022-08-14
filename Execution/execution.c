@@ -17,23 +17,24 @@ void	get_herdoc(t_pipe_data *pipe_data)
 	j = -1;
 	while (pipe_data->delimiter[++j])
 	{
+		global_data.is_in_herdoc = TRUE;
 		if (j > 0)
 		{
 			ft_close(global_data.here_doc_pipe_fds[1], 4);
 			ft_close(global_data.here_doc_pipe_fds[0], 4);
 		}
 		pipe(global_data.here_doc_pipe_fds);
-		line = get_next_line(0);
-		while (line == NULL || ft_strcmp(line, pipe_data->delimiter[j]))
+		line = NULL;
+		while (global_data.is_in_herdoc && (!line || ft_strcmp(line, pipe_data->delimiter[j])))
 		{
 			if (line)
 			{
 				expand = get_env_variables(line);
 				write(global_data.here_doc_pipe_fds[1], expand, ft_strlen(expand));
 				write(global_data.here_doc_pipe_fds[1], "\n", 1);
-				free_str(line);
+				free_str(expand);
 			}
-			line = get_next_line(0);
+			line = readline("> ");
 		}
 		free_str(line);
 	}
@@ -65,7 +66,7 @@ void	validate_cmd(t_pipe_data *pipe_data)
 		else
 		{
 			perror(pipe_data->command);
-			global_data.errnoc = errno;
+			global_data.errno_cp = errno;
 		}
 	}
 	else
@@ -133,7 +134,6 @@ bool	check_builtin(t_pipe_data *pipe_data)
 
 void	exec_pipe(t_pipe_data *pipe_data, int index)
 {
-	printf("cmd: %s | issh: %i\n", pipe_data->command, pipe_data->is_herdoc);
 	pipe_files_prep(pipe_data);
 	if (global_data.size != 1 || !check_builtin(pipe_data))
 	{
@@ -147,6 +147,8 @@ void	exec_pipe(t_pipe_data *pipe_data, int index)
 			if (pipe_data->is_herdoc)
 			{
 				get_herdoc(pipe_data);
+				if (!global_data.is_in_herdoc)
+					exit(1);
 				dup2(global_data.here_doc_pipe_fds[0], 0);
 				ft_close(global_data.here_doc_pipe_fds[1], 7);
 				ft_close(global_data.here_doc_pipe_fds[0], 6);
@@ -166,7 +168,7 @@ void	exec_pipe(t_pipe_data *pipe_data, int index)
 		{
 			ft_putstr_fd(strerror(errno), 2);
 			ft_putstr_fd("\n", 2);
-			global_data.errnoc = errno;
+			global_data.errno_cp = errno;
 		}
 	}
 	ft_close(global_data.cmd_pipe_fds[1], 5);

@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:36:38 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/14 12:09:55 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/14 14:59:37 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ t_pipe_data	*get_pipe_data(t_parse *parse)
 	var_init(pipe_data);
 	while (parse->tokens[i].token)
 	{
-		printf("token: %s\n", parse->tokens[i].type);
 		if (ft_strcmp(parse->tokens[i].type, "command") == 0)
 		{
 			pipe_data->command = parse->tokens[i].token;
@@ -53,7 +52,7 @@ t_pipe_data	*get_pipe_data(t_parse *parse)
 		else if (ft_strcmp(parse->tokens[i].type, "app_outfile") == 0)
 			pipe_data->app_outfile = ft_realloc(pipe_data->app_outfile, parse->tokens[i].token);
 		else if (ft_strcmp(parse->tokens[i].type, "env_var") == 0)
-			pipe_data->argv = ft_realloc(pipe_data->argv, get_env_variables(parse->tokens[i].token));
+			pipe_data->argv = ft_realloc(pipe_data->argv, hello_quotes(get_env_variables(parse->tokens[i].token)));
 		else if (ft_strcmp(parse->tokens[i].type, "option") == 0)
 			pipe_data->argv = ft_realloc(pipe_data->argv, parse->tokens[i].token);
 		i++;

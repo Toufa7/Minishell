@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/13 12:28:02 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/14 16:34:41 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,9 @@ typedef struct s_tokens
 
 typedef struct s_global_data
 {
-	int 	errnoc;
+	int 	errno_cp;
 	bool 	parse_error;
+	bool	is_in_herdoc;
 	char	**envp;
 	int		size;
 	int		cmd_pipe_fds[2];
@@ -101,6 +102,7 @@ typedef struct s_parse
 // ----------- Parsing --------------------------
 
 char		**pipes(char	*str);
+char    *hello_quotes(char *str);
 char	*handling_quotes(char *str, char replaced, char replace_by);
 char		*input_formating(char	*str);
 char		*getting_back_original_input(char *str);

@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:32:04 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/13 12:27:51 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/14 15:15:01 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	input_counter(t_tokens *counter, t_tokens *tokens)
 		if (counter->delimiter > 16)
 		{
 			ft_putstr_fd("Mini-0.0: maximum heredoc", 2);
-			global_data.errnoc = 2;
+			global_data.errno_cp = 2;
 			exit(2);
 		}
 	}

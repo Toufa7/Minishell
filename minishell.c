@@ -6,18 +6,19 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/14 12:10:25 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/14 17:12:11 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
 
 TODO: ✅❓
-	!expanding in herdoc
-	update exit status
-	BAD Address error
-	error when giving dir as cmd
-	pwd in a removed dir and unseted path
+	[✅] expanding in herdoc
+	[❓] signals in herdoc
+	[❓] update exit status
+	[❓] BAD Address error
+	[❓] error when giving dir as cmd
+	[❓] pwd in a removed dir and unseted path
 */
 
 #include "minishell.h"
@@ -48,7 +49,11 @@ void	control_c(int sig)
 {
 	if (sig == SIGINT)
 	{
-		printf("\n");
+		if (!global_data.is_in_herdoc)
+		{
+			printf("\n");
+			global_data.is_in_herdoc = FALSE;
+		}
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
@@ -69,21 +74,26 @@ int main(int ac, char **av, char **env)
 	(void) ac;
 	(void) av;
 	t_parse *parse;
-
+	// char	*remove_quotes;
 	parse = malloc(sizeof(t_parse));
+	global_data.is_in_herdoc = FALSE;
 	env_dup(env);
 	while (TRUE)
 	{
-		global_data.errnoc = 0;
 		signal(SIGINT, control_c); // Ctrl+C
 		signal(SIGQUIT, SIG_IGN); // Ctrl + Backslash
-		parse->line = readline(GREEN "Mini-0.0$ " RESET);
+		parse->line = readline(GREEN "Poms-shell$ " RESET);
+		add_history(parse->line);
 		if (!parse->line || ft_strcmp(parse->line, "exit") == 0) // Ctrl + D 
 			exit(0);
+		// remove_quotes = hello_quotes(parse->line);
+		// printf("Input was -> %s ||| and becomes -> %s\n",parse->line,remove_quotes);
+		// printf("%s\n",remove_quotes);
+		// exit(0);
 		parse->line_double_quotes = handling_quotes(parse->line, ' ', -1);
 		if (!global_data.parse_error)
 		{
-			add_history(parse->line_double_quotes);
+			// add_history(parse->line_double_quotes);
 			parse->formated_input = input_formating(parse->line_double_quotes);
 			parse->splt_pipes = ft_split(parse->formated_input, '|');
 			getting_back(parse->splt_pipes);
@@ -103,7 +113,7 @@ int main(int ac, char **av, char **env)
 			if (parse_error(parse))
 			{
 				ft_putstr_fd("syntax error near unexpected token\n", 2);
-				global_data.errnoc = 258;
+				global_data.errno_cp = 258;
 			}
 			else
 			execution(parse->pipe_data);

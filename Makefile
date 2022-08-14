@@ -2,7 +2,7 @@ NAME = Minishell
 
 C_FLAGS = gcc -Wall -Werror -Wextra -lreadline
 
-C_READLINE_POMS = -L /Users/otoufah/homebrew/opt/readline/lib -I /Users/otoufah/homebrew/opt/readline/include
+C_READLINE_POMS = -L /Users/otoufah/goinfre/homebrew/opt/readline/lib -I /Users/otoufah/goinfre/homebrew/opt/readline/include
 
 C_READLINE_ABOU = -L /goinfre/abouchfa/.brew/opt/readline/lib -I /goinfre/abouchfa/.brew/opt/readline/include
 
@@ -36,6 +36,7 @@ C_FILES = 	minishell.c \
 			Utils/gnl.c \
 			Utils/ft_strnstr.c \
 			Utils/get_var_val.c \
+			Parsing/quotes.c \
 			Parsing/get_env_variables.c \
 			Parsing/input_formating.c \
 			Parsing/spliting_with_spaces.c \
