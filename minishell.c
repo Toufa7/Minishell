@@ -6,19 +6,18 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/14 11:02:39 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/14 12:10:25 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
 
 TODO: ✅❓
+	!expanding in herdoc
 	update exit status
 	BAD Address error
 	error when giving dir as cmd
 	pwd in a removed dir and unseted path
-	All tokens are in a double pointer in pipe_data struct parse->pipe_data->x;
-	system("leaks Minishell");
 */
 
 #include "minishell.h"

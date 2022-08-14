@@ -11,6 +11,7 @@ void ft_close(int n, int s)
 void	get_herdoc(t_pipe_data *pipe_data)
 {
 	char	*line;
+	char	*expand;
 	int		j;
 
 	j = -1;
@@ -27,7 +28,8 @@ void	get_herdoc(t_pipe_data *pipe_data)
 		{
 			if (line)
 			{
-				write(global_data.here_doc_pipe_fds[1], line, ft_strlen(line));
+				expand = get_env_variables(line);
+				write(global_data.here_doc_pipe_fds[1], expand, ft_strlen(expand));
 				write(global_data.here_doc_pipe_fds[1], "\n", 1);
 				free_str(line);
 			}
@@ -131,7 +133,7 @@ bool	check_builtin(t_pipe_data *pipe_data)
 
 void	exec_pipe(t_pipe_data *pipe_data, int index)
 {
-	//printf("cmd: %s | size: %i\n", pipe_data->command, global_data.size);
+	printf("cmd: %s | issh: %i\n", pipe_data->command, pipe_data->is_herdoc);
 	pipe_files_prep(pipe_data);
 	if (global_data.size != 1 || !check_builtin(pipe_data))
 	{

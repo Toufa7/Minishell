@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:36:38 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/03 12:42:11 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/14 12:09:55 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ t_pipe_data	*get_pipe_data(t_parse *parse)
 	var_init(pipe_data);
 	while (parse->tokens[i].token)
 	{
+		printf("token: %s\n", parse->tokens[i].type);
 		if (ft_strcmp(parse->tokens[i].type, "command") == 0)
 		{
 			pipe_data->command = parse->tokens[i].token;
