@@ -31,7 +31,6 @@ TODO:
 
 # define GREEN "\033[32m"
 # define RESET "\033[0m"
-
 # define PATH_MAX  4096
 # define sing_quotes 39
 # define doubles_quotes 34
@@ -94,6 +93,7 @@ typedef struct s_parse
 	char		*orginal_string;
 	char		*formated_input;
 	char		*line_double_quotes;
+	char		*dont_splt;
 	t_pipe_data	**pipe_data;
 	t_tokens	*tokens;
 }	t_parse;
@@ -102,7 +102,7 @@ typedef struct s_parse
 
 char		**pipes(char	*str);
 char    *hello_quotes(char *str);
-char	*handling_quotes(char *str, char replaced, char replace_by);
+char	*handling_quotes(char *str, char replaced_1, char replaced_2, char replace_by);
 char		*input_formating(char	*str);
 char		*getting_back_original_input(char *str);
 char		*get_env_variables(char *target);

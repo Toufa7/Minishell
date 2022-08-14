@@ -43,7 +43,9 @@ void	input_analyse(t_tokens *tokens)
 		while (tokens[i].token[j] == '"')
 			j++;
 		if (ft_strcmp(tokens[i].token, tokens->cmp_h_doc) == 0)
+		{
 			tokens[i].type = "here_doc";
+		}
 		else if (ft_strcmp(tokens[i].token, tokens->cmp_red_in) == 0)
 			tokens[i].type = "red_input";
 		else if (ft_strcmp(tokens[i].token, tokens->cmp_red_out) == 0)

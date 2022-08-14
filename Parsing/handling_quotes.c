@@ -5,21 +5,21 @@ bool	checking_quotes(char *str)
 	if (counting_quotes(str, 'D') % 2 != 0)
 	{
 		ft_putstr_fd("Unclosed Doubles Quotes\n", 2);
-		// rl_on_new_line();
-		// rl_replace_line("", 0);
+		rl_on_new_line();
+		rl_replace_line("", 0);
 		return (TRUE);
 	}
 	else if (counting_quotes(str, 'S') % 2 != 0)
 	{
 		ft_putstr_fd("Unclosed Singles Quotes\n", 2);
-		// rl_on_new_line();
-		// rl_replace_line("", 0);
+		rl_on_new_line();
+		rl_replace_line("", 0);
 		return (TRUE);
 	}
 	return (FALSE);
 }
 
-char	*handling_quotes(char *str, char replaced, char replace_by)
+char	*handling_quotes(char *str, char replaced_1, char replaced_2, char replace_by)
 {
 	int		i;
 	int		j;
@@ -43,7 +43,7 @@ char	*handling_quotes(char *str, char replaced, char replace_by)
 				j = j + 1;
 				while (str[j] != doubles_quotes && str[j] != sing_quotes)
 				{
-					if (str[j] == replaced)
+					if (str[j] == replaced_1 || str[j] == replaced_2)
 						dup[j] = replace_by;
 					else
 						dup[j] = str[j];
