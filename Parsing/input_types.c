@@ -35,6 +35,7 @@ t_pipe_data	*get_pipe_data(t_parse *parse)
 	var_init(pipe_data);
 	while (parse->tokens[i].token)
 	{
+		printf("input ->	%s	type	->	%s\n",parse->tokens[i].token, parse->tokens[i].type);
 		if (ft_strcmp(parse->tokens[i].type, "command") == 0)
 		{
 			pipe_data->command = parse->tokens[i].token;
@@ -52,7 +53,7 @@ t_pipe_data	*get_pipe_data(t_parse *parse)
 		else if (ft_strcmp(parse->tokens[i].type, "app_outfile") == 0)
 			pipe_data->app_outfile = ft_realloc(pipe_data->app_outfile, parse->tokens[i].token);
 		else if (ft_strcmp(parse->tokens[i].type, "env_var") == 0)
-			pipe_data->argv = ft_realloc(pipe_data->argv, get_env_variables(parse->tokens[i].token));
+			pipe_data->argv = ft_realloc(pipe_data->argv, hello_quotes(get_env_variables(parse->tokens[i].token)));
 		else if (ft_strcmp(parse->tokens[i].type, "option") == 0)
 			pipe_data->argv = ft_realloc(pipe_data->argv, parse->tokens[i].token);
 		i++;
