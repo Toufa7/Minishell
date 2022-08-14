@@ -55,9 +55,7 @@ void	input_analyse(t_tokens *tokens)
 		else if (i > 0 && (ft_strcmp(tokens[i - 1].type, "red_input") == 0))
 			tokens[i].type = "infile";
 		else if (i > 0 && (ft_strcmp(tokens[i - 1].type, "red_out") == 0))
-		{
 			tokens[i].type = "outfile";
-		}
 		else if (i > 0 && (ft_strcmp(tokens[i - 1].type, "append") == 0))
 			tokens[i].type = "app_outfile";
 		else if (i > 0 && (ft_strcmp(tokens[i - 1].type, "here_doc") == 0))

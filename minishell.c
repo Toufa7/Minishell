@@ -21,18 +21,30 @@ TODO: ✅❓
 
 #include "minishell.h"
 
-void    looping(char **str)
-{
-	int i = 0;
-	if (!str)
-		return ;
-	while (str[i])
-	{
-		printf("%s\n", str[i]);
-		i++;
-	}
-}
+// int until_this(char *str, char until)
+// {
+//     int i = -1;
+//     while (str[++i])
+//     {
+//         if (str[i] == until)
+//             break;
+//     }
+//     return (i);
+// }
 
+// char	*dont_split(t_parse *parse)
+// {
+// 	int i = -1;
+// 	char	*stor;
+// 	while (parse->line[i++])
+// 	{
+// 		if (parse->line[i] == doubles_quotes || parse->line[i] == sing_quotes)
+// 		{
+// 			stor = ft_substr(parse->line, i + 1, until_this(parse->line, sing_quotes));
+// 		}
+// 	}
+// 	return (stor);
+// }
 
 void	counting(t_parse *parse)
 {
@@ -40,6 +52,15 @@ void	counting(t_parse *parse)
 	while (parse->tokens[++j].token)
 	{
 		input_counter(parse->tokens, &parse->tokens[j]);
+	}
+}
+
+void	getting_back(char **str)
+{
+	int i = -1;
+	while (str[++i])
+	{
+		str[i] = handling_quotes(str[i], -1, ' ');
 	}
 }
 
@@ -54,21 +75,13 @@ void	control_c(int sig)
 	}
 }
 
-void	getting_back(char **str)
-{
-	int i = -1;
-	while (str[++i])
-	{
-		str[i] = handling_quotes(str[i], -1, ' ');
-	}
-}
 
 int main(int ac, char **av, char **env)
 {
 	(void) ac;
 	(void) av;
 	t_parse *parse;
-	// char	*remove_quotes;
+
 	parse = malloc(sizeof(t_parse));
 	global_data.exit_status = 0;
 	env_dup(env);
@@ -80,14 +93,9 @@ int main(int ac, char **av, char **env)
 		add_history(parse->line);
 		if (!parse->line || ft_strcmp(parse->line, "exit") == 0) // Ctrl + D 
 			exit(0);
-		// remove_quotes = hello_quotes(parse->line);
-		// printf("Input was -> %s ||| and becomes -> %s\n",parse->line,remove_quotes);
-		// printf("%s\n",remove_quotes);
-		// exit(0);
 		parse->line_double_quotes = handling_quotes(parse->line, ' ', -1);
 		if (!global_data.parse_error)
 		{
-			// add_history(parse->line_double_quotes);
 			parse->formated_input = input_formating(parse->line_double_quotes);
 			parse->splt_pipes = ft_split(parse->formated_input, '|');
 			getting_back(parse->splt_pipes);

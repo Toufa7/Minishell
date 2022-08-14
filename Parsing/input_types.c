@@ -38,7 +38,7 @@ t_pipe_data	*get_pipe_data(t_parse *parse)
 		printf("input ->	%s	type	->	%s\n",parse->tokens[i].token, parse->tokens[i].type);
 		if (ft_strcmp(parse->tokens[i].type, "command") == 0)
 		{
-			pipe_data->command = parse->tokens[i].token;
+			pipe_data->command = hello_quotes(parse->tokens[i].token);
 			pipe_data->argv = ft_realloc(pipe_data->argv, parse->tokens[i].token);
 		}
 		else if (ft_strcmp(parse->tokens[i].type, "outfile") == 0)
@@ -55,7 +55,7 @@ t_pipe_data	*get_pipe_data(t_parse *parse)
 		else if (ft_strcmp(parse->tokens[i].type, "env_var") == 0)
 			pipe_data->argv = ft_realloc(pipe_data->argv, hello_quotes(get_env_variables(parse->tokens[i].token)));
 		else if (ft_strcmp(parse->tokens[i].type, "option") == 0)
-			pipe_data->argv = ft_realloc(pipe_data->argv, parse->tokens[i].token);
+			pipe_data->argv = ft_realloc(pipe_data->argv, hello_quotes(parse->tokens[i].token));
 		i++;
 	}
 	return pipe_data;

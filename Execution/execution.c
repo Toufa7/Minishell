@@ -140,16 +140,20 @@ bool	check_builtin(t_pipe_data *pipe_data)
 void	exec_pipe(t_pipe_data *pipe_data, int index)
 {
 	//printf("cmd: %s | size: %i\n", pipe_data->command, global_data.size);
-	pipe_files_prep(pipe_data);
 	if (global_data.size != 1 || !check_builtin(pipe_data))
 	{
 		validate_cmd(pipe_data);
 		if (!pipe_data->cmd_path)
 			return ;
 		if (global_data.size > index + 1)
+		{
 			pipe(global_data.cmd_pipe_fds);
+			if (global_data.pre_pipe_infd == -1)
+				global_data.pre_pipe_infd = global_data.cmd_pipe_fds[0];
+		}
 		if (fork() == 0)
 		{
+			pipe_files_prep(pipe_data);
 			if (pipe_data->is_herdoc)
 			{
 				get_herdoc(pipe_data);
