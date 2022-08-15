@@ -19,6 +19,7 @@ TODO: ✅❓
 	[❓] BAD Address error
 	[❓] error when giving dir as cmd
 	[❓] pwd in a removed dir and unseted path
+	[? ] taha serghini 
 */
 
 #include "minishell.h"
@@ -46,7 +47,7 @@ void	getting_back(char **str)
 	int i = -1;
 	while (str[++i])
 	{
-		str[i] = handling_quotes(str[i], -1, -1, ' ');
+		str[i] = handling_quotes(str[i], -1, '|');
 	}
 }
 
@@ -79,11 +80,11 @@ int main(int ac, char **av, char **env)
 	{
 		signal(SIGINT, control_c); // Ctrl+C
 		signal(SIGQUIT, SIG_IGN); // Ctrl + Backslash
-		parse->line = readline(GREEN "Poms-shell$ " RESET);
+		parse->line = readline(GREEN "Mini-0.0$ " RESET);
 		add_history(parse->line);
 		if (!parse->line || ft_strcmp(parse->line, "exit") == 0) // Ctrl + D 
 			exit(0);
-		parse->line_double_quotes = handling_quotes(parse->line, ' ', '|', -1);
+		parse->line_double_quotes = handling_quotes(parse->line, '|', -1);
 		if (!global_data.parse_error)
 		{
 			parse->formated_input = input_formating(parse->line_double_quotes);
@@ -96,12 +97,13 @@ int main(int ac, char **av, char **env)
 			i = -1;
 			while (parse->splt_pipes[++i])
 			{
-				parse->dont_splt = handling_quotes(parse->splt_pipes[i], ' ', ' ', -1);
+				parse->dont_splt = handling_quotes(parse->splt_pipes[i], ' ', -1);
 				parse->tokens = spliting_with_spaces(parse->dont_splt);
 				input_analyse(parse->tokens);
 				initializer(parse->tokens);
 				counting(parse);
 				parse->pipe_data[i] = get_pipe_data(parse);
+				// token_and_type(parse);
 			}
 			if (parse_error(parse))
 			{

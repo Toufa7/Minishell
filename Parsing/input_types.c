@@ -29,6 +29,7 @@ t_pipe_data	*get_pipe_data(t_parse *parse)
 {
 	int			i;
 	char		*without_quotes;
+	char		*replaced;
 	t_pipe_data	*pipe_data;
 
 	i = -1;
@@ -36,7 +37,8 @@ t_pipe_data	*get_pipe_data(t_parse *parse)
 	var_init(pipe_data);
 	while (parse->tokens[++i].token)
 	{
-		without_quotes = remove_quotes(parse->tokens[i].token, DOUBLES_QUOTES);
+		replaced = handling_quotes(parse->tokens[i].token, -1, ' ');
+		without_quotes = remove_quotes(replaced, DOUBLES_QUOTES);
 		if (ft_strcmp(parse->tokens[i].type, "command") == 0)
 		{
 			pipe_data->command = without_quotes;
