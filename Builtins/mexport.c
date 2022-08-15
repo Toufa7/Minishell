@@ -136,10 +136,7 @@ void	mexport(char **argv)
 	while (argv[++i])
 	{
 		if (check_errors(argv[i], &key, &val, &op_type))
-		{
-			printf("2: key: %s | opt: %i | val: %s\n", key, op_type,val);
 			create_final_var(op_type, key, val);
-		}
 	}
 	free_str(key);
 	free_str(val);

@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/15 12:12:41 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/15 16:55:10 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,12 @@
 TODO: ✅❓
 	[✅] expanding in herdoc
 	[✅] cntrl_c in herdoc
-	[❓] update exit status
+	[✅] var witout value should not displayed in env cmd
+	[✅] update exit status
 	[❓] BAD Address error
 	[❓] error when giving dir as cmd
 	[❓] pwd in a removed dir and unseted path
-	[? ] taha serghini 
+	[❓] Program hanging when dealing with std_in and std_out
 */
 
 #include "minishell.h"
@@ -105,13 +106,8 @@ int main(int ac, char **av, char **env)
 				parse->pipe_data[i] = get_pipe_data(parse);
 				// token_and_type(parse);
 			}
-			if (parse_error(parse))
-			{
-				ft_putstr_fd("syntax error near unexpected token\n", 2);
-				global_data.errno_cp = 258;
-			}
-			else
-			execution(parse->pipe_data);
+			if (!parse_error(parse))
+				execution(parse->pipe_data);
 		}
 	}
 }

@@ -19,6 +19,12 @@ void	menv(char **argv, char *prefix, bool is_export)
 		while (global_data.envp[++i])
 		{
 			j = -1;
+			while (global_data.envp[i][++j])
+				if (global_data.envp[i][j] == '=')
+					break;
+			if (global_data.envp[i][j] != '=' && !is_export)
+				continue;
+			j = -1;
 			eq = 0;
 			ft_putstr_fd(prefix, 1);
 			while(global_data.envp[i][++j])
