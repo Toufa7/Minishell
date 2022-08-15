@@ -28,7 +28,6 @@ void	token_and_type(t_parse *parse)
 	{
 		printf("Token -> %s -> Type -> %s\n",parse->tokens[i].token,parse->tokens[i].type);
 	}
-	
 }
 
 void	counting(t_parse *parse)
