@@ -28,7 +28,8 @@ void	var_init(t_pipe_data *pipe_data)
 t_pipe_data	*get_pipe_data(t_parse *parse)
 {
 	int			i;
-	char		*str;
+	char		*without_quotes;
+	char		*replaced;
 	t_pipe_data	*pipe_data;
 
 	i = -1;
@@ -36,27 +37,28 @@ t_pipe_data	*get_pipe_data(t_parse *parse)
 	var_init(pipe_data);
 	while (parse->tokens[++i].token)
 	{
-		str = remove_quotes(parse->tokens[i].token, DOUBLES_QUOTES);
+		replaced = handling_quotes(parse->tokens[i].token, -1, ' ');
+		without_quotes = remove_quotes(replaced, DOUBLES_QUOTES);
 		if (ft_strcmp(parse->tokens[i].type, "command") == 0)
 		{
-			pipe_data->command = str;
+			pipe_data->command = without_quotes;
 			pipe_data->argv = ft_realloc(pipe_data->argv, parse->tokens[i].token);
 		}
 		else if (ft_strcmp(parse->tokens[i].type, "outfile") == 0)
-			pipe_data->out_files = ft_realloc(pipe_data->out_files, str);
+			pipe_data->out_files = ft_realloc(pipe_data->out_files, without_quotes);
 		else if (ft_strcmp(parse->tokens[i].type, "delimiter") == 0)
 		{
-			pipe_data->delimiter = ft_realloc(pipe_data->delimiter, str);
+			pipe_data->delimiter = ft_realloc(pipe_data->delimiter, without_quotes);
 			pipe_data->is_herdoc = TRUE;
 		}
 		else if (ft_strcmp(parse->tokens[i].type, "infile") == 0)
-			pipe_data->in_files = ft_realloc(pipe_data->in_files, str);
+			pipe_data->in_files = ft_realloc(pipe_data->in_files, without_quotes);
 		else if (ft_strcmp(parse->tokens[i].type, "app_outfile") == 0)
-			pipe_data->app_outfile = ft_realloc(pipe_data->app_outfile, str);
+			pipe_data->app_outfile = ft_realloc(pipe_data->app_outfile, without_quotes);
 		else if (ft_strcmp(parse->tokens[i].type, "env_var") == 0)
 			pipe_data->argv = ft_realloc(pipe_data->argv, remove_quotes(get_env_variables(parse->tokens[i].token), DOUBLES_QUOTES));
 		else if (ft_strcmp(parse->tokens[i].type, "option") == 0)
-			pipe_data->argv = ft_realloc(pipe_data->argv, str);
+			pipe_data->argv = ft_realloc(pipe_data->argv, without_quotes);
 	}
 	return (pipe_data);
 }

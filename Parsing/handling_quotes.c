@@ -33,7 +33,7 @@ bool	checking_quotes(char *str)
 	return (FALSE);
 }
 
-char	*handling_quotes(char *str, char replaced_1, char replaced_2, char replace_by)
+char	*handling_quotes(char *str, char replaced, char replace_by)
 {
 	int		i;
 	int		j;
@@ -57,7 +57,7 @@ char	*handling_quotes(char *str, char replaced_1, char replaced_2, char replace_
 				j = j + 1;
 				while (str[j] != DOUBLES_QUOTES && str[j] != SING_QUOTES)
 				{
-					if (str[j] == replaced_1 || str[j] == replaced_2)
+					if (str[j] == replaced)
 						dup[j] = replace_by;
 					else
 						dup[j] = str[j];
