@@ -18,6 +18,7 @@ void	munset(char **argv)
 			ft_putstr_fd("unset: '", 2);
 			ft_putstr_fd(argv[i], 2);
 			ft_putstr_fd("': not a valid identifier\n", 2);
+			global_data.errno_cp = 1;
 			continue;
 		}
 		var_index = get_var_index(argv[i]);

@@ -26,7 +26,7 @@ char	*get_env_in_herdoc(char *target)
 		{
 			if (target[i + 1] == '?')
 			{
-				variable = ft_itoa(global_data.exit_status);
+				variable = ft_itoa(global_data.errno_cp);
 				output = ft_strjoin(output, variable);
 				i += 2;
 			}

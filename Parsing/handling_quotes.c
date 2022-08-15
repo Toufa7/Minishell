@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handling_quotes.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: otoufah <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 10:10:15 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/15 10:10:17 by otoufah          ###   ########.fr       */
+/*   Updated: 2022/08/15 11:55:57 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ bool	checking_quotes(char *str)
 	if (counting_quotes(str, 'D') % 2 != 0)
 	{
 		ft_putstr_fd("Unclosed Doubles Quotes\n", 2);
+		global_data.errno_cp = 1;
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		return (TRUE);
@@ -24,6 +25,7 @@ bool	checking_quotes(char *str)
 	else if (counting_quotes(str, 'S') % 2 != 0)
 	{
 		ft_putstr_fd("Unclosed Singles Quotes\n", 2);
+		global_data.errno_cp = 1;
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		return (TRUE);

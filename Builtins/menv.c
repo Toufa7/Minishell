@@ -12,6 +12,7 @@ void	menv(char **argv, char *prefix, bool is_export)
 		ft_putstr_fd("env: ", 2);
 		ft_putstr_fd(*argv, 2);
 		ft_putstr_fd(": No such file or directory\n", 2);
+		global_data.errno_cp = 127;
 	}
 	else
 	{

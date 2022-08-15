@@ -13,5 +13,6 @@ void    mpwd(void)
 	{
         ft_putstr_fd(strerror(errno), 2);
 		ft_putstr_fd("\n", 2);
+		global_data.errno_cp = errno;
 	}
 }

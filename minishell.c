@@ -6,17 +6,19 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/12 11:28:32 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/15 12:12:41 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
 
 TODO: ✅❓
-	✅ duplicate environment variables
-	❓ link parsing part with execuaation
-	All tokens are in a double pointer in pipe_data struct parse->pipe_data->x;
-	system("leaks Minishell");
+	[✅] expanding in herdoc
+	[✅] cntrl_c in herdoc
+	[❓] update exit status
+	[❓] BAD Address error
+	[❓] error when giving dir as cmd
+	[❓] pwd in a removed dir and unseted path
 */
 
 #include "minishell.h"
@@ -52,10 +54,15 @@ void	control_c(int sig)
 {
 	if (sig == SIGINT)
 	{
-		printf("\n");
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
+		if (!global_data.is_in_herdoc)
+		{
+			printf("\n");
+			rl_on_new_line();
+			rl_replace_line("", 0);
+			rl_redisplay();
+		}
+		else
+			exit(1);
 	}
 }
 
@@ -66,13 +73,13 @@ int main(int ac, char **av, char **env)
 	t_parse *parse;
 
 	parse = malloc(sizeof(t_parse));
-	global_data.exit_status = 0;
+	global_data.is_in_herdoc = FALSE;
 	env_dup(env);
 	while (TRUE)
 	{
 		signal(SIGINT, control_c); // Ctrl+C
 		signal(SIGQUIT, SIG_IGN); // Ctrl + Backslash
-		parse->line = readline(GREEN "Mini-0.0$ " RESET);
+		parse->line = readline(GREEN "Poms-shell$ " RESET);
 		add_history(parse->line);
 		if (!parse->line || ft_strcmp(parse->line, "exit") == 0) // Ctrl + D 
 			exit(0);
@@ -97,7 +104,10 @@ int main(int ac, char **av, char **env)
 				parse->pipe_data[i] = get_pipe_data(parse);
 			}
 			if (parse_error(parse))
+			{
 				ft_putstr_fd("syntax error near unexpected token\n", 2);
+				global_data.errno_cp = 258;
+			}
 			else
 			execution(parse->pipe_data);
 		}
