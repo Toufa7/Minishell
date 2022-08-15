@@ -36,7 +36,8 @@ C_FILES = 	minishell.c \
 			Utils/gnl.c \
 			Utils/ft_strnstr.c \
 			Utils/get_var_val.c \
-			Parsing/quotes.c \
+			Parsing/remove_quotes.c \
+			Parsing/get_env_in_herdoc.c \
 			Parsing/get_env_variables.c \
 			Parsing/input_formating.c \
 			Parsing/spliting_with_spaces.c \

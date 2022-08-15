@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handling_quotes.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/15 10:10:15 by otoufah           #+#    #+#             */
+/*   Updated: 2022/08/15 11:55:57 by abouchfa         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 bool	checking_quotes(char *str)
@@ -8,7 +20,6 @@ bool	checking_quotes(char *str)
 		global_data.errno_cp = 1;
 		rl_on_new_line();
 		rl_replace_line("", 0);
-
 		return (TRUE);
 	}
 	else if (counting_quotes(str, 'S') % 2 != 0)
@@ -22,7 +33,7 @@ bool	checking_quotes(char *str)
 	return (FALSE);
 }
 
-char	*handling_quotes(char *str, char replaced, char replace_by)
+char	*handling_quotes(char *str, char replaced_1, char replaced_2, char replace_by)
 {
 	int		i;
 	int		j;
@@ -38,21 +49,21 @@ char	*handling_quotes(char *str, char replaced, char replace_by)
 		i = -1;
 		while (str[++i])
 		{
-			if (str[i] == doubles_quotes || str[i] == sing_quotes)
+			if (str[i] == DOUBLES_QUOTES || str[i] == SING_QUOTES)
 			{
 				j = i;
-				if (str[j] == doubles_quotes || str[j] == sing_quotes)
+				if (str[j] == DOUBLES_QUOTES || str[j] == SING_QUOTES)
 					dup[j] = str[j];
 				j = j + 1;
-				while (str[j] != doubles_quotes && str[j] != sing_quotes)
+				while (str[j] != DOUBLES_QUOTES && str[j] != SING_QUOTES)
 				{
-					if (str[j] == replaced)
+					if (str[j] == replaced_1 || str[j] == replaced_2)
 						dup[j] = replace_by;
 					else
 						dup[j] = str[j];
 					j++;
 				}
-				if (str[j] == doubles_quotes || str[j] == sing_quotes)
+				if (str[j] == DOUBLES_QUOTES || str[j] == SING_QUOTES)
 					dup[j] = str[j];
 				i = j;
 			}

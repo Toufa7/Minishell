@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/14 17:12:11 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/15 12:12:41 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 TODO: ✅❓
 	[✅] expanding in herdoc
-	[❓] signals in herdoc
+	[✅] cntrl_c in herdoc
 	[❓] update exit status
 	[❓] BAD Address error
 	[❓] error when giving dir as cmd
@@ -23,30 +23,15 @@ TODO: ✅❓
 
 #include "minishell.h"
 
-// int until_this(char *str, char until)
-// {
-//     int i = -1;
-//     while (str[++i])
-//     {
-//         if (str[i] == until)
-//             break;
-//     }
-//     return (i);
-// }
-
-// char	*dont_split(t_parse *parse)
-// {
-// 	int i = -1;
-// 	char	*stor;
-// 	while (parse->line[i++])
-// 	{
-// 		if (parse->line[i] == doubles_quotes || parse->line[i] == sing_quotes)
-// 		{
-// 			stor = ft_substr(parse->line, i + 1, until_this(parse->line, sing_quotes));
-// 		}
-// 	}
-// 	return (stor);
-// }
+void	token_and_type(t_parse *parse)
+{
+	int i = -1;
+	while (parse->tokens[++i].token)
+	{
+		printf("Token -> %s -> Type -> %s\n",parse->tokens[i].token,parse->tokens[i].type);
+	}
+	
+}
 
 void	counting(t_parse *parse)
 {
@@ -62,7 +47,7 @@ void	getting_back(char **str)
 	int i = -1;
 	while (str[++i])
 	{
-		str[i] = handling_quotes(str[i], -1, ' ');
+		str[i] = handling_quotes(str[i], -1, -1, ' ');
 	}
 }
 
@@ -73,14 +58,14 @@ void	control_c(int sig)
 		if (!global_data.is_in_herdoc)
 		{
 			printf("\n");
-			global_data.is_in_herdoc = FALSE;
+			rl_on_new_line();
+			rl_replace_line("", 0);
+			rl_redisplay();
 		}
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
+		else
+			exit(1);
 	}
 }
-
 
 int main(int ac, char **av, char **env)
 {
@@ -99,7 +84,7 @@ int main(int ac, char **av, char **env)
 		add_history(parse->line);
 		if (!parse->line || ft_strcmp(parse->line, "exit") == 0) // Ctrl + D 
 			exit(0);
-		parse->line_double_quotes = handling_quotes(parse->line, ' ', -1);
+		parse->line_double_quotes = handling_quotes(parse->line, ' ', '|', -1);
 		if (!global_data.parse_error)
 		{
 			parse->formated_input = input_formating(parse->line_double_quotes);
@@ -112,7 +97,8 @@ int main(int ac, char **av, char **env)
 			i = -1;
 			while (parse->splt_pipes[++i])
 			{
-				parse->tokens = spliting_with_spaces(parse->splt_pipes[i]);
+				parse->dont_splt = handling_quotes(parse->splt_pipes[i], ' ', ' ', -1);
+				parse->tokens = spliting_with_spaces(parse->dont_splt);
 				input_analyse(parse->tokens);
 				initializer(parse->tokens);
 				counting(parse);

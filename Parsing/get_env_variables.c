@@ -14,14 +14,16 @@
 
 char	*until_dollar(char *str, int *quot)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	if (str[i] == '$')
 		return (ft_strdup("$"));
 	while (str[i] && str[i] != '$')
 	{
 		i++;
-		if (!*quot && (str[i] == sing_quotes))
-			*quot = sing_quotes;
+		if (!*quot && (str[i] == SING_QUOTES))
+			*quot = SING_QUOTES;
 		else if(*quot && (str[i] == *quot))
 			*quot = 0;
 	}
@@ -38,8 +40,8 @@ char	*get_env_variables(char *target)
 	output = ft_strdup("");
 	while (target[i])
 	{
-		if (!expa && target[i] == sing_quotes)
-			expa = sing_quotes;
+		if (!expa && target[i] == SING_QUOTES)
+			expa = SING_QUOTES;
 		else if (expa && target[i] == expa)
 			expa = 0;
 		if (target[i] == '$' && !expa)

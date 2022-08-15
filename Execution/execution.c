@@ -15,9 +15,9 @@ void	get_herdoc(t_pipe_data *pipe_data)
 	int		j;
 
 	j = -1;
+	global_data.is_in_herdoc = TRUE;
 	while (pipe_data->delimiter[++j])
 	{
-		global_data.is_in_herdoc = TRUE;
 		if (j > 0)
 		{
 			ft_close(global_data.here_doc_pipe_fds[1], 4);
@@ -25,11 +25,11 @@ void	get_herdoc(t_pipe_data *pipe_data)
 		}
 		pipe(global_data.here_doc_pipe_fds);
 		line = NULL;
-		while (global_data.is_in_herdoc && (!line || ft_strcmp(line, pipe_data->delimiter[j])))
+		while (!line || ft_strcmp(line, pipe_data->delimiter[j]))
 		{
 			if (line)
 			{
-				expand = get_env_variables(line);
+				expand = get_env_in_herdoc(line);
 				write(global_data.here_doc_pipe_fds[1], expand, ft_strlen(expand));
 				write(global_data.here_doc_pipe_fds[1], "\n", 1);
 				free_str(expand);

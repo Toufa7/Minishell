@@ -26,7 +26,7 @@ t_tokens	*spliting_with_spaces(char *str)
 	i = -1;
 	while (line[++i])
 		tokens[i].token = line[i];
-	tokens[i].token = NULL ;
+	tokens[i].token = NULL;
 	i = -1;
 	return (tokens);
 }

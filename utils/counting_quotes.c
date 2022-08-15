@@ -11,9 +11,9 @@ int	counting_quotes(char *str, char qtype)
 	double_q = 0;
 	while (str[++i])
 	{
-		if (str[i] == doubles_quotes)
+		if (str[i] == DOUBLES_QUOTES)
 			double_q++;
-		if (str[i] == sing_quotes)
+		if (str[i] == SING_QUOTES)
 			single_q++;
 	}
 	if (qtype == 'S')
