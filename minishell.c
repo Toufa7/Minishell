@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/15 16:55:10 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/15 18:46:55 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ TODO: ✅❓
 	[✅] cntrl_c in herdoc
 	[✅] var witout value should not displayed in env cmd
 	[✅] update exit status
-	[❓] BAD Address error
-	[❓] error when giving dir as cmd
+	[✅] error not displayed when error when giving dir as cmd
 	[❓] pwd in a removed dir and unseted path
+	[❓] BAD Address error
 	[❓] Program hanging when dealing with std_in and std_out
 */
 
