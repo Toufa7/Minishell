@@ -26,7 +26,8 @@ void	get_herdoc(t_pipe_data *pipe_data)
 		pipe(global_data.here_doc_pipe_fds);
 		line = NULL;
 		while (!line || ft_strcmp(line, pipe_data->delimiter[j]))
-		{
+		{ 
+			line = readline("> ");
 			if (line)
 			{
 				expand = get_env_in_herdoc(line);
@@ -34,7 +35,8 @@ void	get_herdoc(t_pipe_data *pipe_data)
 				write(global_data.here_doc_pipe_fds[1], "\n", 1);
 				free_str(expand);
 			}
-			line = readline("> ");
+			else
+				break;
 		}
 		free_str(line);
 	}
@@ -45,6 +47,7 @@ void	validate_cmd(t_pipe_data *pipe_data)
 	int		i;
 	char	**execps_paths;
 	char	*path_var;
+	struct	stat statbuf;
 
 	i = -1;
 	execps_paths = NULL;
@@ -61,12 +64,24 @@ void	validate_cmd(t_pipe_data *pipe_data)
 	}
 	if (ft_strchr(pipe_data->command, '/') || !execps_paths)
 	{
-		if (!access(pipe_data->command, F_OK) && !access(pipe_data->command, X_OK))
-			pipe_data->cmd_path = pipe_data->command;
-		else
+		if (stat(pipe_data->command, &statbuf) == 0)
 		{
-			perror(pipe_data->command);
-			global_data.errno_cp = errno;
+			if (!S_ISDIR(statbuf.st_mode) && !access(pipe_data->command, F_OK) && !access(pipe_data->command, X_OK))
+				pipe_data->cmd_path = pipe_data->command;
+			else
+			{
+				if (S_ISDIR(statbuf.st_mode))
+				{
+					ft_putstr_fd(pipe_data->command, 2);
+					ft_putstr_fd(": is a directory\n", 2);
+					global_data.errno_cp = 126;
+				}
+				else
+				{
+					perror(pipe_data->command);
+					global_data.errno_cp = errno;
+				}
+			}
 		}
 	}
 	else
