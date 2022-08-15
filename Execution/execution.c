@@ -113,7 +113,6 @@ void	pipe_files_prep(t_pipe_data *pipe_data)
 
 bool	check_builtin(t_pipe_data *pipe_data)
 {
-	//printf("cmd: %s\n", pipe_data->command);
 	if (!ft_strcmp("cd", pipe_data->command))
 		mcd(*(pipe_data->argv + 1));
 	else if (!ft_strcmp("echo", pipe_data->command))
@@ -154,7 +153,10 @@ void	child_process(t_pipe_data *pipe_data, int index)
 		ft_close(global_data.cmd_pipe_fds[1], 5);
 		ft_close(global_data.cmd_pipe_fds[0], 4);
 		ft_close(global_data.pre_pipe_infd, 3);
-		execve(pipe_data->cmd_path, pipe_data->argv, global_data.envp);
+		if (check_builtin(pipe_data))
+			exit(0);
+		else
+			execve(pipe_data->cmd_path, pipe_data->argv, global_data.envp);
 	}
 }
 
