@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/15 16:00:42 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/15 16:55:10 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ TODO: ✅❓
 	[✅] expanding in herdoc
 	[✅] cntrl_c in herdoc
 	[✅] var witout value should not displayed in env cmd
-	[❓] update exit status
+	[✅] update exit status
 	[❓] BAD Address error
 	[❓] error when giving dir as cmd
 	[❓] pwd in a removed dir and unseted path

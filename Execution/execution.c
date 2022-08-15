@@ -134,7 +134,8 @@ bool	check_builtin(t_pipe_data *pipe_data)
 
 void	child_process(t_pipe_data *pipe_data, int index)
 {
-	if (fork() == 0)
+	global_data.last_child_id = fork();
+	if (global_data.last_child_id == 0)
 	{
 		if (pipe_data->is_herdoc)
 		{
@@ -196,5 +197,13 @@ void	execution(t_pipe_data **pipes_data)
 	ft_close(global_data.pre_pipe_infd, 1);
 	i = -1;
 	while (pipes_data[++i])
-		wait(NULL);
+	{
+		if (i == 0)
+		{
+			waitpid(global_data.last_child_id, &global_data.errno_cp, 0);
+			global_data.errno_cp %= 255;
+		}
+		else
+			waitpid(-1, NULL, 0);
+	}
 }
