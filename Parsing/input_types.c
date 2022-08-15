@@ -28,34 +28,35 @@ void	var_init(t_pipe_data *pipe_data)
 t_pipe_data	*get_pipe_data(t_parse *parse)
 {
 	int			i;
+	char		*str;
 	t_pipe_data	*pipe_data;
 
-	i = 0;
+	i = -1;
 	pipe_data = malloc(sizeof(t_pipe_data));
 	var_init(pipe_data);
-	while (parse->tokens[i].token)
+	while (parse->tokens[++i].token)
 	{
+		str = remove_quotes(parse->tokens[i].token, DOUBLES_QUOTES);
 		if (ft_strcmp(parse->tokens[i].type, "command") == 0)
 		{
-			pipe_data->command = hello_quotes(parse->tokens[i].token);
+			pipe_data->command = str;
 			pipe_data->argv = ft_realloc(pipe_data->argv, parse->tokens[i].token);
 		}
 		else if (ft_strcmp(parse->tokens[i].type, "outfile") == 0)
-			pipe_data->out_files = ft_realloc(pipe_data->out_files, hello_quotes(parse->tokens[i].token));
+			pipe_data->out_files = ft_realloc(pipe_data->out_files, str);
 		else if (ft_strcmp(parse->tokens[i].type, "delimiter") == 0)
 		{
-			pipe_data->delimiter = ft_realloc(pipe_data->delimiter, hello_quotes(parse->tokens[i].token));
+			pipe_data->delimiter = ft_realloc(pipe_data->delimiter, str);
 			pipe_data->is_herdoc = TRUE;
 		}
 		else if (ft_strcmp(parse->tokens[i].type, "infile") == 0)
-			pipe_data->in_files = ft_realloc(pipe_data->in_files, hello_quotes(parse->tokens[i].token));
+			pipe_data->in_files = ft_realloc(pipe_data->in_files, str);
 		else if (ft_strcmp(parse->tokens[i].type, "app_outfile") == 0)
-			pipe_data->app_outfile = ft_realloc(pipe_data->app_outfile, hello_quotes(parse->tokens[i].token));
+			pipe_data->app_outfile = ft_realloc(pipe_data->app_outfile, str);
 		else if (ft_strcmp(parse->tokens[i].type, "env_var") == 0)
-			pipe_data->argv = ft_realloc(pipe_data->argv, hello_quotes(get_env_variables(parse->tokens[i].token)));
+			pipe_data->argv = ft_realloc(pipe_data->argv, remove_quotes(get_env_variables(parse->tokens[i].token), DOUBLES_QUOTES));
 		else if (ft_strcmp(parse->tokens[i].type, "option") == 0)
-			pipe_data->argv = ft_realloc(pipe_data->argv, hello_quotes(parse->tokens[i].token));
-		i++;
+			pipe_data->argv = ft_realloc(pipe_data->argv, str);
 	}
-	return pipe_data;
+	return (pipe_data);
 }

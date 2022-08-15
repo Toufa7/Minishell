@@ -1,3 +1,4 @@
+"file.txt"
 Builtins
 Execution
 Makefile
@@ -8,6 +9,6 @@ Readme
 Resourses
 Testing
 Utils
-file
+file.txt
 minishell.c
 minishell.h

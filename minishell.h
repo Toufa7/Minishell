@@ -32,8 +32,8 @@ TODO:
 # define GREEN "\033[32m"
 # define RESET "\033[0m"
 # define PATH_MAX  4096
-# define sing_quotes 39
-# define doubles_quotes 34
+# define SING_QUOTES 39
+# define DOUBLES_QUOTES 34
 typedef int bool;
 # define TRUE 1 
 # define FALSE 0
@@ -101,21 +101,22 @@ typedef struct s_parse
 // ----------- Parsing --------------------------
 
 char		**pipes(char	*str);
-char    *hello_quotes(char *str);
-char	*handling_quotes(char *str, char replaced_1, char replaced_2, char replace_by);
+char    	*remove_quotes(char *str, char removed);
+char		*handling_quotes(char *str, char replaced_1, char replaced_2, char replace_by);
 char		*input_formating(char	*str);
 char		*getting_back_original_input(char *str);
 char		*get_env_variables(char *target);
-t_pipe_data	*get_pipe_data(t_parse	*parse);
+char		*get_env_in_herdoc(char *target);
 void		initializer(t_tokens	*tokens);
 void		input_analyse(t_tokens	*tokens);
 void		input_counter(t_tokens	*counter, t_tokens	*tokens);
 t_tokens	*spliting_with_spaces(char	*str);
+t_pipe_data	*get_pipe_data(t_parse	*parse);
 bool		parse_error(t_parse *parse);
 
 // ----------- Execution -------------------------
 
-void    mcd(char *path);
+void	mcd(char *path);
 void    mpwd(void);
 void	menv(char **argv, char *prefix, bool is_export);
 void    mecho(char **argv);

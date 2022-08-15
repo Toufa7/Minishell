@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handling_quotes.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: otoufah <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/15 10:10:15 by otoufah           #+#    #+#             */
+/*   Updated: 2022/08/15 10:10:17 by otoufah          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 bool	checking_quotes(char *str)
@@ -35,13 +47,13 @@ char	*handling_quotes(char *str, char replaced_1, char replaced_2, char replace_
 		i = -1;
 		while (str[++i])
 		{
-			if (str[i] == doubles_quotes || str[i] == sing_quotes)
+			if (str[i] == DOUBLES_QUOTES || str[i] == SING_QUOTES)
 			{
 				j = i;
-				if (str[j] == doubles_quotes || str[j] == sing_quotes)
+				if (str[j] == DOUBLES_QUOTES || str[j] == SING_QUOTES)
 					dup[j] = str[j];
 				j = j + 1;
-				while (str[j] != doubles_quotes && str[j] != sing_quotes)
+				while (str[j] != DOUBLES_QUOTES && str[j] != SING_QUOTES)
 				{
 					if (str[j] == replaced_1 || str[j] == replaced_2)
 						dup[j] = replace_by;
@@ -49,7 +61,7 @@ char	*handling_quotes(char *str, char replaced_1, char replaced_2, char replace_
 						dup[j] = str[j];
 					j++;
 				}
-				if (str[j] == doubles_quotes || str[j] == sing_quotes)
+				if (str[j] == DOUBLES_QUOTES || str[j] == SING_QUOTES)
 					dup[j] = str[j];
 				i = j;
 			}

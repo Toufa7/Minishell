@@ -60,7 +60,6 @@ void	control_c(int sig)
 	}
 }
 
-
 int main(int ac, char **av, char **env)
 {
 	(void) ac;
@@ -93,7 +92,6 @@ int main(int ac, char **av, char **env)
 			{
 				parse->dont_splt = handling_quotes(parse->splt_pipes[i], ' ', ' ', -1);
 				parse->tokens = spliting_with_spaces(parse->dont_splt);
-				// getting_back(parse->tokens);
 				input_analyse(parse->tokens);
 				initializer(parse->tokens);
 				counting(parse);

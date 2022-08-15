@@ -1,0 +1,14 @@
+"file.txt"
+Builtins
+Execution
+Makefile
+Minishell
+Minishell.dSYM
+Parsing
+Readme
+Resourses
+Testing
+Utils
+file.txt
+minishell.c
+minishell.h

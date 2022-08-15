@@ -11,6 +11,7 @@ void ft_close(int n, int s)
 void	get_herdoc(t_pipe_data *pipe_data)
 {
 	char	*line;
+	char	*expand;
 	int		j;
 
 	j = -1;
@@ -27,9 +28,10 @@ void	get_herdoc(t_pipe_data *pipe_data)
 		{
 			if (line)
 			{
-				write(global_data.here_doc_pipe_fds[1], line, ft_strlen(line));
+				expand = get_env_in_herdoc(line);
+				write(global_data.here_doc_pipe_fds[1], expand, ft_strlen(expand));
 				write(global_data.here_doc_pipe_fds[1], "\n", 1);
-				free_str(line);
+				free_str(expand);
 			}
 			line = get_next_line(0);
 		}
