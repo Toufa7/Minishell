@@ -38,18 +38,14 @@ void	counting(t_parse *parse)
 {
 	int j = -1;
 	while (parse->tokens[++j].token)
-	{
 		input_counter(parse->tokens, &parse->tokens[j]);
-	}
 }
 
 void	getting_back(char **str)
 {
 	int i = -1;
 	while (str[++i])
-	{
 		str[i] = handling_quotes(str[i], -1, '|');
-	}
 }
 
 void	control_c(int sig)
@@ -104,10 +100,10 @@ int main(int ac, char **av, char **env)
 				initializer(parse->tokens);
 				counting(parse);
 				parse->pipe_data[i] = get_pipe_data(parse);
-				// token_and_type(parse);
+				if (!parse_error(parse))
+					execution(parse->pipe_data);
+				//token_and_type(parse);
 			}
-			if (!parse_error(parse))
-				execution(parse->pipe_data);
 		}
 	}
 }

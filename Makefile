@@ -1,8 +1,8 @@
 NAME = Minishell
 
-C_FLAGS = gcc -Wall -Werror -Wextra -lreadline
+C_FLAGS = gcc -Wall -Werror -Wextra
 
-C_READLINE_POMS = -L /Users/otoufah/goinfre/homebrew/opt/readline/lib -I /Users/otoufah/goinfre/homebrew/opt/readline/include
+C_READLINE_POMS = -lreadline -L /Users/otoufah/goinfre/homebrew/opt/readline/lib -I /Users/otoufah/goinfre/homebrew/opt/readline/include
 
 C_READLINE_ABOU = -L /goinfre/abouchfa/.brew/opt/readline/lib -I /goinfre/abouchfa/.brew/opt/readline/include
 
