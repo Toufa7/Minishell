@@ -60,6 +60,7 @@ t_pipe_data	*get_pipe_data(t_parse *parse)
 			pipe_data->argv = ft_realloc(pipe_data->argv, remove_quotes(get_env_variables(parse->tokens[i].token), DOUBLES_QUOTES));
 		else if (ft_strcmp(parse->tokens[i].type, "option") == 0)
 			pipe_data->argv = ft_realloc(pipe_data->argv, without_d_quotes);
+		free_str(parse->tokens[i].token);
 	}
 	return (pipe_data);
 }
