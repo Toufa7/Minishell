@@ -1,6 +1,6 @@
 #include "../minishell.h"
 
-bool    parse_error(t_parse *parse)
+bool    check_parse_errors(t_parse *parse)
 {
     size_t i = 0;
     if (!parse->tokens[i].token)
@@ -10,7 +10,6 @@ bool    parse_error(t_parse *parse)
     }
     while (i < parse->tokens->total && parse->tokens[i].token)
     {
-        printf("Token -> %s\n",parse->tokens[i].token);
         if ((ft_strcmp(parse->tokens[i].type, "here_doc") == 0 && !parse->tokens[i + 1].token) || (ft_strcmp(parse->tokens[i].type, "here_doc") == 0 && (ft_strcmp(parse->tokens[i + 1].type, "delimiter") != 0)))
         {
             printf("Mini: There's no delimiter in front of [%s]\n",parse->tokens[i].token);

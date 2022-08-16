@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/15 18:39:37 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/16 15:08:29 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ typedef struct s_global_data
 {
 	int 	errno_cp;
 	pid_t	last_child_id;
-	bool 	parse_error;
+	bool	parse_error;
 	bool	is_in_herdoc;
 	char	**envp;
 	int		size;
@@ -84,7 +84,6 @@ typedef struct s_pipe_data
 	char	**out_files;
 	char	**app_outfile;
 	char	**argv;
-	bool	parse_error;
 	bool	out_fd_set;
 	bool	in_fd_set;
 	bool	is_herdoc;
@@ -118,7 +117,7 @@ void		input_analyse(t_tokens	*tokens);
 void		input_counter(t_tokens	*counter, t_tokens	*tokens);
 t_tokens	*spliting_with_spaces(char	*str);
 t_pipe_data	*get_pipe_data(t_parse	*parse);
-bool		parse_error(t_parse *parse);
+bool		check_parse_errors(t_parse *parse);
 
 // ----------- Execution -------------------------
 

@@ -45,7 +45,7 @@ C_FILES = 	minishell.c \
 			Parsing/input_counter.c \
 			Parsing/input_types.c \
 			Parsing/handling_quotes.c \
-			Parsing/parse_error.c \
+			Parsing/check_parse_errors.c \
 			Builtins/mcd.c \
 			Builtins/mecho.c \
 			Builtins/menv.c \

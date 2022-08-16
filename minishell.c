@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/15 18:59:08 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/16 15:09:53 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,8 @@ int main(int ac, char **av, char **env)
 	parse = malloc(sizeof(t_parse));
 	global_data.is_in_herdoc = FALSE;
 	env_dup(env);
-	char flag;
 	while (TRUE)
 	{
-		flag = 0;
 		signal(SIGINT, control_c); // Ctrl+C
 		signal(SIGQUIT, SIG_IGN); // Ctrl + Backslash
 		parse->line = readline(GREEN "Mini-0.0$ " RESET);
@@ -102,14 +100,12 @@ int main(int ac, char **av, char **env)
 				input_analyse(parse->tokens);
 				initializer(parse->tokens);
 				counting(parse);
-				if (parse_error(parse))
-				{
-					flag = 1;
+				global_data.parse_error = check_parse_errors(parse);
+				if (global_data.parse_error)
 					break;
-				}
 				parse->pipe_data[i] = get_pipe_data(parse);
 			}
-			if (!flag)
+			if (!global_data.parse_error)
 				execution(parse->pipe_data);
 		}
 	}
