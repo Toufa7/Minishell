@@ -25,7 +25,8 @@ void	get_herdoc(t_pipe_data *pipe_data)
 		}
 		pipe(global_data.here_doc_pipe_fds);
 		line = NULL;
-		while (!line || ft_strcmp(line, pipe_data->delimiter[j]))
+		expand = NULL;
+		while (line || ft_strcmp(line, pipe_data->delimiter[j]))
 		{ 
 			line = readline("> ");
 			if (line)
