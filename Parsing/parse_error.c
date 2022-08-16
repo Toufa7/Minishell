@@ -42,41 +42,6 @@ bool    parse_error(t_parse *parse)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // bool    parse_error(t_parse *parse)
 // {
 //     int i = 0;

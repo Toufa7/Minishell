@@ -108,7 +108,6 @@ int main(int ac, char **av, char **env)
 				}
 				parse->pipe_data[i] = get_pipe_data(parse);
 			}
-
 			if (!flag)
 				execution(parse->pipe_data);
 		}
