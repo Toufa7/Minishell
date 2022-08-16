@@ -104,10 +104,11 @@ int main(int ac, char **av, char **env)
 				if (parse_error(parse))
 				{
 					flag = 1;
-					break;
+						break;
 				}
 				parse->pipe_data[i] = get_pipe_data(parse);
 			}
+
 			if (!flag)
 				execution(parse->pipe_data);
 		}
