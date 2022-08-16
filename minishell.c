@@ -55,9 +55,9 @@ void	control_c(int sig)
 		if (!global_data.is_in_herdoc)
 		{
 			printf("\n");
-			rl_on_new_line();
-			rl_replace_line("", 0);
-			rl_redisplay();
+			// rl_on_new_line();
+			// rl_replace_line("", 0);
+			// rl_redisplay();
 		}
 		else
 			exit(1);
@@ -73,8 +73,10 @@ int main(int ac, char **av, char **env)
 	parse = malloc(sizeof(t_parse));
 	global_data.is_in_herdoc = FALSE;
 	env_dup(env);
+	char flag;
 	while (TRUE)
 	{
+		flag = 0;
 		signal(SIGINT, control_c); // Ctrl+C
 		signal(SIGQUIT, SIG_IGN); // Ctrl + Backslash
 		parse->line = readline(GREEN "Mini-0.0$ " RESET);
@@ -99,11 +101,15 @@ int main(int ac, char **av, char **env)
 				input_analyse(parse->tokens);
 				initializer(parse->tokens);
 				counting(parse);
+				if (parse_error(parse))
+				{
+					flag = 1;
+					break;
+				}
 				parse->pipe_data[i] = get_pipe_data(parse);
-				if (!parse_error(parse))
-					execution(parse->pipe_data);
-				//token_and_type(parse);
 			}
+			if (!flag)
+				execution(parse->pipe_data);
 		}
 	}
 }

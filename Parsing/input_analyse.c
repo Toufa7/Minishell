@@ -50,8 +50,6 @@ void	input_analyse(t_tokens *tokens)
 			tokens[i].type = "red_out";
 		else if (ft_strcmp(tokens[i].token, tokens->cmp_append) == 0)
 			tokens[i].type = "append";
-		else if (i > 0 && (ft_strcmp(tokens[i - 1].type, "here_doc") == 0))
-			tokens[i].type = "delimiter";
 		else if (ft_strcmp(is_there(tokens[i].token), "in") == 0)
 			tokens[i].type = "env_var";
 		else if (i > 0 && (ft_strcmp(tokens[i - 1].type, "red_input") == 0))
@@ -60,6 +58,8 @@ void	input_analyse(t_tokens *tokens)
 			tokens[i].type = "outfile";
 		else if (i > 0 && (ft_strcmp(tokens[i - 1].type, "append") == 0))
 			tokens[i].type = "app_outfile";
+		else if (i > 0 && (ft_strcmp(tokens[i - 1].type, "here_doc") == 0))
+			tokens[i].type = "delimiter";
 		else if (i > 0 && cmd == 1)
 			tokens[i].type = "option";
 		else

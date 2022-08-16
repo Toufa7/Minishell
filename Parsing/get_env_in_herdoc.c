@@ -18,6 +18,7 @@ char	*get_env_in_herdoc(char *target)
 	int		i;
 	char	*output;
 	char	*variable;
+
 	i = 0;
 	output = ft_strdup("");
 	while (target[i])
