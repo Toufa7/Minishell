@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/15 18:46:55 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/16 15:14:48 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,14 @@ TODO: ✅❓
 	[✅] expanding in herdoc
 	[✅] cntrl_c in herdoc
 	[✅] var witout value should not displayed in env cmd
-	[✅] update exit status
 	[✅] error not displayed when error when giving dir as cmd
+	[✅] update exit status
+	[❓] Reset Exit status to 0 on succces
+	[❓] Changing exit status in case of failure and succes next
 	[❓] pwd in a removed dir and unseted path
 	[❓] BAD Address error
-	[❓] Program hanging when dealing with std_in and std_out
+	[❓] Program hanging when dealing with std_in and std_out (cat < "Makefile " )
+
 */
 
 #include "minishell.h"
@@ -55,9 +58,9 @@ void	control_c(int sig)
 		if (!global_data.is_in_herdoc)
 		{
 			printf("\n");
-			// rl_on_new_line();
-			// rl_replace_line("", 0);
-			// rl_redisplay();
+			rl_on_new_line();
+			rl_replace_line("", 0);
+			rl_redisplay();
 		}
 		else
 			exit(1);
@@ -73,16 +76,15 @@ int main(int ac, char **av, char **env)
 	parse = malloc(sizeof(t_parse));
 	global_data.is_in_herdoc = FALSE;
 	env_dup(env);
-	char flag;
 	while (TRUE)
 	{
-		flag = 0;
 		signal(SIGINT, control_c); // Ctrl+C
 		signal(SIGQUIT, SIG_IGN); // Ctrl + Backslash
 		parse->line = readline(GREEN "Mini-0.0$ " RESET);
+		printf("Line -> %s %zu\n",parse->line, ft_strlen(parse->line));
 		add_history(parse->line);
 		if (!parse->line || ft_strcmp(parse->line, "exit") == 0) // Ctrl + D 
-			exit(0);
+			exit(global_data.errno_cp);
 		parse->line_double_quotes = handling_quotes(parse->line, '|', -1);
 		if (!global_data.parse_error)
 		{
@@ -101,14 +103,13 @@ int main(int ac, char **av, char **env)
 				input_analyse(parse->tokens);
 				initializer(parse->tokens);
 				counting(parse);
-				if (parse_error(parse))
-				{
-					flag = 1;
-						break;
-				}
+				token_and_type(parse);
+				global_data.parse_error = check_parse_errors(parse);
+				if (global_data.parse_error)
+					break;
 				parse->pipe_data[i] = get_pipe_data(parse);
 			}
-			if (!flag)
+			if (!global_data.parse_error)
 				execution(parse->pipe_data);
 		}
 	}

@@ -44,8 +44,8 @@ char	*get_env_in_herdoc(char *target)
 			i += ft_strlen(variable);
 			output = ft_strjoin(output, variable);
 		}
-		free_str(variable);
+		// free_str(variable);
 	}
-	free_str(target);
+	// free_str(target);
 	return output;
 }
