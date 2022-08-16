@@ -24,11 +24,10 @@ void	get_herdoc(t_pipe_data *pipe_data)
 			ft_close(global_data.here_doc_pipe_fds[0], 4);
 		}
 		pipe(global_data.here_doc_pipe_fds);
-		line = NULL;
+		line = readline("> ");
 		expand = NULL;
 		while (!line || ft_strcmp(line, pipe_data->delimiter[j]))
 		{ 
-			line = readline("> ");
 			if (line)
 			{
 				expand = get_env_in_herdoc(line);
@@ -38,6 +37,7 @@ void	get_herdoc(t_pipe_data *pipe_data)
 			}
 			else
 				break;
+			line = readline("> ");
 		}
 		free_str(line);
 	}
@@ -121,8 +121,8 @@ void	pipe_files_prep(t_pipe_data *pipe_data)
 	{
 		fd = open(pipe_data->out_files[i],
 					O_CREAT | O_WRONLY | O_TRUNC, 0777);
-		dup2(fd, 1);
 		pipe_data->out_fd_set = TRUE;
+		dup2(fd, 1);
 		ft_close(fd, 10);
 	}
 }
@@ -130,19 +130,40 @@ void	pipe_files_prep(t_pipe_data *pipe_data)
 bool	check_builtin(t_pipe_data *pipe_data)
 {
 	if (!ft_strcmp("cd", pipe_data->command))
+	{
+		pipe_files_prep(pipe_data);
 		mcd(*(pipe_data->argv + 1));
+	}
 	else if (!ft_strcmp("echo", pipe_data->command))
+	{
+		pipe_files_prep(pipe_data);
 		mecho(pipe_data->argv + 1);
+	}
 	else if (!ft_strcmp("env", pipe_data->command))
+	{
+		pipe_files_prep(pipe_data);
 		menv(pipe_data->argv + 1, NULL, FALSE);
+	}
 	else if (!ft_strcmp("exit", pipe_data->command))
+	{
+		pipe_files_prep(pipe_data);
 		mexit(pipe_data->argv + 1);
+	}
 	else if (!ft_strcmp("export", pipe_data->command))
+	{
+		pipe_files_prep(pipe_data);
 		mexport(pipe_data->argv + 1);
+	}
 	else if (!ft_strcmp("pwd", pipe_data->command))
+	{
+		pipe_files_prep(pipe_data);
 		mpwd();
+	}
 	else if (!ft_strcmp("unset", pipe_data->command))
+	{
+		pipe_files_prep(pipe_data);
 		munset(pipe_data->argv + 1);
+	}
 	else
 		return FALSE;
 	return TRUE;
@@ -153,23 +174,20 @@ void	child_process(t_pipe_data *pipe_data, int index)
 	global_data.last_child_id = fork();
 	if (global_data.last_child_id == 0)
 	{
+		pipe_files_prep(pipe_data);
 		if (pipe_data->is_herdoc)
 		{
-			get_herdoc(pipe_data);
-			if (!global_data.is_in_herdoc)
-				exit(1);
+			dup2(global_data.cmd_pipe_fds[1], 1);
 			dup2(global_data.here_doc_pipe_fds[0], 0);
-			ft_close(global_data.here_doc_pipe_fds[1], 7);
-			ft_close(global_data.here_doc_pipe_fds[0], 6);
+			ft_close(global_data.here_doc_pipe_fds[1], 4);
+			ft_close(global_data.here_doc_pipe_fds[0], 4);
 		}
-		pipe_files_prep(pipe_data);
-		if (!pipe_data->in_fd_set && !pipe_data->is_herdoc)
+		else if (!pipe_data->in_fd_set && !pipe_data->is_herdoc)
 			dup2(global_data.pre_pipe_infd, 0);
 		if (global_data.size > index + 1 && !pipe_data->out_fd_set)
 			dup2(global_data.cmd_pipe_fds[1], 1);
 		ft_close(global_data.cmd_pipe_fds[1], 5);
 		ft_close(global_data.cmd_pipe_fds[0], 4);
-		ft_close(global_data.pre_pipe_infd, 3);
 		if (check_builtin(pipe_data))
 			exit(0);
 		else
@@ -180,7 +198,7 @@ void	child_process(t_pipe_data *pipe_data, int index)
 void	exec_pipe(t_pipe_data *pipe_data, int index)
 {
 	//printf("cmd: %s | size: %i\n", pipe_data->command, global_data.size);
-	if (global_data.size != 1 || !check_builtin(pipe_data))
+	if (global_data.size > 1 || !check_builtin(pipe_data))
 	{
 		validate_cmd(pipe_data);
 		if (!pipe_data->cmd_path)
@@ -188,10 +206,15 @@ void	exec_pipe(t_pipe_data *pipe_data, int index)
 		if (global_data.size != index + 1)
 			pipe(global_data.cmd_pipe_fds);
 		child_process(pipe_data, index);
+		ft_close(global_data.cmd_pipe_fds[1], 5);
+		ft_close(global_data.pre_pipe_infd, 2);
+		global_data.pre_pipe_infd = global_data.cmd_pipe_fds[0];
 	}
-	ft_close(global_data.cmd_pipe_fds[1], 5);
-	ft_close(global_data.pre_pipe_infd, 2);
-	global_data.pre_pipe_infd = global_data.cmd_pipe_fds[0];
+	if (pipe_data->is_herdoc)
+	{
+		ft_close(global_data.here_doc_pipe_fds[1], 4);
+		ft_close(global_data.here_doc_pipe_fds[0], 4);
+	}
 }
 
 void	execution(t_pipe_data **pipes_data)
@@ -199,20 +222,23 @@ void	execution(t_pipe_data **pipes_data)
 	int		i;
 
 	i = -1;
-	global_data.pre_pipe_infd = -1;
-	global_data.size = 0;
 	while (pipes_data[global_data.size])
 		global_data.size++;
 	while (pipes_data[++i])
+	{
 		if (pipes_data[i]->is_herdoc)
+		{
+			get_herdoc(pipes_data[i]);
 			exec_pipe(pipes_data[i], i);
+		}
+	}
 	i = -1;
 	while (pipes_data[++i])
 		if (!pipes_data[i]->is_herdoc)
 			exec_pipe(pipes_data[i], i);
 	ft_close(global_data.pre_pipe_infd, 1);
 	i = -1;
-	while (pipes_data[++i])
+	while (pipes_data[++i] && global_data.size > 1)
 	{
 		if (i == 0)
 		{

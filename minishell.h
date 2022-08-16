@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/16 15:08:29 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/16 18:15:31 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ typedef struct s_tokens
 typedef struct s_global_data
 {
 	int 	errno_cp;
+	int 	in_fd;
+	int 	out_fd;
 	pid_t	last_child_id;
 	bool	parse_error;
 	bool	is_in_herdoc;
