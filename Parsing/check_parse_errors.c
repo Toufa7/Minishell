@@ -41,10 +41,10 @@ bool    check_parse_errors(t_parse *parse)
 		}
 		else if ((ft_strcmp(parse->tokens[i].type,"red_out") == 0 && !parse->tokens[i + 1].token) || (ft_strcmp(parse->tokens[i].type, "red_out") == 0 && (ft_strcmp(parse->tokens[i + 1].type, "outfile") != 0)))
 		{
-			// if (ft_strcmp(parse->tokens[i + 1].type, "env_var") == 0)
-			// {
-				
-			// }
+			if (ft_strcmp(parse->tokens[i + 1].type, "env_var") == 0)
+			{
+				return (FALSE);
+			}
 			printf("Mini: There's no output file in front of red out [%s]\n", parse->tokens[i].token);
 			return (TRUE);
 		}

@@ -83,20 +83,23 @@ void	init_global_data()
 
 int main(int ac, char **av, char **env)
 {
-	(void) ac;
-	(void) av;
-	t_parse *parse;
+	(void)	ac;
+	(void)	av;
+	int		i;
+	t_parse	*parse;
 
 	parse = malloc(sizeof(t_parse));
 	env_dup(env);
 	while (TRUE)
 	{
-		signal(SIGINT, control_c); // Ctrl+C
-		signal(SIGQUIT, SIG_IGN); // Ctrl + Backslash
+		// Ctrl + C
+		signal(SIGINT, control_c);
+		// Ctrl + Backslash
+		signal(SIGQUIT, SIG_IGN); 
 		parse->line = readline(GREEN "Mini-0.0$ " RESET);
-		printf("Line -> %s %zu\n",parse->line, ft_strlen(parse->line));
 		add_history(parse->line);
-		if (!parse->line || ft_strcmp(parse->line, "exit") == 0) // Ctrl + D 
+		// Ctrl + D 
+		if (!parse->line || ft_strcmp(parse->line, "exit") == 0)
 			exit(global_data.errno_cp);
 		parse->line_double_quotes = handling_quotes(parse->line, '|', -1);
 		if (!global_data.parse_error)
@@ -104,7 +107,7 @@ int main(int ac, char **av, char **env)
 			parse->formated_input = input_formating(parse->line_double_quotes);
 			parse->splt_pipes = ft_split(parse->formated_input, '|');
 			getting_back(parse->splt_pipes);
-			int i = 0;
+			i = 0;
 			while (parse->splt_pipes[i])
 				i++;
 			parse->pipe_data = ft_calloc(i + 1, sizeof(t_pipe_data *));
@@ -116,7 +119,7 @@ int main(int ac, char **av, char **env)
 				input_analyse(parse->tokens);
 				initializer(parse->tokens);
 				counting(parse);
-				token_and_type(parse);
+				// token_and_type(parse);
 				global_data.parse_error = check_parse_errors(parse);
 				if (global_data.parse_error)
 					break;
