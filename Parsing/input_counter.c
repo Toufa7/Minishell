@@ -23,7 +23,7 @@ void	initializer(t_tokens	*tokens)
 	tokens->delimiter = 0;
 	tokens->app_file = 0;
 	tokens->cmd = 0;
-	tokens->env_var = 0;
+	// tokens->env_var = 0;
 	tokens->total = 0;
 	tokens->option = 0;
 }
@@ -56,8 +56,8 @@ void	input_counter(t_tokens *counter, t_tokens *tokens)
 			exit(2);
 		}
 	}
-	else if (ft_strcmp(tokens->type, "env_var") == 0)
-		counter->env_var++;
+	// else if (ft_strcmp(tokens->type, "env_var") == 0)
+	// 	counter->env_var++;
 	else if (ft_strcmp(tokens->type, "option") == 0)
 		counter->option++;
 	counter->total = counter->red_in + counter->option + counter->red_out + counter->here_do + counter->app + counter->cmd + counter->in_file + counter->out_file + counter->app_file + counter->delimiter;
