@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/17 15:23:33 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/17 15:36:06 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,8 @@ TODO: ✅❓
 	[✅] var witout value should not displayed in env cmd
 	[✅] error not displayed when error when giving dir as cmd
 	[✅] update exit status
-	[❓] Create 
 	[❓] Reset Exit status to 0 on succces
 	[❓] pwd in a removed dir and unseted path
-	[❓] BAD Address error
-	[❓] Program hanging when dealing with std_in and std_out
 */
 
 #include "minishell.h"
