@@ -24,7 +24,7 @@ TODO: ✅❓
 	[❓] pwd in a removed dir and unseted path
 	[❓] BAD Address error
 	[❓] Program hanging when dealing with std_in and std_out (cat < "Makefile " )
-
+	[❓] echo "Me" | cat -e and then ls
 */
 
 #include "minishell.h"
@@ -59,9 +59,9 @@ void	control_c(int sig)
 		if (!global_data.is_in_herdoc)
 		{
 			printf("\n");
-			// rl_on_new_line();
-			// rl_replace_line("", 0);
-			// rl_redisplay();
+			rl_on_new_line();
+			rl_replace_line("", 0);
+			rl_redisplay();
 		}
 		else
 			exit(1);
@@ -119,8 +119,8 @@ int main(int ac, char **av, char **env)
 				input_analyse(parse->tokens);
 				initializer(parse->tokens);
 				counting(parse);
-				// token_and_type(parse);
-				global_data.parse_error = check_parse_errors(parse);
+				token_and_type(parse);
+				// global_data.parse_error = check_parse_errors(parse);
 				if (global_data.parse_error)
 					break;
 				parse->pipe_data[i] = get_pipe_data(parse);

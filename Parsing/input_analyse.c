@@ -12,7 +12,8 @@
 
 #include "../minishell.h"
 
-// TODO: don't forget echo > $USER
+// TODO: don't forget echo > $USER ==> DONE
+// cat >> $US
 
 char	*is_there(char *str)
 {
