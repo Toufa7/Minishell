@@ -3,7 +3,6 @@
 void ft_close(int n, int s)
 {
 	(void) s;
-	//printf("---> n: %i | s: %i\n", n, s);
 	if (n > 2)
 		close(n);
 }
@@ -204,7 +203,6 @@ void	child_process(t_pipe_data *pipe_data, int index)
 
 void	exec_pipe(t_pipe_data *pipe_data, int index)
 {
-	//printf("cmd: %s | size: %i\n", pipe_data->command, global_data.size);
 	if (global_data.size > 1 || !check_builtin(pipe_data))
 	{
 		validate_cmd(pipe_data);

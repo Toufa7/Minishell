@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 20:05:33 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/21 10:22:30 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/18 15:18:47 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,4 @@ char	*ft_strstr(const char *haystack, const char *needle)
 	}
 	return (NULL);
 }
-
-// int main()
-// {
-// 	printf("%s\n",ft_strstr("TMPDIR=/var/folders/zz/zyxvpxvq6csfxvn_n0000jg00004br/T/",NULL));
-// }
 

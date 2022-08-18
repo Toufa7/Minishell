@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   remove_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: otoufah <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 10:10:52 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/15 10:10:53 by otoufah          ###   ########.fr       */
+/*   Updated: 2022/08/18 15:18:43 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,3 @@ char	*remove_quotes(char *str, char removed)
 	}
 	return (new);
 }
-
-// int main()
-// {
-//     while (1)
-//     {
-//         char *str = readline("");
-//         printf("|%s|\n", hello_quotes(str));
-//     }
-// }

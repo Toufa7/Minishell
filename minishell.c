@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/17 19:18:30 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/18 15:11:57 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,8 @@ TODO: ✅❓
 	[✅] var witout value should not displayed in env cmd
 	[✅] error not displayed when error when giving dir as cmd
 	[✅] update exit status
-	[❓] Reset Exit status to 0 on succces
-	[❓] Changing exit status in case of failure and succes next
-	[❓] pwd in a removed dir and unseted path
+	[✅] Reset Exit status to 0 on succces
+	[✅] pwd in a removed dir and unseted path
 */
 
 #include "minishell.h"
@@ -72,7 +71,6 @@ void	init_global_data()
 	global_data.in_fd = 0;
 	global_data.out_fd = 1;
 	global_data.pre_pipe_infd = -1;
-	global_data.errno_cp = 0;
 	global_data.last_child_id = 0;
 	global_data.parse_error = FALSE;
 }
@@ -85,9 +83,11 @@ int main(int ac, char **av, char **env)
 	t_parse	*parse;
 
 	parse = malloc(sizeof(t_parse));
+	global_data.errno_cp = 0;
 	env_dup(env);
 	while (TRUE)
 	{
+		init_global_data();
 		// Ctrl + C
 		signal(SIGINT, control_c);
 		// Ctrl + Backslash
@@ -95,7 +95,7 @@ int main(int ac, char **av, char **env)
 		parse->line = readline(GREEN "Mini-0.0$ " RESET);
 		add_history(parse->line);
 		// Ctrl + D 
-		if (!parse->line || ft_strcmp(parse->line, "exit") == 0)
+		if (!parse->line)
 			exit(global_data.errno_cp);
 		parse->line_double_quotes = handling_quotes(parse->line, '|', -1);
 		if (!global_data.parse_error)
@@ -115,7 +115,6 @@ int main(int ac, char **av, char **env)
 				input_analyse(parse->tokens);
 				initializer(parse->tokens);
 				counting(parse);
-				// token_and_type(parse);
 				global_data.parse_error = check_parse_errors(parse);
 				if (global_data.parse_error)
 					break;
