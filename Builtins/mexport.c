@@ -97,6 +97,7 @@ void	create_final_var(int op_type, char *key, char *new_val)
 		global_data.envp = ft_realloc(global_data.envp, final_var);
 	if (var_index != -1 && op_type == 1)
 		free_str(final_val);
+	global_data.errno_cp = 0;
 }
 
 bool	check_errors(char *str, char **key, char **val, int *op_type)

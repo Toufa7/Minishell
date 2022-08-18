@@ -40,5 +40,6 @@ void	menv(char **argv, char *prefix, bool is_export)
 					write(1, "\"", global_data.out_fd);
 			ft_putstr_fd("\n", global_data.out_fd);
 		}
+		global_data.errno_cp = 0;
 	}
 }

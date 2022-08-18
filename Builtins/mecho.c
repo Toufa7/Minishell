@@ -34,4 +34,5 @@ void    mecho(char **argv)
 	}
 	if (!new_line)
 		ft_putstr_fd("\n", global_data.out_fd);
+	global_data.errno_cp = 0;
 }

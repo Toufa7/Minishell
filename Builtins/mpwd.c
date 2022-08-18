@@ -8,6 +8,7 @@ void    mpwd(void)
     {
 		ft_putstr_fd(buff, global_data.out_fd);
 		ft_putstr_fd("\n", global_data.out_fd);
+		global_data.errno_cp = 0;
 	}
     else
 	{

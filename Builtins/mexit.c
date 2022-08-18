@@ -34,5 +34,8 @@ void mexit(char **argv)
 		return;
 	}
 	else
+	{
 		exit(ft_atoi(argv[0]));
+		global_data.errno_cp = 0;
+	}
 }
