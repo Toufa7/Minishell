@@ -57,7 +57,9 @@ t_pipe_data	*get_pipe_data(t_parse *parse)
 		else if (ft_strcmp(parse->tokens[i].type, "app_outfile") == 0)
 			pipe_data->app_outfile = ft_realloc(pipe_data->app_outfile, without_d_quotes);
 		else if (ft_strcmp(parse->tokens[i].type, "env_var") == 0)
+		{
 			pipe_data->argv = ft_realloc(pipe_data->argv, remove_quotes(get_env_variables(parse->tokens[i].token), DOUBLES_QUOTES));
+		}
 		else if (ft_strcmp(parse->tokens[i].type, "option") == 0)
 			pipe_data->argv = ft_realloc(pipe_data->argv, without_d_quotes);
 		free_str(parse->tokens[i].token);

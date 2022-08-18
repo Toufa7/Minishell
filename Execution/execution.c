@@ -90,7 +90,7 @@ void	validate_cmd(t_pipe_data *pipe_data)
 	free_arr(execps_paths);
 }
 
-void	pipe_files_prep(t_pipe_data *pipe_data)
+void	pipe_files_prep(t_pipe_data *pipe_data, bool is_builtin)
 {
 	int	i;
 	int fd;
@@ -102,11 +102,8 @@ void	pipe_files_prep(t_pipe_data *pipe_data)
 		{
 			fd = open(pipe_data->in_files[i], O_RDONLY);
 			pipe_data->in_fd_set = TRUE;
-			if (!pipe_data->is_herdoc)
-			{
+			if (!pipe_data->is_herdoc && !is_builtin)
 				dup2(fd, 0);
-				global_data.in_fd = fd;
-			}
 			ft_close(fd, 8);
 		}
 	}
@@ -116,7 +113,8 @@ void	pipe_files_prep(t_pipe_data *pipe_data)
 		fd = open(pipe_data->app_outfile[i],
 					O_CREAT | O_WRONLY | O_APPEND, 0777);
 		pipe_data->out_fd_set = TRUE;
-		dup2(fd, 1);
+		if (!is_builtin)
+			dup2(fd, 1);
 		global_data.out_fd = fd;
 		ft_close(fd, 9);
 	}
@@ -126,83 +124,55 @@ void	pipe_files_prep(t_pipe_data *pipe_data)
 		fd = open(pipe_data->out_files[i],
 					O_CREAT | O_WRONLY | O_TRUNC, 0777);
 		pipe_data->out_fd_set = TRUE;
-		dup2(fd, 1);
+		if (!is_builtin)
+			dup2(fd, 1);
 		global_data.out_fd = fd;
 		ft_close(fd, 10);
 	}
 }
 
-void	reset_std()
-{
-	if (global_data.in_fd != 0)
-	{
-		dup2(0, global_data.in_fd);
-		global_data.in_fd = 0;
-	}
-	if (global_data.out_fd != 1)
-	{
-		dup2(1, global_data.out_fd);
-		global_data.out_fd = 1;
-	}
-}
-
-void	builtin_prep(t_pipe_data *pipe_data)
-{
-	if (pipe_data->is_herdoc)
-	{
-		dup2(global_data.here_doc_pipe_fds[0], 0);
-		global_data.in_fd = global_data.here_doc_pipe_fds[0];
-	}
-	pipe_files_prep(pipe_data);
-}
 
 bool	check_builtin(t_pipe_data *pipe_data)
 {
 	if (!ft_strcmp("cd", pipe_data->command))
 	{
-		builtin_prep(pipe_data);
+		pipe_files_prep(pipe_data, TRUE);
 		mcd(*(pipe_data->argv + 1));
-		reset_std();
 	}
 	else if (!ft_strcmp("echo", pipe_data->command))
 	{
-		builtin_prep(pipe_data);
+		pipe_files_prep(pipe_data, TRUE);
 		mecho(pipe_data->argv + 1);
-		reset_std();
 	}
 	else if (!ft_strcmp("env", pipe_data->command))
 	{
-		builtin_prep(pipe_data);
+		pipe_files_prep(pipe_data, TRUE);
 		menv(pipe_data->argv + 1, NULL, FALSE);
-		reset_std();
 	}
 	else if (!ft_strcmp("exit", pipe_data->command))
 	{
-		builtin_prep(pipe_data);
+		pipe_files_prep(pipe_data, TRUE);
 		mexit(pipe_data->argv + 1);
-		reset_std();
 	}
 	else if (!ft_strcmp("export", pipe_data->command))
 	{
-		builtin_prep(pipe_data);
+		pipe_files_prep(pipe_data, TRUE);
 		mexport(pipe_data->argv + 1);
-		reset_std();
 	}
 	else if (!ft_strcmp("pwd", pipe_data->command))
 	{
-		builtin_prep(pipe_data);
+		pipe_files_prep(pipe_data, TRUE);
 		mpwd();
-		reset_std();
 	}
 	else if (!ft_strcmp("unset", pipe_data->command))
 	{
-		builtin_prep(pipe_data);
+		pipe_files_prep(pipe_data, TRUE);
 		munset(pipe_data->argv + 1);
-		reset_std();
 	}
 	else
 		return FALSE;
-	ft_close(global_data.here_doc_pipe_fds[0], 0);
+	global_data.in_fd = 0;
+	global_data.out_fd = 1;
 	return TRUE;
 }
 
@@ -211,7 +181,7 @@ void	child_process(t_pipe_data *pipe_data, int index)
 	global_data.last_child_id = fork();
 	if (global_data.last_child_id == 0)
 	{
-		pipe_files_prep(pipe_data);
+		pipe_files_prep(pipe_data, FALSE);
 		if (pipe_data->is_herdoc)
 		{
 			dup2(global_data.cmd_pipe_fds[1], 1);

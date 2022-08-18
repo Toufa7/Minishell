@@ -28,10 +28,10 @@ void    mecho(char **argv)
 		j--;
 	while(argv[j])
 	{
-		ft_putstr_fd(argv[j++], 1);
+		ft_putstr_fd(argv[j++], global_data.out_fd);
 		if (argv[j])
-			ft_putstr_fd(" ", 1);
+			ft_putstr_fd(" ", global_data.out_fd);
 	}
 	if (!new_line)
-		ft_putstr_fd("\n", 1);
+		ft_putstr_fd("\n", global_data.out_fd);
 }

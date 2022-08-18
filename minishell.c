@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/17 15:36:06 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/17 19:18:30 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ TODO: ✅❓
 	[✅] error not displayed when error when giving dir as cmd
 	[✅] update exit status
 	[❓] Reset Exit status to 0 on succces
+	[❓] Changing exit status in case of failure and succes next
 	[❓] pwd in a removed dir and unseted path
 */
 
@@ -54,9 +55,9 @@ void	control_c(int sig)
 		if (!global_data.is_in_herdoc)
 		{
 			printf("\n");
-			// rl_on_new_line();
-			// rl_replace_line("", 0);
-			// rl_redisplay();
+			rl_on_new_line();
+			rl_replace_line("", 0);
+			rl_redisplay();
 		}
 		else
 			exit(1);
@@ -78,27 +79,31 @@ void	init_global_data()
 
 int main(int ac, char **av, char **env)
 {
-	(void) ac;
-	(void) av;
-	t_parse *parse;
+	(void)	ac;
+	(void)	av;
+	int		i;
+	t_parse	*parse;
 
 	parse = malloc(sizeof(t_parse));
 	env_dup(env);
 	while (TRUE)
 	{
-		signal(SIGINT, control_c); // Ctrl+C
-		signal(SIGQUIT, SIG_IGN); // Ctrl + Backslash
+		// Ctrl + C
+		signal(SIGINT, control_c);
+		// Ctrl + Backslash
+		signal(SIGQUIT, SIG_IGN); 
 		parse->line = readline(GREEN "Mini-0.0$ " RESET);
 		add_history(parse->line);
-		if (!parse->line || ft_strcmp(parse->line, "exit") == 0) // Ctrl + D 
-			exit(0);
+		// Ctrl + D 
+		if (!parse->line || ft_strcmp(parse->line, "exit") == 0)
+			exit(global_data.errno_cp);
 		parse->line_double_quotes = handling_quotes(parse->line, '|', -1);
 		if (!global_data.parse_error)
 		{
 			parse->formated_input = input_formating(parse->line_double_quotes);
 			parse->splt_pipes = ft_split(parse->formated_input, '|');
 			getting_back(parse->splt_pipes);
-			int i = 0;
+			i = 0;
 			while (parse->splt_pipes[i])
 				i++;
 			parse->pipe_data = ft_calloc(i + 1, sizeof(t_pipe_data *));
@@ -110,6 +115,7 @@ int main(int ac, char **av, char **env)
 				input_analyse(parse->tokens);
 				initializer(parse->tokens);
 				counting(parse);
+				// token_and_type(parse);
 				global_data.parse_error = check_parse_errors(parse);
 				if (global_data.parse_error)
 					break;

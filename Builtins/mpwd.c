@@ -6,8 +6,8 @@ void    mpwd(void)
 
     if (getcwd(buff, sizeof(buff)) != NULL)
     {
-		ft_putstr_fd(buff, 1);
-		ft_putstr_fd("\n", 1);
+		ft_putstr_fd(buff, global_data.out_fd);
+		ft_putstr_fd("\n", global_data.out_fd);
 	}
     else
 	{
