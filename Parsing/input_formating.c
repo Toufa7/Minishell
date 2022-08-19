@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:55:08 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/22 11:35:11 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/18 15:18:40 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,3 @@ char	*input_formating(char *str)
 	free(str);
 	return (spcs);
 }
-
-
-// int main(int ac, char **av, char **env)
-// {
-// 	while (1)
-// 	{
-// 		char *str = readline("");
-// 		printf("%s\n", input_formating(str));
-// 	}
-// }

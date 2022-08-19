@@ -1,13 +1,13 @@
 #include "../minishell.h"
 
-char	**ft_realloc(char **pipe_data, char *str)
+char	**ft_realloc(char **dist, char *str)
 {
 	char	**tmp;
 	char	**new_input;
 	int		i;
 
 	i = 0;
-	tmp = pipe_data;
+	tmp = dist;
 	while (tmp && tmp[i])
 		i++;
 	new_input = ft_calloc(i + 2, sizeof(char *));

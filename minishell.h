@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/16 18:15:31 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/18 11:57:44 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,14 @@ typedef struct s_tokens
 
 typedef struct s_global_data
 {
+	char	**envp;
+	char	*pwd_copy;
 	int 	errno_cp;
 	int 	in_fd;
 	int 	out_fd;
 	pid_t	last_child_id;
 	bool	parse_error;
 	bool	is_in_herdoc;
-	char	**envp;
 	int		size;
 	int		cmd_pipe_fds[2];
 	int		here_doc_pipe_fds[2];
@@ -143,7 +144,7 @@ char	*ft_itoa(int n);
 void	free_arr(char **arr);
 char	*get_var_val(int var_index, bool include_eqs);
 int		validate_var_name(char *var);
-char	**ft_realloc(char **pipe_data, char *str);
+char	**ft_realloc(char **dist, char *str);
 void	env_dup(char **env);
 int		get_var_index(char *var);
 char	*get_next_line(int fd);

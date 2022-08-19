@@ -12,6 +12,7 @@ void	munset(char **argv)
 	tmp = NULL;
 	while (argv[++i])
 	{
+		global_data.errno_cp = 0;
 		j = validate_var_name(argv[i]);
 		if (argv[i][j])
 		{

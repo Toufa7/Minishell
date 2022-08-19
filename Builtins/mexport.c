@@ -67,7 +67,6 @@ int get_op_type(char *str)
 
 void	create_final_var(int op_type, char *key, char *new_val)
 {
-	//printf("3: key: %s | opt: %i | val: %s\n", key, op_type,new_val);
 	char	*final_var;
 	char	*final_val;
 	char	*old_val;
@@ -97,6 +96,7 @@ void	create_final_var(int op_type, char *key, char *new_val)
 		global_data.envp = ft_realloc(global_data.envp, final_var);
 	if (var_index != -1 && op_type == 1)
 		free_str(final_val);
+	global_data.errno_cp = 0;
 }
 
 bool	check_errors(char *str, char **key, char **val, int *op_type)
@@ -105,7 +105,6 @@ bool	check_errors(char *str, char **key, char **val, int *op_type)
 	if (key)
 		*op_type = get_op_type(str + ft_strlen(*key));
 	*val = get_val(str, *op_type == 0);
-	//printf("1: key: %s | opt: %i | val: %s\n", *key, *op_type, *val);
 	if (!key || *op_type == -1)
 	{
 		ft_putstr_fd("export: '", 2);

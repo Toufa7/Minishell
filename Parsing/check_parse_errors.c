@@ -29,14 +29,16 @@ bool    check_parse_errors(t_parse *parse)
 	size_t i = 0;
 	if (!parse->tokens[i].token && is_empty(parse->tokens[i].token) == 0)
 	{
-		printf("Error\n");
+		ft_putstr_fd("Error\n", 2);
 		return TRUE;
 	}
 	while (i < parse->tokens->total && parse->tokens[i].token)
 	{
 		if ((ft_strcmp(parse->tokens[i].type, "here_doc") == 0 && !parse->tokens[i + 1].token) || (ft_strcmp(parse->tokens[i].type, "here_doc") == 0 && (ft_strcmp(parse->tokens[i + 1].type, "delimiter") != 0)))
 		{
-			printf("Mini: There's no delimiter in front of [%s]\n",parse->tokens[i].token);
+			ft_putstr_fd("Mini: There's no delimiter in front of ", 2);
+			ft_putstr_fd(parse->tokens[i].token, 2);
+			ft_putstr_fd("\n", 2);
 			return (TRUE);
 		}
 		else if ((ft_strcmp(parse->tokens[i].type,"red_out") == 0 && !parse->tokens[i + 1].token) || (ft_strcmp(parse->tokens[i].type, "red_out") == 0 && (ft_strcmp(parse->tokens[i + 1].type, "outfile") != 0)))
@@ -45,17 +47,23 @@ bool    check_parse_errors(t_parse *parse)
 			{
 				return (FALSE);
 			}
-			printf("Mini: There's no output file in front of red out [%s]\n", parse->tokens[i].token);
+			ft_putstr_fd("Mini: There's no output file in front of red out ", 2);
+			ft_putstr_fd(parse->tokens[i].token, 2);
+			ft_putstr_fd("\n", 2);
 			return (TRUE);
 		}
 		else if ((ft_strcmp(parse->tokens[i].type, "append") == 0 && !parse->tokens[i + 1].token) || (ft_strcmp(parse->tokens[i].type, "append") == 0 && (ft_strcmp(parse->tokens[i + 1].type, "app_outfile") != 0)))
 		{
-			printf("Mini: There's no appended file in front of a append [%s]\n", parse->tokens[i].token);
+			ft_putstr_fd("Mini: There's no appended file in front of a append \n", 2);
+			ft_putstr_fd(parse->tokens[i].token, 2);
+			ft_putstr_fd("\n", 2);
 			return (TRUE);
 		}
 		else if ((ft_strcmp(parse->tokens[i].type, "red_input") == 0 && !parse->tokens[i + 1].token) || ((ft_strcmp(parse->tokens[i].type, "red_input") == 0) && (ft_strcmp(parse->tokens[i + 1].type, "infile") != 0)))
 		{
-			printf("Mini: There's no input file to be readead from [%s]\n", parse->tokens[i].token);
+			ft_putstr_fd("Mini: There's no input file to be readead from \n", 2);
+			ft_putstr_fd(parse->tokens[i].token, 2);
+			ft_putstr_fd("\n", 2);
 			return (TRUE);            
 		}
 		i++;

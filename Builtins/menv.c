@@ -26,19 +26,20 @@ void	menv(char **argv, char *prefix, bool is_export)
 				continue;
 			j = -1;
 			eq = 0;
-			ft_putstr_fd(prefix, 1);
+			ft_putstr_fd(prefix, global_data.out_fd);
 			while(global_data.envp[i][++j])
 			{
-				write(1, global_data.envp[i] + j, 1);
+				write(1, global_data.envp[i] + j, global_data.out_fd);
 				if (global_data.envp[i][j] == '=' && is_export)
 				{
-					write(1, "\"", 1);
+					write(1, "\"", global_data.out_fd);
 					eq = 1;
 				}
 			}
 			if (is_export && eq)
-					write(1, "\"", 1);
-			ft_putstr_fd("\n", 1);
+					write(1, "\"", global_data.out_fd);
+			ft_putstr_fd("\n", global_data.out_fd);
 		}
+		global_data.errno_cp = 0;
 	}
 }

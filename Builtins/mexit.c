@@ -9,6 +9,11 @@ void mexit(char **argv)
 	isarg_digit = TRUE;
 	j = -1;
 	i = 0;
+	if (!argv[0])
+	{
+		ft_putstr_fd("exit\n", 1);
+		exit(global_data.errno_cp);
+	}
 	while (argv[i][++j])
 	{
 		if (!(argv[i][j] >= '0' && argv[i][j] <= '9'))
@@ -34,5 +39,8 @@ void mexit(char **argv)
 		return;
 	}
 	else
+	{
 		exit(ft_atoi(argv[0]));
+		global_data.errno_cp = 0;
+	}
 }
