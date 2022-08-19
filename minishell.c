@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/18 15:11:57 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/19 17:11:35 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ TODO: ✅❓
 	[❓] echo "Me" | cat -e and then ls
 	[✅] Reset Exit status to 0 on succces
 	[✅] pwd in a removed dir and unseted path
+	Spaces == SEGV
+	Empty cmd should not display cmd not found
+	ctr \ -> quit --> exit 131
+	ctrl c --> exit 130
 */
 
 #include "minishell.h"
@@ -83,13 +87,14 @@ void	init_global_data()
 
 int main(int ac, char **av, char **env)
 {
-	(void)	ac;
-	(void)	av;
+	(void) ac;
+	(void) av;
 	int		i;
 	t_parse	*parse;
 
 	parse = malloc(sizeof(t_parse));
 	global_data.errno_cp = 0;
+	rl_catch_signals = 0;
 	env_dup(env);
 	while (TRUE)
 	{
