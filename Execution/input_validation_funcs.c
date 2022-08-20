@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 19:09:57 by abouchfa          #+#    #+#             */
-/*   Updated: 2022/08/14 15:15:01 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/19 17:47:14 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ char	*get_cmd_path(char *cmd, char **exec_programs_dirs)
 	status = 1;
 	cmd_path = NULL;
 	temp = NULL;
+	printf("---> %s\n", cmd);
 	while (exec_programs_dirs[++i] && cmd && cmd[0] && status)
 	{
 		free_str(cmd_path);

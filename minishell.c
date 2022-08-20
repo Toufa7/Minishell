@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/19 17:11:35 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/20 15:34:47 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@ TODO: ✅❓
 	[✅] update exit status
 	[✅] Reset Exit status to 0 on succces
 	[✅] pwd in a removed dir and unseted path
+	ambiguous redirect when the file redercs in NULL
+	ignore env vars when it empty and it's a cmd
 	Spaces == SEGV
-	Empty cmd should not display cmd not found
+	Empty ` should not display cmd not found
 	ctr \ -> quit --> exit 131
 	ctrl c --> exit 130
 */
