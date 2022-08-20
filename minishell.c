@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/20 22:36:31 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/20 23:52:39 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ TODO: ✅❓
 	--> Parser
 	[❓] cat << "'"'
 	[❓] if delimiter has quotes don't expand
+	[❓] $fghjm << ls --> cmd should be NUll and ls | "" --> cmd should be empty string
 */
 
 #include "minishell.h"
@@ -74,7 +75,9 @@ void	control_c(int sig)
 			rl_redisplay();
 		}
 		else
-			exit(1); // This cause Minishell to quit
+		{
+			dup2(101, 0);
+		}
 	}
 }
 
