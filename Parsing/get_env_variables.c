@@ -65,6 +65,7 @@ char	*get_env_variables(char *target)
 			i += ft_strlen(variable);
 			output = ft_strjoin(output, variable);
 		}
+		printf("%zu\n",ft_strlen(output));
 		// free_str(variable);
 	}
 	// free_str(target);

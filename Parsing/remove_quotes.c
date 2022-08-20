@@ -33,7 +33,7 @@ char	*remove_quotes(char *str, char removed)
 	char	*here;
 
 	i = 0;
-	new = "";
+	new = ft_strdup("");
 	while (str[i])
 	{
 		if (str[i] == removed)

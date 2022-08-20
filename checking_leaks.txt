@@ -1,0 +1,4 @@
+1 = export MallocStackLogging=1
+2 = Remake
+3 = system("Leaks minishell")
+4 = Enjoy

@@ -36,7 +36,7 @@ t_pipe_data	*get_pipe_data(t_parse *parse)
 	i = -1;
 	pipe_data = malloc(sizeof(t_pipe_data));
 	var_init(pipe_data);
-	while (parse->tokens[++i].token)
+	while (parse->tokens[++i].token && parse->tokens[i].token)
 	{
 		replaced = handling_quotes(parse->tokens[i].token, -1, ' ');
 		without_d_quotes = remove_quotes(replaced, DOUBLES_QUOTES);

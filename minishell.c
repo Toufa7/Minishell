@@ -26,10 +26,22 @@ TODO: ✅❓
 	[❓] echo "Me" | cat -e and then ls
 	[✅] Reset Exit status to 0 on succces
 	[✅] pwd in a removed dir and unseted path
-	Spaces == SEGV
+	[✅] Spaces == SEGV
 	Empty cmd should not display cmd not found
-	ctr \ -> quit --> exit 131
-	ctrl c --> exit 130
+	[❓] ctr \ -> quit --> exit 131
+	[❓] ctrl c --> exit 130
+	[❓] cat << ss exiting in Ctrl + C
+	[❓] echo hello > file You should write the output in the file
+	[❓] export > file.txt  == SEGV 
+	[❓] cat << "'"'
+	[❓] if delimiter has quotes don't expand
+	[❓] cat Makefile > outfile.txt < input > outfile_error.txt no such file called input so you should stop a the error file : Solution => Exit in Child Process (if you found an error)
+	[❓] < Makdbvbefile << ss cat : You should stop at the error : Solution => Exit in Child Process
+	[✅] cat | ls : Try to press ok or redirections : Solution => Stop when the user hit enter : Solution simply Try Another Terminal
+	[❓] Try Unset OLDPWD and PWD then try export
+	[❓] declare -x OLDPWD="/Users/otoufah/Desktop/Here_we_go"
+	[❓] declare -x PWD="/Users/otoufah/Desktop/Here_we_go"
+	[❓] cd you should go to home same as ~
 */
 
 #include "minishell.h"
@@ -64,12 +76,12 @@ void	control_c(int sig)
 		if (!global_data.is_in_herdoc)
 		{
 			printf("\n");
-			// rl_on_new_line();
-			// rl_replace_line("", 0);
-			// rl_redisplay();
+			rl_on_new_line();
+			rl_replace_line("", 0);
+			rl_redisplay();
 		}
 		else
-			exit(1);
+			exit(1); // This cause Minishell to quit
 	}
 }
 
@@ -83,6 +95,20 @@ void	init_global_data()
 	global_data.pre_pipe_infd = -1;
 	global_data.last_child_id = 0;
 	global_data.parse_error = FALSE;
+}
+
+
+void	input_signals(t_parse *parse)
+{		
+	// Ctrl + C
+	signal(SIGINT, control_c);
+	// Ctrl + Backslash
+	signal(SIGQUIT, SIG_IGN); 
+	parse->line = readline(GREEN "Mini-0.0$ " RESET);
+	add_history(parse->line);
+	// Ctrl + D 
+	if (!parse->line)
+		exit(global_data.errno_cp);
 }
 
 int main(int ac, char **av, char **env)
@@ -99,15 +125,7 @@ int main(int ac, char **av, char **env)
 	while (TRUE)
 	{
 		init_global_data();
-		// Ctrl + C
-		signal(SIGINT, control_c);
-		// Ctrl + Backslash
-		signal(SIGQUIT, SIG_IGN); 
-		parse->line = readline("Mini-0.0$ ");
-		add_history(parse->line);
-		// Ctrl + D 
-		if (!parse->line)
-			exit(global_data.errno_cp);
+		input_signals(parse);
 		parse->line_double_quotes = handling_quotes(parse->line, '|', -1);
 		if (!global_data.parse_error)
 		{
@@ -126,7 +144,6 @@ int main(int ac, char **av, char **env)
 				input_analyse(parse->tokens);
 				initializer(parse->tokens);
 				counting(parse);
-				token_and_type(parse);
 				global_data.parse_error = check_parse_errors(parse);
 				if (global_data.parse_error)
 					break;
@@ -135,5 +152,6 @@ int main(int ac, char **av, char **env)
 			if (!global_data.parse_error)
 				execution(parse->pipe_data);
 		}
+		// system("leaks Minishell");
 	}
 }

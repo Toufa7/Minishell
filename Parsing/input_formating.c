@@ -13,8 +13,7 @@
 #include "../minishell.h"
 
 /*
-FIXME:
-	? "" o
+	This Function aim to creat spaces 
 */
 
 char	*input_formating(char *str)
