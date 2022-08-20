@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/20 22:30:59 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/20 22:36:31 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ TODO: ✅❓
 	[✅] pwd in a removed dir and unseted path
 	[✅] cat | ls : Try to press ok or redirections : Solution => Stop when the user hit enter : Solution simply Try Another Terminal
 	[✅] Empty cmd should not display cmd not found
+	[✅] do not add PWD and OLDPWD in mcd() Function
 	[❓] ambiguous redirect when the file redercs in NULL
 	[❓] ctr \ -> quit --> exit 131
 	[❓] ctrl c --> exit 130
@@ -31,7 +32,6 @@ TODO: ✅❓
 	[❓] export > file.txt  == SEGV 
 	[❓] cat Makefile > outfile.txt < input > outfile_error.txt no such file called input so you should stop a the error file : Solution => Exit in Child Process (if you found an error)
 	[❓] < Makdbvbefile << ss cat : You should stop at the error : Solution => Exit in Child Process
-	[❓] do not add PWD and OLDPWD in mcd() Function
 	--> Parser
 	[❓] cat << "'"'
 	[❓] if delimiter has quotes don't expand

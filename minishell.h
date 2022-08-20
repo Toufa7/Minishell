@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/20 19:42:33 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/20 22:35:29 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ typedef struct redirections_s
 typedef struct s_global_data
 {
 	char	**envp;
-	char	*pwd_copy;
 	int 	errno_cp;
 	int 	in_fd;
 	int 	out_fd;
