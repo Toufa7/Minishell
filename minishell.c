@@ -6,13 +6,14 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/20 15:34:47 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/20 22:30:59 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
 
 TODO: ✅❓
+	--> exection
 	[✅] expanding in herdoc
 	[✅] cntrl_c in herdoc
 	[✅] var witout value should not displayed in env cmd
@@ -20,12 +21,20 @@ TODO: ✅❓
 	[✅] update exit status
 	[✅] Reset Exit status to 0 on succces
 	[✅] pwd in a removed dir and unseted path
-	ambiguous redirect when the file redercs in NULL
-	ignore env vars when it empty and it's a cmd
-	Spaces == SEGV
-	Empty ` should not display cmd not found
-	ctr \ -> quit --> exit 131
-	ctrl c --> exit 130
+	[✅] cat | ls : Try to press ok or redirections : Solution => Stop when the user hit enter : Solution simply Try Another Terminal
+	[✅] Empty cmd should not display cmd not found
+	[❓] ambiguous redirect when the file redercs in NULL
+	[❓] ctr \ -> quit --> exit 131
+	[❓] ctrl c --> exit 130
+	[❓] cat << ss exiting in Ctrl + C
+	[❓] echo hello > file You should write the output in the file
+	[❓] export > file.txt  == SEGV 
+	[❓] cat Makefile > outfile.txt < input > outfile_error.txt no such file called input so you should stop a the error file : Solution => Exit in Child Process (if you found an error)
+	[❓] < Makdbvbefile << ss cat : You should stop at the error : Solution => Exit in Child Process
+	[❓] do not add PWD and OLDPWD in mcd() Function
+	--> Parser
+	[❓] cat << "'"'
+	[❓] if delimiter has quotes don't expand
 */
 
 #include "minishell.h"
@@ -61,11 +70,11 @@ void	control_c(int sig)
 		{
 			printf("\n");
 			rl_on_new_line();
-			rl_replace_line("", 0);
+			//rl_replace_line("", 0);
 			rl_redisplay();
 		}
 		else
-			exit(1);
+			exit(1); // This cause Minishell to quit
 	}
 }
 
@@ -81,6 +90,20 @@ void	init_global_data()
 	global_data.parse_error = FALSE;
 }
 
+
+void	input_signals(t_parse *parse)
+{		
+	// Ctrl + C
+	signal(SIGINT, control_c);
+	// Ctrl + Backslash
+	signal(SIGQUIT, SIG_IGN); 
+	parse->line = readline(GREEN "Mini-0.0$ " RESET);
+	add_history(parse->line);
+	// Ctrl + D 
+	if (!parse->line)
+		exit(global_data.errno_cp);
+}
+
 int main(int ac, char **av, char **env)
 {
 	(void) ac;
@@ -90,20 +113,12 @@ int main(int ac, char **av, char **env)
 
 	parse = malloc(sizeof(t_parse));
 	global_data.errno_cp = 0;
-	rl_catch_signals = 0;
+	//rl_catch_signals = 0;
 	env_dup(env);
 	while (TRUE)
 	{
 		init_global_data();
-		// Ctrl + C
-		signal(SIGINT, control_c);
-		// Ctrl + Backslash
-		signal(SIGQUIT, SIG_IGN); 
-		parse->line = readline(GREEN "Mini-0.0$ " RESET);
-		add_history(parse->line);
-		// Ctrl + D 
-		if (!parse->line)
-			exit(global_data.errno_cp);
+		input_signals(parse);
 		parse->line_double_quotes = handling_quotes(parse->line, '|', -1);
 		if (!global_data.parse_error)
 		{
@@ -130,5 +145,6 @@ int main(int ac, char **av, char **env)
 			if (!global_data.parse_error)
 				execution(parse->pipe_data);
 		}
+		// system("leaks Minishell");
 	}
 }

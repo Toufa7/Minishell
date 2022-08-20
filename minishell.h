@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/20 15:36:22 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/20 19:42:33 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,19 @@ typedef struct s_tokens
 	size_t	total;
 }	t_tokens;
 
-typedef
+/*
+	redirections_s types:
+	0: ambiguous redirect
+	1: in file
+	2: out file
+	3: append file
+*/
+
+typedef struct redirections_s
+{
+	char	*name;
+	int		type;
+} redirections_t;
 
 typedef struct s_global_data
 {
