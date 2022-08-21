@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/21 04:38:35 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/21 08:34:49 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ typedef struct s_global_data
 	bool	is_in_herdoc;
 	int		size;
 	int		cmd_pipe_fds[2];
-	int		here_doc_pipe_fds[2];
 	int		pre_pipe_infd;
 }	t_global_data;
 
@@ -146,7 +145,7 @@ void    mexit(char **argv);
 void	munset(char **argv);
 void	mexport(char **argv);
 void	execution(t_pipe_data **pipe_data);
-void	get_herdoc(t_pipe_data *pipe_data);
+bool	get_herdoc(t_pipe_data *pipe_data);
 char	*get_cmd_path(char *cmd, char **exec_programs_dirs);
 int		validate_infile(char *infile_path);
 

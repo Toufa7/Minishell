@@ -7,39 +7,53 @@ void ft_close(int n, int s)
 		close(n);
 }
 
-void	get_herdoc(t_pipe_data *pipe_data)
+void	herdoc_signals(int sig)
+{
+	sig = 8;
+	exit(1);
+}
+
+bool	get_herdoc(t_pipe_data *pipe_data)
 {
 	char	*line;
 	char	*expand;
+	int		fd;
 	int		j;
+	int		exit_status;
+	int id;
 
 	j = -1;
 	global_data.is_in_herdoc = TRUE;
-	while (pipe_data->delimiter[++j])
+	id = fork();
+	if (id == 0)
 	{
-		if (j > 0)
+		signal(SIGINT, herdoc_signals);
+		while (pipe_data->delimiter && pipe_data->delimiter[++j])
 		{
-			ft_close(global_data.here_doc_pipe_fds[1], 4);
-			ft_close(global_data.here_doc_pipe_fds[0], 4);
-		}
-		pipe(global_data.here_doc_pipe_fds);
-		line = readline("> ");
-		expand = NULL;
-		while (!line || ft_strcmp(line, pipe_data->delimiter[j]))
-		{ 
-			if (line)
-			{
-				expand = get_env_in_herdoc(line);
-				write(global_data.here_doc_pipe_fds[1], expand, ft_strlen(expand));
-				write(global_data.here_doc_pipe_fds[1], "\n", 1);
-				free_str(expand);
-			}
-			else
-				break;
+			fd = open("/tmp/herdoc", O_CREAT | O_RDWR | O_TRUNC, 0777);
 			line = readline("> ");
+			expand = NULL;
+			while (!line || ft_strcmp(line, pipe_data->delimiter[j]))
+			{ 
+				if (line)
+				{
+					expand = get_env_in_herdoc(line);
+					write(fd, expand, ft_strlen(expand));
+					write(fd, "\n", 1);
+					free_str(expand);
+				}
+				else
+					break;
+				line = readline("> ");
+			}
+			free_str(line);
+			ft_close(fd, 3);
 		}
-		free_str(line);
+		exit(0);
 	}
+	waitpid(-1, &exit_status, 0);
+	global_data.is_in_herdoc = FALSE;
+	return (exit_status);
 }
 
 void	validate_cmd(t_pipe_data *pipe_data)
@@ -183,16 +197,19 @@ bool	check_builtin(t_pipe_data *pipe_data)
 
 void	child_process(t_pipe_data *pipe_data, int index)
 {
+	int fd;
+
 	global_data.last_child_id = fork();
 	if (global_data.last_child_id == 0)
 	{
 		pipe_files_prep(pipe_data, FALSE);
 		if (pipe_data->is_herdoc)
 		{
+			fd = open("/tmp/herdoc", O_RDWR, 0777);
 			dup2(global_data.cmd_pipe_fds[1], 1);
-			dup2(global_data.here_doc_pipe_fds[0], 0);
-			ft_close(global_data.here_doc_pipe_fds[1], 4);
-			ft_close(global_data.here_doc_pipe_fds[0], 4);
+			dup2(fd, 0);
+			// ft_close(global_data.here_doc_pipe_fds[1], 4);
+			// ft_close(global_data.here_doc_pipe_fds[0], 4);
 		}
 		else if (!pipe_data->in_fd_set && !pipe_data->is_herdoc)
 			dup2(global_data.pre_pipe_infd, 0);
@@ -221,11 +238,6 @@ void	exec_pipe(t_pipe_data *pipe_data, int index)
 		ft_close(global_data.pre_pipe_infd, 2);
 		global_data.pre_pipe_infd = global_data.cmd_pipe_fds[0];
 	}
-	if (pipe_data->is_herdoc)
-	{
-		ft_close(global_data.here_doc_pipe_fds[1], 4);
-		ft_close(global_data.here_doc_pipe_fds[0], 4);
-	}
 }
 
 void	execution(t_pipe_data **pipes_data)
@@ -239,8 +251,8 @@ void	execution(t_pipe_data **pipes_data)
 	{
 		if (pipes_data[i]->is_herdoc)
 		{
-			get_herdoc(pipes_data[i]);
-			exec_pipe(pipes_data[i], i);
+			if (!get_herdoc(pipes_data[i]))
+				exec_pipe(pipes_data[i], i);
 		}
 	}
 	i = -1;

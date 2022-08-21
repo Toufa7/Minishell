@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/21 06:51:23 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/21 08:26:54 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,19 +66,12 @@ void	getting_back(char **str)
 
 void	control_c(int sig)
 {
-	if (sig == SIGINT)
+	if (sig == SIGINT && !global_data.is_in_herdoc)
 	{
-		if (!global_data.is_in_herdoc)
-		{
-			printf("\n");
-			rl_on_new_line();
-			//rl_replace_line("", 0);
-			rl_redisplay();
-		}
-		else
-		{
-			dup2(101, 0);
-		}
+		printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
 	}
 }
 
@@ -117,7 +110,7 @@ int main(int ac, char **av, char **env)
 
 	parse = malloc(sizeof(t_parse));
 	global_data.errno_cp = 0;
-	//rl_catch_signals = 0;
+	rl_catch_signals = 0;
 	env_dup(env);
 	while (TRUE)
 	{

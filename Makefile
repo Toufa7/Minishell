@@ -6,7 +6,7 @@ C_READLINE_POMS = -lreadline -L /Users/otoufah/goinfre/homebrew/opt/readline/lib
 
 C_READLINE_ABOU = -L /goinfre/abouchfa/.brew/opt/readline/lib -I /goinfre/abouchfa/.brew/opt/readline/include
 
-ADDI_FLAGS = #-fsanitize=address -g
+ADDI_FLAGS = -fsanitize=address -g
 
 F_REMOVE = rm -rf
 
