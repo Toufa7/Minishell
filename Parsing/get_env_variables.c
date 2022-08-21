@@ -22,10 +22,10 @@ char	*until_dollar(char *str, int *quot)
 	while (str[i] && str[i] != '$')
 	{
 		i++;
-		if (!*quot && (str[i] == SING_QUOTES))
-			*quot = SING_QUOTES;
-		else if(*quot && (str[i] == *quot))
-			*quot = 0;
+		// if (!*quot && (str[i] == SING_QUOTES))
+		// 	*quot = SING_QUOTES;
+		// else if(*quot && (str[i] == *quot))
+		// 	*quot = 0;
 	}
 	return (ft_substr(str, 0, i));
 }
@@ -40,10 +40,10 @@ char	*get_env_variables(char *target)
 	output = ft_strdup("");
 	while (target[i])
 	{
-		if (!expa && target[i] == SING_QUOTES)
-			expa = SING_QUOTES;
-		else if (expa && target[i] == expa)
-			expa = 0;
+		// if (!expa && target[i] == SING_QUOTES)
+		// 	expa = SING_QUOTES;
+		// else if (expa && target[i] == expa)
+		// 	expa = 0;
 		if (target[i] == '$' && !expa)
 		{
 			if (target[i + 1] == '?')
@@ -65,7 +65,6 @@ char	*get_env_variables(char *target)
 			i += ft_strlen(variable);
 			output = ft_strjoin(output, variable);
 		}
-		printf("%zu\n",ft_strlen(output));
 		// free_str(variable);
 	}
 	// free_str(target);

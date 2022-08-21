@@ -39,7 +39,7 @@ t_pipe_data	*get_pipe_data(t_parse *parse)
 	while (parse->tokens[++i].token && parse->tokens[i].token)
 	{
 		replaced = handling_quotes(parse->tokens[i].token, -1, ' ');
-		without_d_quotes = remove_quotes(replaced, DOUBLES_QUOTES);
+		without_d_quotes = singles_doubles_quotes(replaced);
 		if (ft_strcmp(parse->tokens[i].type, "command") == 0)
 		{
 			pipe_data->command = without_d_quotes;
@@ -58,7 +58,7 @@ t_pipe_data	*get_pipe_data(t_parse *parse)
 			pipe_data->app_outfile = ft_realloc(pipe_data->app_outfile, without_d_quotes);
 		else if (ft_strcmp(parse->tokens[i].type, "env_var") == 0)
 		{
-			pipe_data->argv = ft_realloc(pipe_data->argv, remove_quotes(get_env_variables(parse->tokens[i].token), DOUBLES_QUOTES));
+			pipe_data->argv = ft_realloc(pipe_data->argv, singles_doubles_quotes(get_env_variables(parse->tokens[i].token)));
 		}
 		else if (ft_strcmp(parse->tokens[i].type, "option") == 0)
 			pipe_data->argv = ft_realloc(pipe_data->argv, without_d_quotes);

@@ -6,7 +6,7 @@ C_READLINE_POMS = -lreadline -L /Users/otoufah/goinfre/homebrew/opt/readline/lib
 
 C_READLINE_ABOU = -L /goinfre/abouchfa/.brew/opt/readline/lib -I /goinfre/abouchfa/.brew/opt/readline/include
 
-ADDI_FLAGS = #-fsanitize=address -g
+ADDI_FLAGS = -fsanitize=address -g
 
 F_REMOVE = rm -rf
 
@@ -36,7 +36,7 @@ C_FILES = 	minishell.c \
 			Utils/gnl.c \
 			Utils/ft_strnstr.c \
 			Utils/get_var_val.c \
-			Parsing/remove_quotes.c \
+			Parsing/singles_doubles_quotes.c \
 			Parsing/get_env_in_herdoc.c \
 			Parsing/get_env_variables.c \
 			Parsing/input_formating.c \
