@@ -86,7 +86,7 @@ void	validate_cmd(t_pipe_data *pipe_data)
 	}
 	else
 		pipe_data->cmd_path = get_cmd_path(pipe_data->command, execps_paths);
-	free_arr(execps_paths);
+	free_arr((void **) execps_paths);
 }
 
 void	pipe_files_prep(t_pipe_data *pipe_data, bool is_builtin)
@@ -95,38 +95,36 @@ void	pipe_files_prep(t_pipe_data *pipe_data, bool is_builtin)
 	int fd;
 
 	i = -1;
-	while (pipe_data->in_files && pipe_data->in_files[++i])
+	while (pipe_data->redirections && pipe_data->redirections[++i])
 	{
-		if (validate_infile(pipe_data->in_files[i]))
+		if (pipe_data->redirections[i]->type == INFILE && validate_infile(pipe_data->redirections[i]->path))
 		{
-			fd = open(pipe_data->in_files[i], O_RDONLY);
+			fd = open(pipe_data->redirections[i]->path, O_RDONLY);
 			pipe_data->in_fd_set = TRUE;
 			if (!pipe_data->is_herdoc && !is_builtin)
 				dup2(fd, 0);
 			ft_close(fd, 8);
 		}
-	}
-	i = -1;
-	while (pipe_data->app_outfile && pipe_data->app_outfile[++i])
-	{
-		fd = open(pipe_data->app_outfile[i],
-					O_CREAT | O_WRONLY | O_APPEND, 0777);
-		pipe_data->out_fd_set = TRUE;
-		if (!is_builtin)
-			dup2(fd, 1);
-		global_data.out_fd = fd;
-		ft_close(fd, 9);
-	}
-	i = -1;
-	while (pipe_data->out_files && pipe_data->out_files[++i])
-	{
-		fd = open(pipe_data->out_files[i],
-					O_CREAT | O_WRONLY | O_TRUNC, 0777);
-		pipe_data->out_fd_set = TRUE;
-		if (!is_builtin)
-			dup2(fd, 1);
-		global_data.out_fd = fd;
-		ft_close(fd, 10);
+		else if (pipe_data->redirections[i]->type == OUTFILE)
+		{
+			fd = open(pipe_data->redirections[i]->path,
+						O_CREAT | O_WRONLY | O_TRUNC, 0777);
+			pipe_data->out_fd_set = TRUE;
+			if (!is_builtin)
+				dup2(fd, 1);
+			global_data.out_fd = fd;
+			ft_close(fd, 10);
+		}
+		else if (pipe_data->redirections[i]->type == APPENDFILE)
+		{
+			fd = open(pipe_data->redirections[i]->path,
+						O_CREAT | O_WRONLY | O_APPEND, 0777);
+			pipe_data->out_fd_set = TRUE;
+			if (!is_builtin)
+				dup2(fd, 1);
+			global_data.out_fd = fd;
+			ft_close(fd, 9);
+		}
 	}
 }
 

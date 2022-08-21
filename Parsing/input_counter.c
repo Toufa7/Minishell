@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:32:04 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/18 15:02:40 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/21 01:31:27 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,9 @@ void	initializer(t_tokens	*tokens)
 	tokens->red_out = 0;
 	tokens->here_do = 0;
 	tokens->app = 0;
-	tokens->in_file = 0;
-	tokens->out_file = 0;
+	tokens->redirections = 0;
 	tokens->delimiter = 0;
-	tokens->app_file = 0;
 	tokens->cmd = 0;
-	// tokens->env_var = 0;
 	tokens->total = 0;
 	tokens->option = 0;
 }
@@ -41,11 +38,11 @@ void	input_counter(t_tokens *counter, t_tokens *tokens)
 	else if (ft_strcmp(tokens->type, "command") == 0)
 		counter->cmd++;
 	else if (ft_strcmp(tokens->type, "infile") == 0)
-		counter->in_file++;
+		counter->redirections++;
 	else if (ft_strcmp(tokens->type, "outfile") == 0)
-		counter->out_file++;
+		counter->redirections++;
 	else if (ft_strcmp(tokens->type, "app_outfile") == 0)
-		counter->app_file++;
+		counter->redirections++;
 	else if (ft_strcmp(tokens->type, "delimiter") == 0)
 	{
 		counter->delimiter++;
@@ -56,9 +53,7 @@ void	input_counter(t_tokens *counter, t_tokens *tokens)
 			exit(2);
 		}
 	}
-	// else if (ft_strcmp(tokens->type, "env_var") == 0)
-	// 	counter->env_var++;
 	else if (ft_strcmp(tokens->type, "option") == 0)
 		counter->option++;
-	counter->total = counter->red_in + counter->option + counter->red_out + counter->here_do + counter->app + counter->cmd + counter->in_file + counter->out_file + counter->app_file + counter->delimiter;
+	counter->total = counter->red_in + counter->option + counter->red_out + counter->here_do + counter->app + counter->cmd + counter->redirections + counter->delimiter;
 }

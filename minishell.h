@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/20 22:35:29 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/21 04:38:35 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,14 @@ TODO:
 # define PATH_MAX  4096
 # define SING_QUOTES 39
 # define DOUBLES_QUOTES 34
-typedef int bool;
 # define TRUE 1 
-# define FALSE 0
+# define FALSE 0 
+# define AMBIGUOUS 0
+# define INFILE 1
+# define OUTFILE 2
+# define APPENDFILE 3
+
+typedef int bool;
 
 typedef struct s_tokens
 {
@@ -52,10 +57,8 @@ typedef struct s_tokens
 	size_t	red_out;
 	size_t	here_do;
 	size_t	app;
-	size_t	in_file;
-	size_t	out_file;
+	size_t	redirections;
 	size_t	delimiter;
-	size_t	app_file;
 	size_t	cmd;
 	size_t	env_var;
 	size_t	option;
@@ -63,18 +66,18 @@ typedef struct s_tokens
 }	t_tokens;
 
 /*
-	redirections_s types:
+	s_redirections types:
 	0: ambiguous redirect
 	1: in file
 	2: out file
 	3: append file
 */
 
-typedef struct redirections_s
+typedef struct s_redirections
 {
-	char	*name;
+	char	*path;
 	int		type;
-} redirections_t;
+} t_redirections;
 
 typedef struct s_global_data
 {
@@ -93,16 +96,14 @@ typedef struct s_global_data
 
 typedef struct s_pipe_data
 {
-	char	*command;
-	char	*cmd_path;
-	char	**in_files;
-	char	**delimiter;
-	char	**out_files;
-	char	**app_outfile;
-	char	**argv;
-	bool	out_fd_set;
-	bool	in_fd_set;
-	bool	is_herdoc;
+	char			*command;
+	char			*cmd_path;
+	char			**delimiter;
+	char			**argv;
+	bool			out_fd_set;
+	bool			in_fd_set;
+	bool			is_herdoc;
+	t_redirections	**redirections;
 }	t_pipe_data;
 
 typedef struct s_parse
@@ -152,9 +153,9 @@ int		validate_infile(char *infile_path);
 // ----------- Shared Functions ------------------
 
 int		counting_quotes(char *str, char qtype);
-void	free_str(char *str);
+void	free_str(void *ptr);
+void	free_arr(void **arr);
 char	*ft_itoa(int n);
-void	free_arr(char **arr);
 char	*get_var_val(int var_index, bool include_eqs);
 int		validate_var_name(char *var);
 char	**ft_realloc(char **dist, char *str);
@@ -177,8 +178,6 @@ void	*ft_calloc(size_t count, size_t size);
 char	*ft_strchr(const char *s, int c);
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
-void	free_str(char *str);
-void	free_arr(char **arr);
 
 
 t_global_data global_data;

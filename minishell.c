@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/20 23:52:39 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/21 02:53:01 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ TODO: ✅❓
 	[✅] cat | ls : Try to press ok or redirections : Solution => Stop when the user hit enter : Solution simply Try Another Terminal
 	[✅] Empty cmd should not display cmd not found
 	[✅] do not add PWD and OLDPWD in mcd() Function
+	[❓] All s_redirections in one array
 	[❓] ambiguous redirect when the file redercs in NULL
 	[❓] ctr \ -> quit --> exit 131
 	[❓] ctrl c --> exit 130
