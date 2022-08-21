@@ -14,9 +14,17 @@
 
 bool	checking_quotes(char *str)
 {
-	if (ft_strcmp(singles_doubles_quotes(str), "Error") == 0)
+	if (counting_quotes(str, 'D') % 2 != 0)
 	{
-		ft_putstr_fd("Unclosed Quotes\n", 2);
+		ft_putstr_fd("Unclosed Doubles Quotes\n", 2);
+		global_data.errno_cp = 1;
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		return (TRUE);
+	}
+	else if (counting_quotes(str, 'S') % 2 != 0)
+	{
+		ft_putstr_fd("Unclosed Singles Quotes\n", 2);
 		global_data.errno_cp = 1;
 		rl_on_new_line();
 		rl_replace_line("", 0);
@@ -25,36 +33,29 @@ bool	checking_quotes(char *str)
 	return (FALSE);
 }
 
-// This function aims to if it found something that we split with like space of | we well repalace it with something else
-
-
 char	*handling_quotes(char *str, char replaced, char replace_by)
 {
 	int		i;
 	int		j;
 	char	*dup;
 
-	// printf("Entering -> %s\n",str);
-	// global_data.parse_error = checking_quotes(str);
-	// dup = NULL;
-	// if (!global_data.parse_error)
-	// {
+	global_data.parse_error = checking_quotes(str);
+	dup = NULL;
+	if (!global_data.parse_error)
+	{
 		dup = malloc(sizeof(char) * (ft_strlen(str) + 1));
 		if (!dup)
 			return (NULL);
-		i = 0;
-		while (str[i] && i < strlen(str) - 1)
+		i = -1;
+		while (str[++i])
 		{
-			// "'"
 			if (str[i] == DOUBLES_QUOTES || str[i] == SING_QUOTES)
 			{
 				j = i;
 				if (str[j] == DOUBLES_QUOTES || str[j] == SING_QUOTES)
-				{
 					dup[j] = str[j];
-					j++;
-				}
-				while (str[j] && str[j] != DOUBLES_QUOTES && str[j] != SING_QUOTES)
+				j = j + 1;
+				while (str[j] != DOUBLES_QUOTES && str[j] != SING_QUOTES)
 				{
 					if (str[j] == replaced)
 						dup[j] = replace_by;
@@ -62,21 +63,15 @@ char	*handling_quotes(char *str, char replaced, char replace_by)
 						dup[j] = str[j];
 					j++;
 				}
-				if (str[j] && (str[j] == DOUBLES_QUOTES || str[j] == SING_QUOTES))
-				{
+				if (str[j] == DOUBLES_QUOTES || str[j] == SING_QUOTES)
 					dup[j] = str[j];
-					printf("Dup %c Str %c\n",dup[j],str[j]);
-				}
 				i = j;
 			}
 			else
-			{
 				dup[i] = str[i];
-			}
-			i++;
 		}
 		dup[i] = '\0';
 		// free_str(str);
-		return (dup);
 	}
-// }
+	return (dup);
+}
