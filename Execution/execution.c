@@ -110,20 +110,26 @@ void	pipe_files_prep(t_pipe_data *pipe_data, bool is_builtin)
 			fd = open(pipe_data->redirections[i]->path,
 						O_CREAT | O_WRONLY | O_TRUNC, 0777);
 			pipe_data->out_fd_set = TRUE;
-			if (!is_builtin)
+			if (!is_builtin || global_data.size > 1)
+			{
 				dup2(fd, 1);
-			global_data.out_fd = fd;
-			ft_close(fd, 10);
+				ft_close(fd, 10);
+			}
+			else
+				global_data.out_fd = fd;
 		}
 		else if (pipe_data->redirections[i]->type == APPENDFILE)
 		{
 			fd = open(pipe_data->redirections[i]->path,
 						O_CREAT | O_WRONLY | O_APPEND, 0777);
 			pipe_data->out_fd_set = TRUE;
-			if (!is_builtin)
+			if (!is_builtin || global_data.size > 1)
+			{
 				dup2(fd, 1);
-			global_data.out_fd = fd;
-			ft_close(fd, 9);
+				ft_close(fd, 9);
+			}
+			else
+				global_data.out_fd = fd;
 		}
 	}
 }
@@ -168,6 +174,8 @@ bool	check_builtin(t_pipe_data *pipe_data)
 	}
 	else
 		return FALSE;
+	ft_close(global_data.in_fd, 1);
+	ft_close(global_data.out_fd, 1);
 	global_data.in_fd = 0;
 	global_data.out_fd = 1;
 	return TRUE;

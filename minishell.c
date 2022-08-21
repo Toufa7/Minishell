@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/21 02:53:01 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/21 06:51:23 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@ TODO: ✅❓
 	[✅] cat | ls : Try to press ok or redirections : Solution => Stop when the user hit enter : Solution simply Try Another Terminal
 	[✅] Empty cmd should not display cmd not found
 	[✅] do not add PWD and OLDPWD in mcd() Function
-	[❓] All s_redirections in one array
-	[❓] ambiguous redirect when the file redercs in NULL
+	[✅] All s_redirections in one array
+	[✅] echo hello > file You should write the output in the file
+	[✅] export > file.txt  == SEGV 
 	[❓] ctr \ -> quit --> exit 131
 	[❓] ctrl c --> exit 130
 	[❓] cat << ss exiting in Ctrl + C
-	[❓] echo hello > file You should write the output in the file
-	[❓] export > file.txt  == SEGV 
 	[❓] cat Makefile > outfile.txt < input > outfile_error.txt no such file called input so you should stop a the error file : Solution => Exit in Child Process (if you found an error)
 	[❓] < Makdbvbefile << ss cat : You should stop at the error : Solution => Exit in Child Process
+	[❓] ambiguous redirect when the file redercs in NULL
 	--> Parser
 	[❓] cat << "'"'
 	[❓] if delimiter has quotes don't expand
