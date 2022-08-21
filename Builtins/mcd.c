@@ -23,8 +23,6 @@ void	update_oldpwd()
 			free(global_data.envp[i]);
 			global_data.envp[i] = ft_strjoin("OLDPWD=", buff);
 		}
-		else
-			global_data.envp = ft_realloc(global_data.envp, ft_strjoin("OLDPWD=", buff));
 	}
 }
 
@@ -41,10 +39,6 @@ void	update_pwd()
 			free(global_data.envp[i]);
 			global_data.envp[i] = ft_strjoin("PWD=", buff);
 		}
-		else
-			global_data.envp = ft_realloc(global_data.envp, ft_strjoin("PWD=", buff));
-		free_str(global_data.pwd_copy);
-		global_data.pwd_copy = ft_strjoin("PWD=", buff);
 	}
 	else
 		ft_putstr_fd("cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory\n", 2);

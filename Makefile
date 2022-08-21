@@ -1,6 +1,6 @@
 NAME = Minishell
 
-C_FLAGS = gcc -Wall -Werror -Wextra
+C_FLAGS = gcc
 
 C_READLINE_POMS = -lreadline -L /Users/otoufah/goinfre/homebrew/opt/readline/lib -I /Users/otoufah/goinfre/homebrew/opt/readline/include
 
@@ -43,7 +43,7 @@ C_FILES = 	minishell.c \
 			Parsing/spliting_with_spaces.c \
 			Parsing/input_analyse.c \
 			Parsing/input_counter.c \
-			Parsing/input_types.c \
+			Parsing/get_pipe_data.c \
 			Parsing/handling_quotes.c \
 			Parsing/check_parse_errors.c \
 			Builtins/mcd.c \

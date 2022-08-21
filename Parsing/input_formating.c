@@ -68,3 +68,11 @@ char	*input_formating(char *str)
 	free(str);
 	return (spcs);
 }
+
+// int main()
+// {
+// 	while (TRUE)
+// 	{
+// 	char *s = readline(""); printf("%s\n",input_formating(s));
+// 	}
+// }

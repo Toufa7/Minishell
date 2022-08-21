@@ -6,42 +6,40 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/19 17:11:35 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/21 08:26:54 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
 
 TODO: ✅❓
+	--> exection
 	[✅] expanding in herdoc
 	[✅] cntrl_c in herdoc
 	[✅] var witout value should not displayed in env cmd
 	[✅] error not displayed when error when giving dir as cmd
 	[✅] update exit status
-	[❓] Reset Exit status to 0 on succces
-	[❓] Changing exit status in case of failure and succes next
-	[❓] pwd in a removed dir and unseted path
-	[❓] BAD Address error
-	[❓] Program hanging when dealing with std_in and std_out (cat < "Makefile " )
-	[❓] echo "Me" | cat -e and then ls
 	[✅] Reset Exit status to 0 on succces
 	[✅] pwd in a removed dir and unseted path
-	[✅] Spaces == SEGV
-	Empty cmd should not display cmd not found
+	[✅] cat | ls : Try to press ok or redirections : Solution => Stop when the user hit enter : Solution simply Try Another Terminal
+	[✅] Empty cmd should not display cmd not found
+	[✅] do not add PWD and OLDPWD in mcd() Function
+	[✅] All s_redirections in one array
+	[✅] echo hello > file You should write the output in the file
+	[✅] export > file.txt  == SEGV 
 	[❓] ctr \ -> quit --> exit 131
 	[❓] ctrl c --> exit 130
 	[❓] cat << ss exiting in Ctrl + C
-	[❓] echo hello > file You should write the output in the file
-	[❓] export > file.txt  == SEGV 
-	[❓] cat << "'"'
-	[❓] if delimiter has quotes don't expand
 	[❓] cat Makefile > outfile.txt < input > outfile_error.txt no such file called input so you should stop a the error file : Solution => Exit in Child Process (if you found an error)
 	[❓] < Makdbvbefile << ss cat : You should stop at the error : Solution => Exit in Child Process
-	[✅] cat | ls : Try to press ok or redirections : Solution => Stop when the user hit enter : Solution simply Try Another Terminal
-	[❓] Try Unset OLDPWD and PWD then try export
-	[❓] declare -x OLDPWD="/Users/otoufah/Desktop/Here_we_go"
-	[❓] declare -x PWD="/Users/otoufah/Desktop/Here_we_go"
-	[❓] cd you should go to home same as ~
+	[❓] ambiguous redirect when the file redercs in NULL
+	
+	                                            Parser
+	[✅] if delimiter has quotes don't expand
+	[✅] $fghjm << ls --> cmd should be NUll and ls | "" --> cmd should be empty string : Solution => Simply check if the upcoming input lenght is 0
+	[✅]  $NOTEXIT ls --> it should run ls 
+	[❓] cat << "'"'
+	[❓] echo ''"'"
 */
 
 #include "minishell.h"
@@ -71,17 +69,12 @@ void	getting_back(char **str)
 
 void	control_c(int sig)
 {
-	if (sig == SIGINT)
+	if (sig == SIGINT && !global_data.is_in_herdoc)
 	{
-		if (!global_data.is_in_herdoc)
-		{
-			printf("\n");
-			rl_on_new_line();
-			rl_replace_line("", 0);
-			rl_redisplay();
-		}
-		else
-			exit(1); // This cause Minishell to quit
+		printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
 	}
 }
 
@@ -98,7 +91,7 @@ void	init_global_data()
 }
 
 
-void	input_signals(t_parse *parse)
+void	input_and_signals(t_parse *parse)
 {		
 	// Ctrl + C
 	signal(SIGINT, control_c);
@@ -125,8 +118,9 @@ int main(int ac, char **av, char **env)
 	while (TRUE)
 	{
 		init_global_data();
-		input_signals(parse);
+		input_and_signals(parse);
 		parse->line_double_quotes = handling_quotes(parse->line, '|', -1);
+		// exit(0);
 		if (!global_data.parse_error)
 		{
 			parse->formated_input = input_formating(parse->line_double_quotes);
@@ -141,10 +135,10 @@ int main(int ac, char **av, char **env)
 			{
 				parse->dont_splt = handling_quotes(parse->splt_pipes[i], ' ', -1);
 				parse->tokens = spliting_with_spaces(parse->dont_splt);
-				input_analyse(parse->tokens);
-				initializer(parse->tokens);
-				counting(parse);
-				global_data.parse_error = check_parse_errors(parse);
+				input_analyse(parse->tokens); // Specifying each token his type (delimiter, command, option ...)
+				initializer(parse->tokens); counting(parse); // Just fo counting
+				// token_and_type(parse);
+				global_data.parse_error = check_parse_errors(parse); 
 				if (global_data.parse_error)
 					break;
 				parse->pipe_data[i] = get_pipe_data(parse);
@@ -152,6 +146,5 @@ int main(int ac, char **av, char **env)
 			if (!global_data.parse_error)
 				execution(parse->pipe_data);
 		}
-		// system("leaks Minishell");
 	}
 }

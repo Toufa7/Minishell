@@ -40,5 +40,5 @@ void	munset(char **argv)
 			global_data.envp[k] = NULL;
 		}
 	}
-	free_arr(tmp);
+	free_arr((void **) tmp);
 }

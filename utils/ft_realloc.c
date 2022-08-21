@@ -18,6 +18,6 @@ char	**ft_realloc(char **dist, char *str)
 		i++;
 	new_input[i++] = ft_strdup(str);
 	new_input[i] = NULL;
-	free_arr(tmp);
+	free_arr((void **) tmp);
 	return (new_input);
 }

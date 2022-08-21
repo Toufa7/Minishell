@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-char	*until_dollar(char *str, int *quot)
+char	*until_dollar(char *str)
 {
 	int	i;
 
@@ -20,13 +20,7 @@ char	*until_dollar(char *str, int *quot)
 	if (str[i] == '$')
 		return (ft_strdup("$"));
 	while (str[i] && str[i] != '$')
-	{
 		i++;
-		// if (!*quot && (str[i] == SING_QUOTES))
-		// 	*quot = SING_QUOTES;
-		// else if(*quot && (str[i] == *quot))
-		// 	*quot = 0;
-	}
 	return (ft_substr(str, 0, i));
 }
 
@@ -35,16 +29,11 @@ char	*get_env_variables(char *target)
 	int		i;
 	char	*output;
 	char	*variable;
-	int		expa = 0;
 	i = 0;
 	output = ft_strdup("");
 	while (target[i])
 	{
-		// if (!expa && target[i] == SING_QUOTES)
-		// 	expa = SING_QUOTES;
-		// else if (expa && target[i] == expa)
-		// 	expa = 0;
-		if (target[i] == '$' && !expa)
+		if (target[i] == '$' )
 		{
 			if (target[i + 1] == '?')
 			{
@@ -61,13 +50,13 @@ char	*get_env_variables(char *target)
 		}
 		else
 		{
-			variable = until_dollar(target + i, &expa);
+			variable = until_dollar(target + i);
 			i += ft_strlen(variable);
 			output = ft_strjoin(output, variable);
 		}
-		// free_str(variable);
+		free_str(variable);
 	}
-	// free_str(target);
+	free_str(target);
 	return output;
 }
 

@@ -31,7 +31,7 @@ char	*singles_doubles_quotes(char *str)
 			len = until_this(&str[i + 1], str[i]);
             if (str[len + i + 1] == '\0')
             {
-                printf("Error");
+                return ("Error");
                 exit(0);
             }
             str[i] = -1;
@@ -51,3 +51,12 @@ char	*singles_doubles_quotes(char *str)
     str[j] = '\0';
 	return (str);
 }
+
+// int main()
+// {
+// 	while (TRUE)
+// 	{
+// 		char *s = readline("");
+// 		printf("%s\n",singles_doubles_quotes(s));
+// 	}
+// }

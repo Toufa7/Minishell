@@ -46,21 +46,25 @@ bool    check_parse_errors(t_parse *parse)
 		if ((ft_strcmp(parse->tokens[i].type, "here_doc") == 0 && !parse->tokens[i + 1].token) || (ft_strcmp(parse->tokens[i].type, "here_doc") == 0 && (ft_strcmp(parse->tokens[i + 1].type, "delimiter") != 0)))
 		{
 			error_exiting("Mini: There's no delimiter in front of ", parse->tokens[i].token, "\n");
+			global_data.errno_cp = 258;
 			return (TRUE);
 		}
 		else if ((ft_strcmp(parse->tokens[i].type,"red_out") == 0 && !parse->tokens[i + 1].token) || (ft_strcmp(parse->tokens[i].type, "red_out") == 0 && (ft_strcmp(parse->tokens[i + 1].type, "outfile") != 0)))
 		{
 			error_exiting("Mini: There's no output file in front of red out ", parse->tokens[i].token, "\n");
+			global_data.errno_cp = 258;
 			return (TRUE);
 		}
 		else if ((ft_strcmp(parse->tokens[i].type, "append") == 0 && !parse->tokens[i + 1].token) || (ft_strcmp(parse->tokens[i].type, "append") == 0 && (ft_strcmp(parse->tokens[i + 1].type, "app_outfile") != 0)))
 		{
 			error_exiting("Mini: There's no appended file in front of a append \n", parse->tokens[i].token, "\n");
+			global_data.errno_cp = 258;
 			return (TRUE);
 		}
 		else if ((ft_strcmp(parse->tokens[i].type, "red_input") == 0 && !parse->tokens[i + 1].token) || ((ft_strcmp(parse->tokens[i].type, "red_input") == 0) && (ft_strcmp(parse->tokens[i + 1].type, "infile") != 0)))
 		{
 			error_exiting("Mini: There's no input file to be readead from \n", parse->tokens[i].token, "\n");
+			global_data.errno_cp = 258;
 			return (TRUE);
 		}
 		i++;
