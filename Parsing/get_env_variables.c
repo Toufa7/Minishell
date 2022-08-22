@@ -12,6 +12,10 @@
 
 #include "../minishell.h"
 
+char	*add_equal(char *str)
+{
+	return (ft_strjoin(str,"="));
+}
 char	*until_dollar(char *str)
 {
 	int	i;
@@ -27,10 +31,12 @@ char	*until_dollar(char *str)
 char	*get_env_variables(char *target)
 {
 	int		i;
+	int		idx;
 	char	*output;
 	char	*variable;
-	i = 0;
+	char	*env_var;
 	output = ft_strdup("");
+	i = 0;
 	while (target[i])
 	{
 		if (target[i] == '$' )
@@ -43,8 +49,11 @@ char	*get_env_variables(char *target)
 			}
 			else
 			{
+				// printf("Target -> %s\n",target);
 				variable = ft_substr(target + i + 1, 0, validate_var_name(target + i + 1));
-				output = ft_strjoin(output, getenv(variable));
+				env_var = add_equal(variable);
+				idx = get_var_index(env_var);
+				output = ft_strjoin(output, get_var_val(idx , FALSE));
 				i += validate_var_name(target + i + 1) + 1;
 			}
 		}

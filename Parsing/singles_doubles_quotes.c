@@ -31,8 +31,7 @@ char	*singles_doubles_quotes(char *str)
 			len = until_this(&str[i + 1], str[i]);
             if (str[len + i + 1] == '\0')
             {
-                return ("Error");
-                exit(0);
+                return (NULL);
             }
             str[i] = -1;
             str[len + i + 1] = -1;
