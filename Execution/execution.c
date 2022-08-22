@@ -9,7 +9,7 @@ void ft_close(int n, int s)
 
 void	herdoc_signals(int sig)
 {
-	sig = 8;
+	(void) sig;
 	exit(1);
 }
 
@@ -88,12 +88,12 @@ void	validate_cmd(t_pipe_data *pipe_data)
 				{
 					ft_putstr_fd(pipe_data->command, 2);
 					ft_putstr_fd(": is a directory\n", 2);
-					global_data.errno_cp = 126;
+					exit(126);
 				}
 				else
 				{
 					perror(pipe_data->command);
-					global_data.errno_cp = errno;
+					exit(errno);
 				}
 			}
 		}
@@ -111,8 +111,15 @@ void	pipe_files_prep(t_pipe_data *pipe_data, bool is_builtin)
 	i = -1;
 	while (pipe_data->redirections && pipe_data->redirections[++i])
 	{
-		if (pipe_data->redirections[i]->type == INFILE && validate_infile(pipe_data->redirections[i]->path))
+		if (pipe_data->redirections[i]->type == INFILE)
 		{
+			if (access(pipe_data->redirections[i]->path, F_OK) || access(pipe_data->redirections[i]->path, R_OK))
+			{
+				perror(pipe_data->redirections[i]->path);
+				if (!is_builtin)
+					exit(errno);
+				global_data.errno_cp = errno;
+			}
 			fd = open(pipe_data->redirections[i]->path, O_RDONLY);
 			pipe_data->in_fd_set = TRUE;
 			if (!pipe_data->is_herdoc && !is_builtin)
@@ -203,13 +210,14 @@ void	child_process(t_pipe_data *pipe_data, int index)
 	if (global_data.last_child_id == 0)
 	{
 		pipe_files_prep(pipe_data, FALSE);
+		validate_cmd(pipe_data);
+		if (!pipe_data->cmd_path)
+			exit(1);
 		if (pipe_data->is_herdoc)
 		{
 			fd = open("/tmp/herdoc", O_RDWR, 0777);
 			dup2(global_data.cmd_pipe_fds[1], 1);
 			dup2(fd, 0);
-			// ft_close(global_data.here_doc_pipe_fds[1], 4);
-			// ft_close(global_data.here_doc_pipe_fds[0], 4);
 		}
 		else if (!pipe_data->in_fd_set && !pipe_data->is_herdoc)
 			dup2(global_data.pre_pipe_infd, 0);
@@ -228,9 +236,6 @@ void	exec_pipe(t_pipe_data *pipe_data, int index)
 {
 	if (global_data.size > 1 || !check_builtin(pipe_data))
 	{
-		validate_cmd(pipe_data);
-		if (!pipe_data->cmd_path)
-			return ;
 		if (global_data.size != index + 1)
 			pipe(global_data.cmd_pipe_fds);
 		child_process(pipe_data, index);

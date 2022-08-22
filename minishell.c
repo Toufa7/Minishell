@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/21 08:26:54 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/22 11:40:17 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ TODO: ✅❓
 	[✅] All s_redirections in one array
 	[✅] echo hello > file You should write the output in the file
 	[✅] export > file.txt  == SEGV 
+	[❓] cat << ss exiting in Ctrl + C
 	[❓] ctr \ -> quit --> exit 131
 	[❓] ctrl c --> exit 130
-	[❓] cat << ss exiting in Ctrl + C
 	[❓] cat Makefile > outfile.txt < input > outfile_error.txt no such file called input so you should stop a the error file : Solution => Exit in Child Process (if you found an error)
-	[❓] < Makdbvbefile << ss cat : You should stop at the error : Solution => Exit in Child Process
+	[✅] < Makdbvbefile << ss cat : You should stop at the error : Solution => Exit in Child Process
 	[❓] ambiguous redirect when the file redercs in NULL
 	
-	                                            Parser
+	---> Parser
 	[✅] if delimiter has quotes don't expand
 	[✅] $fghjm << ls --> cmd should be NUll and ls | "" --> cmd should be empty string : Solution => Simply check if the upcoming input lenght is 0
 	[✅]  $NOTEXIT ls --> it should run ls 
@@ -69,7 +69,7 @@ void	getting_back(char **str)
 
 void	control_c(int sig)
 {
-	if (sig == SIGINT && !global_data.is_in_herdoc)
+	if (!global_data.is_in_herdoc)
 	{
 		printf("\n");
 		rl_on_new_line();
@@ -91,19 +91,6 @@ void	init_global_data()
 }
 
 
-void	input_and_signals(t_parse *parse)
-{		
-	// Ctrl + C
-	signal(SIGINT, control_c);
-	// Ctrl + Backslash
-	signal(SIGQUIT, SIG_IGN); 
-	parse->line = readline(GREEN "Mini-0.0$ " RESET);
-	add_history(parse->line);
-	// Ctrl + D 
-	if (!parse->line)
-		exit(global_data.errno_cp);
-}
-
 int main(int ac, char **av, char **env)
 {
 	(void) ac;
@@ -114,11 +101,19 @@ int main(int ac, char **av, char **env)
 	parse = malloc(sizeof(t_parse));
 	global_data.errno_cp = 0;
 	rl_catch_signals = 0;
+	// Ctrl + C
+	signal(SIGINT, control_c);
+	// Ctrl + Backslash
+	signal(SIGQUIT, SIG_IGN); 
 	env_dup(env);
 	while (TRUE)
 	{
 		init_global_data();
-		input_and_signals(parse);
+		parse->line = readline(GREEN "Mini-0.0$ " RESET);
+		// Ctrl + D
+		if (!parse->line)
+			exit(global_data.errno_cp);
+		add_history(parse->line);
 		parse->line_double_quotes = handling_quotes(parse->line, '|', -1);
 		// exit(0);
 		if (!global_data.parse_error)
@@ -136,7 +131,8 @@ int main(int ac, char **av, char **env)
 				parse->dont_splt = handling_quotes(parse->splt_pipes[i], ' ', -1);
 				parse->tokens = spliting_with_spaces(parse->dont_splt);
 				input_analyse(parse->tokens); // Specifying each token his type (delimiter, command, option ...)
-				initializer(parse->tokens); counting(parse); // Just fo counting
+				initializer(parse->tokens); 
+				counting(parse); // Just fo counting
 				// token_and_type(parse);
 				global_data.parse_error = check_parse_errors(parse); 
 				if (global_data.parse_error)

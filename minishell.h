@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/21 08:34:49 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/22 00:27:40 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,6 +182,3 @@ int		ft_isdigit(int c);
 t_global_data global_data;
 
 #endif
-
-
-// FOEIUWGHFEEUHOFUOIU
