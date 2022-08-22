@@ -111,6 +111,8 @@ void	pipe_files_prep(t_pipe_data *pipe_data, bool is_builtin)
 	i = -1;
 	while (pipe_data->redirections && pipe_data->redirections[++i])
 	{
+		if (pipe_data->redirections[i]->path && pipe_data->redirections[i]->path[0] == '$')
+			continue ;
 		if (pipe_data->redirections[i]->type == INFILE)
 		{
 			if (access(pipe_data->redirections[i]->path, F_OK) || access(pipe_data->redirections[i]->path, R_OK))
@@ -215,11 +217,11 @@ void	child_process(t_pipe_data *pipe_data, int index)
 			exit(1);
 		if (pipe_data->is_herdoc)
 		{
-			fd = open("/tmp/herdoc", O_RDWR, 0777);
+			fd = open("/tmp/herdoc", O_RDWR, 0004);
 			dup2(global_data.cmd_pipe_fds[1], 1);
 			dup2(fd, 0);
 		}
-		else if (!pipe_data->in_fd_set && !pipe_data->is_herdoc)
+		else if (global_data.pre_pipe_infd != -1 && !pipe_data->in_fd_set)
 			dup2(global_data.pre_pipe_infd, 0);
 		if (global_data.size > index + 1 && !pipe_data->out_fd_set)
 			dup2(global_data.cmd_pipe_fds[1], 1);

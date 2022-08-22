@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:52:21 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/15 11:57:19 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/22 13:02:04 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,16 @@ char	*is_there(char *str)
 			return ("in");
 	}
 	return ("out");
+}
+
+void	check_ambiguous(char *str)
+{
+	if (str && str[0] == '$')
+	{
+		ft_putstr_fd(str, 2);
+		ft_putstr_fd(": ambiguous redirect\n", 2);
+		global_data.errno_cp = 1;
+	}
 }
 
 void	input_analyse(t_tokens *tokens)
@@ -57,30 +67,33 @@ void	input_analyse(t_tokens *tokens)
 		else if (i > 0 && (ft_strcmp(tokens[i - 1].type, "red_input") == 0))
 		{
 			tokens[i].type = "infile";
-			tokens[i].token = get_env_variables(tokens[i].token);
+			tokens[i].token = get_env_variables(tokens[i].token, TRUE);
+			check_ambiguous(tokens[i].token);
 		}
 		else if (i > 0 && (ft_strcmp(tokens[i - 1].type, "red_out") == 0))
 		{
 			tokens[i].type = "outfile";
-			tokens[i].token = get_env_variables(tokens[i].token);
+			tokens[i].token = get_env_variables(tokens[i].token, TRUE);
+			check_ambiguous(tokens[i].token);
 		}
 		else if (i > 0 && (ft_strcmp(tokens[i - 1].type, "append") == 0))
 		{
 			tokens[i].type = "app_outfile";
-			tokens[i].token = get_env_variables(tokens[i].token);
+			tokens[i].token = get_env_variables(tokens[i].token, TRUE);
+			check_ambiguous(tokens[i].token);
 		}
 		else if (i > 0 && (ft_strcmp(tokens[i - 1].type, "here_doc") == 0))
 			tokens[i].type = "delimiter";
 		else if (i > 0 && cmd == 1)
 		{
 			tokens[i].type = "option";
-			tokens[i].token = get_env_variables(tokens[i].token);
+			tokens[i].token = get_env_variables(tokens[i].token, FALSE);
 		}
 		else
 		{
 			cmd = 1;
 			tokens[i].type = "command";
-			tokens[i].token = get_env_variables(tokens[i].token);
+			tokens[i].token = get_env_variables(tokens[i].token, TRUE);
 		}
 		// else if (i > 0 && ft_strcmp(is_there(tokens[i].token), "in") == 0 && ft_strcmp(tokens[i - 1].type, "red_out") != 0)
 		// 	tokens[i].type = "env_var";

@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/22 11:40:17 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/22 13:07:45 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,11 @@ TODO: ✅❓
 	[✅] All s_redirections in one array
 	[✅] echo hello > file You should write the output in the file
 	[✅] export > file.txt  == SEGV 
-	[❓] cat << ss exiting in Ctrl + C
-	[❓] ctr \ -> quit --> exit 131
-	[❓] ctrl c --> exit 130
-	[❓] cat Makefile > outfile.txt < input > outfile_error.txt no such file called input so you should stop a the error file : Solution => Exit in Child Process (if you found an error)
+	[✅] cat Makefile > outfile.txt < input > outfile_error.txt no such file called input so you should stop a the error file : Solution => Exit in Child Process (if you found an error)
 	[✅] < Makdbvbefile << ss cat : You should stop at the error : Solution => Exit in Child Process
-	[❓] ambiguous redirect when the file redercs in NULL
+	[✅] ambiguous redirect when the file redercs in NULL
+	[❓] cat << ss --> Ctrl + C --> exit 130
+	[❓] ctr \ -> quit --> exit 131
 	
 	---> Parser
 	[✅] if delimiter has quotes don't expand
@@ -136,7 +135,7 @@ int main(int ac, char **av, char **env)
 				input_analyse(parse->tokens); // Specifying each token his type (delimiter, command, option ...)
 				initializer(parse->tokens); 
 				counting(parse); // Just fo counting
-				// token_and_type(parse);
+				//token_and_type(parse);
 				global_data.parse_error = check_parse_errors(parse); 
 				if (global_data.parse_error)
 					break;
