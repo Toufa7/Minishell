@@ -126,7 +126,7 @@ char		*singles_doubles_quotes(char *str);
 char		*handling_quotes(char *str, char replaced_1, char replace_by);
 char		*input_formating(char	*str);
 char		*getting_back_original_input(char *str);
-char		*get_env_variables(char *target);
+char		*get_env_variables(char *target, bool flag);
 char		*get_env_in_herdoc(char *target);
 void		initializer(t_tokens	*tokens);
 void		input_analyse(t_tokens	*tokens);

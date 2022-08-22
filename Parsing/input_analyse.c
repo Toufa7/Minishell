@@ -57,30 +57,30 @@ void	input_analyse(t_tokens *tokens)
 		else if (i > 0 && (ft_strcmp(tokens[i - 1].type, "red_input") == 0))
 		{
 			tokens[i].type = "infile";
-			tokens[i].token = get_env_variables(tokens[i].token);
+			tokens[i].token = get_env_variables(tokens[i].token, TRUE);
 		}
 		else if (i > 0 && (ft_strcmp(tokens[i - 1].type, "red_out") == 0))
 		{
 			tokens[i].type = "outfile";
-			tokens[i].token = get_env_variables(tokens[i].token);
+			tokens[i].token = get_env_variables(tokens[i].token, TRUE);
 		}
 		else if (i > 0 && (ft_strcmp(tokens[i - 1].type, "append") == 0))
 		{
 			tokens[i].type = "app_outfile";
-			tokens[i].token = get_env_variables(tokens[i].token);
+			tokens[i].token = get_env_variables(tokens[i].token, TRUE);
 		}
 		else if (i > 0 && (ft_strcmp(tokens[i - 1].type, "here_doc") == 0))
 			tokens[i].type = "delimiter";
 		else if (i > 0 && cmd == 1)
 		{
 			tokens[i].type = "option";
-			tokens[i].token = get_env_variables(tokens[i].token);
+			tokens[i].token = get_env_variables(tokens[i].token, FALSE);
 		}
 		else
 		{
 			cmd = 1;
 			tokens[i].type = "command";
-			tokens[i].token = get_env_variables(tokens[i].token);
+			tokens[i].token = get_env_variables(tokens[i].token, TRUE);
 		}
 		// else if (i > 0 && ft_strcmp(is_there(tokens[i].token), "in") == 0 && ft_strcmp(tokens[i - 1].type, "red_out") != 0)
 		// 	tokens[i].type = "env_var";

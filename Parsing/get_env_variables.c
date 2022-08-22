@@ -12,9 +12,9 @@
 
 #include "../minishell.h"
 
-char	*add_equal(char *str)
+char	*add_equal(char *str, char *add)
 {
-	return (ft_strjoin(str,"="));
+	return (ft_strjoin(str, add));
 }
 char	*until_dollar(char *str)
 {
@@ -28,13 +28,13 @@ char	*until_dollar(char *str)
 	return (ft_substr(str, 0, i));
 }
 
-char	*get_env_variables(char *target)
+char	*get_env_variables(char *target, bool flag)
 {
 	int		i;
 	int		idx;
 	char	*output;
-	char	*variable;
 	char	*env_var;
+	char	*variable;
 	output = ft_strdup("");
 	i = 0;
 	while (target[i])
@@ -49,12 +49,24 @@ char	*get_env_variables(char *target)
 			}
 			else
 			{
-				// printf("Target -> %s\n",target);
 				variable = ft_substr(target + i + 1, 0, validate_var_name(target + i + 1));
-				env_var = add_equal(variable);
-				idx = get_var_index(env_var);
-				output = ft_strjoin(output, get_var_val(idx , FALSE));
-				i += validate_var_name(target + i + 1) + 1;
+				env_var = add_equal(variable, "=");
+				idx = get_var_index(add_equal(variable, "="));
+				if (idx != -1)
+				{
+					output = ft_strjoin(output, get_var_val(idx , FALSE));
+					i += validate_var_name(target + i + 1) + 1;
+				}
+				else if (flag == TRUE)
+				{
+					output = ft_strjoin(output, add_equal("$", variable));
+					i += validate_var_name(target + i + 1) + 1;
+				}
+				else
+				{
+					output = ft_strjoin(output, "");
+					i += validate_var_name(target + i + 1) + 1;	
+				}
 			}
 		}
 		else
