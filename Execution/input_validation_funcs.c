@@ -17,11 +17,7 @@ char	*put_cmd_status(int status, char *cmd_path, char *cmd)
 	if (status)
 	{
 		ft_putstr_fd(cmd, 2);
-		if (ft_strlen(cmd) == 0)
-		{
-			global_data.errno_cp = 127;
-		}
-		else if (status == 1 && cmd)
+		if (status == 1 && cmd)
 		{
 			ft_putstr_fd(" :command not found\n", 2);
 			global_data.errno_cp = 127;

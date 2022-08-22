@@ -38,8 +38,11 @@ TODO: ✅❓
 	[✅] if delimiter has quotes don't expand
 	[✅] $fghjm << ls --> cmd should be NUll and ls | "" --> cmd should be empty string : Solution => Simply check if the upcoming input lenght is 0
 	[✅]  $NOTEXIT ls --> it should run ls 
-	[❓] cat << "'"'
-	[❓] echo ''"'"
+	[✅] cat << "'"
+	[✅] echo ''"'"
+	[✅] Using get_var_index to get variable from our env 
+	[]  When the varibles in case of > >> < 
+	[] $NONEXIT	return it $UGD => $UGD 
 */
 
 #include "minishell.h"
@@ -73,7 +76,7 @@ void	control_c(int sig)
 	{
 		printf("\n");
 		rl_on_new_line();
-		rl_replace_line("", 0);
+		// rl_replace_line("", 0);
 		rl_redisplay();
 	}
 }

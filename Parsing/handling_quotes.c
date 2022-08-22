@@ -14,17 +14,10 @@
 
 bool	checking_quotes(char *str)
 {
-	if (counting_quotes(str, 'D') % 2 != 0)
+	char *check = ft_strdup(str);
+	if (singles_doubles_quotes(check) == NULL)
 	{
-		ft_putstr_fd("Unclosed Doubles Quotes\n", 2);
-		global_data.errno_cp = 1;
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		return (TRUE);
-	}
-	else if (counting_quotes(str, 'S') % 2 != 0)
-	{
-		ft_putstr_fd("Unclosed Singles Quotes\n", 2);
+		ft_putstr_fd("Unclosed Quotes\n", 2);
 		global_data.errno_cp = 1;
 		rl_on_new_line();
 		rl_replace_line("", 0);
@@ -43,19 +36,21 @@ char	*handling_quotes(char *str, char replaced, char replace_by)
 	dup = NULL;
 	if (!global_data.parse_error)
 	{
-		dup = malloc(sizeof(char) * (ft_strlen(str) + 1));
+		dup = ft_calloc((ft_strlen(str) + 1), sizeof(char));
 		if (!dup)
 			return (NULL);
 		i = -1;
-		while (str[++i])
+		while (++i < ft_strlen(str))
 		{
 			if (str[i] == DOUBLES_QUOTES || str[i] == SING_QUOTES)
 			{
 				j = i;
 				if (str[j] == DOUBLES_QUOTES || str[j] == SING_QUOTES)
+				{
 					dup[j] = str[j];
-				j = j + 1;
-				while (str[j] != DOUBLES_QUOTES && str[j] != SING_QUOTES)
+					j = j + 1;
+				}
+				while (str[j] && str[j] != DOUBLES_QUOTES && str[j] != SING_QUOTES)
 				{
 					if (str[j] == replaced)
 						dup[j] = replace_by;
@@ -70,7 +65,6 @@ char	*handling_quotes(char *str, char replaced, char replace_by)
 			else
 				dup[i] = str[i];
 		}
-		dup[i] = '\0';
 		// free_str(str);
 	}
 	return (dup);
