@@ -73,8 +73,10 @@ void	input_analyse(t_tokens *tokens)
 			tokens[i].type = "delimiter";
 		else if (i > 0 && cmd == 1)
 		{
+			printf("-=> %s\n", tokens[i].token);
 			tokens[i].type = "option";
 			tokens[i].token = get_env_variables(tokens[i].token, FALSE);
+			printf("-=> %s\n", tokens[i].token);
 		}
 		else
 		{

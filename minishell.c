@@ -116,7 +116,7 @@ int main(int ac, char **av, char **env)
 
 	parse = malloc(sizeof(t_parse));
 	global_data.errno_cp = 0;
-	rl_catch_signals = 0;
+	// rl_catch_signals = 0;
 	env_dup(env);
 	while (TRUE)
 	{
@@ -140,7 +140,7 @@ int main(int ac, char **av, char **env)
 				parse->tokens = spliting_with_spaces(parse->dont_splt);
 				input_analyse(parse->tokens); // Specifying each token his type (delimiter, command, option ...)
 				initializer(parse->tokens); counting(parse); // Just fo counting
-				// token_and_type(parse);
+				token_and_type(parse);
 				global_data.parse_error = check_parse_errors(parse); 
 				if (global_data.parse_error)
 					break;

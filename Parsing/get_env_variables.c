@@ -52,7 +52,13 @@ char	*get_env_variables(char *target, bool flag)
 				variable = ft_substr(target + i + 1, 0, validate_var_name(target + i + 1));
 				env_var = add_equal(variable, "=");
 				idx = get_var_index(add_equal(variable, "="));
-				if (idx != -1)
+
+				if ((i > 0 && target[i - 1] == '\\'))
+				{
+					output = ft_strjoin(output, add_equal("$", variable));
+					i += validate_var_name(target + i + 1) + 1;
+				}
+				else if (idx != -1)
 				{
 					output = ft_strjoin(output, get_var_val(idx , FALSE));
 					i += validate_var_name(target + i + 1) + 1;
