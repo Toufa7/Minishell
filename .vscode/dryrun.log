@@ -1,0 +1,5 @@
+make --dry-run --keep-going --print-directory
+make: Entering directory `/Users/otoufah/Desktop/Here_we_go'
+make: Nothing to be done for `all'.
+make: Leaving directory `/Users/otoufah/Desktop/Here_we_go'
+ 

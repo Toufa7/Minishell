@@ -14,7 +14,7 @@ int	validate_var_name(char *var)
 	i = -1;
 	while (var[++i])
 	{
-		if (!(ft_isalpha(var[i]) || (ft_isdigit(var[i]) && i != 0) || var[i] == '_'))
+		if (!(ft_isalpha(var[i]) || var[i] == BACKSLASH || (ft_isdigit(var[i]) && i != 0) || var[i] == '_'))
 			break;
 	}
 	return (i);

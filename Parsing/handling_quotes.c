@@ -20,7 +20,7 @@ bool	checking_quotes(char *str)
 		ft_putstr_fd("Unclosed Quotes\n", 2);
 		global_data.errno_cp = 1;
 		rl_on_new_line();
-		// rl_replace_line("", 0);
+		rl_replace_line("", 0);
 		return (TRUE);
 	}
 	return (FALSE);
@@ -31,6 +31,7 @@ char	*handling_quotes(char *str, char replaced, char replace_by)
 	int		i;
 	int		j;
 	char	*dup;
+	char	d_or_s;
 
 	global_data.parse_error = checking_quotes(str);
 	dup = NULL;
@@ -44,19 +45,15 @@ char	*handling_quotes(char *str, char replaced, char replace_by)
 		{
 			if (str[i] == DOUBLES_QUOTES || str[i] == SING_QUOTES)
 			{
+				dup[i] = str[i];
+				d_or_s = dup[i];
 				j = i;
-				if (str[j] == DOUBLES_QUOTES || str[j] == SING_QUOTES)
-				{
-					dup[j] = str[j];
-					j = j + 1;
-				}
-				while (str[j] && str[j] != DOUBLES_QUOTES && str[j] != SING_QUOTES)
+				while (str[++j] && str[j] != d_or_s)
 				{
 					if (str[j] == replaced)
 						dup[j] = replace_by;
 					else
 						dup[j] = str[j];
-					j++;
 				}
 				if (str[j] == DOUBLES_QUOTES || str[j] == SING_QUOTES)
 					dup[j] = str[j];

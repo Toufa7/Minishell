@@ -10,29 +10,13 @@ TODO:
 }
 */
 
-int	is_empty(char *str)
-{
-	int i = -1;
-
-	if (!str)
-		return (0);
-	while (str[++i])
-	{
-		if (str[i] != 32)
-		{
-			break;
-			return (1);
-		}
-	}
-	return (0);
-}
-
 void	error_exiting(char *str_1, char *str_2, char *str_3)
 {
 	ft_putstr_fd(str_1, 2);
 	ft_putstr_fd(str_2, 2);
 	ft_putstr_fd(str_3, 2);
 }
+
 bool    check_parse_errors(t_parse *parse)
 {
 	size_t i = 0;

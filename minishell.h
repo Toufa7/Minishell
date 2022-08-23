@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/21 08:34:49 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/22 00:27:40 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ TODO:
 # define PATH_MAX  4096
 # define SING_QUOTES 39
 # define DOUBLES_QUOTES 34
+# define BACKSLASH 92
+# define TAAB 9
+# define SPAACE 32
 # define TRUE 1 
 # define FALSE 0 
 # define AMBIGUOUS 0
@@ -182,6 +185,3 @@ int		ft_isdigit(int c);
 t_global_data global_data;
 
 #endif
-
-
-// FOEIUWGHFEEUHOFUOIU
