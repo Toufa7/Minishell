@@ -57,7 +57,7 @@ t_pipe_data	*get_pipe_data(t_parse *parse)
 		if (ft_strcmp(parse->tokens[i].type, "command") == 0)
 		{
 			pipe_data->command = without_d_quotes;
-			pipe_data->argv = ft_realloc(pipe_data->argv, without_s_quotes);
+			pipe_data->argv = ft_realloc(pipe_data->argv, without_d_quotes);
 		}
 		else if (ft_strcmp(parse->tokens[i].type, "delimiter") == 0)
 		{
