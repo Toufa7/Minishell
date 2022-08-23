@@ -25,6 +25,7 @@ bool	checking_quotes(char *str)
 		rl_replace_line("", 0);
 		return (TRUE);
 	}
+	// free_str(str);
 	return (FALSE);
 }
 
@@ -64,7 +65,6 @@ char	*handling_quotes(char *str, char replaced, char replace_by)
 			else
 				dup[i] = str[i];
 		}
-		// free_str(str);
 	}
 	return (dup);
 }

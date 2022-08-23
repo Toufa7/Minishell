@@ -68,7 +68,7 @@ char	*input_formating(char *str)
 			spcs[j++] = str[i];
 	}
 	spcs[j] = '\0';
-	free(str);
+	free_str(str);
 	return (spcs);
 }
 

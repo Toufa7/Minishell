@@ -20,7 +20,7 @@ void	error_exiting(char *str_1, char *str_2, char *str_3)
 bool    check_parse_errors(t_parse *parse)
 {
 	size_t i = 0;
-	// if (!parse->tokens[i].token && is_empty(parse->tokens[i].token) == 0)
+	// if (!parse->tokens[i].token)
 	// {
 	// 	ft_putstr_fd("Error\n", 2);
 	// 	return TRUE;
