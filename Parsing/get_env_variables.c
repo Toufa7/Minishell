@@ -50,12 +50,20 @@ char	*get_env_variables(char *target, bool flag)
 				output = ft_strjoin(output, variable);
 				i += 2;
 			}
-			else if (target[i + 1] <= '1' && target[i + 1] >= '9')
+			else if (ft_isdigit(target[i + 1]) == 1)
 			{
-				printf("I Enter\n");
-				variable = ft_strdup(&target[i]);
-				output = ft_strjoin(output, variable);
-				i += ft_strlen(variable);
+				if (target[i + 1] == '0')
+				{
+					variable = ft_strdup("Minishell");
+					output = ft_strjoin(output, variable);
+					i += ft_strlen(variable);
+				}
+				else
+				{
+					variable = &target[i + 2];
+					output = ft_strjoin(output, variable);
+					i += ft_strlen(variable);
+				}
 			}
 			else
 			{
@@ -85,8 +93,8 @@ char	*get_env_variables(char *target, bool flag)
 			output = ft_strjoin(output, variable);
 			i += ft_strlen(variable);
 		}
-		free_str(variable);
+		// free_str(variable);
 	}
-	free_str(target);
+	// free_str(target);
 	return output;
 }

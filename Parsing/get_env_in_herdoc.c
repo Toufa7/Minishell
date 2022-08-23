@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_env_in_herdoc.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: otoufah <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/23 16:49:01 by otoufah           #+#    #+#             */
+/*   Updated: 2022/08/23 16:49:02 by otoufah          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
-char	*until_doll(char *str)
+char	*till_dollar(char *str)
 {
 	int	i;
 
@@ -11,7 +23,6 @@ char	*until_doll(char *str)
 		i++;
 	return (ft_substr(str, 0, i));
 }
-
 
 char	*get_env_in_herdoc(char *target)
 {
@@ -33,19 +44,20 @@ char	*get_env_in_herdoc(char *target)
 			}
 			else
 			{
-				variable = ft_substr(target + i + 1, 0, validate_var_name(target + i + 1));
+				variable = ft_substr(target + i + 1, 0,
+						validate_var_name(target + i + 1));
 				output = ft_strjoin(output, getenv(variable));
 				i += validate_var_name(target + i + 1) + 1;
 			}
 		}
 		else
 		{
-			variable = until_doll(target + i);
+			variable = till_dollar(target + i);
 			i += ft_strlen(variable);
 			output = ft_strjoin(output, variable);
 		}
 		// free_str(variable);
 	}
 	// free_str(target);
-	return output;
+	return (output);
 }

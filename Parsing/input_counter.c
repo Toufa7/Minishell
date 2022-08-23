@@ -25,28 +25,28 @@ void	initializer(t_tokens	*tokens)
 	tokens->option = 0;
 }
 
-void	input_counter(t_tokens *counter, t_tokens *tokens)
+void	input_counter(t_tokens *cnt, t_tokens *tokens)
 {
 	if (ft_strcmp(tokens->type, "red_input") == 0)
-		counter->red_in++;
+		cnt->red_in++;
 	else if (ft_strcmp(tokens->type, "red_out") == 0)
-		counter->red_out++;
+		cnt->red_out++;
 	else if (ft_strcmp(tokens->type, "here_doc") == 0)
-		counter->here_do++;
+		cnt->here_do++;
 	else if (ft_strcmp(tokens->type, "append") == 0)
-		counter->app++;
+		cnt->app++;
 	else if (ft_strcmp(tokens->type, "command") == 0)
-		counter->cmd++;
+		cnt->cmd++;
 	else if (ft_strcmp(tokens->type, "infile") == 0)
-		counter->redirections++;
+		cnt->redirections++;
 	else if (ft_strcmp(tokens->type, "outfile") == 0)
-		counter->redirections++;
+		cnt->redirections++;
 	else if (ft_strcmp(tokens->type, "app_outfile") == 0)
-		counter->redirections++;
+		cnt->redirections++;
 	else if (ft_strcmp(tokens->type, "delimiter") == 0)
 	{
-		counter->delimiter++;
-		if (counter->delimiter > 16)
+		cnt->delimiter++;
+		if (cnt->delimiter > 16)
 		{
 			ft_putstr_fd("Mini-0.0: maximum here-document count exceeded", 2);
 			global_data.errno_cp = 2;
@@ -54,6 +54,7 @@ void	input_counter(t_tokens *counter, t_tokens *tokens)
 		}
 	}
 	else if (ft_strcmp(tokens->type, "option") == 0)
-		counter->option++;
-	counter->total = counter->red_in + counter->option + counter->red_out + counter->here_do + counter->app + counter->cmd + counter->redirections + counter->delimiter;
+		cnt->option++;
+	cnt->total = cnt->red_in + cnt->option + cnt->red_out + cnt->here_do
+		+ cnt->app + cnt->cmd + cnt->redirections + cnt->delimiter;
 }

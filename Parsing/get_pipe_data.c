@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_pipe_data.c                                      :+:      :+:    :+:   */
+/*   get_pipe_data.c                                      :+:      :+:    :+: */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -30,9 +30,9 @@ t_redirections	*get_redirection(char *path, int type)
 
 	i = 0;
 	new_redrcs = malloc(sizeof(t_redirections));
-	new_redrcs->path = ft_strdup(path); 
+	new_redrcs->path = ft_strdup(path);
 	new_redrcs->type = type;
-	return new_redrcs;
+	return (new_redrcs);
 }
 
 t_pipe_data	*get_pipe_data(t_parse *parse)
@@ -40,7 +40,7 @@ t_pipe_data	*get_pipe_data(t_parse *parse)
 	int			i;
 	int			j;
 	char		*without_d_quotes;
-	char		*without_s_quotes = "";
+	char		*without_s_quotes;
 	char		*replaced;
 	t_pipe_data	*pipe_data;
 
@@ -48,6 +48,7 @@ t_pipe_data	*get_pipe_data(t_parse *parse)
 	j = -1;
 	pipe_data = malloc(sizeof(t_pipe_data));
 	var_init(pipe_data);
+	without_s_quotes = "";
 	pipe_data->redirections = ft_calloc(parse->tokens->redirections + 1, sizeof(t_redirections *));
 	while (parse->tokens[++i].token && parse->tokens[i].token)
 	{

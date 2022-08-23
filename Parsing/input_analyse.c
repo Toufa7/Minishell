@@ -95,7 +95,11 @@ void	input_analyse(t_tokens *tokens)
 			tokens[i].type = "command";
 			tokens[i].token = get_env_variables(tokens[i].token, TRUE);
 		}
-		// else if (i > 0 && ft_strcmp(is_there(tokens[i].token), "in") == 0 && ft_strcmp(tokens[i - 1].type, "red_out") != 0)
-		// 	tokens[i].type = "env_var";
 	}
 }
+
+/*
+	else if (i > 0 && ft_strcmp(is_there(tokens[i].token), "in") == 0
+		&& ft_strcmp(tokens[i - 1].type, "red_out") != 0)
+	tokens[i].type = "env_var";
+*/

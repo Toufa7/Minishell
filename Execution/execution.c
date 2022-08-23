@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   execution.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: otoufah <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/23 16:00:14 by otoufah           #+#    #+#             */
+/*   Updated: 2022/08/23 16:00:18 by otoufah          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
-void ft_close(int n, int s)
+void	ft_close(int n, int s)
 {
 	(void) s;
 	if (n > 2)
@@ -20,7 +32,7 @@ bool	get_herdoc(t_pipe_data *pipe_data)
 	int		fd;
 	int		j;
 	int		exit_status;
-	int id;
+	int		id;
 
 	j = -1;
 	global_data.is_in_herdoc = TRUE;
@@ -34,7 +46,7 @@ bool	get_herdoc(t_pipe_data *pipe_data)
 			line = readline("> ");
 			expand = NULL;
 			while (!line || ft_strcmp(line, pipe_data->delimiter[j]))
-			{ 
+			{
 				if (line)
 				{
 					expand = get_env_in_herdoc(line);
@@ -43,7 +55,7 @@ bool	get_herdoc(t_pipe_data *pipe_data)
 					free_str(expand);
 				}
 				else
-					break;
+					break ;
 				line = readline("> ");
 			}
 			free_str(line);
@@ -59,9 +71,9 @@ bool	get_herdoc(t_pipe_data *pipe_data)
 void	validate_cmd(t_pipe_data *pipe_data)
 {
 	int		i;
-	char	**execps_paths;
 	char	*path_var;
-	struct	stat statbuf;
+	char	**execps_paths;
+	struct	stat	statbuf;
 
 	i = -1;
 	execps_paths = NULL;
@@ -73,14 +85,15 @@ void	validate_cmd(t_pipe_data *pipe_data)
 		{
 			path_var = path_var + 5;
 			execps_paths = ft_split(path_var, ':');
-			break;
+			break ;
 		}
 	}
 	if (ft_strchr(pipe_data->command, '/') || !execps_paths)
 	{
 		if (stat(pipe_data->command, &statbuf) == 0)
 		{
-			if (!S_ISDIR(statbuf.st_mode) && !access(pipe_data->command, F_OK) && !access(pipe_data->command, X_OK))
+			if (!S_ISDIR(statbuf.st_mode) && !access(pipe_data->command, F_OK)
+				&& !access(pipe_data->command, X_OK))
 				pipe_data->cmd_path = pipe_data->command;
 			else
 			{
@@ -106,16 +119,18 @@ void	validate_cmd(t_pipe_data *pipe_data)
 void	pipe_files_prep(t_pipe_data *pipe_data, bool is_builtin)
 {
 	int	i;
-	int fd;
+	int	fd;
 
 	i = -1;
 	while (pipe_data->redirections && pipe_data->redirections[++i])
 	{
-		if (pipe_data->redirections[i]->path && pipe_data->redirections[i]->path[0] == '$')
+		if (pipe_data->redirections[i]->path
+			&& pipe_data->redirections[i]->path[0] == '$')
 			continue ;
 		if (pipe_data->redirections[i]->type == INFILE)
 		{
-			if (access(pipe_data->redirections[i]->path, F_OK) || access(pipe_data->redirections[i]->path, R_OK))
+			if (access(pipe_data->redirections[i]->path, F_OK)
+				|| access(pipe_data->redirections[i]->path, R_OK))
 			{
 				perror(pipe_data->redirections[i]->path);
 				if (!is_builtin)
@@ -131,7 +146,7 @@ void	pipe_files_prep(t_pipe_data *pipe_data, bool is_builtin)
 		else if (pipe_data->redirections[i]->type == OUTFILE)
 		{
 			fd = open(pipe_data->redirections[i]->path,
-						O_CREAT | O_WRONLY | O_TRUNC, 0777);
+					O_CREAT | O_WRONLY | O_TRUNC, 0777);
 			pipe_data->out_fd_set = TRUE;
 			if (!is_builtin || global_data.size > 1)
 			{
@@ -144,7 +159,7 @@ void	pipe_files_prep(t_pipe_data *pipe_data, bool is_builtin)
 		else if (pipe_data->redirections[i]->type == APPENDFILE)
 		{
 			fd = open(pipe_data->redirections[i]->path,
-						O_CREAT | O_WRONLY | O_APPEND, 0777);
+					O_CREAT | O_WRONLY | O_APPEND, 0777);
 			pipe_data->out_fd_set = TRUE;
 			if (!is_builtin || global_data.size > 1)
 			{
@@ -156,7 +171,6 @@ void	pipe_files_prep(t_pipe_data *pipe_data, bool is_builtin)
 		}
 	}
 }
-
 
 bool	check_builtin(t_pipe_data *pipe_data)
 {
@@ -196,12 +210,12 @@ bool	check_builtin(t_pipe_data *pipe_data)
 		munset(pipe_data->argv + 1);
 	}
 	else
-		return FALSE;
+		return (FALSE);
 	ft_close(global_data.in_fd, 1);
 	ft_close(global_data.out_fd, 1);
 	global_data.in_fd = 0;
 	global_data.out_fd = 1;
-	return TRUE;
+	return (TRUE);
 }
 
 void	child_process(t_pipe_data *pipe_data, int index)

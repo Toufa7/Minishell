@@ -33,6 +33,11 @@ TODO: ✅❓
 	[❓] cat << ss --> Ctrl + C --> exit 130
 	[❓] ctr \ -> quit --> exit 131 and CTRL+C retur status it's 1 not 0
 	[❓] cd = Bad Address
+	[❓] unset PATH && cmd : Expected = error msg and exit child proccess
+	[❓] echo test > b | << lim | << lim2 creates b before finishing all heredocs: Expected = wait until all heredocs finished
+	[❓] echo test > $"" : expected i will say it again please stop at the error the next time i will distroy your father's home iskawatcha
+	[❓] non exist command : check the exit_status : it should be 127 not 126 u idiot
+	[❓] exit -1 || exit +1 should exit cleanly without any errors
 	
 	---> Parser
 	[✅] if delimiter has quotes don't expand
@@ -48,6 +53,9 @@ TODO: ✅❓
 	[❓]	export a="ls -la" 
 	[❓]	echo $123
 	[✅]	echo "$USER ' '  'imad ok"
+	[❓] echo "$" =  expected = $
+	[❓] echo $"test"$ : Expected = test$
+	[❓] echo '$' : Expected = $
 	env ls
 */
 

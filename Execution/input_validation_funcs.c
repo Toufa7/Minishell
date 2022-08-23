@@ -14,9 +14,11 @@
 
 bool	is_empty(char *str)
 {
+	int	i;
+
 	if (!str)
 		return (TRUE);
-	int i = 0;
+	i = 0;
 	while (str[i])
 	{
 		if (str[i] != TAAB && str[i] != SPAACE)
@@ -25,7 +27,6 @@ bool	is_empty(char *str)
 	}
 	return (TRUE);
 }
-
 
 char	*put_cmd_status(int status, char *cmd_path, char *cmd)
 {

@@ -14,7 +14,9 @@
 
 bool	checking_quotes(char *str)
 {
-	char *check = ft_strdup(str);
+	char	*check;
+
+	check = ft_strdup(str);
 	if (singles_doubles_quotes(check) == NULL)
 	{
 		ft_putstr_fd("Unclosed Quotes\n", 2);

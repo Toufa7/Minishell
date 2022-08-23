@@ -21,14 +21,15 @@ char	*input_formating(char *str)
 	int		i;
 	int		j;
 	int		allo;
-	char 	sing;
+	char	sing;
 	char	*spcs;
 
 	i = -1;
 	allo = 0;
 	while (str[++i])
 	{
-		if ((str[i] == '<' && str[i + 1] != '<') || (str[i] == '>' && str[i + 1] != '>') || str[i] == '|')
+		if ((str[i] == '<' && str[i + 1] != '<')
+			|| (str[i] == '>' && str[i + 1] != '>') || str[i] == '|')
 			allo++;
 	}
 	spcs = malloc(sizeof(char) * (ft_strlen(str) + (allo * 2) + 1));
@@ -47,7 +48,8 @@ char	*input_formating(char *str)
 				spcs[j++] = str[i];
 			}
 		}
-		if ((str[i] == '<' && str[i + 1] == '<') || (str[i] == '>' && str[i + 1] == '>'))
+		if ((str[i] == '<' && str[i + 1] == '<')
+			|| (str[i] == '>' && str[i + 1] == '>'))
 		{
 			spcs[j++] = ' ';
 			spcs[j++] = str[i];
@@ -55,7 +57,8 @@ char	*input_formating(char *str)
 			spcs[j++] = ' ';
 			i++;
 		}
-		else if ((str[i] == '>' && str[i + 1] != '>') || (str[i] == '<' && str[i + 1] != '<') || str[i] == '|')
+		else if ((str[i] == '>' && str[i + 1] != '>')
+			|| (str[i] == '<' && str[i + 1] != '<') || str[i] == '|')
 		{
 			spcs[j++] = ' ';
 			spcs[j++] = str[i];

@@ -154,7 +154,6 @@ int		validate_infile(char *infile_path);
 
 // ----------- Shared Functions ------------------
 
-int		counting_quotes(char *str, char qtype);
 void	free_str(void *ptr);
 void	free_arr(void **arr);
 char	*ft_itoa(int n);
