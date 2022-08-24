@@ -6,5 +6,6 @@ Minishell.dSYM
 *.o
 *.out
 /*/*.o
+/.vscode/*
 /.vscode
 */*.out
