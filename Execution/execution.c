@@ -220,6 +220,8 @@ void	child_process(t_pipe_data *pipe_data, int index)
 			fd = open("/tmp/herdoc", O_RDWR, 0004);
 			dup2(global_data.cmd_pipe_fds[1], 1);
 			dup2(fd, 0);
+			ft_close(global_data.cmd_pipe_fds[1], 1);
+			ft_close(fd, 1);
 		}
 		else if (global_data.pre_pipe_infd != -1 && !pipe_data->in_fd_set)
 			dup2(global_data.pre_pipe_infd, 0);
@@ -227,10 +229,12 @@ void	child_process(t_pipe_data *pipe_data, int index)
 			dup2(global_data.cmd_pipe_fds[1], 1);
 		ft_close(global_data.cmd_pipe_fds[1], 5);
 		ft_close(global_data.cmd_pipe_fds[0], 4);
+		ft_close(global_data.pre_pipe_infd, 4);
 		if (check_builtin(pipe_data))
 			exit(0);
 		else
 			execve(pipe_data->cmd_path, pipe_data->argv, global_data.envp);
+		printf("-1\n");
 	}
 }
 
