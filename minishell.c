@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/25 07:46:18 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/25 07:47:45 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ TODO: ✅❓
 	[✅] exit -1 || exit +1 should exit cleanly without any errors
 	[✅] exit without args ==> you should return the last exit_status
 	[✅]	$ export a : export a+=Sultan : env : you should assing 
+	[❓] Built ins is not working with mulitble pipes: I know why and the solution I just need some rest
 	[❓] cat << ss --> Ctrl + C --> exit 130
 	[❓] ctr \ -> quit --> exit 131 and CTRL+C retur status it's 1 not 0
 	[❓] ignore cntr C in childs
