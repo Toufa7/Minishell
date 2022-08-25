@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:00:14 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/25 00:21:52 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/25 01:46:43 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,17 +78,7 @@ void	validate_cmd(t_pipe_data *pipe_data)
 	i = -1;
 	execps_paths = NULL;
 	path_var = NULL;
-	while (global_data.envp[++i])
-	{
-		path_var = ft_strnstr(global_data.envp[i], "PATH=", 5);
-		if (path_var)
-		{
-			path_var = path_var + 5;
-			execps_paths = ft_split(path_var, ':');
-			break ;
-		}
-	}
-	if (ft_strchr(pipe_data->command, '/') || !execps_paths)
+	if (ft_strchr(pipe_data->command, '/'))
 	{
 		if (stat(pipe_data->command, &statbuf) == 0)
 		{
@@ -112,8 +102,27 @@ void	validate_cmd(t_pipe_data *pipe_data)
 		}
 	}
 	else
-		pipe_data->cmd_path = get_cmd_path(pipe_data->command, execps_paths);
-	free_arr((void **) execps_paths);
+	{
+		while (global_data.envp[++i])
+		{
+			path_var = ft_strnstr(global_data.envp[i], "PATH=", 5);
+			if (path_var)
+			{
+				path_var = path_var + 5;
+				execps_paths = ft_split(path_var, ':');
+				break ;
+			}
+		}
+		if (execps_paths)
+			pipe_data->cmd_path = get_cmd_path(pipe_data->command, execps_paths);
+		else
+		{
+			ft_putstr_fd(pipe_data->command, 2);
+			ft_putstr_fd(": No such file or directory\n", 2);
+			exit(127);
+		}
+		free_arr((void **) execps_paths);
+	}
 }
 
 void	pipe_files_prep(t_pipe_data *pipe_data, bool is_builtin)
