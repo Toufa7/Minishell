@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:00:14 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/25 01:51:10 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/25 02:23:00 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,35 +127,51 @@ void	validate_cmd(t_pipe_data *pipe_data)
 
 void	pipe_files_prep(t_pipe_data *pipe_data, bool is_builtin)
 {
+	char	*path;
+	int		type;
 	int	i;
 	int	fd;
 
 	i = -1;
 	while (pipe_data->redirections && pipe_data->redirections[++i])
 	{
-		if (pipe_data->redirections[i]->path
-			&& pipe_data->redirections[i]->path[0] == '$')
-			continue ;
-		if (pipe_data->redirections[i]->type == INFILE)
+		path = pipe_data->redirections[i]->path;
+		type = pipe_data->redirections[i]->type;
+		if (path && path[0] == '$')
 		{
-			if (access(pipe_data->redirections[i]->path, F_OK)
-				|| access(pipe_data->redirections[i]->path, R_OK))
+			if (path[0] == '$' && path[1])
 			{
-				perror(pipe_data->redirections[i]->path);
+				ft_putstr_fd(path, 2);
+				ft_putstr_fd(": ambiguous redirect\n", 2);
+			}
+			else
+				ft_putstr_fd(": No such file or directory\n", 2);
+			if (is_builtin)
+			{
+				global_data.errno_cp = 1;
+				break;
+			}
+			else
+				exit(1);
+		}
+		if (type == INFILE)
+		{
+			if (access(path, F_OK) || access(path, R_OK))
+			{
+				perror(path);
 				if (!is_builtin)
 					exit(errno);
 				global_data.errno_cp = errno;
 			}
-			fd = open(pipe_data->redirections[i]->path, O_RDONLY);
+			fd = open(path, O_RDONLY);
 			pipe_data->in_fd_set = TRUE;
 			if (!pipe_data->is_herdoc && !is_builtin)
 				dup2(fd, 0);
 			ft_close(fd, 8);
 		}
-		else if (pipe_data->redirections[i]->type == OUTFILE)
+		else if (type == OUTFILE)
 		{
-			fd = open(pipe_data->redirections[i]->path,
-					O_CREAT | O_WRONLY | O_TRUNC, 0777);
+			fd = open(path, O_CREAT | O_WRONLY | O_TRUNC, 0777);
 			pipe_data->out_fd_set = TRUE;
 			if (!is_builtin || global_data.size > 1)
 			{
@@ -165,10 +181,9 @@ void	pipe_files_prep(t_pipe_data *pipe_data, bool is_builtin)
 			else
 				global_data.out_fd = fd;
 		}
-		else if (pipe_data->redirections[i]->type == APPENDFILE)
+		else if (type == APPENDFILE)
 		{
-			fd = open(pipe_data->redirections[i]->path,
-					O_CREAT | O_WRONLY | O_APPEND, 0777);
+			fd = open(path, O_CREAT | O_WRONLY | O_APPEND, 0777);
 			pipe_data->out_fd_set = TRUE;
 			if (!is_builtin || global_data.size > 1)
 			{
@@ -186,37 +201,44 @@ bool	check_builtin(t_pipe_data *pipe_data)
 	if (!ft_strcmp("cd", pipe_data->command))
 	{
 		pipe_files_prep(pipe_data, TRUE);
-		mcd(*(pipe_data->argv + 1));
+		if (!global_data.errno_cp)
+			mcd(*(pipe_data->argv + 1));
 	}
 	else if (!ft_strcmp("echo", pipe_data->command))
 	{
 		pipe_files_prep(pipe_data, TRUE);
-		mecho(pipe_data->argv + 1);
+		if (!global_data.errno_cp)
+			mecho(pipe_data->argv + 1);
 	}
 	else if (!ft_strcmp("env", pipe_data->command))
 	{
 		pipe_files_prep(pipe_data, TRUE);
-		menv(pipe_data->argv + 1, NULL, FALSE);
+		if (!global_data.errno_cp)
+			menv(pipe_data->argv + 1, NULL, FALSE);
 	}
 	else if (!ft_strcmp("exit", pipe_data->command))
 	{
 		pipe_files_prep(pipe_data, TRUE);
-		mexit(pipe_data->argv + 1);
+		if (!global_data.errno_cp)
+			mexit(pipe_data->argv + 1);
 	}
 	else if (!ft_strcmp("export", pipe_data->command))
 	{
 		pipe_files_prep(pipe_data, TRUE);
-		mexport(pipe_data->argv + 1);
+		if (!global_data.errno_cp)
+			mexport(pipe_data->argv + 1);
 	}
 	else if (!ft_strcmp("pwd", pipe_data->command))
 	{
 		pipe_files_prep(pipe_data, TRUE);
-		mpwd();
+		if (!global_data.errno_cp)
+			mpwd();
 	}
 	else if (!ft_strcmp("unset", pipe_data->command))
 	{
 		pipe_files_prep(pipe_data, TRUE);
-		munset(pipe_data->argv + 1);
+		if (!global_data.errno_cp)
+			munset(pipe_data->argv + 1);
 	}
 	else
 		return (FALSE);

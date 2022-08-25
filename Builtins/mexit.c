@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:19:54 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/23 16:19:55 by otoufah          ###   ########.fr       */
+/*   Updated: 2022/08/25 04:10:50 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,32 @@
 
 void	mexit(char **argv)
 {
-	bool	isarg_digit;
+	bool	is_valid;
+	bool	is_digit;
 	int		j;
 	int		i;
 
-	isarg_digit = TRUE;
-	j = -1;
+	is_valid = TRUE;
 	i = 0;
-	if (!argv[0])
-	{
-		ft_putstr_fd("exit\n", 1);
-		exit(global_data.errno_cp);
-	}
-	while (argv[i][++j])
+	j = 0;
+	if (!ft_strcmp(argv[i], "--"))
+		i++;
+	if (argv[i] && (argv[i][j] == '-' || argv[i][j] == '+'))
+		j++;
+	if (argv[i] && !argv[i][j])
+		is_valid = FALSE;
+	while (argv[i] && argv[i][j])
 	{
 		if (!(argv[i][j] >= '0' && argv[i][j] <= '9'))
 		{
-			isarg_digit = FALSE;
+			is_valid = FALSE;
 			break ;
 		}
+		j++;
 	}
 	while (argv[i])
 		i++;
-	if (!isarg_digit)
+	if (!is_valid)
 	{
 		ft_putstr_fd("exit\nexit: ", 2);
 		ft_putstr_fd(argv[0], 2);
@@ -52,7 +55,9 @@ void	mexit(char **argv)
 	}
 	else
 	{
-		exit(ft_atoi(argv[0]));
-		global_data.errno_cp = 0;
+		if (argv[i])
+			global_data.errno_cp = ft_atoi(argv[i]) % 256;
+		printf("exit\n");
+		exit(global_data.errno_cp);
 	}
 }
