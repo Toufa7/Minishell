@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:19:59 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/23 16:19:59 by otoufah          ###   ########.fr       */
+/*   Updated: 2022/08/25 07:39:46 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*get_key(char *str)
 	return (key);
 }
 
-char	*get_val(char *str, bool include_eqs)
+char	*get_val(char *str)
 {
 	char	*val;
 	int		i;
@@ -49,9 +49,7 @@ char	*get_val(char *str, bool include_eqs)
 		while (str[i + j])
 			j++;
 		val = malloc(sizeof(char) * (j + 1));
-		if (!include_eqs)
-			i++;
-		ft_strncpy(val, str + i, j);
+		ft_strncpy(val, str + i + 1, j);
 	}
 	return (val);
 }
@@ -80,23 +78,31 @@ int	get_op_type(char *str)
 void	create_final_var(int op_type, char *key, char *new_val)
 {
 	char	*final_var;
-	char	*final_val;
+	char	*cmpined_val;
 	char	*old_val;
 	int		var_index;
 
 	var_index = get_var_index(key);
-	if (var_index != -1 && (op_type == 1 || op_type == 2))
+	if (var_index != -1 && op_type == 1)
 	{
-		old_val = get_var_val(var_index, TRUE);
-		final_val = ft_strjoin(old_val, new_val);
-		if (!final_val)
-			final_val = ft_strdup(old_val);
+		old_val = get_var_val(var_index);
+		cmpined_val = ft_strjoin(old_val, new_val);
+		if (!cmpined_val)
+			cmpined_val = ft_strdup(old_val);
+		cmpined_val = ft_strjoin("=", cmpined_val);
 		free_str(old_val);
 	}
+	else if (op_type == 2)
+		cmpined_val = ft_strdup(new_val);
 	else
-		final_val = new_val;
-	if (final_val)
-		final_var = ft_strjoin(key, final_val);
+	{
+		if (new_val)
+			cmpined_val = ft_strjoin("=", new_val);
+		else
+			cmpined_val = ft_strdup("=");
+	}
+	if (cmpined_val)
+		final_var = ft_strjoin(key, cmpined_val);
 	else
 		final_var = ft_strdup(key);
 	if (var_index != -1)
@@ -107,7 +113,7 @@ void	create_final_var(int op_type, char *key, char *new_val)
 	else
 		global_data.envp = ft_realloc(global_data.envp, final_var);
 	if (var_index != -1 && op_type == 1)
-		free_str(final_val);
+		free_str(cmpined_val);
 	global_data.errno_cp = 0;
 }
 
@@ -116,7 +122,7 @@ bool	check_errors(char *str, char **key, char **val, int *op_type)
 	*key = get_key(str);
 	if (key)
 		*op_type = get_op_type(str + ft_strlen(*key));
-	*val = get_val(str, *op_type == 0);
+	*val = get_val(str);
 	if (!key || *op_type == -1)
 	{
 		ft_putstr_fd("export: '", 2);

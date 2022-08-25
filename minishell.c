@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/25 04:09:08 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/25 07:46:18 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,15 @@ TODO: ✅❓
 	[✅] ambiguous redirect when the file redercs in NULL
 	[✅] cd = Bad Address
 	[✅] unset PATH && cmd : Expected = error msg and exit child proccess
-	[❓] cat << ss --> Ctrl + C --> exit 130
-	[❓] ctr \ -> quit --> exit 131 and CTRL+C retur status it's 1 not 0
 	[✅] echo test > b | << lim | << lim2 creates b before finishing all heredocs: Expected = wait until all heredocs finished
 	[✅] echo test > $"" : expected i will say it again please stop at the error the next time i will distroy your father's home iskawatcha
 	[✅] non exist command : check the exit_status : it should be 127 not 126
 	[✅] exit -1 || exit +1 should exit cleanly without any errors
-	[❓] exit without args ==> you should return the last exit_status
+	[✅] exit without args ==> you should return the last exit_status
+	[✅]	$ export a : export a+=Sultan : env : you should assing 
+	[❓] cat << ss --> Ctrl + C --> exit 130
+	[❓] ctr \ -> quit --> exit 131 and CTRL+C retur status it's 1 not 0
 	[❓] ignore cntr C in childs
-	[❓]	$ export a : export a+=Sultan : env : you should assing 
  
 	---> Parser
 	[✅] if delimiter has quotes don't expand
@@ -88,23 +88,23 @@ void	getting_back(char **str)
 		str[i] = handling_quotes(str[i], -1, '|');
 }
 
-void	control_c(int sig)
-{
-	if (!global_data.is_in_herdoc)
-	{
-		printf("\n");
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}
-	else
-	{
-		//printf("\n");
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}
-}
+// void	control_c(int sig)
+// {
+// 	if (!global_data.is_in_herdoc)
+// 	{
+// 		printf("\n");
+// 		rl_on_new_line();
+// 		rl_replace_line("", 0);
+// 		rl_redisplay();
+// 	}
+// 	else
+// 	{
+// 		//printf("\n");
+// 		rl_on_new_line();
+// 		rl_replace_line("", 0);
+// 		rl_redisplay();
+// 	}
+// }
 
 void	init_global_data()
 {
@@ -116,8 +116,8 @@ void	init_global_data()
 	global_data.pre_pipe_infd = -1;
 	global_data.last_child_id = 0;
 	global_data.parse_error = FALSE;
+	global_data.redirection_error = FALSE;
 }
-
 
 int main(int ac, char **av, char **env)
 {

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input_validation_funcs.c                           :+:      :+:    :+:   */
+/*   command_validation.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 19:09:57 by abouchfa          #+#    #+#             */
-/*   Updated: 2022/08/25 02:24:05 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/25 05:56:05 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,60 @@ char	*get_cmd_path(char *cmd, char **exec_programs_dirs)
 	return (put_cmd_status(status, cmd_path, cmd));
 }
 
-int	validate_infile(char *infile_path)
+void	check_cmd_path(t_pipe_data *pipe_data)
 {
-	if (!access(infile_path, F_OK) && !access(infile_path, R_OK))
-		return (1);
-	perror(infile_path);
-	global_data.errno_cp = errno;
-	return (0);
+	struct stat	statbuf;
+
+	if (stat(pipe_data->command, &statbuf) == 0)
+	{
+		if (!S_ISDIR(statbuf.st_mode) && !access(pipe_data->command, F_OK)
+			&& !access(pipe_data->command, X_OK))
+			pipe_data->cmd_path = pipe_data->command;
+		else
+		{
+			if (S_ISDIR(statbuf.st_mode))
+			{
+				ft_putstr_fd(pipe_data->command, 2);
+				ft_putstr_fd(": is a directory\n", 2);
+				exit(126);
+			}
+			else
+			{
+				perror(pipe_data->command);
+				exit(errno);
+			}
+		}
+	}
+}
+
+void	check_command_name(t_pipe_data *pipe_data)
+{
+	int		i;
+	char	*path_var;
+	char	**execps_paths;
+
+	i = -1;
+	execps_paths = NULL;
+	path_var = NULL;
+	i = get_var_index("PATH=");
+	if (i != -1)
+	{
+		execps_paths = ft_split(global_data.envp[i] + 5, ':');
+		pipe_data->cmd_path = get_cmd_path(pipe_data->command, execps_paths);
+	}
+	else
+	{
+		ft_putstr_fd(pipe_data->command, 2);
+		ft_putstr_fd(": No such file or directory\n", 2);
+		exit(127);
+	}
+	free_arr((void **) execps_paths);
+}
+
+void	validate_cmd(t_pipe_data *pipe_data)
+{
+	if (ft_strchr(pipe_data->command, '/'))
+		check_cmd_path(pipe_data);
+	else
+		check_command_name(pipe_data);
 }

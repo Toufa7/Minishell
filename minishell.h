@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/22 00:27:40 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/25 07:28:22 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ typedef struct s_global_data
 	bool	parse_error;
 	pid_t	last_child_id;
 	bool	is_in_herdoc;
+	bool	redirection_error;
 }	t_global_data;
 
 typedef struct s_pipe_data
@@ -148,16 +149,22 @@ void	mexit(char **argv);
 void	munset(char **argv);
 void	mexport(char **argv);
 void	execution(t_pipe_data **pipe_data);
-bool	get_herdoc(t_pipe_data *pipe_data);
-int		validate_infile(char *infile_path);
+bool	check_builtin(t_pipe_data *pipe_data);
 char	*get_cmd_path(char *cmd, char **exec_programs_dirs);
+void	pipe_files_prep(t_pipe_data *pipe_data, bool is_builtin);
+void	validate_cmd(t_pipe_data *pipe_data);
 
 // ----------- Shared Functions ------------------
 
+void	ft_close(int n, int s);
 void	free_str(void *ptr); 
 void	free_arr(void **arr);
+
+void	herdoc_signals(int sig);
+void	control_c(int sig);
+
 char	*ft_itoa(int n);
-char	*get_var_val(int var_index, bool include_eqs);
+char	*get_var_val(int var_index);
 int		validate_var_name(char *var);
 char	**ft_realloc(char **dist, char *str);
 void	env_dup(char **env);

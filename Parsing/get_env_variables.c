@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:32:28 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/24 18:36:15 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/25 07:28:05 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char	*get_env_variables(char *target, bool flag)
 				idx = get_var_index(add_something(variable, "="));										// echo "\$USER" == $USER	[❓]
 				if (idx != -1)
 				{
-					output = ft_strjoin(output, get_var_val(idx, FALSE));
+					output = ft_strjoin(output, get_var_val(idx));
 					i += validate_var_name(target + i + 1) + 1;
 				}
 				else if (flag == TRUE)
