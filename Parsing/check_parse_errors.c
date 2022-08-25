@@ -20,11 +20,11 @@ void	error_exiting(char *str_1, char *str_2, char *str_3)
 bool    check_parse_errors(t_parse *parse)
 {
 	size_t i = 0;
-	// if (!parse->tokens[i].token)
-	// {
-	// 	ft_putstr_fd("Error\n", 2);
-	// 	return TRUE;
-	// }
+	if (!parse->tokens[i].token)
+	{
+		ft_putstr_fd("Error\n", 2);
+		return TRUE;
+	}
 	while (i < parse->tokens->total && parse->tokens[i].token)
 	{
 		if ((ft_strcmp(parse->tokens[i].type, "here_doc") == 0 && !parse->tokens[i + 1].token) || (ft_strcmp(parse->tokens[i].type, "here_doc") == 0 && (ft_strcmp(parse->tokens[i + 1].type, "delimiter") != 0)))

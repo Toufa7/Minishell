@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:20:03 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/23 16:20:04 by otoufah          ###   ########.fr       */
+/*   Updated: 2022/08/25 07:28:12 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	mpwd(void)
 	}
 	else if (get_var_index("PWD=") != -1)
 	{
-		tmp = get_var_val(get_var_index("PWD="), FALSE);
+		tmp = get_var_val(get_var_index("PWD="));
 		ft_putstr_fd(tmp, global_data.out_fd);
 		ft_putstr_fd("\n", global_data.out_fd);
 		global_data.errno_cp = 0;

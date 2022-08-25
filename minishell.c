@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/22 13:07:45 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/25 07:47:45 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,19 @@ TODO: ✅❓
 	[✅] cat Makefile > outfile.txt < input > outfile_error.txt no such file called input so you should stop a the error file : Solution => Exit in Child Process (if you found an error)
 	[✅] < Makdbvbefile << ss cat : You should stop at the error : Solution => Exit in Child Process
 	[✅] ambiguous redirect when the file redercs in NULL
+	[✅] cd = Bad Address
+	[✅] unset PATH && cmd : Expected = error msg and exit child proccess
+	[✅] echo test > b | << lim | << lim2 creates b before finishing all heredocs: Expected = wait until all heredocs finished
+	[✅] echo test > $"" : expected i will say it again please stop at the error the next time i will distroy your father's home iskawatcha
+	[✅] non exist command : check the exit_status : it should be 127 not 126
+	[✅] exit -1 || exit +1 should exit cleanly without any errors
+	[✅] exit without args ==> you should return the last exit_status
+	[✅]	$ export a : export a+=Sultan : env : you should assing 
+	[❓] Built ins is not working with mulitble pipes: I know why and the solution I just need some rest
 	[❓] cat << ss --> Ctrl + C --> exit 130
 	[❓] ctr \ -> quit --> exit 131 and CTRL+C retur status it's 1 not 0
-	[❓] cd = Bad Address
-	[❓] unset PATH && cmd : Expected = error msg and exit child proccess
-	[❓] echo test > b | << lim | << lim2 creates b before finishing all heredocs: Expected = wait until all heredocs finished
-	[❓] echo test > $"" : expected i will say it again please stop at the error the next time i will distroy your father's home iskawatcha
-	[❓] non exist command : check the exit_status : it should be 127 not 126
-	[❓] exit -1 || exit +1 should exit cleanly without any errors
-	[❓] exit without args ==> you should return the last exit_status
 	[❓] ignore cntr C in childs
-	[❓]	$ export a : export a+=Sultan : env : you should assing 
-
+ 
 	---> Parser
 	[✅] if delimiter has quotes don't expand
 	[✅] $fghjm << ls --> cmd should be NUll and ls | "" --> cmd should be empty string : Solution => Simply check if the upcoming input lenght is 0
@@ -49,19 +50,25 @@ TODO: ✅❓
 	[✅] cat << "'"
 	[✅] echo ''"'"
 	[✅] Using get_var_index to get variable from our env 
-	[❓] $NONEXIT cmd 
-	[❓] When the varibles in case of > >> < 
-	[❓] $NONEXIT	return it $UGD => $UGD 
+	[✅] $NONEXIT return it $UGD => $UGD 
 	[✅] Mixing tabs with spaces : Done but check : 
-	[❓]	export a="ls -la" 
-	[❓]	echo $123
+	[✅]	echo $123
 	[✅]	echo "$USER ' '  'imad ok"
-	[❓] echo "$" =  expected = $
-	[❓] echo $"test"$ : Expected = test$
-	[❓] echo '$' : Expected = $
+	{
+		[✅] echo "$" =  expected = $
+		[✅] echo "$" : Expected = $
+		[✅] echo "$_" : Expected = Last Command
+		[✅] // echo "$\USER" == $\USER	
+		[✅] // echo "\USER"  == \USER	
+		[✅] echo $"test"$ : Expected = test$
+	}
+	[❓] cat <$k
+	[❓] When the varibles in case of > >> < 
+	[❓]	export a="ls -la" 
 	[❓] env ls => not required
 	[❓] pipes : check syntax errors
-	*/
+	[❓] $NONEXIT cmd 
+*/
 
 #include "minishell.h"
 
@@ -106,6 +113,24 @@ void	control_c(int sig)
 	}
 }
 
+// void	control_c(int sig)
+// {
+// 	if (!global_data.is_in_herdoc)
+// 	{
+// 		printf("\n");
+// 		rl_on_new_line();
+// 		rl_replace_line("", 0);
+// 		rl_redisplay();
+// 	}
+// 	else
+// 	{
+// 		//printf("\n");
+// 		rl_on_new_line();
+// 		rl_replace_line("", 0);
+// 		rl_redisplay();
+// 	}
+// }
+
 void	init_global_data()
 {
 	global_data.pre_pipe_infd = -1;
@@ -116,8 +141,8 @@ void	init_global_data()
 	global_data.pre_pipe_infd = -1;
 	global_data.last_child_id = 0;
 	global_data.parse_error = FALSE;
+	global_data.redirection_error = FALSE;
 }
-
 
 int main(int ac, char **av, char **env)
 {

@@ -71,11 +71,3 @@ char	*input_formating(char *str)
 	free_str(str);
 	return (spcs);
 }
-
-// int main()
-// {
-// 	while (TRUE)
-// 	{
-// 	char *s = readline(""); printf("%s\n",input_formating(s));
-// 	}
-// }

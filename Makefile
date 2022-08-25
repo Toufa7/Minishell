@@ -11,6 +11,8 @@ ADDI_FLAGS = -fsanitize=address -g
 F_REMOVE = rm -rf
 
 C_FILES = 	minishell.c \
+			Utils/system_calls_protection.c \
+			Utils/signals.c \
 			Utils/ft_itoa.c \
 			Utils/validate_var_name.c \
 			Utils/free_funcs.c \
@@ -45,6 +47,7 @@ C_FILES = 	minishell.c \
 			Parsing/get_pipe_data.c \
 			Parsing/handling_quotes.c \
 			Parsing/check_parse_errors.c \
+			Builtins/driver.c \
 			Builtins/mcd.c \
 			Builtins/mecho.c \
 			Builtins/menv.c \
@@ -53,12 +56,13 @@ C_FILES = 	minishell.c \
 			Builtins/mpwd.c \
 			Builtins/munset.c \
 			Execution/execution.c \
-			Execution/input_validation_funcs.c \
+			Execution/command_validation.c \
+			Execution/files_preps.c \
 
 all: $(NAME)
 
 $(NAME): $(C_FILES)
-		$(C_FLAGS) $(ADDI_FLAGS) $(C_READLINE_POMS) $(C_FILES) -o $(NAME)
+		$(C_FLAGS) $(C_READLINE_POMS) $(C_READLINE_ABOU) $(C_FILES) -o $(NAME)
 
 clean:
 	rm -rf $(NAME)

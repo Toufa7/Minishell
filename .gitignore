@@ -1,0 +1,11 @@
+test.c
+Minishell
+/Minishell.dSYM
+.DS_Store
+*/.DS_Store
+*.o
+*.out
+/*/*.o
+/.vscode/*
+/.vscode
+*/*.out

@@ -19,6 +19,7 @@ bool	checking_quotes(char *str)
 	check = ft_strdup(str);
 	if (singles_doubles_quotes(check) == NULL)
 	{
+		printf("Str -> %s\n",str);
 		ft_putstr_fd("Unclosed Quotes\n", 2);
 		global_data.errno_cp = 1;
 		rl_on_new_line();
@@ -40,6 +41,7 @@ char	*handling_quotes(char *str, char replaced, char replace_by)
 	dup = NULL;
 	if (!global_data.parse_error)
 	{
+		// printf("+> [%s]\n", str);
 		dup = ft_calloc((ft_strlen(str) + 1), sizeof(char));
 		if (!dup)
 			return (NULL);

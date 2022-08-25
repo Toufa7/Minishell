@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:19:40 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/23 16:19:42 by otoufah          ###   ########.fr       */
+/*   Updated: 2022/08/25 01:36:03 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void	update_pwd(void)
 
 void	mcd(char *path)
 {
+	if (!path)
+		return;
 	update_oldpwd();
 	if (chdir(path) != 0)
 		print_error(path);
