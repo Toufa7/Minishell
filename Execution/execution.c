@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:00:14 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/25 01:46:43 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/25 01:51:10 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ bool	get_herdoc(t_pipe_data *pipe_data)
 		}
 		exit(0);
 	}
-	waitpid(-1, &exit_status, 0);
+	waitpid(id, &exit_status, 0);
 	global_data.is_in_herdoc = FALSE;
 	return (exit_status);
 }

@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/25 01:47:29 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/25 01:52:54 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ TODO: ✅❓
 	[✅] cat Makefile > outfile.txt < input > outfile_error.txt no such file called input so you should stop a the error file : Solution => Exit in Child Process (if you found an error)
 	[✅] < Makdbvbefile << ss cat : You should stop at the error : Solution => Exit in Child Process
 	[✅] ambiguous redirect when the file redercs in NULL
-	[❓] cat << ss --> Ctrl + C --> exit 130
-	[❓] ctr \ -> quit --> exit 131 and CTRL+C retur status it's 1 not 0
 	[✅] cd = Bad Address
 	[✅] unset PATH && cmd : Expected = error msg and exit child proccess
-	[❓] echo test > b | << lim | << lim2 creates b before finishing all heredocs: Expected = wait until all heredocs finished
+	[❓] cat << ss --> Ctrl + C --> exit 130
+	[❓] ctr \ -> quit --> exit 131 and CTRL+C retur status it's 1 not 0
+	[✅] echo test > b | << lim | << lim2 creates b before finishing all heredocs: Expected = wait until all heredocs finished
 	[❓] echo test > $"" : expected i will say it again please stop at the error the next time i will distroy your father's home iskawatcha
 	[❓] non exist command : check the exit_status : it should be 127 not 126
 	[❓] exit -1 || exit +1 should exit cleanly without any errors
