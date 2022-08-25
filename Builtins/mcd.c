@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mcd.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/23 16:19:40 by otoufah           #+#    #+#             */
+/*   Updated: 2022/08/25 01:36:03 by abouchfa         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 void	print_error(char *path)
@@ -10,9 +22,9 @@ void	print_error(char *path)
 	global_data.errno_cp = errno;
 }
 
-void	update_oldpwd()
+void	update_oldpwd(void)
 {
-	char    buff[PATH_MAX];
+	char	buff[PATH_MAX];
 	int		i;
 
 	i = get_var_index("OLDPWD=");
@@ -26,10 +38,10 @@ void	update_oldpwd()
 	}
 }
 
-void	update_pwd()
+void	update_pwd(void)
 {
-	char    buff[PATH_MAX];
 	int		i;
+	char	buff[PATH_MAX];
 
 	i = get_var_index("PWD=");
 	if (getcwd(buff, sizeof(buff)) != NULL)
@@ -44,10 +56,12 @@ void	update_pwd()
 		ft_putstr_fd("cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory\n", 2);
 }
 
-void    mcd(char *path)
+void	mcd(char *path)
 {
+	if (!path)
+		return;
 	update_oldpwd();
-    if (chdir(path) != 0)
+	if (chdir(path) != 0)
 		print_error(path);
 	else
 	{

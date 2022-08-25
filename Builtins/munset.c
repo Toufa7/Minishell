@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   munset.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/23 16:20:07 by otoufah           #+#    #+#             */
+/*   Updated: 2022/08/23 16:20:08 by otoufah          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 void	munset(char **argv)
@@ -20,14 +32,14 @@ void	munset(char **argv)
 			ft_putstr_fd(argv[i], 2);
 			ft_putstr_fd("': not a valid identifier\n", 2);
 			global_data.errno_cp = 1;
-			continue;
+			continue ;
 		}
 		var_index = get_var_index(argv[i]);
 		if (!argv[i][j] && var_index != -1)
 		{
 			j = 0;
 			tmp = global_data.envp;
-			while (global_data.envp[j])	
+			while (global_data.envp[j])
 				j++;
 			global_data.envp = malloc((sizeof(char *) * j));
 			j = -1;

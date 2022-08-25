@@ -36,6 +36,9 @@ TODO:
 # define PATH_MAX  4096
 # define SING_QUOTES 39
 # define DOUBLES_QUOTES 34
+# define BACKSLASH 92
+# define TAAB 9
+# define SPAACE 32
 # define TRUE 1 
 # define FALSE 0 
 # define AMBIGUOUS 0
@@ -43,7 +46,7 @@ TODO:
 # define OUTFILE 2
 # define APPENDFILE 3
 
-typedef int bool;
+typedef	int	bool;
 
 typedef struct s_tokens
 {
@@ -81,16 +84,16 @@ typedef struct s_redirections
 
 typedef struct s_global_data
 {
-	char	**envp;
-	int 	errno_cp;
-	int 	in_fd;
-	int 	out_fd;
-	pid_t	last_child_id;
-	bool	parse_error;
-	bool	is_in_herdoc;
+	int		errno_cp;
+	int		in_fd;
+	int		out_fd;
 	int		size;
 	int		cmd_pipe_fds[2];
 	int		pre_pipe_infd;
+	char	**envp;
+	bool	parse_error;
+	pid_t	last_child_id;
+	bool	is_in_herdoc;
 }	t_global_data;
 
 typedef struct s_pipe_data
@@ -138,21 +141,20 @@ bool		check_parse_errors(t_parse *parse);
 // ----------- Execution -------------------------
 
 void	mcd(char *path);
-void    mpwd(void);
+void	mpwd(void);
 void	menv(char **argv, char *prefix, bool is_export);
-void    mecho(char **argv);
-void    mexit(char **argv);
+void	mecho(char **argv);
+void	mexit(char **argv);
 void	munset(char **argv);
 void	mexport(char **argv);
 void	execution(t_pipe_data **pipe_data);
 bool	get_herdoc(t_pipe_data *pipe_data);
-char	*get_cmd_path(char *cmd, char **exec_programs_dirs);
 int		validate_infile(char *infile_path);
+char	*get_cmd_path(char *cmd, char **exec_programs_dirs);
 
 // ----------- Shared Functions ------------------
 
-int		counting_quotes(char *str, char qtype);
-void	free_str(void *ptr);
+void	free_str(void *ptr); 
 void	free_arr(void **arr);
 char	*ft_itoa(int n);
 char	*get_var_val(int var_index, bool include_eqs);

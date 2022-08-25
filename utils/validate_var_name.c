@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validate_var_name.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: otoufah <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/23 16:43:29 by otoufah           #+#    #+#             */
+/*   Updated: 2022/08/23 16:43:30 by otoufah          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 /*
@@ -14,8 +26,9 @@ int	validate_var_name(char *var)
 	i = -1;
 	while (var[++i])
 	{
-		if (!(ft_isalpha(var[i]) || (ft_isdigit(var[i]) && i != 0) || var[i] == '_'))
-			break;
+		if (!(ft_isalpha(var[i]) || var[i] == BACKSLASH
+				|| (ft_isdigit(var[i]) && i != 0) || var[i] == '_'))
+			break ;
 	}
 	return (i);
 }

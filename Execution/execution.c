@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   execution.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/23 16:00:14 by otoufah           #+#    #+#             */
+/*   Updated: 2022/08/25 00:21:52 by abouchfa         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
-void ft_close(int n, int s)
+void	ft_close(int n, int s)
 {
 	(void) s;
 	if (n > 2)
@@ -20,7 +32,7 @@ bool	get_herdoc(t_pipe_data *pipe_data)
 	int		fd;
 	int		j;
 	int		exit_status;
-	int id;
+	int		id;
 
 	j = -1;
 	global_data.is_in_herdoc = TRUE;
@@ -34,7 +46,7 @@ bool	get_herdoc(t_pipe_data *pipe_data)
 			line = readline("> ");
 			expand = NULL;
 			while (!line || ft_strcmp(line, pipe_data->delimiter[j]))
-			{ 
+			{
 				if (line)
 				{
 					expand = get_env_in_herdoc(line);
@@ -43,7 +55,7 @@ bool	get_herdoc(t_pipe_data *pipe_data)
 					free_str(expand);
 				}
 				else
-					break;
+					break ;
 				line = readline("> ");
 			}
 			free_str(line);
@@ -59,9 +71,9 @@ bool	get_herdoc(t_pipe_data *pipe_data)
 void	validate_cmd(t_pipe_data *pipe_data)
 {
 	int		i;
-	char	**execps_paths;
 	char	*path_var;
-	struct	stat statbuf;
+	char	**execps_paths;
+	struct	stat	statbuf;
 
 	i = -1;
 	execps_paths = NULL;
@@ -73,14 +85,15 @@ void	validate_cmd(t_pipe_data *pipe_data)
 		{
 			path_var = path_var + 5;
 			execps_paths = ft_split(path_var, ':');
-			break;
+			break ;
 		}
 	}
 	if (ft_strchr(pipe_data->command, '/') || !execps_paths)
 	{
 		if (stat(pipe_data->command, &statbuf) == 0)
 		{
-			if (!S_ISDIR(statbuf.st_mode) && !access(pipe_data->command, F_OK) && !access(pipe_data->command, X_OK))
+			if (!S_ISDIR(statbuf.st_mode) && !access(pipe_data->command, F_OK)
+				&& !access(pipe_data->command, X_OK))
 				pipe_data->cmd_path = pipe_data->command;
 			else
 			{
@@ -106,16 +119,18 @@ void	validate_cmd(t_pipe_data *pipe_data)
 void	pipe_files_prep(t_pipe_data *pipe_data, bool is_builtin)
 {
 	int	i;
-	int fd;
+	int	fd;
 
 	i = -1;
 	while (pipe_data->redirections && pipe_data->redirections[++i])
 	{
-		if (pipe_data->redirections[i]->path && pipe_data->redirections[i]->path[0] == '$')
+		if (pipe_data->redirections[i]->path
+			&& pipe_data->redirections[i]->path[0] == '$')
 			continue ;
 		if (pipe_data->redirections[i]->type == INFILE)
 		{
-			if (access(pipe_data->redirections[i]->path, F_OK) || access(pipe_data->redirections[i]->path, R_OK))
+			if (access(pipe_data->redirections[i]->path, F_OK)
+				|| access(pipe_data->redirections[i]->path, R_OK))
 			{
 				perror(pipe_data->redirections[i]->path);
 				if (!is_builtin)
@@ -131,7 +146,7 @@ void	pipe_files_prep(t_pipe_data *pipe_data, bool is_builtin)
 		else if (pipe_data->redirections[i]->type == OUTFILE)
 		{
 			fd = open(pipe_data->redirections[i]->path,
-						O_CREAT | O_WRONLY | O_TRUNC, 0777);
+					O_CREAT | O_WRONLY | O_TRUNC, 0777);
 			pipe_data->out_fd_set = TRUE;
 			if (!is_builtin || global_data.size > 1)
 			{
@@ -144,7 +159,7 @@ void	pipe_files_prep(t_pipe_data *pipe_data, bool is_builtin)
 		else if (pipe_data->redirections[i]->type == APPENDFILE)
 		{
 			fd = open(pipe_data->redirections[i]->path,
-						O_CREAT | O_WRONLY | O_APPEND, 0777);
+					O_CREAT | O_WRONLY | O_APPEND, 0777);
 			pipe_data->out_fd_set = TRUE;
 			if (!is_builtin || global_data.size > 1)
 			{
@@ -156,7 +171,6 @@ void	pipe_files_prep(t_pipe_data *pipe_data, bool is_builtin)
 		}
 	}
 }
-
 
 bool	check_builtin(t_pipe_data *pipe_data)
 {
@@ -196,12 +210,12 @@ bool	check_builtin(t_pipe_data *pipe_data)
 		munset(pipe_data->argv + 1);
 	}
 	else
-		return FALSE;
+		return (FALSE);
 	ft_close(global_data.in_fd, 1);
 	ft_close(global_data.out_fd, 1);
 	global_data.in_fd = 0;
 	global_data.out_fd = 1;
-	return TRUE;
+	return (TRUE);
 }
 
 void	child_process(t_pipe_data *pipe_data, int index)
@@ -220,21 +234,21 @@ void	child_process(t_pipe_data *pipe_data, int index)
 			fd = open("/tmp/herdoc", O_RDWR, 0004);
 			dup2(global_data.cmd_pipe_fds[1], 1);
 			dup2(fd, 0);
-			ft_close(global_data.cmd_pipe_fds[1], 1);
 			ft_close(fd, 1);
 		}
 		else if (global_data.pre_pipe_infd != -1 && !pipe_data->in_fd_set)
 			dup2(global_data.pre_pipe_infd, 0);
-		if (global_data.size > index + 1 && !pipe_data->out_fd_set)
+		if (global_data.size != index + 1 && !pipe_data->out_fd_set)
 			dup2(global_data.cmd_pipe_fds[1], 1);
 		ft_close(global_data.cmd_pipe_fds[1], 5);
 		ft_close(global_data.cmd_pipe_fds[0], 4);
-		ft_close(global_data.pre_pipe_infd, 4);
 		if (check_builtin(pipe_data))
 			exit(0);
-		else
-			execve(pipe_data->cmd_path, pipe_data->argv, global_data.envp);
-		printf("-1\n");
+		else if (execve(pipe_data->cmd_path, pipe_data->argv, global_data.envp) == -1)
+		{
+			ft_putstr_fd(strerror(errno), 2);
+			exit(errno);
+		}
 	}
 }
 
@@ -255,9 +269,9 @@ void	execution(t_pipe_data **pipes_data)
 {
 	int		i;
 
-	i = -1;
 	while (pipes_data[global_data.size])
 		global_data.size++;
+	i = -1;
 	while (pipes_data[++i])
 	{
 		if (pipes_data[i]->is_herdoc)

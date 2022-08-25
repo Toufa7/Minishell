@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   menv.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/23 16:19:50 by otoufah           #+#    #+#             */
+/*   Updated: 2022/08/23 16:19:51 by otoufah          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 void	menv(char **argv, char *prefix, bool is_export)
@@ -21,13 +33,13 @@ void	menv(char **argv, char *prefix, bool is_export)
 			j = -1;
 			while (global_data.envp[i][++j])
 				if (global_data.envp[i][j] == '=')
-					break;
+					break ;
 			if (global_data.envp[i][j] != '=' && !is_export)
-				continue;
+				continue ;
 			j = -1;
 			eq = 0;
 			ft_putstr_fd(prefix, global_data.out_fd);
-			while(global_data.envp[i][++j])
+			while (global_data.envp[i][++j])
 			{
 				write(1, global_data.envp[i] + j, global_data.out_fd);
 				if (global_data.envp[i][j] == '=' && is_export)
@@ -37,7 +49,7 @@ void	menv(char **argv, char *prefix, bool is_export)
 				}
 			}
 			if (is_export && eq)
-					write(1, "\"", global_data.out_fd);
+				write(1, "\"", global_data.out_fd);
 			ft_putstr_fd("\n", global_data.out_fd);
 		}
 		global_data.errno_cp = 0;

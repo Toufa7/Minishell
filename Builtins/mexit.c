@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mexit.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/23 16:19:54 by otoufah           #+#    #+#             */
+/*   Updated: 2022/08/23 16:19:55 by otoufah          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
-void mexit(char **argv)
+void	mexit(char **argv)
 {
 	bool	isarg_digit;
 	int		j;
@@ -19,7 +31,7 @@ void mexit(char **argv)
 		if (!(argv[i][j] >= '0' && argv[i][j] <= '9'))
 		{
 			isarg_digit = FALSE;
-			break;
+			break ;
 		}
 	}
 	while (argv[i])
@@ -36,7 +48,7 @@ void mexit(char **argv)
 	{
 		ft_putstr_fd("exit\nexit: too many arguments\n", 2);
 		global_data.errno_cp = 1;
-		return;
+		return ;
 	}
 	else
 	{

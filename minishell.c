@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/22 15:26:16 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/25 01:36:20 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,37 @@ TODO: ✅❓
 	[✅] < Makdbvbefile << ss cat : You should stop at the error : Solution => Exit in Child Process
 	[✅] ambiguous redirect when the file redercs in NULL
 	[❓] cat << ss --> Ctrl + C --> exit 130
-	[❓] ctr \ -> quit --> exit 131
-	
+	[❓] ctr \ -> quit --> exit 131 and CTRL+C retur status it's 1 not 0
+	[✅] cd = Bad Address
+	[❓] unset PATH && cmd : Expected = error msg and exit child proccess
+	[❓] echo test > b | << lim | << lim2 creates b before finishing all heredocs: Expected = wait until all heredocs finished
+	[❓] echo test > $"" : expected i will say it again please stop at the error the next time i will distroy your father's home iskawatcha
+	[❓] non exist command : check the exit_status : it should be 127 not 126
+	[❓] exit -1 || exit +1 should exit cleanly without any errors
+	[❓] exit without args ==> you should return the last exit_status
+	[❓] ignore cntr C in childs
+	[❓]	$ export a : export a+=Sultan : env : you should assing 
+ 
 	---> Parser
 	[✅] if delimiter has quotes don't expand
 	[✅] $fghjm << ls --> cmd should be NUll and ls | "" --> cmd should be empty string : Solution => Simply check if the upcoming input lenght is 0
-	[✅]  $NOTEXIT ls --> it should run ls 
+	[✅] $NOTEXIT ls --> it should run ls 
 	[✅] cat << "'"
 	[✅] echo ''"'"
 	[✅] Using get_var_index to get variable from our env 
-	[]  When the varibles in case of > >> < 
-	[] $NONEXIT	return it $UGD => $UGD 
-*/
+	[❓] $NONEXIT cmd 
+	[❓] When the varibles in case of > >> < 
+	[❓] $NONEXIT	return it $UGD => $UGD 
+	[✅] Mixing tabs with spaces : Done but check : 
+	[❓]	export a="ls -la" 
+	[❓]	echo $123
+	[✅]	echo "$USER ' '  'imad ok"
+	[❓] echo "$" =  expected = $
+	[❓] echo $"test"$ : Expected = test$
+	[❓] echo '$' : Expected = $
+	[❓] env ls => not required
+	[❓] pipes : check syntax errors
+	*/
 
 #include "minishell.h"
 
@@ -75,7 +94,14 @@ void	control_c(int sig)
 	{
 		printf("\n");
 		rl_on_new_line();
-		// rl_replace_line("", 0);
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
+	else
+	{
+		//printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
 		rl_redisplay();
 	}
 }
@@ -111,7 +137,7 @@ int main(int ac, char **av, char **env)
 	while (TRUE)
 	{
 		init_global_data();
-		parse->line = readline(GREEN "Mini-0.0$ " RESET);
+		parse->line = readline("Mini-0.0$ ");
 		// Ctrl + D
 		if (!parse->line)
 			exit(global_data.errno_cp);
@@ -133,8 +159,7 @@ int main(int ac, char **av, char **env)
 				parse->dont_splt = handling_quotes(parse->splt_pipes[i], ' ', -1);
 				parse->tokens = spliting_with_spaces(parse->dont_splt);
 				input_analyse(parse->tokens); // Specifying each token his type (delimiter, command, option ...)
-				initializer(parse->tokens); 
-				counting(parse); // Just fo counting
+				initializer(parse->tokens); counting(parse); // Just fo counting
 				//token_and_type(parse);
 				global_data.parse_error = check_parse_errors(parse); 
 				if (global_data.parse_error)
@@ -144,5 +169,6 @@ int main(int ac, char **av, char **env)
 			if (!global_data.parse_error)
 				execution(parse->pipe_data);
 		}
+		// system("leaks Minishell");
 	}
 }

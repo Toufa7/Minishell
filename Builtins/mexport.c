@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mexport.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/23 16:19:59 by otoufah           #+#    #+#             */
+/*   Updated: 2022/08/23 16:19:59 by otoufah          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 char	*get_key(char *str)
@@ -10,7 +22,7 @@ char	*get_key(char *str)
 	while (str[i] && str[i] != '=' && str[i] != '+')
 	{
 		if (!(ft_isalpha(str[i]) || (ft_isdigit(str[i]) && i != 0)))
-			break;
+			break ;
 		i++;
 	}
 	if (i > 0)
@@ -18,7 +30,7 @@ char	*get_key(char *str)
 		key = malloc(sizeof(char) * (i + 1));
 		ft_strncpy(key, str, i);
 	}
-	return key;
+	return (key);
 }
 
 char	*get_val(char *str, bool include_eqs)
@@ -30,7 +42,7 @@ char	*get_val(char *str, bool include_eqs)
 	i = 0;
 	j = 0;
 	val = NULL;
-	while(str[i] && str[i] != '=')
+	while (str[i] && str[i] != '=')
 		i++;
 	if (str[i])
 	{
@@ -41,7 +53,7 @@ char	*get_val(char *str, bool include_eqs)
 			i++;
 		ft_strncpy(val, str + i, j);
 	}
-	return val;
+	return (val);
 }
 
 /*
@@ -51,7 +63,7 @@ char	*get_val(char *str, bool include_eqs)
 	 2: Just a var name
 */
 
-int get_op_type(char *str)
+int	get_op_type(char *str)
 {
 	int	type;
 
@@ -59,7 +71,7 @@ int get_op_type(char *str)
 	if (!str || !str[0])
 		type = 2;
 	if (str[0] && str[0] == '=')
-		type =  0;
+		type = 0;
 	if (str[0] && str[1] && str[0] == '+' && str[1] == '=')
 		type = 1;
 	return (type);
@@ -111,9 +123,9 @@ bool	check_errors(char *str, char **key, char **val, int *op_type)
 		ft_putstr_fd(str, 2);
 		ft_putstr_fd("': not a valid identifier\n", 2);
 		global_data.errno_cp = 1;
-		return FALSE;
+		return (FALSE);
 	}
-	return TRUE;
+	return (TRUE);
 }
 
 void	mexport(char **argv)

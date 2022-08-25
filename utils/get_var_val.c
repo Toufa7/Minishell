@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_var_val.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: otoufah <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/23 16:41:44 by otoufah           #+#    #+#             */
+/*   Updated: 2022/08/23 16:41:45 by otoufah          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 char	*get_var_val(int var_index, bool include_eqs)
@@ -11,7 +23,7 @@ char	*get_var_val(int var_index, bool include_eqs)
 	j = 0;
 	val = NULL;
 	var = global_data.envp[var_index];
-	while(var[i] && var[i] != '=')
+	while (var[i] && var[i] != '=')
 		i++;
 	if (var[i])
 	{
@@ -22,5 +34,5 @@ char	*get_var_val(int var_index, bool include_eqs)
 			i++;
 		ft_strncpy(val, var + i, j);
 	}
-	return val;
+	return (val);
 }

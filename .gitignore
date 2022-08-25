@@ -1,6 +1,6 @@
 test.c
 Minishell
-Minishell.dSYM
+/Minishell.dSYM
 .DS_Store
 */.DS_Store
 *.o
