@@ -52,8 +52,6 @@ bool	check_parse_errors(t_parse	*parse)
 	size_t	i;
 
 	i = 0;
-	if (!parse->tokens[i].token)
-		err_exiting("Error", NULL, "\n");
 	while (i < parse->tokens->total && parse->tokens[i].token)
 	{
 		type = parse->tokens[i].type;
@@ -65,23 +63,10 @@ bool	check_parse_errors(t_parse	*parse)
 		else if (compare(type, next_type, next_token) == 2)
 			err_exiting("Mini: no output file in front of red out ", tkn, "\n");
 		else if (compare(type, next_type, next_token) == 3)
-			err_exiting("Mini: no appended file in front of a append ", tkn, "\n");
+			err_exiting("Mini: no appended file in front of append ", tkn, "\n");
 		else if (compare(type, next_type, next_token) == 4)
 			err_exiting("Mini: no input file to be readead from ", tkn, "\n");
 		i++;
 	}
 	return (FALSE);
 }
-
-/*
-	- echo hello > "${NotExist}" ==> bash: : No such file or directory 
-	- echo hello > ${NotExist}  ==> bash: ${NONEXISTENT}: ambiguous redirect
-	- echo hello > "${Exist}" ==> simply creat the file with expanded name
-	- echo hello > ${Exist}  ==> the same
-	- echo hello > ${Exist but it's a directory}  ==> bash: /Users/otoufah/Desktop/Here_we_go: Is a directory
-	if there's nothing in piplines
-	if there's no delimiter
-	if there's no output file in red out
-	if there's no appended file to be redirected 
-	if there's no input file to be readead from 
-*/

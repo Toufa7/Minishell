@@ -8,7 +8,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This program built for i386-apple-darwin11.3.0
  
 
-# Make data base, printed on Fri Aug 26 22:24:33 2022
+# Make data base, printed on Sat Aug 27 00:16:45 2022
 
 # Variables
 
@@ -68,7 +68,7 @@ VSCODE_CODE_CACHE_PATH = /Users/otoufah/Library/Application Support/Code/CachedD
 # environment
 LOGNAME = otoufah
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # makefile (from `Makefile', line 7)
 C_READLINE_ABOU = -L /goinfre/abouchfa/.brew/opt/readline/lib -I /goinfre/abouchfa/.brew/opt/readline/include
 # environment
@@ -160,9 +160,9 @@ VSCODE_PID = 15283
 
 # Directories
 
-# . (device 16777227, inode 1803793): 16 files, no impossibilities.
+# . (device 16777227, inode 1803793): 17 files, no impossibilities.
 
-# 16 files, no impossibilities in 1 directories.
+# 17 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -176,6 +176,7 @@ Builtins/munset.c:
 #  Last modified 2022-08-26 18:46:21
 #  File has been updated.
 #  Successfully updated.
+ 
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
@@ -288,7 +289,6 @@ Parsing/get_env_in_herdoc.c:
 Utils/ft_strchr.c:
 #  Implicit rule search has been done.
 #  Last modified 2022-08-26 15:24:43
- 
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -321,7 +321,7 @@ Utils/ft_putstr_fd.c:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-26 19:59:18
+#  Last modified 2022-08-27 00:11:07
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -366,7 +366,7 @@ Utils/ft_atoi.c:
 # Not a target:
 Parsing/handling_quotes.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-26 19:45:04
+#  Last modified 2022-08-26 23:47:41
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -374,7 +374,7 @@ Parsing/handling_quotes.c:
 
 Minishell: minishell.c Utils/system_calls_protection.c Utils/signals.c Utils/ft_itoa.c Utils/validate_var_name.c Utils/free_funcs.c Utils/env_dup.c Utils/get_var_index.c Utils/ft_putstr_fd.c Utils/ft_atoi.c Utils/ft_strncpy.c Utils/ft_split.c Utils/ft_substr.c Utils/ft_strlen.c Utils/ft_strstr.c Utils/ft_strjoin.c Utils/ft_strcmp.c Utils/ft_strncmp.c Utils/ft_strdup.c Utils/ft_calloc.c Utils/ft_strchr.c Utils/ft_realloc.c Utils/ft_isalpha.c Utils/ft_isdigit.c Utils/gnl.c Utils/ft_strnstr.c Utils/get_var_val.c Parsing/s_d_quotes.c Parsing/get_env_in_herdoc.c Parsing/get_env_variables.c Parsing/input_formating.c Parsing/spliting_with_spaces.c Parsing/input_analyse.c Parsing/input_counter.c Parsing/get_pipe_data.c Parsing/handling_quotes.c Parsing/token_and_type.c Parsing/check_parse_errors.c Builtins/driver.c Builtins/mcd.c Builtins/mecho.c Builtins/menv.c Builtins/mexit.c Builtins/mexport.c Builtins/mpwd.c Builtins/munset.c Execution/execution.c Execution/command_validation.c Execution/files_preps.c
 #  Implicit rule search has not been done.
-#  Last modified 2022-08-26 20:04:50
+#  Last modified 2022-08-27 00:12:38
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -444,6 +444,7 @@ Utils/ft_itoa.c:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
+ 
 Utils/ft_strlen.c:
 #  Implicit rule search has been done.
 #  Last modified 2022-08-26 15:24:43
@@ -488,7 +489,7 @@ Builtins/mexport.c:
 # Not a target:
 Parsing/check_parse_errors.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-26 19:53:17
+#  Last modified 2022-08-27 00:01:06
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -521,7 +522,7 @@ re: fclean all
 # Not a target:
 Utils/signals.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-26 19:49:55
+#  Last modified 2022-08-26 23:56:50
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -557,8 +558,7 @@ Parsing/spliting_with_spaces.c:
 # Not a target:
 minishell.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-26 20:02:45
- 
+#  Last modified 2022-08-27 00:01:31
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -612,7 +612,7 @@ Parsing/input_formating.c:
 # Not a target:
 Parsing/get_pipe_data.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-26 15:57:56
+#  Last modified 2022-08-27 00:00:35
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -694,6 +694,6 @@ Execution/command_validation.c:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Fri Aug 26 22:24:33 2022
+# Finished Make data base on Sat Aug 27 00:16:45 2022
 
  

@@ -62,6 +62,19 @@ TODO: ✅❓
 		[✅] echo $"test"$ : Expected = test$
 		[]	$"PWD"
 	}
+	errors
+	{
+		- echo hello > "${NotExist}" ==> bash: : No such file or directory 
+		- echo hello > ${NotExist}  ==> bash: ${NONEXISTENT}: ambiguous redirect
+		- echo hello > "${Exist}" ==> simply creat the file with expanded name
+		- echo hello > ${Exist}  ==> the same
+		- echo hello > ${Exist but it's a directory}  ==> bash: /Users/otoufah/Desktop/Here_we_go: Is a directory
+		if there's nothing in piplines
+		if there's no delimiter
+		if there's no output file in red out
+		if there's no appended file to be redirected 
+		if there's no input file to be readead from
+	}
 	[❓] cat <$k
 	[❓] When the varibles in case of > >> < 
 	[❓]	export a="ls -la" 
