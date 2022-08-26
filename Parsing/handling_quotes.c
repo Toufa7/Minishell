@@ -25,7 +25,6 @@ bool	checking_quotes(char *str)
 		rl_replace_line("", 0);
 		return (TRUE);
 	}
-	free_str(str);
 	return (FALSE);
 }
 
@@ -36,10 +35,10 @@ char	*handling_quotes(char *str, char replaced, char replace_by)
 	char	*dup;
 	char	d_or_s;
 
-	// global_data.parse_error = checking_quotes(str);
-	// dup = NULL;
-	// if (!global_data.parse_error)
-	// {
+	global_data.parse_error = checking_quotes(str);
+	dup = NULL;
+	if (!global_data.parse_error)
+	{
 		dup = ft_calloc((ft_strlen(str) + 1), sizeof(char));
 		if (!dup)
 			return (NULL);
@@ -65,6 +64,6 @@ char	*handling_quotes(char *str, char replaced, char replace_by)
 			else
 				dup[i] = str[i];
 		}
-	// }
+	}
 	return (dup);
 }

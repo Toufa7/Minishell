@@ -59,13 +59,13 @@ bool	check_parse_errors(t_parse	*parse)
 		next_token = parse->tokens[i + 1].token;
 		next_type = parse->tokens[i + 1].type;
 		if (compare(type, next_type, next_token) == 1)
-			err_exiting("Mini: no delimiter in front of ", tkn, "\n");
+			return (err_exiting("Mini: no delimiter in front of ", tkn, "\n"));
 		else if (compare(type, next_type, next_token) == 2)
-			err_exiting("Mini: no output file in front of red out ", tkn, "\n");
+			return (err_exiting("Mini: no output file in front of red out ", tkn, "\n"));
 		else if (compare(type, next_type, next_token) == 3)
-			err_exiting("Mini: no appended file in front of append ", tkn, "\n");
+			return (err_exiting("Mini: no appended file in front of append ", tkn, "\n"));
 		else if (compare(type, next_type, next_token) == 4)
-			err_exiting("Mini: no input file to be readead from ", tkn, "\n");
+			return (err_exiting("Mini: no input file to be readead from ", tkn, "\n"));
 		i++;
 	}
 	return (FALSE);

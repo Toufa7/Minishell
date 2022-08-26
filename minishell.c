@@ -37,6 +37,7 @@ TODO: ✅❓
 	[✅] exit -1 || exit +1 should exit cleanly without any errors
 	[✅] exit without args ==> you should return the last exit_status
 	[✅]	$ export a : export a+=Sultan : env : you should assing 
+		opne herdoc even if thee is a parse error
 	[❓] Built ins is not working with mulitble pipes: I know why and the solution I just need some rest
 	[❓] cat << ss --> Ctrl + C --> exit 130
 	[❓] ctr \ -> quit --> exit 131 and CTRL+C retur status it's 1 not 0
@@ -143,8 +144,7 @@ void	minishell(t_parse *parse)
 				break ;
 			parse->pipe_data[i] = get_pipe_data(parse);
 		}
-		if (!global_data.parse_error)
-			execution(parse->pipe_data);
+		execution(parse->pipe_data);
 	}
 }
 
