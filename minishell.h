@@ -6,15 +6,9 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/25 07:28:22 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/26 18:33:28 by otoufah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/*
-TODO:
-	✅ char	*heredoc_limiter;
-	Adding array of s_input in ordre to deal with only arguments passsed to one pipe
-*/
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -46,7 +40,7 @@ TODO:
 # define OUTFILE 2
 # define APPENDFILE 3
 
-typedef	int	bool;
+typedef int	bool;
 
 typedef struct s_tokens
 {
@@ -80,7 +74,7 @@ typedef struct s_redirections
 {
 	char	*path;
 	int		type;
-} t_redirections;
+}	t_redirections;
 
 typedef struct s_global_data
 {
@@ -116,7 +110,7 @@ typedef struct s_parse
 	char		*orginal_string;
 	char		*formated_input;
 	char		*line_double_quotes;
-	char		*dont_splt;
+	char		*no_splt;
 	char		pipe;
 	char		space;
 	t_pipe_data	**pipe_data;
@@ -126,7 +120,7 @@ typedef struct s_parse
 // ----------- Parsing --------------------------
 
 char		**pipes(char	*str);
-char		*singles_doubles_quotes(char *str);
+char		*s_d_quotes(char *str);
 char		*handling_quotes(char *str, char replaced_1, char replace_by);
 char		*input_formating(char	*str);
 char		*getting_back_original_input(char *str);
@@ -134,6 +128,7 @@ char		*get_env_variables(char *target, bool flag);
 char		*get_env_in_herdoc(char *target);
 void		initializer(t_tokens	*tokens);
 void		input_analyse(t_tokens	*tokens);
+void		token_and_type(t_parse *parse);
 void		input_counter(t_tokens	*counter, t_tokens	*tokens);
 t_tokens	*spliting_with_spaces(char	*str);
 t_pipe_data	*get_pipe_data(t_parse	*parse);
@@ -141,52 +136,49 @@ bool		check_parse_errors(t_parse *parse);
 
 // ----------- Execution -------------------------
 
-void	mcd(char *path);
-void	mpwd(void);
-void	menv(char **argv, char *prefix, bool is_export);
-void	mecho(char **argv);
-void	mexit(char **argv);
-void	munset(char **argv);
-void	mexport(char **argv);
-void	execution(t_pipe_data **pipe_data);
-bool	check_builtin(t_pipe_data *pipe_data);
-char	*get_cmd_path(char *cmd, char **exec_programs_dirs);
-void	pipe_files_prep(t_pipe_data *pipe_data, bool is_builtin);
-void	validate_cmd(t_pipe_data *pipe_data);
+void		mcd(char *path);
+void		mpwd(void);
+void		menv(char **argv, char *prefix, bool is_export);
+void		mecho(char **argv);
+void		mexit(char **argv);
+void		munset(char **argv);
+void		mexport(char **argv);
+void		validate_cmd(t_pipe_data *pipe_data);
+void		pipe_files_prep(t_pipe_data *pipe_data, bool is_builtin);
+void		execution(t_pipe_data **pipe_data);
+bool		check_builtin(t_pipe_data *pipe_data);
+char		*get_cmd_path(char	*cmd, char	**exec_programs_dirs);
 
 // ----------- Shared Functions ------------------
 
-void	ft_close(int n, int s);
-void	free_str(void *ptr); 
-void	free_arr(void **arr);
-
-void	herdoc_signals(int sig);
-void	control_c(int sig);
-
-char	*ft_itoa(int n);
-char	*get_var_val(int var_index);
-int		validate_var_name(char *var);
-char	**ft_realloc(char **dist, char *str);
-void	env_dup(char **env);
-int		get_var_index(char *var);
-char	*get_next_line(int fd);
-char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
-void	ft_putstr_fd(char *s, int fd);
-void	ft_strncpy(char *dest, char *src, int n);
-int		ft_atoi(const char *str);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
-char	**ft_split(char const *s, char c);
-size_t	ft_strlen(const char *s);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-char	*ft_strstr(const char *haystack, const char *needle);
-char	*ft_strjoin(char const *s1, char const *s2);
-int		ft_strcmp(const char *s1, const char *s2);
-char	*ft_strdup(const char *s1);
-void	*ft_calloc(size_t count, size_t size);
-char	*ft_strchr(const char *s, int c);
-int		ft_isalpha(int c);
-int		ft_isdigit(int c);
-
+void		ft_close(int n, int s);
+void		free_str(void	*ptr); 
+void		free_arr(void **arr);
+void		herdoc_signals(int sig);
+void		control_c(int sig);
+void		*ft_calloc(size_t count, size_t size);
+void		env_dup(char **env);
+char		*ft_itoa(int n);
+char		*get_var_val(int var_index);
+char		**ft_realloc(char **dist, char *str);
+char		*get_next_line(int fd);
+char		*ft_strnstr(const char *haystack, const char *needle, size_t len);
+void		ft_putstr_fd(char *s, int fd);
+void		ft_strncpy(char *dest, char *src, int n);
+char		**ft_split(char const *s, char c);
+char		*ft_strstr(const char *haystack, const char *needle);
+char		*ft_strjoin(char const *s1, char const *s2);
+char		*ft_strdup(const char *s1);
+char		*ft_strchr(const char *s, int c);
+char		*ft_substr(char const *s, unsigned int start, size_t len);
+int			validate_var_name(char *var);
+int			get_var_index(char *var);
+int			ft_atoi(const char *str);
+int			ft_strncmp(const char *s1, const char *s2, size_t n);
+int			ft_strcmp(const char *s1, const char *s2);
+int			ft_isalpha(int c);
+int			ft_isdigit(int c);
+size_t		ft_strlen(const char *s);
 
 t_global_data global_data;
 

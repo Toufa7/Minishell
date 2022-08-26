@@ -6,11 +6,13 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # PARTICULAR PURPOSE.
 
 # This program built for i386-apple-darwin11.3.0
+ 
 
-# Make data base, printed on Thu Aug 25 23:48:15 2022
+# Make data base, printed on Fri Aug 26 22:24:33 2022
 
 # Variables
 
+ 
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
@@ -22,7 +24,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # automatic
 @F = $(notdir $@)
 # makefile
-CURDIR := /Users/otoufah/Desktop/Here_we_go
+CURDIR := /Users/otoufah/Desktop/Herewego
 # makefile
 SHELL = /bin/sh
 # environment
@@ -34,7 +36,7 @@ MAKEFILE_LIST :=  Makefile
 # environment
 VSCODE_CWD = /
 # environment
-Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.rlKmvH40y2/Render
+Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.Kj4xzk9Ntr/Render
 # environment
 PATH = /Users/otoufah/goinfre/otoufah/.brew/bin:/Users/otoufah/goinfre/otoufah/.brew/bin:/Users/otoufah/goinfre/otoufah/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki
 # environment
@@ -48,11 +50,11 @@ ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.jqXlXZsv8G/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.YHY7bTlJSx/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
-PWD = /Users/otoufah/Desktop/Here_we_go
+PWD = /Users/otoufah/Desktop/Herewego
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = undefined
 # environment
@@ -114,7 +116,7 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = com.microsoft.VSCode.1188
+XPC_SERVICE_NAME = com.microsoft.VSCode.1248
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
@@ -142,13 +144,13 @@ ADDI_FLAGS = -fsanitize=address -g
 # default
 .INCLUDE_DIRS = /usr/local/include
 # makefile (from `Makefile', line 13)
-C_FILES = minishell.c Utils/system_calls_protection.c Utils/signals.c Utils/ft_itoa.c Utils/validate_var_name.c Utils/free_funcs.c Utils/env_dup.c Utils/get_var_index.c Utils/ft_putstr_fd.c Utils/ft_atoi.c Utils/ft_strncpy.c Utils/ft_split.c Utils/ft_substr.c Utils/ft_strlen.c Utils/ft_strstr.c Utils/ft_strjoin.c Utils/ft_strcmp.c Utils/ft_strncmp.c Utils/ft_strdup.c Utils/ft_calloc.c Utils/ft_strchr.c Utils/ft_realloc.c Utils/ft_isalpha.c Utils/ft_isdigit.c Utils/gnl.c Utils/ft_strnstr.c Utils/get_var_val.c Parsing/singles_doubles_quotes.c Parsing/get_env_in_herdoc.c Parsing/get_env_variables.c Parsing/input_formating.c Parsing/spliting_with_spaces.c Parsing/input_analyse.c Parsing/input_counter.c Parsing/get_pipe_data.c Parsing/handling_quotes.c Parsing/check_parse_errors.c Builtins/driver.c Builtins/mcd.c Builtins/mecho.c Builtins/menv.c Builtins/mexit.c Builtins/mexport.c Builtins/mpwd.c Builtins/munset.c Execution/execution.c Execution/command_validation.c Execution/files_preps.c 
+C_FILES = minishell.c Utils/system_calls_protection.c Utils/signals.c Utils/ft_itoa.c Utils/validate_var_name.c Utils/free_funcs.c Utils/env_dup.c Utils/get_var_index.c Utils/ft_putstr_fd.c Utils/ft_atoi.c Utils/ft_strncpy.c Utils/ft_split.c Utils/ft_substr.c Utils/ft_strlen.c Utils/ft_strstr.c Utils/ft_strjoin.c Utils/ft_strcmp.c Utils/ft_strncmp.c Utils/ft_strdup.c Utils/ft_calloc.c Utils/ft_strchr.c Utils/ft_realloc.c Utils/ft_isalpha.c Utils/ft_isdigit.c Utils/gnl.c Utils/ft_strnstr.c Utils/get_var_val.c Parsing/s_d_quotes.c Parsing/get_env_in_herdoc.c Parsing/get_env_variables.c Parsing/input_formating.c Parsing/spliting_with_spaces.c Parsing/input_analyse.c Parsing/input_counter.c Parsing/get_pipe_data.c Parsing/handling_quotes.c Parsing/token_and_type.c Parsing/check_parse_errors.c Builtins/driver.c Builtins/mcd.c Builtins/mecho.c Builtins/menv.c Builtins/mexit.c Builtins/mexport.c Builtins/mpwd.c Builtins/munset.c Execution/execution.c Execution/command_validation.c Execution/files_preps.c 
 # environment
 MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 65144
+VSCODE_PID = 15283
 # variable set hash-table stats:
 # Load=69/1024=7%, Rehash=0, Collisions=2/96=2%
 
@@ -158,9 +160,9 @@ VSCODE_PID = 65144
 
 # Directories
 
-# . (device 16777227, inode 1067082): 18 files, no impossibilities.
+# . (device 16777227, inode 1803793): 16 files, no impossibilities.
 
-# 18 files, no impossibilities in 1 directories.
+# 16 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -171,7 +173,7 @@ VSCODE_PID = 65144
 # Not a target:
 Builtins/munset.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-23 16:36:56
+#  Last modified 2022-08-26 18:46:21
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -180,7 +182,7 @@ Builtins/munset.c:
 # Not a target:
 Parsing/input_analyse.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-25 19:51:27
+#  Last modified 2022-08-26 19:21:33
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -189,7 +191,7 @@ Parsing/input_analyse.c:
 # Not a target:
 Utils/ft_isalpha.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-23 16:42:58
+#  Last modified 2022-08-26 15:24:43
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -198,7 +200,7 @@ Utils/ft_isalpha.c:
 # Not a target:
 Utils/get_var_val.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-25 10:47:00
+#  Last modified 2022-08-26 18:46:19
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -207,7 +209,7 @@ Utils/get_var_val.c:
 # Not a target:
 Parsing/input_counter.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-23 16:58:12
+#  Last modified 2022-08-26 18:46:20
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -226,7 +228,7 @@ all: Minishell
 # Not a target:
 Utils/ft_strncpy.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-23 16:42:31
+#  Last modified 2022-08-26 15:24:43
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -235,7 +237,7 @@ Utils/ft_strncpy.c:
 # Not a target:
 Utils/ft_strncmp.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-23 16:42:20
+#  Last modified 2022-08-26 15:24:43
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -249,7 +251,7 @@ Utils/ft_strncmp.c:
 # Not a target:
 Utils/ft_strcmp.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-16 10:51:47
+#  Last modified 2022-08-26 15:24:43
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -258,7 +260,7 @@ Utils/ft_strcmp.c:
 # Not a target:
 Utils/ft_realloc.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-23 16:43:10
+#  Last modified 2022-08-26 15:24:43
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -267,17 +269,16 @@ Utils/ft_realloc.c:
 # Not a target:
 Utils/ft_strdup.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-09 11:04:05
+#  Last modified 2022-08-26 15:24:43
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
- 
 Parsing/get_env_in_herdoc.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-23 17:08:33
+#  Last modified 2022-08-26 18:46:20
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -286,7 +287,17 @@ Parsing/get_env_in_herdoc.c:
 # Not a target:
 Utils/ft_strchr.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-23 16:48:06
+#  Last modified 2022-08-26 15:24:43
+ 
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+Parsing/token_and_type.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-26 19:57:24
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -301,7 +312,7 @@ Utils/ft_strchr.c:
 # Not a target:
 Utils/ft_putstr_fd.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-09 11:04:05
+#  Last modified 2022-08-26 15:24:43
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -310,7 +321,7 @@ Utils/ft_putstr_fd.c:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-25 12:10:03
+#  Last modified 2022-08-26 19:59:18
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -319,7 +330,7 @@ Makefile:
 # Not a target:
 Utils/ft_strstr.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-23 16:45:58
+#  Last modified 2022-08-26 15:24:43
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -328,7 +339,7 @@ Utils/ft_strstr.c:
 # Not a target:
 Builtins/driver.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-25 10:47:00
+#  Last modified 2022-08-26 18:46:22
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -337,16 +348,7 @@ Builtins/driver.c:
 # Not a target:
 Execution/execution.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-25 10:47:00
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-# Not a target:
-Parsing/singles_doubles_quotes.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-08-23 17:03:45
+#  Last modified 2022-08-26 19:28:21
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -355,7 +357,7 @@ Parsing/singles_doubles_quotes.c:
 # Not a target:
 Utils/ft_atoi.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-23 16:40:38
+#  Last modified 2022-08-26 15:24:43
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -364,27 +366,27 @@ Utils/ft_atoi.c:
 # Not a target:
 Parsing/handling_quotes.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-25 19:53:19
+#  Last modified 2022-08-26 19:45:04
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-Minishell: minishell.c Utils/system_calls_protection.c Utils/signals.c Utils/ft_itoa.c Utils/validate_var_name.c Utils/free_funcs.c Utils/env_dup.c Utils/get_var_index.c Utils/ft_putstr_fd.c Utils/ft_atoi.c Utils/ft_strncpy.c Utils/ft_split.c Utils/ft_substr.c Utils/ft_strlen.c Utils/ft_strstr.c Utils/ft_strjoin.c Utils/ft_strcmp.c Utils/ft_strncmp.c Utils/ft_strdup.c Utils/ft_calloc.c Utils/ft_strchr.c Utils/ft_realloc.c Utils/ft_isalpha.c Utils/ft_isdigit.c Utils/gnl.c Utils/ft_strnstr.c Utils/get_var_val.c Parsing/singles_doubles_quotes.c Parsing/get_env_in_herdoc.c Parsing/get_env_variables.c Parsing/input_formating.c Parsing/spliting_with_spaces.c Parsing/input_analyse.c Parsing/input_counter.c Parsing/get_pipe_data.c Parsing/handling_quotes.c Parsing/check_parse_errors.c Builtins/driver.c Builtins/mcd.c Builtins/mecho.c Builtins/menv.c Builtins/mexit.c Builtins/mexport.c Builtins/mpwd.c Builtins/munset.c Execution/execution.c Execution/command_validation.c Execution/files_preps.c
+Minishell: minishell.c Utils/system_calls_protection.c Utils/signals.c Utils/ft_itoa.c Utils/validate_var_name.c Utils/free_funcs.c Utils/env_dup.c Utils/get_var_index.c Utils/ft_putstr_fd.c Utils/ft_atoi.c Utils/ft_strncpy.c Utils/ft_split.c Utils/ft_substr.c Utils/ft_strlen.c Utils/ft_strstr.c Utils/ft_strjoin.c Utils/ft_strcmp.c Utils/ft_strncmp.c Utils/ft_strdup.c Utils/ft_calloc.c Utils/ft_strchr.c Utils/ft_realloc.c Utils/ft_isalpha.c Utils/ft_isdigit.c Utils/gnl.c Utils/ft_strnstr.c Utils/get_var_val.c Parsing/s_d_quotes.c Parsing/get_env_in_herdoc.c Parsing/get_env_variables.c Parsing/input_formating.c Parsing/spliting_with_spaces.c Parsing/input_analyse.c Parsing/input_counter.c Parsing/get_pipe_data.c Parsing/handling_quotes.c Parsing/token_and_type.c Parsing/check_parse_errors.c Builtins/driver.c Builtins/mcd.c Builtins/mecho.c Builtins/menv.c Builtins/mexit.c Builtins/mexport.c Builtins/mpwd.c Builtins/munset.c Execution/execution.c Execution/command_validation.c Execution/files_preps.c
 #  Implicit rule search has not been done.
-#  Last modified 2022-08-25 19:54:09
+#  Last modified 2022-08-26 20:04:50
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 65):
+#  commands to execute (from `Makefile', line 66):
 	$(C_FLAGS) $(C_READLINE_POMS) $(C_READLINE_ABOU) $(C_FILES) -o $(NAME)
 	
 
 # Not a target:
 Utils/free_funcs.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-23 16:40:33
+#  Last modified 2022-08-26 15:24:43
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -393,7 +395,7 @@ Utils/free_funcs.c:
 # Not a target:
 Utils/get_var_index.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-23 16:46:47
+#  Last modified 2022-08-26 18:46:19
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -408,7 +410,7 @@ fclean: clean
 # Not a target:
 Utils/gnl.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-23 16:41:17
+#  Last modified 2022-08-26 15:24:43
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -417,7 +419,7 @@ Utils/gnl.c:
 # Not a target:
 Builtins/mecho.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-23 16:26:09
+#  Last modified 2022-08-26 18:46:21
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -426,7 +428,7 @@ Builtins/mecho.c:
 # Not a target:
 Utils/ft_strnstr.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-09 11:04:05
+#  Last modified 2022-08-26 15:24:43
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -435,7 +437,7 @@ Utils/ft_strnstr.c:
 # Not a target:
 Utils/ft_itoa.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-23 16:43:57
+#  Last modified 2022-08-26 15:24:43
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -444,7 +446,7 @@ Utils/ft_itoa.c:
 # Not a target:
 Utils/ft_strlen.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-09 11:04:05
+#  Last modified 2022-08-26 15:24:43
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -453,7 +455,7 @@ Utils/ft_strlen.c:
 # Not a target:
 Builtins/mpwd.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-25 10:47:00
+#  Last modified 2022-08-26 18:46:21
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -462,7 +464,7 @@ Builtins/mpwd.c:
 # Not a target:
 Utils/ft_isdigit.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-09 11:04:05
+#  Last modified 2022-08-26 15:24:43
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -471,7 +473,7 @@ Utils/ft_isdigit.c:
 # Not a target:
 Builtins/mexport.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-25 10:47:00
+#  Last modified 2022-08-26 18:46:21
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -486,7 +488,7 @@ Builtins/mexport.c:
 # Not a target:
 Parsing/check_parse_errors.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-25 12:04:41
+#  Last modified 2022-08-26 19:53:17
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -495,7 +497,7 @@ Parsing/check_parse_errors.c:
 # Not a target:
 Utils/ft_strjoin.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-23 16:45:14
+#  Last modified 2022-08-26 15:24:43
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -504,7 +506,7 @@ Utils/ft_strjoin.c:
 # Not a target:
 Utils/ft_split.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-23 16:44:37
+#  Last modified 2022-08-26 15:24:43
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -519,7 +521,7 @@ re: fclean all
 # Not a target:
 Utils/signals.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-25 10:50:29
+#  Last modified 2022-08-26 19:49:55
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -530,24 +532,23 @@ clean:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 68):
+#  commands to execute (from `Makefile', line 69):
 	rm -rf $(NAME)
 	
 
 # Not a target:
 Utils/env_dup.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-23 16:44:28
+#  Last modified 2022-08-26 18:46:19
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
- 
 Parsing/spliting_with_spaces.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-24 00:21:39
+#  Last modified 2022-08-26 15:24:41
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -556,7 +557,8 @@ Parsing/spliting_with_spaces.c:
 # Not a target:
 minishell.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-25 19:42:24
+#  Last modified 2022-08-26 20:02:45
+ 
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -565,7 +567,16 @@ minishell.c:
 # Not a target:
 Builtins/menv.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-23 16:30:19
+#  Last modified 2022-08-26 18:46:21
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+Parsing/s_d_quotes.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-26 16:25:03
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -574,7 +585,7 @@ Builtins/menv.c:
 # Not a target:
 Builtins/mexit.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-25 10:47:00
+#  Last modified 2022-08-26 18:46:21
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -583,7 +594,7 @@ Builtins/mexit.c:
 # Not a target:
 Utils/system_calls_protection.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-25 10:47:00
+#  Last modified 2022-08-26 20:04:34
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -592,7 +603,7 @@ Utils/system_calls_protection.c:
 # Not a target:
 Parsing/input_formating.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-25 19:46:30
+#  Last modified 2022-08-26 15:24:41
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -601,7 +612,7 @@ Parsing/input_formating.c:
 # Not a target:
 Parsing/get_pipe_data.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-24 13:58:15
+#  Last modified 2022-08-26 15:57:56
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -610,7 +621,7 @@ Parsing/get_pipe_data.c:
 # Not a target:
 Execution/files_preps.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-25 10:47:00
+#  Last modified 2022-08-26 18:47:51
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -619,7 +630,7 @@ Execution/files_preps.c:
 # Not a target:
 Utils/validate_var_name.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-23 16:47:49
+#  Last modified 2022-08-26 15:24:43
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -628,7 +639,7 @@ Utils/validate_var_name.c:
 # Not a target:
 Parsing/get_env_variables.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-25 19:34:50
+#  Last modified 2022-08-26 18:46:22
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -637,7 +648,7 @@ Parsing/get_env_variables.c:
 # Not a target:
 Utils/ft_calloc.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-09 11:04:05
+#  Last modified 2022-08-26 15:24:43
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -646,7 +657,7 @@ Utils/ft_calloc.c:
 # Not a target:
 Builtins/mcd.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-25 10:47:00
+#  Last modified 2022-08-26 20:03:35
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -655,7 +666,7 @@ Builtins/mcd.c:
 # Not a target:
 Utils/ft_substr.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-23 16:45:19
+#  Last modified 2022-08-26 15:24:43
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -664,14 +675,14 @@ Utils/ft_substr.c:
 # Not a target:
 Execution/command_validation.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-25 10:47:00
+#  Last modified 2022-08-26 18:46:23
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # files hash-table stats:
-# Load=57/1024=6%, Rehash=0, Collisions=6/126=5%
+# Load=58/1024=6%, Rehash=0, Collisions=6/128=5%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -683,6 +694,6 @@ Execution/command_validation.c:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Thu Aug 25 23:48:15 2022
+# Finished Make data base on Fri Aug 26 22:24:33 2022
 
  

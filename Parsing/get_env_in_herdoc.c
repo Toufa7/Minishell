@@ -6,7 +6,7 @@
 /*   By: otoufah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:49:01 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/23 16:49:02 by otoufah          ###   ########.fr       */
+/*   Updated: 2022/08/26 15:29:19 by otoufah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ char	*get_env_in_herdoc(char *target)
 			i += ft_strlen(variable);
 			output = ft_strjoin(output, variable);
 		}
-		// free_str(variable);
 	}
-	// free_str(target);
 	return (output);
 }

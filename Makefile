@@ -37,7 +37,7 @@ C_FILES = 	minishell.c \
 			Utils/gnl.c \
 			Utils/ft_strnstr.c \
 			Utils/get_var_val.c \
-			Parsing/singles_doubles_quotes.c \
+			Parsing/s_d_quotes.c \
 			Parsing/get_env_in_herdoc.c \
 			Parsing/get_env_variables.c \
 			Parsing/input_formating.c \
@@ -46,6 +46,7 @@ C_FILES = 	minishell.c \
 			Parsing/input_counter.c \
 			Parsing/get_pipe_data.c \
 			Parsing/handling_quotes.c \
+			Parsing/token_and_type.c \
 			Parsing/check_parse_errors.c \
 			Builtins/driver.c \
 			Builtins/mcd.c \

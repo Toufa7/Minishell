@@ -6,20 +6,20 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:32:28 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/25 07:28:05 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/26 18:31:36 by otoufah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char *add_something(char *str, char *add)
+char	*add_something(char *str, char *add)
 {
 	return (ft_strjoin(str, add));
 }
 
-char *until_dollar(char *str)
+char	*until_dollar(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (str[i] == '$')
@@ -31,28 +31,10 @@ char *until_dollar(char *str)
 	return (ft_substr(str, 0, i));
 }
 
-void ft_get_pid(char **env)
-{
-	pid_t pid;
-
-	pid = fork();
-	char *const cmd = "/bin/ps";
-	char *const ps[] = {cmd, "-a"};
-	if (pid == 0)
-	{
-		if (execve(cmd, ps, env) == -1)
-		{
-			perror("Error\n");
-		}
-	}
-	waitpid(pid, &global_data.errno_cp, 0);
-}
-
-char *get_env_variables(char *target, bool flag)
+char	*get_env_variables(char *target, bool flag)
 {
 	int		i;
 	int		idx;
-	int 	a = 0;
 	char	*output;
 	char	*env_var;
 	char	*variable;
@@ -92,7 +74,8 @@ char *get_env_variables(char *target, bool flag)
 			}
 			else
 			{
-				variable = ft_substr(&target[i] + 1, 0, validate_var_name(&target[i] + 1));
+				variable = ft_substr(&target[i] + 1, 0,
+						validate_var_name(&target[i] + 1));
 				env_var = add_something(variable, "=");
 				idx = get_var_index(add_something(variable, "="));
 				if (idx != -1)
@@ -107,13 +90,8 @@ char *get_env_variables(char *target, bool flag)
 				}
 				else
 				{
-					if (!ft_isalpha(target[i + 1]) && !ft_isdigit(target[i + 1]))
-					{
-						output = ft_strjoin(output, "$");
-						a++;
-					}
 					output = ft_strjoin(output, "");
-					i += validate_var_name(&target[i] + 1) + a;
+					i += validate_var_name(&target[i]) + 1;
 				}
 			}
 		}
@@ -123,8 +101,25 @@ char *get_env_variables(char *target, bool flag)
 			output = ft_strjoin(output, variable);
 			i += ft_strlen(variable);
 		}
-		// free_str(variable);
 	}
-	// free_str(target);
-	return output;
+	return (output);
 }
+
+/*
+void	ft_get_pid(char **env)
+{
+	pid_t pid;
+
+	pid = fork();
+	char *const cmd = "/bin/ps";
+	char *const ps[] = {cmd, "-a"};
+	if (pid == 0)
+	{
+		if (execve(cmd, ps, env) == -1)
+		{
+			perror("Error\n");
+		}
+	}
+	waitpid(pid, &global_data.errno_cp, 0);
+}
+*/

@@ -59,7 +59,7 @@ void	update_pwd(void)
 void	mcd(char *path)
 {
 	if (!path)
-		return;
+		return ;
 	update_oldpwd();
 	if (chdir(path) != 0)
 		print_error(path);

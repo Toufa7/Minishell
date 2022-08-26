@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 /*
-
 TODO: ✅❓
 	--> exection
 	[✅] expanding in herdoc
@@ -61,6 +60,7 @@ TODO: ✅❓
 		[✅] // echo "$\USER" == $\USER	
 		[✅] // echo "\USER"  == \USER	
 		[✅] echo $"test"$ : Expected = test$
+		[]	$"PWD"
 	}
 	[❓] cat <$k
 	[❓] When the varibles in case of > >> < 
@@ -72,66 +72,7 @@ TODO: ✅❓
 
 #include "minishell.h"
 
-void	token_and_type(t_parse *parse)
-{
-	int i = -1;
-	while (parse->tokens[++i].token)
-	{
-		printf("Token -> %s -> Type -> %s\n",parse->tokens[i].token,parse->tokens[i].type);
-	}
-}
-
-void	counting(t_parse *parse)
-{
-	int j = -1;
-	while (parse->tokens[++j].token)
-		input_counter(parse->tokens, &parse->tokens[j]);
-}
-
-void	getting_back(char **str)
-{
-	int i = -1;
-	while (str[++i])
-		str[i] = handling_quotes(str[i], -1, '|');
-}
-
-void	control_c(int sig)
-{
-	if (!global_data.is_in_herdoc)
-	{
-		printf("\n");
-		rl_on_new_line();
-		// rl_replace_line("", 0);
-		rl_redisplay();
-	}
-	else
-	{
-		//printf("\n");
-		rl_on_new_line();
-		// rl_replace_line("", 0);
-		rl_redisplay();
-	}
-}
-
-// void	control_c(int sig)
-// {
-// 	if (!global_data.is_in_herdoc)
-// 	{
-// 		printf("\n");
-// 		rl_on_new_line();
-// 		rl_replace_line("", 0);
-// 		rl_redisplay();
-// 	}
-// 	else
-// 	{
-// 		//printf("\n");
-// 		rl_on_new_line();
-// 		rl_replace_line("", 0);
-// 		rl_redisplay();
-// 	}
-// }
-
-void	init_global_data()
+void	init_global_data(void)
 {
 	global_data.pre_pipe_infd = -1;
 	global_data.size = 0;
@@ -144,56 +85,75 @@ void	init_global_data()
 	global_data.redirection_error = FALSE;
 }
 
-int main(int ac, char **av, char **env)
+void	counting(t_parse *parse)
 {
-	(void) ac;
-	(void) av;
-	int		i;
+	int	j;
+
+	j = -1;
+	while (parse->tokens[++j].token)
+		input_counter(parse->tokens, &parse->tokens[j]);
+}
+
+void	getting_back(char **str)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+		str[i] = handling_quotes(str[i], -1, '|');
+}
+
+void	minishell(t_parse *parse)
+{
+	int	i;
+
+	parse->line_double_quotes = handling_quotes(parse->line, '|', -1);
+	if (!global_data.parse_error)
+	{
+		parse->formated_input = input_formating(parse->line_double_quotes);
+		parse->splt_pipes = ft_split(parse->formated_input, '|');
+		getting_back(parse->splt_pipes);
+		i = 0;
+		while (parse->splt_pipes[i])
+			i++;
+		parse->pipe_data = ft_calloc(i + 1, sizeof(t_pipe_data *));
+		i = -1;
+		while (parse->splt_pipes[++i])
+		{
+			parse->no_splt = handling_quotes(parse->splt_pipes[i], ' ', -1);
+			parse->tokens = spliting_with_spaces(parse->no_splt);
+			input_analyse(parse->tokens);
+			initializer(parse->tokens);
+			counting(parse);
+			global_data.parse_error = check_parse_errors(parse);
+			if (global_data.parse_error)
+				break ;
+			parse->pipe_data[i] = get_pipe_data(parse);
+		}
+		if (!global_data.parse_error)
+			execution(parse->pipe_data);
+	}
+}
+
+int	main(int ac, char **av, char **env)
+{
 	t_parse	*parse;
 
+	(void) ac;
+	(void) av;
 	parse = malloc(sizeof(t_parse));
 	global_data.errno_cp = 0;
-	// rl_catch_signals = 0;
-	// Ctrl + C
+	rl_catch_signals = 0;
 	signal(SIGINT, control_c);
-	// Ctrl + Backslash
-	signal(SIGQUIT, SIG_IGN); 
+	signal(SIGQUIT, SIG_IGN);
 	env_dup(env);
 	while (TRUE)
 	{
 		init_global_data();
 		parse->line = readline("Mini-0.0$ ");
-		// Ctrl + D
 		if (!parse->line)
 			exit(global_data.errno_cp);
 		add_history(parse->line);
-		parse->line_double_quotes = handling_quotes(parse->line, '|', -1);
-		// exit(0);
-		if (!global_data.parse_error)
-		{
-			parse->formated_input = input_formating(parse->line_double_quotes);
-			parse->splt_pipes = ft_split(parse->formated_input, '|');
-			getting_back(parse->splt_pipes);
-			i = 0;
-			while (parse->splt_pipes[i])
-				i++;
-			parse->pipe_data = ft_calloc(i + 1, sizeof(t_pipe_data *));
-			i = -1;
-			while (parse->splt_pipes[++i])
-			{
-				parse->dont_splt = handling_quotes(parse->splt_pipes[i], ' ', -1);
-				parse->tokens = spliting_with_spaces(parse->dont_splt);
-				input_analyse(parse->tokens); // Specifying each token his type (delimiter, command, option ...)
-				initializer(parse->tokens); counting(parse); // Just fo counting
-				//token_and_type(parse);
-				global_data.parse_error = check_parse_errors(parse); 
-				if (global_data.parse_error)
-					break;
-				parse->pipe_data[i] = get_pipe_data(parse);
-			}
-			if (!global_data.parse_error)
-				execution(parse->pipe_data);
-		}
-		// system("leaks Minishell");
+		minishell(parse);
 	}
 }

@@ -12,9 +12,12 @@
 
 #include "../minishell.h"
 
-// TODO: don't forget echo > $USER ==> DONE
-// cat >> $US
-// cd ~/
+/*
+	Goal of this function
+	is to specifying each token his type (delimiter, command, option ...
+	cat >> $US
+	cd ~/
+*/
 
 char	*is_there(char *str)
 {

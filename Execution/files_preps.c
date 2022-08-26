@@ -44,13 +44,12 @@ void	out_file_prep(t_pipe_data *pipe_data, char *path, bool is_builtin)
 	}
 	else
 		global_data.out_fd = fd;
-
 }
 
 void	append_file_prep(t_pipe_data *pipe_data, char *path, bool is_builtin)
 {
 	int	fd;
-	
+
 	fd = open(path, O_CREAT | O_WRONLY | O_APPEND, 0777);
 	pipe_data->out_fd_set = TRUE;
 	if (!is_builtin || global_data.size > 1)
@@ -83,7 +82,7 @@ void	pipe_files_prep(t_pipe_data *pipe_data, bool is_builtin)
 			else
 				ft_putstr_fd(": No such file or directory\n", 2);
 			if (is_builtin)
-				break;
+				break ;
 			else
 				exit(1);
 		}

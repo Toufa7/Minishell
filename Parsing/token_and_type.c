@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   system_calls_protection.c                          :+:      :+:    :+:   */
+/*   minishell_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: otoufah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/26 20:04:29 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/26 20:04:34 by otoufah          ###   ########.fr       */
+/*   Created: 2022/08/26 19:56:17 by otoufah           #+#    #+#             */
+/*   Updated: 2022/08/26 19:56:18 by otoufah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_close(int n, int s)
+void	token_and_type(t_parse *parse)
 {
-	(void) s;
-	if (n > 2)
-		close(n);
+	int	i;
+
+	i = -1;
+	while (parse->tokens[++i].token)
+	{
+		printf("Token -> %s -> Type -> %s\n",
+			parse->tokens[i].token, parse->tokens[i].type);
+	}
 }
