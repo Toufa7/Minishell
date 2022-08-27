@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-void	in_file_prep(t_pipe_data *pipe_data, char *path, bool is_builtin)
+void	in_file_prep(t_pipe_data *pipe_data, char *path, t_bool is_builtin)
 {
 	int	fd;
 
@@ -31,7 +31,7 @@ void	in_file_prep(t_pipe_data *pipe_data, char *path, bool is_builtin)
 	ft_close(fd, 8);
 }
 
-void	out_file_prep(t_pipe_data *pipe_data, char *path, bool is_builtin)
+void	out_file_prep(t_pipe_data *pipe_data, char *path, t_bool is_builtin)
 {
 	int	fd;
 
@@ -46,7 +46,7 @@ void	out_file_prep(t_pipe_data *pipe_data, char *path, bool is_builtin)
 		global_data.out_fd = fd;
 }
 
-void	append_file_prep(t_pipe_data *pipe_data, char *path, bool is_builtin)
+void	append_file_prep(t_pipe_data *pipe_data, char *path, t_bool is_builtin)
 {
 	int	fd;
 
@@ -61,7 +61,7 @@ void	append_file_prep(t_pipe_data *pipe_data, char *path, bool is_builtin)
 		global_data.out_fd = fd;
 }
 
-void	pipe_files_prep(t_pipe_data *pipe_data, bool is_builtin)
+void	pipe_files_prep(t_pipe_data *pipe_data, t_bool is_builtin)
 {
 	char	*path;
 	int		i;

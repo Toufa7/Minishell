@@ -31,7 +31,7 @@ char	*until_dollar(char *str)
 	return (ft_substr(str, 0, i));
 }
 
-char	*get_env_variables(char *target, bool flag)
+char	*get_env_variables(char *target, t_bool flag)
 {
 	int		i;
 	int		idx;

@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-bool	checking_quotes(char *str)
+t_bool	checking_quotes(char *str)
 {
 	char	*check;
 
@@ -21,8 +21,8 @@ bool	checking_quotes(char *str)
 	{
 		ft_putstr_fd("Unclosed Quotes\n", 2);
 		global_data.errno_cp = 1;
-		// rl_on_new_line();
-		// rl_replace_line("", 0);
+		rl_on_new_line();
+		rl_replace_line("", 0);
 		return (TRUE);
 	}
 	return (FALSE);

@@ -56,7 +56,7 @@ void	get_herdoc(t_pipe_data *pipe_data)
 
 void	child_process(t_pipe_data *pipe_data, int index)
 {
-	int fd;
+	int	fd;
 
 	global_data.last_child_id = fork();
 	if (global_data.last_child_id == 0)

@@ -40,7 +40,7 @@ void	tokens_type_init(t_tokens *tokens)
 	tokens->cmp_append = ">>";
 }
 
-void	type_define(t_tokens *tokens, char *str, int i, bool what)
+void	type_define(t_tokens *tokens, char *str, int i, t_bool what)
 {
 	tokens[i].type = str;
 	tokens[i].token = get_env_variables(tokens[i].token, what);

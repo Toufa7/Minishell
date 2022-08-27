@@ -14,8 +14,8 @@
 
 void	mexit(char **argv)
 {
-	bool	is_valid;
-	bool	is_digit;
+	t_bool	is_valid;
+	t_bool	is_digit;
 	int		j;
 	int		i;
 

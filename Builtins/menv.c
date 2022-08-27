@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-void	menv(char **argv, char *prefix, bool is_export)
+void	menv(char **argv, char *prefix, t_bool is_export)
 {
 	int	eq;
 	int	i;

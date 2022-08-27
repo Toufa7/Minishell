@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-bool	err(char *str_1, char *str_2, char *str_3)
+t_bool	err(char *str_1, char *str_2, char *str_3)
 {
 	ft_putstr_fd(str_1, 2);
 	ft_putstr_fd(str_2, 2);
@@ -43,7 +43,7 @@ int	compare(char	*t, char	*nxt_t, char	*nxt_tok)
 		return (-1);
 }
 
-bool	check_parse_errors(t_parse	*parse)
+t_bool	check_parse_errors(t_parse	*parse)
 {
 	char	*type;
 	char	*tn;

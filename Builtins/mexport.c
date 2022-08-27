@@ -119,7 +119,7 @@ void	create_final_var(int op_type, char *key, char *new_val)
 	global_data.errno_cp = 0;
 }
 
-bool	check_errors(char *str, char **key, char **val, int *op_type)
+t_bool	check_errors(char *str, char **key, char **val, int *op_type)
 {
 	*key = get_key(str);
 	if (key)

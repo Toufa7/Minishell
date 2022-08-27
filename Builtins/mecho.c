@@ -14,8 +14,8 @@
 
 void	mecho(char **argv)
 {
-	bool	new_line;
-	bool	valid_arg;
+	t_bool	new_line;
+	t_bool	valid_arg;
 	int		i;
 	int		j;
 

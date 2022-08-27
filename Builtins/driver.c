@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-bool	check_builtin(t_pipe_data *pipe_data)
+t_bool	check_builtin(t_pipe_data *pipe_data)
 {
 	if (!ft_strcmp("cd", pipe_data->command))
 	{
