@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:00:14 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/27 09:37:28 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/27 11:42:46 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	get_herdoc(t_pipe_data *pipe_data)
 	signal(SIGINT, parent_sigint);
 }
 
-void	child_process(t_pipe_data *pipe_data, int index)
+void	child_process(t_pipe_data *pipe_data, int pipe_nb, int builtin_nb)
 {
 	int fd;
 
@@ -63,8 +63,9 @@ void	child_process(t_pipe_data *pipe_data, int index)
 	{
 		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_DFL);
-		pipe_files_prep(pipe_data, FALSE);
-		validate_cmd(pipe_data);
+		pipe_files_prep(pipe_data, builtin_nb != -1);
+		if (builtin_nb == -1)
+			validate_cmd(pipe_data);
 		if (pipe_data->is_herdoc)
 		{
 			fd = open("/tmp/herdoc", O_RDWR, 0004);
@@ -74,12 +75,15 @@ void	child_process(t_pipe_data *pipe_data, int index)
 		}
 		else if (global_data.pre_pipe_infd != -1 && !pipe_data->in_fd_set)
 			dup2(global_data.pre_pipe_infd, 0);
-		if (global_data.size != index + 1 && !pipe_data->out_fd_set)
+		if (global_data.size != pipe_nb + 1 && !pipe_data->out_fd_set)
 			dup2(global_data.cmd_pipe_fds[1], 1);
 		ft_close(global_data.cmd_pipe_fds[1], 5);
 		ft_close(global_data.cmd_pipe_fds[0], 4);
-		if (check_builtin(pipe_data))
+		if (builtin_nb != -1)
+		{
+			exec_builtin(builtin_nb, pipe_data);
 			exit(0);
+		}
 		else if (execve(pipe_data->cmd_path, pipe_data->argv, global_data.envp) == -1)
 		{
 			ft_putstr_fd(strerror(errno), 2);
@@ -90,11 +94,19 @@ void	child_process(t_pipe_data *pipe_data, int index)
 
 void	exec_pipe(t_pipe_data *pipe_data, int index)
 {
-	if (global_data.size > 1 || !check_builtin(pipe_data))
+	int	builtin_nb;
+
+	builtin_nb = check_builtin(pipe_data);
+	if (global_data.size == 1 && builtin_nb != -1)
+	{
+		pipe_files_prep(pipe_data, TRUE);
+		exec_builtin(builtin_nb, pipe_data);
+	}
+	else
 	{
 		if (global_data.size != index + 1)
 			pipe(global_data.cmd_pipe_fds);
-		child_process(pipe_data, index);
+		child_process(pipe_data, index, builtin_nb);
 		ft_close(global_data.cmd_pipe_fds[1], 5);
 		ft_close(global_data.pre_pipe_infd, 2);
 		global_data.pre_pipe_infd = global_data.cmd_pipe_fds[0];

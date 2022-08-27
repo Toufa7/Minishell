@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/27 09:40:48 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/27 09:42:14 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ TODO: ✅❓
 	[✅] ctr \ -> quit --> exit 131
 	[✅] ignore cntr C in childs
 	[❓] Built ins is not working with mulitble pipes: I know why and the solution I just need some rest
- 
+	[❓] Bad address when press ctr^D in herdoc
+
 	---> Parser
 	[✅] if delimiter has quotes don't expand
 	[✅] $fghjm << ls --> cmd should be NUll and ls | "" --> cmd should be empty string : Solution => Simply check if the upcoming input lenght is 0
