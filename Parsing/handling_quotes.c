@@ -21,8 +21,8 @@ t_bool	checking_quotes(char *str)
 	{
 		ft_putstr_fd("Unclosed Quotes\n", 2);
 		g_glbl_data.errno_cp = 1;
-		// rl_on_new_line();
-		// rl_replace_line("", 0);
+		rl_on_new_line();
+		rl_replace_line("", 0);
 		return (TRUE);
 	}
 	return (FALSE);

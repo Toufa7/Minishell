@@ -53,7 +53,11 @@ void	update_pwd(void)
 		}
 	}
 	else
-		ft_putstr_fd("cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory\n", 2);
+	{
+		ft_putstr_fd("cd: error retrieving current directory: getcwd: ", 2);
+		ft_putstr_fd("cannot access parent directories", 2);
+		ft_putstr_fd(": No such file or directory\n", 2);
+	}
 }
 
 void	mcd(char *path)
