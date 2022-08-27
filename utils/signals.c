@@ -16,7 +16,7 @@ void	parent_sigint(int sig)
 {
 	printf("\n");
 	rl_on_new_line();
-	rl_replace_line("", 0);
+	// rl_replace_line("", 0);
 	rl_redisplay();
 	global_data.errno_cp = 1;
 }
@@ -27,7 +27,7 @@ void	herdoc_sigint(int sig)
 	exit(1);
 }
 
-void void_sig(int sig)
+void	void_sig(int sig)
 {
 	(void) sig;
 }

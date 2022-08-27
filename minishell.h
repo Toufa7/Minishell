@@ -153,12 +153,12 @@ char		*get_cmd_path(char	*cmd, char	**exec_programs_dirs);
 // ----------- Shared Functions ------------------
 
 void		ft_close(int n, int s);
-void		free_str(void	*ptr); 
+void		free_str(void	*ptr);
 void		free_arr(void **arr);
 
 void		parent_sigint(int sig);
 void		herdoc_sigint(int sig);
-void 		void_sig(int sig);
+void		void_sig(int sig);
 // void		child_sigquit(int sig);
 // void		child_sigint(int sig);
 
@@ -186,6 +186,6 @@ int			ft_isalpha(int c);
 int			ft_isdigit(int c);
 size_t		ft_strlen(const char *s);
 
-t_global_data global_data;
+t_global_data	global_data;
 
 #endif

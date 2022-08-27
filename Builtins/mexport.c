@@ -84,7 +84,7 @@ void	create_final_var(int op_type, char *key, char *new_val)
 
 	var_index = get_var_index(key);
 	if (var_index != -1 && op_type == 2)
-		return;
+		return ;
 	if (var_index != -1 && op_type == 1)
 	{
 		old_val = get_var_val(var_index);

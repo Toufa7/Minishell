@@ -19,7 +19,7 @@ void	get_herdoc(t_pipe_data *pipe_data)
 	int		fd;
 	int		j;
 	int		id;
-	sig_t sig;
+	sig_t	sig;
 
 	j = -1;
 	id = fork();
@@ -80,7 +80,8 @@ void	child_process(t_pipe_data *pipe_data, int index)
 		ft_close(global_data.cmd_pipe_fds[0], 4);
 		if (check_builtin(pipe_data))
 			exit(0);
-		else if (execve(pipe_data->cmd_path, pipe_data->argv, global_data.envp) == -1)
+		else if (execve(pipe_data->cmd_path, pipe_data->argv,
+				global_data.envp) == -1)
 		{
 			ft_putstr_fd(strerror(errno), 2);
 			exit(errno);

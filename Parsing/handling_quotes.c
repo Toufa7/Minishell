@@ -21,12 +21,27 @@ bool	checking_quotes(char *str)
 	{
 		ft_putstr_fd("Unclosed Quotes\n", 2);
 		global_data.errno_cp = 1;
-		rl_on_new_line();
-		rl_replace_line("", 0);
+		// rl_on_new_line();
+		// rl_replace_line("", 0);
 		return (TRUE);
 	}
 	return (FALSE);
 }
+
+// void	found_and_replace(char *str, char found, char replace)
+// {
+// 	int	i;
+
+// 	i = 1;
+// 	while (str[i])
+// 	{
+// 		if (str[i] == found)
+// 			str[i] = replace;
+// 		else
+// 			str[i] = str[i];
+// 		i++;
+// 	}
+// }
 
 char	*handling_quotes(char *str, char replaced, char replace_by)
 {
@@ -67,3 +82,11 @@ char	*handling_quotes(char *str, char replaced, char replace_by)
 	}
 	return (dup);
 }
+
+// int main()
+// {
+// 	while (TRUE)
+// 	{
+// 		char *s = readline("");printf("%s\n",handling_quotes(s, ' ', -1));
+// 	}
+// }
