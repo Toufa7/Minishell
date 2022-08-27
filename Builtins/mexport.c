@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:19:59 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/27 14:27:16 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/27 15:57:35 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	create_final_var(int op_type, char *key, char *new_val)
 
 	var_index = get_var_index(key);
 	if (var_index != -1 && op_type == 2)
-		return;
+		return ;
 	if (var_index != -1 && op_type == 1)
 	{
 		old_val = get_var_val(var_index);
@@ -92,7 +92,6 @@ void	create_final_var(int op_type, char *key, char *new_val)
 		if (!cmpined_val)
 			cmpined_val = ft_strdup(old_val);
 		cmpined_val = ft_strjoin("=", cmpined_val);
-		//free_str(old_val);
 	}
 	else if (op_type == 2)
 		cmpined_val = ft_strdup(new_val);
@@ -108,18 +107,14 @@ void	create_final_var(int op_type, char *key, char *new_val)
 	else
 		final_var = ft_strdup(key);
 	if (var_index != -1)
-	{
-		//free_str(global_data.envp[var_index]);
-		global_data.envp[var_index] = final_var;
-	}
+		g_global_data.envp[var_index] = final_var;
 	else
-		global_data.envp = ft_realloc(global_data.envp, final_var);
+		g_global_data.envp = ft_realloc(g_global_data.envp, final_var);
 	if (var_index != -1 && op_type == 1)
-		//free_str(cmpined_val);
-	global_data.errno_cp = 0;
+		g_global_data.errno_cp = 0;
 }
 
-bool	check_errors(char *str, char **key, char **val, int *op_type)
+t_bool	check_errors(char *str, char **key, char **val, int *op_type)
 {
 	*key = get_key(str);
 	if (key)
@@ -130,7 +125,7 @@ bool	check_errors(char *str, char **key, char **val, int *op_type)
 		ft_putstr_fd("export: '", 2);
 		ft_putstr_fd(str, 2);
 		ft_putstr_fd("': not a valid identifier\n", 2);
-		global_data.errno_cp = 1;
+		g_global_data.errno_cp = 1;
 		return (FALSE);
 	}
 	return (TRUE);

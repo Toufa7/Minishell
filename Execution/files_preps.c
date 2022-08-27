@@ -6,20 +6,20 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 05:23:48 by abouchfa          #+#    #+#             */
-/*   Updated: 2022/08/27 12:05:00 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/27 15:55:53 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	in_file_prep(t_pipe_data *pipe_data, char *path, bool is_builtin)
+void	in_file_prep(t_pipe_data *pipe_data, char *path, t_bool is_builtin)
 {
 	int	fd;
 
 	if (access(path, F_OK) || access(path, R_OK))
 	{
-		global_data.errno_cp = errno;
-		global_data.redirection_error = TRUE;
+		g_global_data.errno_cp = errno;
+		g_global_data.redirection_error = TRUE;
 		perror(path);
 		if (!is_builtin)
 			exit(errno);
@@ -31,41 +31,36 @@ void	in_file_prep(t_pipe_data *pipe_data, char *path, bool is_builtin)
 	ft_close(fd, 8);
 }
 
-void	out_file_prep(t_pipe_data *pipe_data, char *path, bool is_builtin)
+void	out_file_prep(t_pipe_data *pipe_data, char *path, t_bool is_builtin)
 {
 	int	fd;
 
 	fd = open(path, O_CREAT | O_WRONLY | O_TRUNC, 0777);
 	pipe_data->out_fd_set = TRUE;
-	if (!is_builtin || global_data.size > 1)
+	if (!is_builtin || g_global_data.size > 1)
 	{
 		dup2(fd, 1);
 		ft_close(fd, 10);
 	}
 	else
-		global_data.out_fd = fd;
+		g_global_data.out_fd = fd;
 }
 
-void	append_file_prep(t_pipe_data *pipe_data, char *path, bool is_builtin)
+void	append_file_prep(t_pipe_data *pipe_data, char *path, t_bool is_builtin)
 {
 	int	fd;
-printf("--- 1\n");
 	fd = open(path, O_CREAT | O_WRONLY | O_APPEND, 0777);
-printf("--- 2\n");
 	pipe_data->out_fd_set = TRUE;
-printf("--- 3\n");
-	if (!is_builtin || global_data.size > 1)
+	if (!is_builtin || g_global_data.size > 1)
 	{
-printf("--- 4\n");
 		dup2(fd, 1);
-printf("--- 5\n");
 		ft_close(fd, 9);
 	}
 	else
-		global_data.out_fd = fd;
+		g_global_data.out_fd = fd;
 }
 
-void	pipe_files_prep(t_pipe_data *pipe_data, bool is_builtin)
+void	pipe_files_prep(t_pipe_data *pipe_data, t_bool is_builtin)
 {
 	char	*path;
 	int		i;
@@ -76,8 +71,8 @@ void	pipe_files_prep(t_pipe_data *pipe_data, bool is_builtin)
 		path = pipe_data->redirections[i]->path;
 		if (path && path[0] == '$')
 		{
-			global_data.redirection_error = TRUE;
-			global_data.errno_cp = 1;
+			g_global_data.redirection_error = TRUE;
+			g_global_data.errno_cp = 1;
 			if (path[0] == '$' && path[1])
 			{
 				ft_putstr_fd(path, 2);

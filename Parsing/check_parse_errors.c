@@ -12,12 +12,12 @@
 
 #include "../minishell.h"
 
-bool	err_exiting(char *str_1, char *str_2, char *str_3)
+t_bool	err(char *str_1, char *str_2, char *str_3)
 {
 	ft_putstr_fd(str_1, 2);
 	ft_putstr_fd(str_2, 2);
 	ft_putstr_fd(str_3, 2);
-	global_data.errno_cp = 258;
+	g_global_data.errno_cp = 258;
 	return (TRUE);
 }
 
@@ -43,10 +43,10 @@ int	compare(char	*t, char	*nxt_t, char	*nxt_tok)
 		return (-1);
 }
 
-bool	check_parse_errors(t_parse	*parse)
+t_bool	check_parse_errors(t_parse	*parse)
 {
 	char	*type;
-	char	*tkn;
+	char	*tn;
 	char	*next_type;
 	char	*next_token;
 	size_t	i;
@@ -55,17 +55,17 @@ bool	check_parse_errors(t_parse	*parse)
 	while (i < parse->tokens->total && parse->tokens[i].token)
 	{
 		type = parse->tokens[i].type;
-		tkn = parse->tokens[i].token;
+		tn = parse->tokens[i].token;
 		next_token = parse->tokens[i + 1].token;
 		next_type = parse->tokens[i + 1].type;
 		if (compare(type, next_type, next_token) == 1)
-			return (err_exiting("Mini: no delimiter in front of ", tkn, "\n"));
+			return (err("Mini: no delimiter in front of ", tn, "\n"));
 		else if (compare(type, next_type, next_token) == 2)
-			return (err_exiting("Mini: no output file in front of red out ", tkn, "\n"));
+			return (err("Mini: no output file in front of red out ", tn, "\n"));
 		else if (compare(type, next_type, next_token) == 3)
-			return (err_exiting("Mini: no appended file in front of append ", tkn, "\n"));
+			return (err("Mini: no appended file in front of append ", tn, "\n"));
 		else if (compare(type, next_type, next_token) == 4)
-			return (err_exiting("Mini: no input file to be readead from ", tkn, "\n"));
+			return (err("Mini: no input file to be readead from ", tn, "\n"));
 		i++;
 	}
 	return (FALSE);

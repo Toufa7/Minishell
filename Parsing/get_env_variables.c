@@ -31,7 +31,7 @@ char	*until_dollar(char *str)
 	return (ft_substr(str, 0, i));
 }
 
-char	*get_env_variables(char *target, bool flag)
+char	*get_env_variables(char *target, t_bool flag)
 {
 	int		i;
 	int		idx;
@@ -47,13 +47,13 @@ char	*get_env_variables(char *target, bool flag)
 		{
 			if (target[i + 1] == '?')
 			{
-				variable = ft_itoa(global_data.errno_cp);
+				variable = ft_itoa(g_global_data.errno_cp);
 				output = ft_strjoin(output, variable);
 				i += 2;
 			}
 			if (target[i + 1] == '?')
 			{
-				variable = ft_itoa(global_data.errno_cp);
+				variable = ft_itoa(g_global_data.errno_cp);
 				output = ft_strjoin(output, variable);
 				i += 2;
 			}

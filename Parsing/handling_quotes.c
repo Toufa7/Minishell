@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-bool	checking_quotes(char *str)
+t_bool	checking_quotes(char *str)
 {
 	char	*check;
 
@@ -20,9 +20,9 @@ bool	checking_quotes(char *str)
 	if (s_d_quotes(check) == NULL)
 	{
 		ft_putstr_fd("Unclosed Quotes\n", 2);
-		global_data.errno_cp = 1;
-		rl_on_new_line();
-		rl_replace_line("", 0);
+		g_global_data.errno_cp = 1;
+		// rl_on_new_line();
+		// rl_replace_line("", 0);
 		return (TRUE);
 	}
 	return (FALSE);
@@ -31,13 +31,12 @@ bool	checking_quotes(char *str)
 char	*handling_quotes(char *str, char replaced, char replace_by)
 {
 	int		i;
-	int		j;
 	char	*dup;
 	char	d_or_s;
 
-	global_data.parse_error = checking_quotes(str);
+	g_global_data.parse_error = checking_quotes(str);
 	dup = NULL;
-	if (!global_data.parse_error)
+	if (!g_global_data.parse_error)
 	{
 		dup = ft_calloc((ft_strlen(str) + 1), sizeof(char));
 		if (!dup)
@@ -49,17 +48,15 @@ char	*handling_quotes(char *str, char replaced, char replace_by)
 			{
 				dup[i] = str[i];
 				d_or_s = dup[i];
-				j = i;
-				while (str[++j] && str[j] != d_or_s)
+				while (str[++i] && str[i] != d_or_s)
 				{
-					if (str[j] == replaced)
-						dup[j] = replace_by;
+					if (str[i] == replaced)
+						dup[i] = replace_by;
 					else
-						dup[j] = str[j];
+						dup[i] = str[i];
 				}
-				if (str[j] == DOUBLES_QUOTES || str[j] == SING_QUOTES)
-					dup[j] = str[j];
-				i = j;
+				if (str[i] == DOUBLES_QUOTES || str[i] == SING_QUOTES)
+					dup[i] = str[i];
 			}
 			else
 				dup[i] = str[i];

@@ -6,47 +6,47 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:55:08 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/27 14:27:16 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/27 16:00:52 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-/*
-	This Function aim to creat spaces 
-*/
+int	spc_allo(char *str)
+{
+	int	i;
+	int	mem;
+
+	i = -1;
+	while (str[++i])
+	{
+		if ((str[i] == '<' && str[i + 1] != '<')
+			|| (str[i] == '>' && str[i + 1] != '>') || str[i] == '|')
+		mem++;
+	}
+	return (mem);
+}
 
 char	*input_formating(char *str)
 {
 	int		i;
 	int		j;
-	int		allo;
 	char	sing;
 	char	*spcs;
 
-	i = -1;
-	allo = 0;
-	while (str[++i])
-	{
-		if ((str[i] == '<' && str[i + 1] != '<')
-			|| (str[i] == '>' && str[i + 1] != '>') || str[i] == '|')
-			allo++;
-	}
-	spcs = alloc(sizeof(char) * (ft_strlen(str) + (allo * 2) + 1));
+	spcs = malloc(sizeof(char) * (ft_strlen(str) + (spc_allo(str) * 2) + 1));
 	if (!spcs)
 		return (NULL);
 	i = -1;
 	j = 0;
 	while (str[++i])
 	{
-		if (str[i] == '"' || str[i] == '\'')
+		if (str[i] == DOUBLES_QUOTES || str[i] == SING_QUOTES)
 		{
 			sing = str[i];
 			spcs[j++] = str[i];
 			while (str[++i] != sing && str[i])
-			{
 				spcs[j++] = str[i];
-			}
 		}
 		if ((str[i] == '<' && str[i + 1] == '<')
 			|| (str[i] == '>' && str[i + 1] == '>'))
@@ -68,6 +68,5 @@ char	*input_formating(char *str)
 			spcs[j++] = str[i];
 	}
 	spcs[j] = '\0';
-	//free_str(str);
 	return (spcs);
 }

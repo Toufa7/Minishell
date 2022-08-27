@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/27 14:26:21 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/27 15:59:37 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 # define OUTFILE 2
 # define APPENDFILE 3
 
-typedef int	bool;
+typedef int	t_bool;
 
 typedef struct s_tokens
 {
@@ -83,7 +83,7 @@ typedef struct s_redirections
 	int		type;
 }	t_redirections;
 
-typedef struct s_global_data
+typedef struct s_g_global_data
 {
 	int		errno_cp;
 	int		in_fd;
@@ -93,10 +93,10 @@ typedef struct s_global_data
 	int		pre_pipe_infd;
 	char	**envp;
 	t_list	**alloc_list;
-	bool	parse_error;
+	t_bool	parse_error;
 	pid_t	last_child_id;
-	bool	is_in_herdoc;
-	bool	redirection_error;
+	t_bool	is_in_herdoc;
+	t_bool	redirection_error;
 }	t_global_data;
 
 typedef struct s_pipe_data
@@ -105,9 +105,9 @@ typedef struct s_pipe_data
 	char			*cmd_path;
 	char			**delimiter;
 	char			**argv;
-	bool			out_fd_set;
-	bool			in_fd_set;
-	bool			is_herdoc;
+	t_bool			out_fd_set;
+	t_bool			in_fd_set;
+	t_bool			is_herdoc;
 	t_redirections	**redirections;
 }	t_pipe_data;
 
@@ -132,7 +132,7 @@ char		*s_d_quotes(char *str);
 char		*handling_quotes(char *str, char replaced_1, char replace_by);
 char		*input_formating(char	*str);
 char		*getting_back_original_input(char *str);
-char		*get_env_variables(char *target, bool flag);
+char		*get_env_variables(char *target, t_bool flag);
 char		*get_env_in_herdoc(char *target);
 void		initializer(t_tokens	*tokens);
 void		input_analyse(t_tokens	*tokens);
@@ -140,19 +140,19 @@ void		token_and_type(t_parse *parse);
 void		input_counter(t_tokens	*counter, t_tokens	*tokens);
 t_tokens	*spliting_with_spaces(char	*str);
 t_pipe_data	*get_pipe_data(t_parse	*parse);
-bool		check_parse_errors(t_parse *parse);
+t_bool		check_parse_errors(t_parse *parse);
 
 // ----------- Execution -------------------------
 
 void		mcd(char *path);
 void		mpwd(void);
-void		menv(char **argv, char *prefix, bool is_export);
+void		menv(char **argv, char *prefix, t_bool is_export);
 void		mecho(char **argv);
 void		mexit(char **argv);
 void		munset(char **argv);
 void		mexport(char **argv);
 void		validate_cmd(t_pipe_data *pipe_data);
-void		pipe_files_prep(t_pipe_data *pipe_data, bool is_builtin);
+void		pipe_files_prep(t_pipe_data *pipe_data, t_bool is_builtin);
 void		execution(t_pipe_data **pipe_data);
 char		*get_cmd_path(char	*cmd, char	**exec_programs_dirs);
 int			check_builtin(t_pipe_data *pipe_data);
@@ -161,14 +161,11 @@ void		exec_builtin(int builtin_nb, t_pipe_data *pipe_data);
 // ----------- Shared Functions ------------------
 
 void		*alloc(size_t size);
-
 void		ft_close(int n, int s);
-// void		//free_str(void	*ptr); 
-// void		//free_arr(void **arr);
 
 void		parent_sigint(int sig);
 void		herdoc_sigint(int sig);
-void 		void_sig(int sig);
+void		void_sig(int sig);
 // void		child_sigquit(int sig);
 // void		child_sigint(int sig);
 
@@ -196,6 +193,6 @@ int			ft_isalpha(int c);
 int			ft_isdigit(int c);
 size_t		ft_strlen(const char *s);
 
-t_global_data global_data;
+t_global_data	g_global_data;
 
 #endif

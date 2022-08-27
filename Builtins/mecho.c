@@ -14,8 +14,8 @@
 
 void	mecho(char **argv)
 {
-	bool	new_line;
-	bool	valid_arg;
+	t_bool	new_line;
+	t_bool	valid_arg;
 	int		i;
 	int		j;
 
@@ -40,11 +40,11 @@ void	mecho(char **argv)
 		j--;
 	while (argv[j])
 	{
-		ft_putstr_fd(argv[j++], global_data.out_fd);
+		ft_putstr_fd(argv[j++], g_global_data.out_fd);
 		if (argv[j])
-			ft_putstr_fd(" ", global_data.out_fd);
+			ft_putstr_fd(" ", g_global_data.out_fd);
 	}
 	if (!new_line)
-		ft_putstr_fd("\n", global_data.out_fd);
-	global_data.errno_cp = 0;
+		ft_putstr_fd("\n", g_global_data.out_fd);
+	g_global_data.errno_cp = 0;
 }
