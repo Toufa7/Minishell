@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/26 18:33:28 by otoufah          ###   ########.fr       */
+/*   Updated: 2022/08/27 09:37:56 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <signal.h>
 # include <sys/types.h>
 # include <sys/stat.h>
+# include <sys/wait.h>
 
 # define GREEN "\033[32m"
 # define RESET "\033[0m"
@@ -154,8 +155,13 @@ char		*get_cmd_path(char	*cmd, char	**exec_programs_dirs);
 void		ft_close(int n, int s);
 void		free_str(void	*ptr); 
 void		free_arr(void **arr);
-void		herdoc_signals(int sig);
-void		control_c(int sig);
+
+void		parent_sigint(int sig);
+void		herdoc_sigint(int sig);
+void 		void_sig(int sig);
+// void		child_sigquit(int sig);
+// void		child_sigint(int sig);
+
 void		*ft_calloc(size_t count, size_t size);
 void		env_dup(char **env);
 char		*ft_itoa(int n);

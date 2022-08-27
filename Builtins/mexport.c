@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:19:59 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/25 07:39:46 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/27 04:00:27 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ void	create_final_var(int op_type, char *key, char *new_val)
 	int		var_index;
 
 	var_index = get_var_index(key);
+	if (var_index != -1 && op_type == 2)
+		return;
 	if (var_index != -1 && op_type == 1)
 	{
 		old_val = get_var_val(var_index);

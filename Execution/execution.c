@@ -6,27 +6,26 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:00:14 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/25 07:46:03 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/27 09:37:28 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-bool	get_herdoc(t_pipe_data *pipe_data)
+void	get_herdoc(t_pipe_data *pipe_data)
 {
 	char	*line;
 	char	*expand;
 	int		fd;
 	int		j;
-	int		exit_status;
 	int		id;
+	sig_t sig;
 
 	j = -1;
-	global_data.is_in_herdoc = TRUE;
 	id = fork();
 	if (id == 0)
 	{
-		signal(SIGINT, herdoc_signals);
+		signal(SIGINT, herdoc_sigint);
 		while (pipe_data->delimiter && pipe_data->delimiter[++j])
 		{
 			fd = open("/tmp/herdoc", O_CREAT | O_RDWR | O_TRUNC, 0777);
@@ -50,9 +49,9 @@ bool	get_herdoc(t_pipe_data *pipe_data)
 		}
 		exit(0);
 	}
-	waitpid(id, &exit_status, 0);
-	global_data.is_in_herdoc = FALSE;
-	return (exit_status);
+	signal(SIGINT, SIG_IGN);
+	waitpid(id, &global_data.errno_cp, 0);
+	signal(SIGINT, parent_sigint);
 }
 
 void	child_process(t_pipe_data *pipe_data, int index)
@@ -62,10 +61,10 @@ void	child_process(t_pipe_data *pipe_data, int index)
 	global_data.last_child_id = fork();
 	if (global_data.last_child_id == 0)
 	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
 		pipe_files_prep(pipe_data, FALSE);
 		validate_cmd(pipe_data);
-		if (!pipe_data->cmd_path)
-			exit(1);
 		if (pipe_data->is_herdoc)
 		{
 			fd = open("/tmp/herdoc", O_RDWR, 0004);
@@ -111,9 +110,11 @@ void	execution(t_pipe_data **pipes_data)
 	i = -1;
 	while (pipes_data[++i])
 	{
+		global_data.errno_cp = 0;
 		if (pipes_data[i]->is_herdoc)
 		{
-			if (!get_herdoc(pipes_data[i]))
+			get_herdoc(pipes_data[i]);
+			if (!global_data.errno_cp)
 				exec_pipe(pipes_data[i], i);
 		}
 	}
@@ -123,6 +124,8 @@ void	execution(t_pipe_data **pipes_data)
 			exec_pipe(pipes_data[i], i);
 	ft_close(global_data.pre_pipe_infd, 1);
 	i = -1;
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 	while (pipes_data[++i])
 	{
 		if (i == 0)
@@ -133,4 +136,8 @@ void	execution(t_pipe_data **pipes_data)
 		else
 			waitpid(-1, NULL, 0);
 	}
+	if (global_data.errno_cp == 3 || global_data.errno_cp == 2)
+		global_data.errno_cp += 128;
+	signal(SIGINT, parent_sigint);
+	signal(SIGQUIT, SIG_IGN);
 }

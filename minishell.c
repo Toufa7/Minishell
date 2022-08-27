@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/25 07:47:45 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/27 09:40:48 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,10 @@ TODO: ✅❓
 	[✅] exit -1 || exit +1 should exit cleanly without any errors
 	[✅] exit without args ==> you should return the last exit_status
 	[✅]	$ export a : export a+=Sultan : env : you should assing 
-		opne herdoc even if thee is a parse error
+	[✅] cat --> Ctrl + C --> exit 130
+	[✅] ctr \ -> quit --> exit 131
+	[✅] ignore cntr C in childs
 	[❓] Built ins is not working with mulitble pipes: I know why and the solution I just need some rest
-	[❓] cat << ss --> Ctrl + C --> exit 130
-	[❓] ctr \ -> quit --> exit 131 and CTRL+C retur status it's 1 not 0
-	[❓] ignore cntr C in childs
  
 	---> Parser
 	[✅] if delimiter has quotes don't expand
@@ -156,8 +155,7 @@ int	main(int ac, char **av, char **env)
 	(void) av;
 	parse = malloc(sizeof(t_parse));
 	global_data.errno_cp = 0;
-	rl_catch_signals = 0;
-	signal(SIGINT, control_c);
+	signal(SIGINT, parent_sigint);
 	signal(SIGQUIT, SIG_IGN);
 	env_dup(env);
 	while (TRUE)
