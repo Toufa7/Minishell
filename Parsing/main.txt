@@ -1,0 +1,8 @@
+int main()
+{
+	while (TRUE)
+	{
+		char *s = readline("");
+		printf("%s\n", handling_quotes(s, ' ', -1));
+	}
+}

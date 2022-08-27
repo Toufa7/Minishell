@@ -32,18 +32,27 @@ char	*is_there(char *str)
 	return ("out");
 }
 
-void	input_analyse(t_tokens *tokens)
+void	tokens_type_init(t_tokens *tokens)
 {
-	int		i;
-	int		cmd;
-	int		j;
-
 	tokens->cmp_red_in = "<";
 	tokens->cmp_h_doc = "<<";
 	tokens->cmp_red_out = ">";
 	tokens->cmp_append = ">>";
+}
+
+void	type_define(t_tokens *tokens, char *str, int i, bool what)
+{
+	tokens[i].type = str;
+	tokens[i].token = get_env_variables(tokens[i].token, what);
+}
+
+void	input_analyse(t_tokens *tokens)
+{
+	int		i;
+	int		cmd;
+
+	tokens_type_init(tokens);
 	i = -1;
-	j = 0;
 	cmd = 0;
 	while (tokens[++i].token)
 	{
@@ -56,38 +65,19 @@ void	input_analyse(t_tokens *tokens)
 		else if (ft_strcmp(tokens[i].token, tokens->cmp_append) == 0)
 			tokens[i].type = "append";
 		else if (i > 0 && (ft_strcmp(tokens[i - 1].type, "red_input") == 0))
-		{
-			tokens[i].type = "infile";
-			tokens[i].token = get_env_variables(tokens[i].token, TRUE);
-		}
+			type_define(tokens, "infile", i, TRUE);
 		else if (i > 0 && (ft_strcmp(tokens[i - 1].type, "red_out") == 0))
-		{
-			tokens[i].type = "outfile";
-			tokens[i].token = get_env_variables(tokens[i].token, TRUE);
-		}
+			type_define(tokens, "outfile", i, TRUE);
 		else if (i > 0 && (ft_strcmp(tokens[i - 1].type, "append") == 0))
-		{
-			tokens[i].type = "app_outfile";
-			tokens[i].token = get_env_variables(tokens[i].token, TRUE);
-		}
+			type_define(tokens, "app_outfile", i, TRUE);
 		else if (i > 0 && (ft_strcmp(tokens[i - 1].type, "here_doc") == 0))
 			tokens[i].type = "delimiter";
 		else if (i > 0 && cmd == 1)
-		{
-			tokens[i].type = "option";
-			tokens[i].token = get_env_variables(tokens[i].token, FALSE);
-		}
+			type_define(tokens, "option", i, FALSE);
 		else
 		{
 			cmd = 1;
-			tokens[i].type = "command";
-			tokens[i].token = get_env_variables(tokens[i].token, TRUE);
+			type_define(tokens, "command", i, TRUE);
 		}
 	}
 }
-
-/*
-	else if (i > 0 && ft_strcmp(is_there(tokens[i].token), "in") == 0
-		&& ft_strcmp(tokens[i - 1].type, "red_out") != 0)
-	tokens[i].type = "env_var";
-*/

@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-<<<<<<< HEAD
-=======
+
 /*
 TODO: ✅❓
 	--> exection
@@ -86,7 +85,6 @@ TODO: ✅❓
 	[❓] $NONEXIT cmd 
 */
 
->>>>>>> 90ab9d4ca5fc51d82bc0b0a68b1af610e4ab50fd
 #include "minishell.h"
 
 void	init_global_data(void)

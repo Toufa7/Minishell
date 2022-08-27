@@ -24,6 +24,17 @@ char	*till_dollar(char *str)
 	return (ft_substr(str, 0, i));
 }
 
+
+// char	*expanding_cases(char	cases, char *variable, char *output)
+// {
+// 	if (cases == '?')
+// 	{
+// 		variable = ft_itoa(global_data.errno_cp);
+// 		return (ft_strjoin(output, variable));
+// 	}
+// }
+
+
 char	*get_env_in_herdoc(char *target)
 {
 	int		i;

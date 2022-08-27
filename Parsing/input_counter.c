@@ -25,6 +25,16 @@ void	initializer(t_tokens	*tokens)
 	tokens->option = 0;
 }
 
+void	check_nbr_of_delimiters(t_tokens *cnt)
+{
+	if (cnt->delimiter > 16)
+	{
+		ft_putstr_fd("Mini-0.0: maximum here-document count exceeded", 2);
+		global_data.errno_cp = 2;
+		exit(2);
+	}
+}
+
 void	input_counter(t_tokens *cnt, t_tokens *tokens)
 {
 	if (ft_strcmp(tokens->type, "red_input") == 0)
@@ -43,18 +53,13 @@ void	input_counter(t_tokens *cnt, t_tokens *tokens)
 		cnt->redirections++;
 	else if (ft_strcmp(tokens->type, "app_outfile") == 0)
 		cnt->redirections++;
+	else if (ft_strcmp(tokens->type, "option") == 0)
+		cnt->option++;
 	else if (ft_strcmp(tokens->type, "delimiter") == 0)
 	{
 		cnt->delimiter++;
-		if (cnt->delimiter > 16)
-		{
-			ft_putstr_fd("Mini-0.0: maximum here-document count exceeded", 2);
-			global_data.errno_cp = 2;
-			exit(2);
-		}
+		check_nbr_of_delimiters(cnt);
 	}
-	else if (ft_strcmp(tokens->type, "option") == 0)
-		cnt->option++;
 	cnt->total = cnt->red_in + cnt->option + cnt->red_out + cnt->here_do
 		+ cnt->app + cnt->cmd + cnt->redirections + cnt->delimiter;
 }

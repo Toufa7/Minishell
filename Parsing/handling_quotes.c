@@ -64,11 +64,3 @@ char	*handling_quotes(char *str, char replaced, char replace_by)
 	}
 	return (dup);
 }
-
-// int main()
-// {
-// 	while (TRUE)
-// 	{
-// 		char *s = readline("");printf("%s\n",handling_quotes(s, ' ', -1));
-// 	}
-// }
