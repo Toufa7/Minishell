@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 20:05:07 by otoufah           #+#    #+#             */
-/*   Updated: 2022/07/21 10:22:30 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/27 14:42:20 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_strdup(const char *s1)
 
 	l = ft_strlen(s1);
 	memory = (sizeof(char) * l + 1);
-	dup = (char *)malloc(memory);
+	dup = alloc(memory);
 	if (!(dup && s1))
 		return (NULL);
 	i = 0;

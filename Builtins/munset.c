@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:20:07 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/23 16:20:08 by otoufah          ###   ########.fr       */
+/*   Updated: 2022/08/27 14:27:16 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	munset(char **argv)
 			tmp = global_data.envp;
 			while (global_data.envp[j])
 				j++;
-			global_data.envp = malloc((sizeof(char *) * j));
+			global_data.envp = alloc((sizeof(char *) * j));
 			j = -1;
 			k = 0;
 			while (tmp[++j])
@@ -52,5 +52,5 @@ void	munset(char **argv)
 			global_data.envp[k] = NULL;
 		}
 	}
-	free_arr((void **) tmp);
+	//free_arr((void **) tmp);
 }

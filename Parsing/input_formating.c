@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:55:08 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/18 15:18:40 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/27 14:27:16 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*input_formating(char *str)
 			|| (str[i] == '>' && str[i + 1] != '>') || str[i] == '|')
 			allo++;
 	}
-	spcs = malloc(sizeof(char) * (ft_strlen(str) + (allo * 2) + 1));
+	spcs = alloc(sizeof(char) * (ft_strlen(str) + (allo * 2) + 1));
 	if (!spcs)
 		return (NULL);
 	i = -1;
@@ -68,6 +68,6 @@ char	*input_formating(char *str)
 			spcs[j++] = str[i];
 	}
 	spcs[j] = '\0';
-	free_str(str);
+	//free_str(str);
 	return (spcs);
 }

@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 05:23:48 by abouchfa          #+#    #+#             */
-/*   Updated: 2022/08/25 06:05:12 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/27 12:05:00 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,16 @@ void	out_file_prep(t_pipe_data *pipe_data, char *path, bool is_builtin)
 void	append_file_prep(t_pipe_data *pipe_data, char *path, bool is_builtin)
 {
 	int	fd;
-
+printf("--- 1\n");
 	fd = open(path, O_CREAT | O_WRONLY | O_APPEND, 0777);
+printf("--- 2\n");
 	pipe_data->out_fd_set = TRUE;
+printf("--- 3\n");
 	if (!is_builtin || global_data.size > 1)
 	{
+printf("--- 4\n");
 		dup2(fd, 1);
+printf("--- 5\n");
 		ft_close(fd, 9);
 	}
 	else

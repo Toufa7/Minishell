@@ -9,6 +9,7 @@ ADDI_FLAGS = -fsanitize=address -g
 F_REMOVE = rm -rf
 
 C_FILES = 	minishell.c \
+			Utils/memmory_utils.c \
 			Utils/system_calls_protection.c \
 			Utils/signals.c \
 			Utils/ft_itoa.c \
@@ -61,7 +62,7 @@ C_FILES = 	minishell.c \
 all: $(NAME)
 
 $(NAME): $(C_FILES)
-		$(C_FLAGS) $(READLINE) $(C_FILES) -o $(NAME)
+		$(C_FLAGS) $(READLINE) $(C_FILES) $(ADDI_FLAGS) -o $(NAME)
 
 clean:
 	rm -rf $(NAME)

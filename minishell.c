@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/27 09:42:14 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/27 15:05:34 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,12 +148,33 @@ void	minishell(t_parse *parse)
 	}
 }
 
+void	ft_lstclear(t_list **lst)
+{
+	t_list	*temp;
+
+	while (*lst)
+	{
+		//printf("1 --> %s\n", (*lst)->content);
+		temp = (*lst)->next;
+		printf("2\n");
+		if (*lst && (*lst)->content)
+			free((*lst)->content);
+		printf("3\n");
+		if (*lst)
+			free(*lst);
+		printf("4\n");
+		(*lst) = temp;
+		printf("5\n");
+	}
+}
+
 int	main(int ac, char **av, char **env)
 {
 	t_parse	*parse;
 
 	(void) ac;
 	(void) av;
+	global_data.alloc_list = malloc(sizeof(t_list *));
 	parse = malloc(sizeof(t_parse));
 	global_data.errno_cp = 0;
 	signal(SIGINT, parent_sigint);
@@ -167,5 +188,6 @@ int	main(int ac, char **av, char **env)
 			exit(global_data.errno_cp);
 		add_history(parse->line);
 		minishell(parse);
+		ft_lstclear(global_data.alloc_list);
 	}
 }

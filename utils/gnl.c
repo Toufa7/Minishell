@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gnl.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: otoufah <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:41:15 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/23 16:41:17 by otoufah          ###   ########.fr       */
+/*   Updated: 2022/08/27 14:27:16 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*get_next_line(int fd)
 		temp = line;
 		if (line)
 			len = ft_strlen(line);
-		line = malloc(len + 2);
+		line = alloc(len + 2);
 		while (++i < len)
 			line[i] = temp[i];
 		if (buffer != '\n')

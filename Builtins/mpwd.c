@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:20:03 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/25 07:28:12 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/27 14:26:11 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	mpwd(void)
 		ft_putstr_fd(tmp, global_data.out_fd);
 		ft_putstr_fd("\n", global_data.out_fd);
 		global_data.errno_cp = 0;
-		free_str(tmp);
+		//free_str(tmp);
 	}
 	else
 	{

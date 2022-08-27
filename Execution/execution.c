@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:00:14 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/27 11:42:46 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/27 14:26:11 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ void	get_herdoc(t_pipe_data *pipe_data)
 					expand = get_env_in_herdoc(line);
 					write(fd, expand, ft_strlen(expand));
 					write(fd, "\n", 1);
-					free_str(expand);
+					//free_str(expand);
 				}
 				else
 					break ;
 				line = readline("> ");
 			}
-			free_str(line);
+			//free_str(line);
 			ft_close(fd, 3);
 		}
 		exit(0);

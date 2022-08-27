@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/27 11:15:27 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/27 14:26:21 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,12 @@ typedef struct s_tokens
 	size_t	total;
 }	t_tokens;
 
+typedef struct s_list
+{
+    void			*content;
+    struct s_list	*next;
+}      t_list;
+
 /*
 	s_redirections types:
 	0: ambiguous redirect
@@ -86,6 +92,7 @@ typedef struct s_global_data
 	int		cmd_pipe_fds[2];
 	int		pre_pipe_infd;
 	char	**envp;
+	t_list	**alloc_list;
 	bool	parse_error;
 	pid_t	last_child_id;
 	bool	is_in_herdoc;
@@ -153,9 +160,11 @@ void		exec_builtin(int builtin_nb, t_pipe_data *pipe_data);
 
 // ----------- Shared Functions ------------------
 
+void		*alloc(size_t size);
+
 void		ft_close(int n, int s);
-void		free_str(void	*ptr); 
-void		free_arr(void **arr);
+// void		//free_str(void	*ptr); 
+// void		//free_arr(void **arr);
 
 void		parent_sigint(int sig);
 void		herdoc_sigint(int sig);

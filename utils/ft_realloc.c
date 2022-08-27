@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: otoufah <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:43:05 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/23 16:43:10 by otoufah          ###   ########.fr       */
+/*   Updated: 2022/08/27 14:26:21 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ char	**ft_realloc(char **dist, char *str)
 		i++;
 	new_input[i++] = ft_strdup(str);
 	new_input[i] = NULL;
-	free_arr((void **) tmp);
+	//free_arr((void **) tmp);
 	return (new_input);
 }
