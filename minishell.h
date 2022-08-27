@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/27 09:37:56 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/27 11:15:27 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,8 +147,9 @@ void		mexport(char **argv);
 void		validate_cmd(t_pipe_data *pipe_data);
 void		pipe_files_prep(t_pipe_data *pipe_data, bool is_builtin);
 void		execution(t_pipe_data **pipe_data);
-bool		check_builtin(t_pipe_data *pipe_data);
 char		*get_cmd_path(char	*cmd, char	**exec_programs_dirs);
+int			check_builtin(t_pipe_data *pipe_data);
+void		exec_builtin(int builtin_nb, t_pipe_data *pipe_data);
 
 // ----------- Shared Functions ------------------
 
