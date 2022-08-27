@@ -104,22 +104,3 @@ char	*get_env_variables(char *target, bool flag)
 	}
 	return (output);
 }
-
-/*
-void	ft_get_pid(char **env)
-{
-	pid_t pid;
-
-	pid = fork();
-	char *const cmd = "/bin/ps";
-	char *const ps[] = {cmd, "-a"};
-	if (pid == 0)
-	{
-		if (execve(cmd, ps, env) == -1)
-		{
-			perror("Error\n");
-		}
-	}
-	waitpid(pid, &global_data.errno_cp, 0);
-}
-*/
