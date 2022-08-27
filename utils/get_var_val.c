@@ -22,7 +22,7 @@ char	*get_var_val(int var_index)
 	i = 0;
 	j = 0;
 	val = NULL;
-	var = g_global_data.envp[var_index];
+	var = g_glbl_data.envp[var_index];
 	while (var[i] && var[i] != '=')
 		i++;
 	if (var[i])

@@ -100,7 +100,7 @@ void	check_command_name(t_pipe_data *pipe_data)
 	i = get_var_index("PATH=");
 	if (i != -1)
 	{
-		execps_paths = ft_split(g_global_data.envp[i] + 5, ':');
+		execps_paths = ft_split(g_glbl_data.envp[i] + 5, ':');
 		pipe_data->cmd_path = get_cmd_path(pipe_data->command, execps_paths);
 	}
 	else

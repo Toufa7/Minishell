@@ -40,11 +40,11 @@ void	mecho(char **argv)
 		j--;
 	while (argv[j])
 	{
-		ft_putstr_fd(argv[j++], g_global_data.out_fd);
+		ft_putstr_fd(argv[j++], g_glbl_data.out_fd);
 		if (argv[j])
-			ft_putstr_fd(" ", g_global_data.out_fd);
+			ft_putstr_fd(" ", g_glbl_data.out_fd);
 	}
 	if (!new_line)
-		ft_putstr_fd("\n", g_global_data.out_fd);
-	g_global_data.errno_cp = 0;
+		ft_putstr_fd("\n", g_glbl_data.out_fd);
+	g_glbl_data.errno_cp = 0;
 }

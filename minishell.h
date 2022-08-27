@@ -77,7 +77,7 @@ typedef struct s_redirections
 	int		type;
 }	t_redirections;
 
-typedef struct s_g_global_data
+typedef struct s_g_glbl_data
 {
 	int		errno_cp;
 	int		in_fd;
@@ -90,7 +90,7 @@ typedef struct s_g_global_data
 	pid_t	last_child_id;
 	t_bool	is_in_herdoc;
 	t_bool	redirection_error;
-}	t_global_data;
+}	t_glbl_data;
 
 typedef struct s_pipe_data
 {
@@ -187,6 +187,6 @@ int			ft_isalpha(int c);
 int			ft_isdigit(int c);
 size_t		ft_strlen(const char *s);
 
-t_global_data	g_global_data;
+t_glbl_data	g_glbl_data;
 
 #endif

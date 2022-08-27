@@ -30,7 +30,7 @@ void	check_nbr_of_delimiters(t_tokens *cnt)
 	if (cnt->delimiter > 16)
 	{
 		ft_putstr_fd("Mini-0.0: maximum here-document count exceeded", 2);
-		g_global_data.errno_cp = 2;
+		g_glbl_data.errno_cp = 2;
 		exit(2);
 	}
 }

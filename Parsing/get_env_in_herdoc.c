@@ -24,16 +24,15 @@ char	*till_dollar(char *str)
 	return (ft_substr(str, 0, i));
 }
 
-
-// char	*expanding_cases(char	cases, char *variable, char *output)
-// {
-// 	if (cases == '?')
-// 	{
-// 		variable = ft_itoa(g_global_data.errno_cp);
-// 		return (ft_strjoin(output, variable));
-// 	}
-// }
-
+char	*exp_cases(char cases, char	*variable, char	*output)
+{
+	if (cases == '?')
+	{
+		variable = ft_itoa(g_glbl_data.errno_cp);
+		return (ft_strjoin(output, variable));
+	}
+	return (NULL);
+}
 
 char	*get_env_in_herdoc(char *target)
 {
@@ -49,8 +48,7 @@ char	*get_env_in_herdoc(char *target)
 		{
 			if (target[i + 1] == '?')
 			{
-				variable = ft_itoa(g_global_data.errno_cp);
-				output = ft_strjoin(output, variable);
+				output = exp_cases('?', ft_itoa(g_glbl_data.errno_cp), output);
 				i += 2;
 			}
 			else

@@ -19,9 +19,9 @@ void	env_dup(char **env)
 	i = 0;
 	while (env[i])
 		i++;
-	g_global_data.envp = ft_calloc(i + 1, sizeof(char *));
+	g_glbl_data.envp = ft_calloc(i + 1, sizeof(char *));
 	i = -1;
 	while (env[++i])
-		g_global_data.envp[i] = ft_strdup(env[i]);
-	g_global_data.envp[i] = NULL;
+		g_glbl_data.envp[i] = ft_strdup(env[i]);
+	g_glbl_data.envp[i] = NULL;
 }

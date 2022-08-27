@@ -12,17 +12,17 @@
 
 #include "minishell.h"
 
-void	init_global_data(void)
+void	init_glbl_data(void)
 {
-	g_global_data.pre_pipe_infd = -1;
-	g_global_data.size = 0;
-	g_global_data.is_in_herdoc = FALSE;
-	g_global_data.in_fd = 0;
-	g_global_data.out_fd = 1;
-	g_global_data.pre_pipe_infd = -1;
-	g_global_data.last_child_id = 0;
-	g_global_data.parse_error = FALSE;
-	g_global_data.redirection_error = FALSE;
+	g_glbl_data.pre_pipe_infd = -1;
+	g_glbl_data.size = 0;
+	g_glbl_data.is_in_herdoc = FALSE;
+	g_glbl_data.in_fd = 0;
+	g_glbl_data.out_fd = 1;
+	g_glbl_data.pre_pipe_infd = -1;
+	g_glbl_data.last_child_id = 0;
+	g_glbl_data.parse_error = FALSE;
+	g_glbl_data.redirection_error = FALSE;
 }
 
 void	counting(t_parse *parse)
@@ -48,7 +48,7 @@ void	minishell(t_parse *parse)
 	int	i;
 
 	parse->line_double_quotes = handling_quotes(parse->line, '|', -1);
-	if (!g_global_data.parse_error)
+	if (!g_glbl_data.parse_error)
 	{
 		parse->formated_input = input_formating(parse->line_double_quotes);
 		parse->splt_pipes = ft_split(parse->formated_input, '|');
@@ -65,8 +65,8 @@ void	minishell(t_parse *parse)
 			input_analyse(parse->tokens);
 			initializer(parse->tokens);
 			counting(parse);
-			g_global_data.parse_error = check_parse_errors(parse);
-			if (g_global_data.parse_error)
+			g_glbl_data.parse_error = check_parse_errors(parse);
+			if (g_glbl_data.parse_error)
 				break ;
 			parse->pipe_data[i] = get_pipe_data(parse);
 		}
@@ -81,16 +81,16 @@ int	main(int ac, char **av, char **env)
 	(void) ac;
 	(void) av;
 	parse = malloc(sizeof(t_parse));
-	g_global_data.errno_cp = 0;
+	g_glbl_data.errno_cp = 0;
 	signal(SIGINT, parent_sigint);
 	signal(SIGQUIT, SIG_IGN);
 	env_dup(env);
 	while (TRUE)
 	{
-		init_global_data();
+		init_glbl_data();
 		parse->line = readline("Mini-0.0$ ");
 		if (!parse->line)
-			exit(g_global_data.errno_cp);
+			exit(g_glbl_data.errno_cp);
 		add_history(parse->line);
 		minishell(parse);
 	}
