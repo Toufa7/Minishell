@@ -77,7 +77,7 @@ typedef struct s_redirections
 	int		type;
 }	t_redirections;
 
-typedef struct s_global_data
+typedef struct s_g_global_data
 {
 	int		errno_cp;
 	int		in_fd;
@@ -187,6 +187,6 @@ int			ft_isalpha(int c);
 int			ft_isdigit(int c);
 size_t		ft_strlen(const char *s);
 
-t_global_data	global_data;
+t_global_data	g_global_data;
 
 #endif

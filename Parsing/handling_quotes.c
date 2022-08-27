@@ -20,9 +20,9 @@ t_bool	checking_quotes(char *str)
 	if (s_d_quotes(check) == NULL)
 	{
 		ft_putstr_fd("Unclosed Quotes\n", 2);
-		global_data.errno_cp = 1;
-		rl_on_new_line();
-		rl_replace_line("", 0);
+		g_global_data.errno_cp = 1;
+		// rl_on_new_line();
+		// rl_replace_line("", 0);
 		return (TRUE);
 	}
 	return (FALSE);
@@ -34,9 +34,9 @@ char	*handling_quotes(char *str, char replaced, char replace_by)
 	char	*dup;
 	char	d_or_s;
 
-	global_data.parse_error = checking_quotes(str);
+	g_global_data.parse_error = checking_quotes(str);
 	dup = NULL;
-	if (!global_data.parse_error)
+	if (!g_global_data.parse_error)
 	{
 		dup = ft_calloc((ft_strlen(str) + 1), sizeof(char));
 		if (!dup)

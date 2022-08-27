@@ -44,20 +44,20 @@ void	mexit(char **argv)
 		ft_putstr_fd("exit\nexit: ", 2);
 		ft_putstr_fd(argv[0], 2);
 		ft_putstr_fd(": numeric argument required\n", 2);
-		global_data.errno_cp = 255;
+		g_global_data.errno_cp = 255;
 		exit(255);
 	}
 	else if (i > 1)
 	{
 		ft_putstr_fd("exit\nexit: too many arguments\n", 2);
-		global_data.errno_cp = 1;
+		g_global_data.errno_cp = 1;
 		return ;
 	}
 	else
 	{
 		if (argv[i])
-			global_data.errno_cp = ft_atoi(argv[i]) % 256;
+			g_global_data.errno_cp = ft_atoi(argv[i]) % 256;
 		printf("exit\n");
-		exit(global_data.errno_cp);
+		exit(g_global_data.errno_cp);
 	}
 }

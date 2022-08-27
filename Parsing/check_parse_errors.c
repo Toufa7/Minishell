@@ -17,7 +17,7 @@ t_bool	err(char *str_1, char *str_2, char *str_3)
 	ft_putstr_fd(str_1, 2);
 	ft_putstr_fd(str_2, 2);
 	ft_putstr_fd(str_3, 2);
-	global_data.errno_cp = 258;
+	g_global_data.errno_cp = 258;
 	return (TRUE);
 }
 

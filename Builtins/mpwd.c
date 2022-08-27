@@ -19,22 +19,22 @@ void	mpwd(void)
 
 	if (getcwd(buff, sizeof(buff)) != NULL)
 	{
-		ft_putstr_fd(buff, global_data.out_fd);
-		ft_putstr_fd("\n", global_data.out_fd);
-		global_data.errno_cp = 0;
+		ft_putstr_fd(buff, g_global_data.out_fd);
+		ft_putstr_fd("\n", g_global_data.out_fd);
+		g_global_data.errno_cp = 0;
 	}
 	else if (get_var_index("PWD=") != -1)
 	{
 		tmp = get_var_val(get_var_index("PWD="));
-		ft_putstr_fd(tmp, global_data.out_fd);
-		ft_putstr_fd("\n", global_data.out_fd);
-		global_data.errno_cp = 0;
+		ft_putstr_fd(tmp, g_global_data.out_fd);
+		ft_putstr_fd("\n", g_global_data.out_fd);
+		g_global_data.errno_cp = 0;
 		free_str(tmp);
 	}
 	else
 	{
 		ft_putstr_fd(strerror(errno), 2);
 		ft_putstr_fd("\n", 2);
-		global_data.errno_cp = errno;
+		g_global_data.errno_cp = errno;
 	}
 }

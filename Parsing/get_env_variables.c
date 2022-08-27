@@ -47,13 +47,13 @@ char	*get_env_variables(char *target, t_bool flag)
 		{
 			if (target[i + 1] == '?')
 			{
-				variable = ft_itoa(global_data.errno_cp);
+				variable = ft_itoa(g_global_data.errno_cp);
 				output = ft_strjoin(output, variable);
 				i += 2;
 			}
 			if (target[i + 1] == '?')
 			{
-				variable = ft_itoa(global_data.errno_cp);
+				variable = ft_itoa(g_global_data.errno_cp);
 				output = ft_strjoin(output, variable);
 				i += 2;
 			}

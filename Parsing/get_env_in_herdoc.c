@@ -29,7 +29,7 @@ char	*till_dollar(char *str)
 // {
 // 	if (cases == '?')
 // 	{
-// 		variable = ft_itoa(global_data.errno_cp);
+// 		variable = ft_itoa(g_global_data.errno_cp);
 // 		return (ft_strjoin(output, variable));
 // 	}
 // }
@@ -49,7 +49,7 @@ char	*get_env_in_herdoc(char *target)
 		{
 			if (target[i + 1] == '?')
 			{
-				variable = ft_itoa(global_data.errno_cp);
+				variable = ft_itoa(g_global_data.errno_cp);
 				output = ft_strjoin(output, variable);
 				i += 2;
 			}
