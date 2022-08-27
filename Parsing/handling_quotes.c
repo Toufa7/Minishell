@@ -28,25 +28,9 @@ bool	checking_quotes(char *str)
 	return (FALSE);
 }
 
-// void	found_and_replace(char *str, char found, char replace)
-// {
-// 	int	i;
-
-// 	i = 1;
-// 	while (str[i])
-// 	{
-// 		if (str[i] == found)
-// 			str[i] = replace;
-// 		else
-// 			str[i] = str[i];
-// 		i++;
-// 	}
-// }
-
 char	*handling_quotes(char *str, char replaced, char replace_by)
 {
 	int		i;
-	int		j;
 	char	*dup;
 	char	d_or_s;
 
@@ -64,17 +48,15 @@ char	*handling_quotes(char *str, char replaced, char replace_by)
 			{
 				dup[i] = str[i];
 				d_or_s = dup[i];
-				j = i;
-				while (str[++j] && str[j] != d_or_s)
+				while (str[++i] && str[i] != d_or_s)
 				{
-					if (str[j] == replaced)
-						dup[j] = replace_by;
+					if (str[i] == replaced)
+						dup[i] = replace_by;
 					else
-						dup[j] = str[j];
+						dup[i] = str[i];
 				}
-				if (str[j] == DOUBLES_QUOTES || str[j] == SING_QUOTES)
-					dup[j] = str[j];
-				i = j;
+				if (str[i] == DOUBLES_QUOTES || str[i] == SING_QUOTES)
+					dup[i] = str[i];
 			}
 			else
 				dup[i] = str[i];
