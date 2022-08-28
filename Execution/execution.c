@@ -26,13 +26,11 @@ void	get_herdoc(t_pipe_data *pipe_data)
 					expand = get_env_in_herdoc(line);
 					write(fd, expand, ft_strlen(expand));
 					write(fd, "\n", 1);
-					//free_str(expand);
 				}
 				else
 					break ;
 				line = readline("> ");
 			}
-			//free_str(line);
 			ft_close(fd, 3);
 		}
 		exit(0);

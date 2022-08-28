@@ -33,7 +33,6 @@ C_FILES = 	minishell.c \
 			Utils/ft_realloc.c \
 			Utils/ft_isalpha.c \
 			Utils/ft_isdigit.c \
-			Utils/gnl.c \
 			Utils/ft_strnstr.c \
 			Utils/get_var_val.c \
 			Parsing/s_d_quotes.c \

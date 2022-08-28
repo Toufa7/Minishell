@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 10:10:15 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/27 16:04:53 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/28 15:56:13 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_bool	checking_quotes(char *str)
 {
 	char	*check;
 
-	check = ft_strdup(str);
+	check = ft_strdup(str, TRUE);
 	if (s_d_quotes(check) == NULL)
 	{
 		ft_putstr_fd("Unclosed Quotes\n", 2);
@@ -38,7 +38,7 @@ char	*handling_quotes(char *str, char replaced, char replace_by)
 	dup = NULL;
 	if (!g_data.parse_error)
 	{
-		dup = ft_calloc((ft_strlen(str) + 1), sizeof(char));
+		dup = ft_calloc((ft_strlen(str) + 1), sizeof(char), TRUE);
 		if (!dup)
 			return (NULL);
 		i = -1;

@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:41:44 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/27 16:04:53 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/28 15:16:58 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*get_var_val(int var_index)
 	{
 		while (var[i + j])
 			j++;
-		val = alloc(sizeof(char) * (j + 1));
+		val = alloc(sizeof(char) * (j + 1), "get_var_val");
 		ft_strncpy(val, var + i + 1, j);
 	}
 	return (val);

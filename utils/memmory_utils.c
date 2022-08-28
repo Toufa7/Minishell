@@ -6,17 +6,17 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 01:22:42 by abouchfa          #+#    #+#             */
-/*   Updated: 2022/08/27 16:26:26 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/28 15:36:29 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_list	*ft_lstnew(void *content)
+t_alloc_lst	*ft_lstnew(void *content)
 {
-	t_list	*list;
+	t_alloc_lst	*list;
 
-	list = malloc(sizeof(t_list));
+	list = malloc(sizeof(t_alloc_lst));
 	if (!list)
 		return (NULL);
 	list->content = content;
@@ -24,33 +24,22 @@ t_list	*ft_lstnew(void *content)
 	return (list);
 }
 
-void    ft_lstadd_back(t_list **lst, t_list *new)
+void    ft_lstadd_front(t_alloc_lst **lst, t_alloc_lst *new)
 {
-    t_list  *temp;
-	// printf("-1\n");
     if (!new)
-            return ;
-	// printf("-2\n");
-    if (!*lst)
-    {
-	// printf("-3\n");
-        *lst = new;
         return ;
-    }
-	// printf("-4\n");
-    temp = *lst;
-    while (temp->next)
-        temp = temp->next;
-	// printf("-5\n");
-    temp->next = new;
+    if (*lst)
+        new->next = *lst;
+    *lst = new;
 }
 
-void	*alloc(size_t size)
+void	*alloc(size_t size, char *source)
 {
+	(void) source;
 	void	*content;
 	
 	content = malloc(size);
-	ft_lstadd_back(g_data.alloc_list, ft_lstnew(content));
+	ft_lstadd_front(g_data.alloc_list, ft_lstnew(content));
 	return (content);
 }
 

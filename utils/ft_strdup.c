@@ -6,13 +6,13 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 20:05:07 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/27 14:42:20 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/28 15:22:08 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char	*ft_strdup(const char *s1)
+char	*ft_strdup(const char *s1, t_bool use_alloc)
 {
 	char	*dup;
 	size_t	i;
@@ -21,7 +21,10 @@ char	*ft_strdup(const char *s1)
 
 	l = ft_strlen(s1);
 	memory = (sizeof(char) * l + 1);
-	dup = alloc(memory);
+	if (use_alloc)
+		dup = alloc(memory, "ft_strdup");
+	else
+		dup = malloc(memory);
 	if (!(dup && s1))
 		return (NULL);
 	i = 0;

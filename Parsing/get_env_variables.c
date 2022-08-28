@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:32:28 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/27 16:04:53 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/28 15:37:10 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*until_dollar(char *str)
 
 	i = 0;
 	if (str[i] == '$')
-		return (ft_strdup("$"));
+		return (ft_strdup("$", TRUE));
 	while (str[i] && str[i] != '$')
 	{
 		i++;
@@ -40,7 +40,7 @@ char	*get_env_variables(char *target, t_bool flag)
 	char	*variable;
 
 	i = 0;
-	output = ft_strdup("");
+	output = ft_strdup("", TRUE);
 	while (i < ft_strlen(target))
 	{
 		if (target[i] == '$')

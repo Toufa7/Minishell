@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/27 16:59:58 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/28 15:55:55 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	minishell(t_parse *parse)
 		i = 0;
 		while (parse->splt_pipes[i])
 			i++;
-		parse->pipe_data = ft_calloc(i + 1, sizeof(t_pipe_data *));
+		parse->pipe_data = ft_calloc(i + 1, sizeof(t_pipe_data *), TRUE);
 		i = -1;
 		while (parse->splt_pipes[++i])
 		{
@@ -74,23 +74,18 @@ void	minishell(t_parse *parse)
 	}
 }
 
-void	ft_lstclear(t_list **lst)
+void	ft_lstclear(t_alloc_lst **lst)
 {
-	t_list	*temp;
+	t_alloc_lst	*temp;
 
 	while (*lst)
 	{
-		// printf("1 --> %p\n", *lst);
 		temp = (*lst)->next;
-		// printf("2\n");
 		if (*lst && (*lst)->content)
 			free((*lst)->content);
-		// printf("3\n");
 		if (*lst)
 			free(*lst);
-		// printf("4\n");
 		(*lst) = temp;
-		// printf("5\n");
 	}
 }
 
@@ -100,7 +95,7 @@ int	main(int ac, char **av, char **env)
 
 	(void) ac;
 	(void) av;
-	g_data.alloc_list = malloc(sizeof(t_list *));
+	g_data.alloc_list = malloc(sizeof(t_alloc_lst *));
 	*(g_data.alloc_list) = NULL;
 	parse = malloc(sizeof(t_parse));
 	g_data.errno_cp = 0;
@@ -109,7 +104,6 @@ int	main(int ac, char **av, char **env)
 	env_dup(env);
 	while (TRUE)
 	{
-		printf("1\n");
 		init_glbl_data();
 		parse->line = readline("Mini-0.0$ ");
 		if (!parse->line)
@@ -117,5 +111,7 @@ int	main(int ac, char **av, char **env)
 		add_history(parse->line);
 		minishell(parse);
 		ft_lstclear(g_data.alloc_list);
+		if (parse->line)
+			free(parse->line);
 	}
 }

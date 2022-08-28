@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:19:40 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/27 16:04:53 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/28 10:37:32 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	update_oldpwd(void)
 	{
 		if (i != -1)
 		{
-			free(g_data.envp[i]);
+			//free(g_data.envp[i]);
 			g_data.envp[i] = ft_strjoin("OLDPWD=", buff);
 		}
 	}
@@ -48,7 +48,7 @@ void	update_pwd(void)
 	{
 		if (i != -1)
 		{
-			free(g_data.envp[i]);
+			//free(g_data.envp[i]);
 			g_data.envp[i] = ft_strjoin("PWD=", buff);
 		}
 	}

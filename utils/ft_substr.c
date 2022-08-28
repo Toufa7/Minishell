@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 20:05:38 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/27 14:42:35 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/28 15:16:55 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (!s)
 		return (NULL);
 	memory = (sizeof(char) * len + 1);
-	sub = alloc(memory);
+	sub = alloc(memory, "ft_substr");
 	if (!sub)
 		return (NULL);
 	i = 0;

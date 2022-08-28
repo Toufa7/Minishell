@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:55:08 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/27 16:05:31 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/28 15:16:23 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	spc_allo(char *str)
 	int	mem;
 
 	i = -1;
+	mem = 0;
 	while (str[++i])
 	{
 		if ((str[i] == '<' && str[i + 1] != '<')
@@ -34,7 +35,7 @@ char	*input_formating(char *str)
 	char	sing;
 	char	*spcs;
 
-	spcs = alloc(sizeof(char) * (ft_strlen(str) + (spc_allo(str) * 2) + 1));
+	spcs = alloc(sizeof(char) * (ft_strlen(str) + (spc_allo(str) * 2) + 1), "input_formating");
 	if (!spcs)
 		return (NULL);
 	i = -1;

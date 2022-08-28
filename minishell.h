@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/27 16:04:53 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/28 15:55:44 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,11 @@ typedef struct s_tokens
 	size_t	total;
 }	t_tokens;
 
-typedef struct s_list
+typedef struct s_alloc_lst
 {
-    void			*content;
-    struct s_list	*next;
-}      t_list;
+    void				*content;
+    struct s_alloc_lst	*next;
+}      t_alloc_lst;
 
 /*
 	s_redirections types:
@@ -92,7 +92,7 @@ typedef struct s_g_glbl_data
 	int		cmd_pipe_fds[2];
 	int		pre_pipe_infd;
 	char	**envp;
-	t_list	**alloc_list;
+	t_alloc_lst	**alloc_list;
 	t_bool	parse_error;
 	pid_t	last_child_id;
 	t_bool	is_in_herdoc;
@@ -160,8 +160,10 @@ void		exec_builtin(int builtin_nb, t_pipe_data *pipe_data);
 
 // ----------- Shared Functions ------------------
 
-void		*alloc(size_t size);
+void		*alloc(size_t size, char *source);
 void		ft_close(int n, int s);
+void		free_str(void *ptr); 
+void		free_arr(void **arr);
 
 void		parent_sigint(int sig);
 void		herdoc_sigint(int sig);
@@ -169,19 +171,18 @@ void		void_sig(int sig);
 // void		child_sigquit(int sig);
 // void		child_sigint(int sig);
 
-void		*ft_calloc(size_t count, size_t size);
 void		env_dup(char **env);
+char		**ft_realloc(char **dist, char *str, t_bool use_alloc);
+void		*ft_calloc(size_t count, size_t size, t_bool use_alloc);
+char		*ft_strdup(const char *s1, t_bool use_alloc);
 char		*ft_itoa(int n);
 char		*get_var_val(int var_index);
-char		**ft_realloc(char **dist, char *str);
-char		*get_next_line(int fd);
 char		*ft_strnstr(const char *haystack, const char *needle, size_t len);
 void		ft_putstr_fd(char *s, int fd);
 void		ft_strncpy(char *dest, char *src, int n);
 char		**ft_split(char const *s, char c);
 char		*ft_strstr(const char *haystack, const char *needle);
 char		*ft_strjoin(char const *s1, char const *s2);
-char		*ft_strdup(const char *s1);
 char		*ft_strchr(const char *s, int c);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
 int			validate_var_name(char *var);

@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:19:59 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/27 16:04:53 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/28 15:55:02 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*get_key(char *str)
 	}
 	if (i > 0)
 	{
-		key = alloc(sizeof(char) * (i + 1));
+		key = alloc(sizeof(char) * (i + 1), "export val");
 		ft_strncpy(key, str, i);
 	}
 	return (key);
@@ -48,7 +48,7 @@ char	*get_val(char *str)
 	{
 		while (str[i + j])
 			j++;
-		val = alloc(sizeof(char) * (j + 1));
+		val = alloc(sizeof(char) * (j + 1), "export val");
 		ft_strncpy(val, str + i + 1, j);
 	}
 	return (val);
@@ -90,28 +90,29 @@ void	create_final_var(int op_type, char *key, char *new_val)
 		old_val = get_var_val(var_index);
 		cmpined_val = ft_strjoin(old_val, new_val);
 		if (!cmpined_val)
-			cmpined_val = ft_strdup(old_val);
+			cmpined_val = ft_strdup(old_val, TRUE);
 		cmpined_val = ft_strjoin("=", cmpined_val);
 	}
 	else if (op_type == 2)
-		cmpined_val = ft_strdup(new_val);
+		cmpined_val = ft_strdup(new_val, TRUE);
 	else
 	{
 		if (new_val)
 			cmpined_val = ft_strjoin("=", new_val);
 		else
-			cmpined_val = ft_strdup("=");
+			cmpined_val = ft_strdup("=", TRUE);
 	}
 	if (cmpined_val)
 		final_var = ft_strjoin(key, cmpined_val);
 	else
-		final_var = ft_strdup(key);
+		final_var = ft_strjoin(key, "");
 	if (var_index != -1)
-		g_data.envp[var_index] = final_var;
+	{
+		free_str(g_data.envp[var_index]);
+		g_data.envp[var_index] = ft_strdup(final_var, FALSE);
+	}
 	else
-		g_data.envp = ft_realloc(g_data.envp, final_var);
-	if (var_index != -1 && op_type == 1)
-		g_data.errno_cp = 0;
+		g_data.envp = ft_realloc(g_data.envp, final_var, FALSE);
 	g_data.errno_cp = 0;
 }
 
@@ -153,6 +154,4 @@ void	mexport(char **argv)
 		if (check_errors(argv[i], &key, &val, &op_type))
 			create_final_var(op_type, key, val);
 	}
-	//free_str(key);
-	//free_str(val);
 }

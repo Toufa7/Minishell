@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:43:39 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/27 14:27:16 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/28 15:18:13 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*ft_itoa(int n)
 		temp_n /= 10;
 		size++;
 	}
-	str = alloc(size * sizeof(char));
+	str = alloc(size * sizeof(char), "ft_itoa");
 	if (!str)
 		return (NULL);
 	nbrtoi(str, size, (long int) n);

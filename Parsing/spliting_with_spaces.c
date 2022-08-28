@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:34:59 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/27 14:27:16 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/28 15:18:46 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_tokens	*spliting_with_spaces(char *str)
 	line = ft_split(str, ' ');
 	while (line[i])
 		i++;
-	tokens = alloc(sizeof(t_tokens) * (i + 1));
+	tokens = alloc(sizeof(t_tokens) * (i + 1), "spliting_with_spaces");
 	i = -1;
 	while (line[++i])
 		tokens[i].token = line[i];
