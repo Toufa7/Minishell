@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-void	initializer(t_tokens	*tokens)
+void	token_counter_init(t_tokens	*tokens)
 {
 	tokens->red_in = 0;
 	tokens->red_out = 0;

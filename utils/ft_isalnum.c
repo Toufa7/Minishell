@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: otoufah <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/23 16:42:56 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/23 16:42:58 by otoufah          ###   ########.fr       */
+/*   Created: 2021/11/01 13:20:26 by abouchfa          #+#    #+#             */
+/*   Updated: 2021/11/16 15:44:29 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	ft_isalpha(int c)
+int	ft_isalnum(int c)
 {
-	if (c < 65 || c > 122 || (c >= 91 && c <= 96))
+	if (ft_isdigit(c) || ft_isalpha(c))
+		return (1);
+	else
 		return (0);
-	return (1);
 }

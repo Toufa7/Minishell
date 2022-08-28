@@ -51,6 +51,7 @@ typedef struct s_tokens
 	char	*cmp_h_doc;
 	char	*cmp_red_out;
 	char	*cmp_append;
+	int		set_as_cmd;
 	size_t	red_in;
 	size_t	red_out;
 	size_t	here_do;
@@ -127,7 +128,7 @@ char		*input_formating(char	*str);
 char		*getting_back_original_input(char *str);
 char		*get_env_variables(char *target, t_bool flag);
 char		*get_env_in_herdoc(char *target);
-void		initializer(t_tokens	*tokens);
+void		token_counter_init(t_tokens	*tokens);
 void		input_analyse(t_tokens	*tokens);
 void		token_and_type(t_parse *parse);
 void		input_counter(t_tokens	*counter, t_tokens	*tokens);
@@ -162,7 +163,7 @@ void		herdoc_sigint(int sig);
 void		void_sig(int sig);
 // void		child_sigquit(int sig);
 // void		child_sigint(int sig);
-
+int			ft_isalnum(int c);
 void		*ft_calloc(size_t count, size_t size);
 void		env_dup(char **env);
 char		*ft_itoa(int n);

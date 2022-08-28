@@ -2,9 +2,11 @@ NAME = Minishell
 
 C_FLAGS = gcc
 
-READLINE = -lreadline -L /Users/abouchfa/brew/opt/readline/lib -I /Users/abouchfa/brew/opt/readline/include
+#READLINE = -lreadline -L /Users/abouchfa/brew/opt/readline/lib -I /Users/abouchfa/brew/opt/readline/include
+READLINE = -lreadline -L /goinfre/otoufah/homebrew/opt/readline/lib -I /goinfre/otoufah/homebrew/opt/readline/include
 
 ADDI_FLAGS = -fsanitize=address -g
+
 
 F_REMOVE = rm -rf
 
@@ -32,6 +34,7 @@ C_FILES = 	minishell.c \
 			Utils/ft_realloc.c \
 			Utils/ft_isalpha.c \
 			Utils/ft_isdigit.c \
+			Utils/ft_isalnum.c \
 			Utils/gnl.c \
 			Utils/ft_strnstr.c \
 			Utils/get_var_val.c \

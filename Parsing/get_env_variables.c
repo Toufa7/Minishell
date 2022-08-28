@@ -51,6 +51,14 @@ char	*get_env_variables(char *target, t_bool flag)
 				output = ft_strjoin(output, variable);
 				i += 2;
 			}
+			else if (!ft_isalnum(target[i + 1]) && target[i + 1] != '_')
+			{
+				if (target[i] == '$' && (target[i + 1] == '\"' || target[i + 1] == '\''))
+					i++;
+				variable = until_dollar(&target[i]);
+				output = ft_strjoin(output, variable);
+				i += ft_strlen(variable);
+			}
 			else if (ft_isdigit(target[i + 1]) == 1)
 			{
 				if (target[i + 1] == '0')

@@ -24,16 +24,6 @@ char	*till_dollar(char *str)
 	return (ft_substr(str, 0, i));
 }
 
-char	*exp_cases(char cases, char	*variable, char	*output)
-{
-	if (cases == '?')
-	{
-		variable = ft_itoa(g_glbl_data.errno_cp);
-		return (ft_strjoin(output, variable));
-	}
-	return (NULL);
-}
-
 char	*get_env_in_herdoc(char *target)
 {
 	int		i;
@@ -48,7 +38,8 @@ char	*get_env_in_herdoc(char *target)
 		{
 			if (target[i + 1] == '?')
 			{
-				output = exp_cases('?', ft_itoa(g_glbl_data.errno_cp), output);
+				variable = ft_itoa(g_glbl_data.errno_cp);
+				output = ft_strjoin(output, variable);
 				i += 2;
 			}
 			else

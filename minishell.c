@@ -25,15 +25,6 @@ void	init_glbl_data(void)
 	g_glbl_data.redirection_error = FALSE;
 }
 
-void	counting(t_parse *parse)
-{
-	int	j;
-
-	j = -1;
-	while (parse->tokens[++j].token)
-		input_counter(parse->tokens, &parse->tokens[j]);
-}
-
 void	getting_back(char **str)
 {
 	int	i;
@@ -41,6 +32,17 @@ void	getting_back(char **str)
 	i = -1;
 	while (str[++i])
 		str[i] = handling_quotes(str[i], -1, '|');
+}
+
+void	analyse_init_count(t_parse *parse)
+{
+	int	j;
+
+	j = -1;
+	input_analyse(parse->tokens);
+	token_counter_init(parse->tokens);
+	while (parse->tokens[++j].token)
+		input_counter(parse->tokens, &parse->tokens[j]);
 }
 
 void	minishell(t_parse *parse)
@@ -62,11 +64,9 @@ void	minishell(t_parse *parse)
 		{
 			parse->no_splt = handling_quotes(parse->splt_pipes[i], ' ', -1);
 			parse->tokens = spliting_with_spaces(parse->no_splt);
-			input_analyse(parse->tokens);
-			initializer(parse->tokens);
-			counting(parse);
+			analyse_init_count(parse);
 			g_glbl_data.parse_error = check_parse_errors(parse);
-			if (g_glbl_data.parse_error)
+			if (g_glbl_data.parse_error == 1)
 				break ;
 			parse->pipe_data[i] = get_pipe_data(parse);
 		}

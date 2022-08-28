@@ -19,41 +19,26 @@
 	cd ~/
 */
 
-char	*is_there(char *str)
-{
-	int	i;
-
-	i = -1;
-	while (str[++i])
-	{
-		if (str[i] == '$')
-			return ("in");
-	}
-	return ("out");
-}
-
 void	tokens_type_init(t_tokens *tokens)
 {
 	tokens->cmp_red_in = "<";
 	tokens->cmp_h_doc = "<<";
 	tokens->cmp_red_out = ">";
 	tokens->cmp_append = ">>";
+	tokens->set_as_cmd = 0;
 }
 
-void	type_define(t_tokens *tokens, char *str, int i, t_bool what)
+void	type_define(t_tokens *tokens, char *str, int i, t_bool flag)
 {
 	tokens[i].type = str;
-	tokens[i].token = get_env_variables(tokens[i].token, what);
+	tokens[i].token = get_env_variables(tokens[i].token, flag);
 }
 
-void	input_analyse(t_tokens *tokens)
+void	loop_and_assign(t_tokens *tokens)
 {
-	int		i;
-	int		cmd;
+	int	i;
 
-	tokens_type_init(tokens);
 	i = -1;
-	cmd = 0;
 	while (tokens[++i].token)
 	{
 		if (ft_strcmp(tokens[i].token, tokens->cmp_h_doc) == 0)
@@ -72,12 +57,18 @@ void	input_analyse(t_tokens *tokens)
 			type_define(tokens, "app_outfile", i, TRUE);
 		else if (i > 0 && (ft_strcmp(tokens[i - 1].type, "here_doc") == 0))
 			tokens[i].type = "delimiter";
-		else if (i > 0 && cmd == 1)
+		else if (i > 0 && tokens->set_as_cmd == 1)
 			type_define(tokens, "option", i, FALSE);
 		else
 		{
-			cmd = 1;
+			tokens->set_as_cmd = 1;
 			type_define(tokens, "command", i, TRUE);
 		}
 	}
+}
+
+void	input_analyse(t_tokens *tokens)
+{
+	tokens_type_init(tokens);
+	loop_and_assign(tokens);
 }

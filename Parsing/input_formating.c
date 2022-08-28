@@ -18,6 +18,7 @@ int	spc_allo(char *str)
 	int	mem;
 
 	i = -1;
+	mem = 0;
 	while (str[++i])
 	{
 		if ((str[i] == '<' && str[i + 1] != '<')
