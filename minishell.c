@@ -65,6 +65,7 @@ void	minishell(t_parse *parse)
 			parse->no_splt = handling_quotes(parse->splt_pipes[i], ' ', -1);
 			parse->tokens = spliting_with_spaces(parse->no_splt);
 			analyse_init_count(parse);
+			token_and_type(parse);
 			g_glbl_data.parse_error = check_parse_errors(parse);
 			if (g_glbl_data.parse_error == 1)
 				break ;

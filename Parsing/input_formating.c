@@ -28,6 +28,17 @@ int	spc_allo(char *str)
 	return (mem);
 }
 
+int	check_conditions(char current, char next)
+{
+	if ((current == '<' && next == '<')
+		|| (current == '>' && next == '>'))
+		return (1);
+	else if ((current == '>' && next != '>')
+		|| (current == '<' && next != '<') || current == '|')
+		return (2);
+	return (-1);
+}
+
 char	*input_formating(char *str)
 {
 	int		i;
@@ -49,8 +60,7 @@ char	*input_formating(char *str)
 			while (str[++i] != sing && str[i])
 				spcs[j++] = str[i];
 		}
-		if ((str[i] == '<' && str[i + 1] == '<')
-			|| (str[i] == '>' && str[i + 1] == '>'))
+		if (check_conditions(str[i], str[i + 1]) == 1)
 		{
 			spcs[j++] = ' ';
 			spcs[j++] = str[i];
@@ -58,8 +68,7 @@ char	*input_formating(char *str)
 			spcs[j++] = ' ';
 			i++;
 		}
-		else if ((str[i] == '>' && str[i + 1] != '>')
-			|| (str[i] == '<' && str[i + 1] != '<') || str[i] == '|')
+		else if (check_conditions(str[i], str[i + 1]) == 2)
 		{
 			spcs[j++] = ' ';
 			spcs[j++] = str[i];
@@ -71,3 +80,4 @@ char	*input_formating(char *str)
 	spcs[j] = '\0';
 	return (spcs);
 }
+
