@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:41:44 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/27 14:27:16 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/27 16:04:53 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*get_var_val(int var_index)
 	i = 0;
 	j = 0;
 	val = NULL;
-	var = g_global_data.envp[var_index];
+	var = g_data.envp[var_index];
 	while (var[i] && var[i] != '=')
 		i++;
 	if (var[i])

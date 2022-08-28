@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:19:59 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/27 15:57:35 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/27 16:04:53 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,11 +107,12 @@ void	create_final_var(int op_type, char *key, char *new_val)
 	else
 		final_var = ft_strdup(key);
 	if (var_index != -1)
-		g_global_data.envp[var_index] = final_var;
+		g_data.envp[var_index] = final_var;
 	else
-		g_global_data.envp = ft_realloc(g_global_data.envp, final_var);
+		g_data.envp = ft_realloc(g_data.envp, final_var);
 	if (var_index != -1 && op_type == 1)
-		g_global_data.errno_cp = 0;
+		g_data.errno_cp = 0;
+	g_data.errno_cp = 0;
 }
 
 t_bool	check_errors(char *str, char **key, char **val, int *op_type)
@@ -125,7 +126,7 @@ t_bool	check_errors(char *str, char **key, char **val, int *op_type)
 		ft_putstr_fd("export: '", 2);
 		ft_putstr_fd(str, 2);
 		ft_putstr_fd("': not a valid identifier\n", 2);
-		g_global_data.errno_cp = 1;
+		g_data.errno_cp = 1;
 		return (FALSE);
 	}
 	return (TRUE);

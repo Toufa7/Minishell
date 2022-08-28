@@ -6,23 +6,23 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/27 15:59:10 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/27 16:59:58 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	init_global_data(void)
+void	init_glbl_data(void)
 {
-	g_global_data.pre_pipe_infd = -1;
-	g_global_data.size = 0;
-	g_global_data.is_in_herdoc = FALSE;
-	g_global_data.in_fd = 0;
-	g_global_data.out_fd = 1;
-	g_global_data.pre_pipe_infd = -1;
-	g_global_data.last_child_id = 0;
-	g_global_data.parse_error = FALSE;
-	g_global_data.redirection_error = FALSE;
+	g_data.pre_pipe_infd = -1;
+	g_data.size = 0;
+	g_data.is_in_herdoc = FALSE;
+	g_data.in_fd = 0;
+	g_data.out_fd = 1;
+	g_data.pre_pipe_infd = -1;
+	g_data.last_child_id = 0;
+	g_data.parse_error = FALSE;
+	g_data.redirection_error = FALSE;
 }
 
 void	counting(t_parse *parse)
@@ -48,7 +48,7 @@ void	minishell(t_parse *parse)
 	int	i;
 
 	parse->line_double_quotes = handling_quotes(parse->line, '|', -1);
-	if (!g_global_data.parse_error)
+	if (!g_data.parse_error)
 	{
 		parse->formated_input = input_formating(parse->line_double_quotes);
 		parse->splt_pipes = ft_split(parse->formated_input, '|');
@@ -65,8 +65,8 @@ void	minishell(t_parse *parse)
 			input_analyse(parse->tokens);
 			initializer(parse->tokens);
 			counting(parse);
-			g_global_data.parse_error = check_parse_errors(parse);
-			if (g_global_data.parse_error)
+			g_data.parse_error = check_parse_errors(parse);
+			if (g_data.parse_error)
 				break ;
 			parse->pipe_data[i] = get_pipe_data(parse);
 		}
@@ -80,17 +80,17 @@ void	ft_lstclear(t_list **lst)
 
 	while (*lst)
 	{
-		//printf("1 --> %s\n", (*lst)->content);
+		// printf("1 --> %p\n", *lst);
 		temp = (*lst)->next;
-		printf("2\n");
+		// printf("2\n");
 		if (*lst && (*lst)->content)
 			free((*lst)->content);
-		printf("3\n");
+		// printf("3\n");
 		if (*lst)
 			free(*lst);
-		printf("4\n");
+		// printf("4\n");
 		(*lst) = temp;
-		printf("5\n");
+		// printf("5\n");
 	}
 }
 
@@ -100,20 +100,22 @@ int	main(int ac, char **av, char **env)
 
 	(void) ac;
 	(void) av;
-	g_global_data.alloc_list = malloc(sizeof(t_list *));
+	g_data.alloc_list = malloc(sizeof(t_list *));
+	*(g_data.alloc_list) = NULL;
 	parse = malloc(sizeof(t_parse));
-	g_global_data.errno_cp = 0;
+	g_data.errno_cp = 0;
 	signal(SIGINT, parent_sigint);
 	signal(SIGQUIT, SIG_IGN);
 	env_dup(env);
 	while (TRUE)
 	{
-		init_global_data();
+		printf("1\n");
+		init_glbl_data();
 		parse->line = readline("Mini-0.0$ ");
 		if (!parse->line)
-			exit(g_global_data.errno_cp);
+			exit(g_data.errno_cp);
 		add_history(parse->line);
 		minishell(parse);
-		ft_lstclear(g_global_data.alloc_list);
+		ft_lstclear(g_data.alloc_list);
 	}
 }

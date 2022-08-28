@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:32:04 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/21 01:31:27 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/27 16:04:53 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	check_nbr_of_delimiters(t_tokens *cnt)
 	if (cnt->delimiter > 16)
 	{
 		ft_putstr_fd("Mini-0.0: maximum here-document count exceeded", 2);
-		g_global_data.errno_cp = 2;
+		g_data.errno_cp = 2;
 		exit(2);
 	}
 }

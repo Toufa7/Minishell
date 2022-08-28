@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:32:28 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/26 18:31:36 by otoufah          ###   ########.fr       */
+/*   Updated: 2022/08/27 16:04:53 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,7 @@ char	*get_env_variables(char *target, t_bool flag)
 		{
 			if (target[i + 1] == '?')
 			{
-				variable = ft_itoa(g_global_data.errno_cp);
-				output = ft_strjoin(output, variable);
-				i += 2;
-			}
-			if (target[i + 1] == '?')
-			{
-				variable = ft_itoa(g_global_data.errno_cp);
+				variable = ft_itoa(g_data.errno_cp);
 				output = ft_strjoin(output, variable);
 				i += 2;
 			}

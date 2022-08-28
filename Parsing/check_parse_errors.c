@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_parse_errors.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: otoufah <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:26:08 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/26 16:42:12 by otoufah          ###   ########.fr       */
+/*   Updated: 2022/08/27 16:04:53 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_bool	err(char *str_1, char *str_2, char *str_3)
 	ft_putstr_fd(str_1, 2);
 	ft_putstr_fd(str_2, 2);
 	ft_putstr_fd(str_3, 2);
-	g_global_data.errno_cp = 258;
+	g_data.errno_cp = 258;
 	return (TRUE);
 }
 

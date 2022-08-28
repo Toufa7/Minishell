@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:20:07 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/27 15:57:58 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/27 16:05:31 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,32 +24,32 @@ void	munset(char **argv)
 	tmp = NULL;
 	while (argv[++i])
 	{
-		g_global_data.errno_cp = 0;
+		g_data.errno_cp = 0;
 		j = validate_var_name(argv[i]);
 		if (argv[i][j])
 		{
 			ft_putstr_fd("unset: '", 2);
 			ft_putstr_fd(argv[i], 2);
 			ft_putstr_fd("': not a valid identifier\n", 2);
-			g_global_data.errno_cp = 1;
+			g_data.errno_cp = 1;
 			continue ;
 		}
 		var_index = get_var_index(argv[i]);
 		if (!argv[i][j] && var_index != -1)
 		{
 			j = 0;
-			tmp = g_global_data.envp;
-			while (g_global_data.envp[j])
+			tmp = g_data.envp;
+			while (g_data.envp[j])
 				j++;
-			g_global_data.envp = malloc((sizeof(char *) * j));
+			g_data.envp = alloc((sizeof(char *) * j));
 			j = -1;
 			k = 0;
 			while (tmp[++j])
 			{
 				if (var_index != j)
-					g_global_data.envp[k++] = ft_strdup(tmp[j]);
+					g_data.envp[k++] = ft_strdup(tmp[j]);
 			}
-			g_global_data.envp[k] = NULL;
+			g_data.envp[k] = NULL;
 		}
 	}
 	//free_arr((void **) tmp);

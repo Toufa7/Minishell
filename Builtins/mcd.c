@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:19:40 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/25 01:36:03 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/27 16:04:53 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	print_error(char *path)
 	ft_putstr_fd(": ", 2);
 	ft_putstr_fd(strerror(errno), 2);
 	ft_putstr_fd("\n", 2);
-	g_global_data.errno_cp = errno;
+	g_data.errno_cp = errno;
 }
 
 void	update_oldpwd(void)
@@ -32,8 +32,8 @@ void	update_oldpwd(void)
 	{
 		if (i != -1)
 		{
-			free(g_global_data.envp[i]);
-			g_global_data.envp[i] = ft_strjoin("OLDPWD=", buff);
+			free(g_data.envp[i]);
+			g_data.envp[i] = ft_strjoin("OLDPWD=", buff);
 		}
 	}
 }
@@ -48,12 +48,16 @@ void	update_pwd(void)
 	{
 		if (i != -1)
 		{
-			free(g_global_data.envp[i]);
-			g_global_data.envp[i] = ft_strjoin("PWD=", buff);
+			free(g_data.envp[i]);
+			g_data.envp[i] = ft_strjoin("PWD=", buff);
 		}
 	}
 	else
-		ft_putstr_fd("cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory\n", 2);
+	{
+		ft_putstr_fd("cd: error retrieving current directory: getcwd: ", 2);
+		ft_putstr_fd("cannot access parent directories", 2);
+		ft_putstr_fd(": No such file or directory\n", 2);
+	}
 }
 
 void	mcd(char *path)
@@ -65,7 +69,7 @@ void	mcd(char *path)
 		print_error(path);
 	else
 	{
-		g_global_data.errno_cp = 0;
+		g_data.errno_cp = 0;
 		update_pwd();
 	}
 }

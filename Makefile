@@ -4,7 +4,7 @@ C_FLAGS = gcc
 
 READLINE = -lreadline -L /Users/abouchfa/brew/opt/readline/lib -I /Users/abouchfa/brew/opt/readline/include
 
-ADDI_FLAGS = -fsanitize=address -g
+ADDI_FLAGS = #-fsanitize=address -g
 
 F_REMOVE = rm -rf
 

@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/27 15:59:37 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/27 16:04:53 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ typedef struct s_redirections
 	int		type;
 }	t_redirections;
 
-typedef struct s_g_global_data
+typedef struct s_g_glbl_data
 {
 	int		errno_cp;
 	int		in_fd;
@@ -97,7 +97,7 @@ typedef struct s_g_global_data
 	pid_t	last_child_id;
 	t_bool	is_in_herdoc;
 	t_bool	redirection_error;
-}	t_global_data;
+}	t_glbl_data;
 
 typedef struct s_pipe_data
 {
@@ -193,6 +193,6 @@ int			ft_isalpha(int c);
 int			ft_isdigit(int c);
 size_t		ft_strlen(const char *s);
 
-t_global_data	g_global_data;
+t_glbl_data	g_data;
 
 #endif
