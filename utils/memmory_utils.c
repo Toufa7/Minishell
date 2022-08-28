@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 01:22:42 by abouchfa          #+#    #+#             */
-/*   Updated: 2022/08/28 16:39:27 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/28 17:52:54 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	*alloc(size_t size, char *source)
 	(void) source;
 	void	*content;
 	
-	printf("Size: %zu | Source: %s\n", size, source);
 	content = malloc(size);
 	ft_lstadd_front(g_data.alloc_list, ft_lstnew(content));
 	return (content);
