@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:19:40 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/25 01:36:03 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/28 10:37:32 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	print_error(char *path)
 	ft_putstr_fd(": ", 2);
 	ft_putstr_fd(strerror(errno), 2);
 	ft_putstr_fd("\n", 2);
-	g_glbl_data.errno_cp = errno;
+	g_data.errno_cp = errno;
 }
 
 void	update_oldpwd(void)
@@ -32,8 +32,8 @@ void	update_oldpwd(void)
 	{
 		if (i != -1)
 		{
-			free(g_glbl_data.envp[i]);
-			g_glbl_data.envp[i] = ft_strjoin("OLDPWD=", buff);
+			//free(g_data.envp[i]);
+			g_data.envp[i] = ft_strjoin("OLDPWD=", buff);
 		}
 	}
 }
@@ -48,8 +48,8 @@ void	update_pwd(void)
 	{
 		if (i != -1)
 		{
-			free(g_glbl_data.envp[i]);
-			g_glbl_data.envp[i] = ft_strjoin("PWD=", buff);
+			//free(g_data.envp[i]);
+			g_data.envp[i] = ft_strjoin("PWD=", buff);
 		}
 	}
 	else
@@ -69,7 +69,7 @@ void	mcd(char *path)
 		print_error(path);
 	else
 	{
-		g_glbl_data.errno_cp = 0;
+		g_data.errno_cp = 0;
 		update_pwd();
 	}
 }

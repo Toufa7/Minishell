@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:32:28 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/26 18:31:36 by otoufah          ###   ########.fr       */
+/*   Updated: 2022/08/28 15:37:10 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*until_dollar(char *str)
 
 	i = 0;
 	if (str[i] == '$')
-		return (ft_strdup("$"));
+		return (ft_strdup("$", TRUE));
 	while (str[i] && str[i] != '$')
 	{
 		i++;
@@ -40,15 +40,14 @@ char	*get_env_variables(char *target, t_bool flag)
 	char	*variable;
 
 	i = 0;
-	output = ft_strdup("");
+	output = ft_strdup("", TRUE);
 	while (i < ft_strlen(target))
 	{
 		if (target[i] == '$')
 		{
 			if (target[i + 1] == '?')
 			{
-				variable = ft_itoa(g_glbl_data.errno_cp);
-				output = ft_strjoin(output, variable);
+				output = ft_strjoin(output, ft_itoa(g_data.errno_cp));
 				i += 2;
 			}
 			else if (!ft_isalnum(target[i + 1]) && target[i + 1] != '_')
@@ -63,9 +62,8 @@ char	*get_env_variables(char *target, t_bool flag)
 			{
 				if (target[i + 1] == '0')
 				{
-					variable = until_dollar(&target[i]);
 					output = ft_strjoin(output, "Minishell");
-					i += ft_strlen(variable) + 1;
+					i += ft_strlen(until_dollar(&target[i])) + 1;
 				}
 				else
 				{

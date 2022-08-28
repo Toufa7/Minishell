@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:41:44 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/25 07:27:58 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/28 15:16:58 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ char	*get_var_val(int var_index)
 	i = 0;
 	j = 0;
 	val = NULL;
-	var = g_glbl_data.envp[var_index];
+	var = g_data.envp[var_index];
 	while (var[i] && var[i] != '=')
 		i++;
 	if (var[i])
 	{
 		while (var[i + j])
 			j++;
-		val = malloc(sizeof(char) * (j + 1));
+		val = alloc(sizeof(char) * (j + 1), "get_var_val");
 		ft_strncpy(val, var + i + 1, j);
 	}
 	return (val);

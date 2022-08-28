@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 19:09:57 by abouchfa          #+#    #+#             */
-/*   Updated: 2022/08/25 05:56:05 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/28 15:58:08 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ char	*put_cmd_status(int status, char *cmd_path, char *cmd)
 			ft_putstr_fd(": permission denied\n", 2);
 			exit(126);
 		}
-		free_str(cmd_path);
 		return (NULL);
 	}
 	else
@@ -48,7 +47,6 @@ char	*get_cmd_path(char *cmd, char **exec_programs_dirs)
 	temp = NULL;
 	while (exec_programs_dirs[++i] && cmd && cmd[0] && status)
 	{
-		free_str(cmd_path);
 		temp = ft_strjoin(exec_programs_dirs[i], "/");
 		cmd_path = ft_strjoin(temp, cmd);
 		if (access(cmd_path, F_OK))
@@ -57,7 +55,6 @@ char	*get_cmd_path(char *cmd, char **exec_programs_dirs)
 			status = 2;
 		else
 			status = 0;
-		free_str(temp);
 	}
 	return (put_cmd_status(status, cmd_path, cmd));
 }
@@ -100,7 +97,7 @@ void	check_command_name(t_pipe_data *pipe_data)
 	i = get_var_index("PATH=");
 	if (i != -1)
 	{
-		execps_paths = ft_split(g_glbl_data.envp[i] + 5, ':');
+		execps_paths = ft_split(g_data.envp[i] + 5, ':');
 		pipe_data->cmd_path = get_cmd_path(pipe_data->command, execps_paths);
 	}
 	else
@@ -109,7 +106,6 @@ void	check_command_name(t_pipe_data *pipe_data)
 		ft_putstr_fd(": No such file or directory\n", 2);
 		exit(127);
 	}
-	free_arr((void **) execps_paths);
 }
 
 void	validate_cmd(t_pipe_data *pipe_data)

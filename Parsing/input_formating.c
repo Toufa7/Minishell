@@ -6,13 +6,13 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:55:08 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/18 15:18:40 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/28 15:16:23 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	spc_allo(char *str)
+int	spc(char *str)
 {
 	int	i;
 	int	mem;
@@ -46,7 +46,7 @@ char	*input_formating(char *str)
 	char	sing;
 	char	*spcs;
 
-	spcs = malloc(sizeof(char) * (ft_strlen(str) + (spc_allo(str) * 2) + 1));
+	spcs = alloc(sizeof(char) * (ft_strlen(str) + (spc(str) * 2) + 1), "frmt");
 	if (!spcs)
 		return (NULL);
 	i = -1;
@@ -80,4 +80,3 @@ char	*input_formating(char *str)
 	spcs[j] = '\0';
 	return (spcs);
 }
-

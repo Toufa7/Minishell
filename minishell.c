@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/27 09:42:14 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/28 15:55:55 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,35 @@
 
 void	init_glbl_data(void)
 {
-	g_glbl_data.pre_pipe_infd = -1;
-	g_glbl_data.size = 0;
-	g_glbl_data.is_in_herdoc = FALSE;
-	g_glbl_data.in_fd = 0;
-	g_glbl_data.out_fd = 1;
-	g_glbl_data.pre_pipe_infd = -1;
-	g_glbl_data.last_child_id = 0;
-	g_glbl_data.parse_error = FALSE;
-	g_glbl_data.redirection_error = FALSE;
+	g_data.pre_pipe_infd = -1;
+	g_data.size = 0;
+	g_data.is_in_herdoc = FALSE;
+	g_data.in_fd = 0;
+	g_data.out_fd = 1;
+	g_data.pre_pipe_infd = -1;
+	g_data.last_child_id = 0;
+	g_data.parse_error = FALSE;
+	g_data.redirection_error = FALSE;
+}
+
+void	init_analyse_and_count(t_parse *parse)
+{
+	int	j;
+
+	j = -1;
+	parse->tokens->red_in = 0;
+	parse->tokens->red_out = 0;
+	parse->tokens->here_do = 0;
+	parse->tokens->app = 0;
+	parse->tokens->redirections = 0;
+	parse->tokens->delimiter = 0;
+	parse->tokens->cmd = 0;
+	parse->tokens->total = 0;
+	parse->tokens->option = 0;
+	init_glbl_data();
+	input_analyse(parse->tokens);
+	while (parse->tokens[++j].token)
+		input_counter(parse->tokens + j);
 }
 
 void	getting_back(char **str)
@@ -34,23 +54,12 @@ void	getting_back(char **str)
 		str[i] = handling_quotes(str[i], -1, '|');
 }
 
-void	analyse_init_count(t_parse *parse)
-{
-	int	j;
-
-	j = -1;
-	input_analyse(parse->tokens);
-	token_counter_init(parse->tokens);
-	while (parse->tokens[++j].token)
-		input_counter(parse->tokens, &parse->tokens[j]);
-}
-
 void	minishell(t_parse *parse)
 {
 	int	i;
 
 	parse->line_double_quotes = handling_quotes(parse->line, '|', -1);
-	if (!g_glbl_data.parse_error)
+	if (!g_data.parse_error)
 	{
 		parse->formated_input = input_formating(parse->line_double_quotes);
 		parse->splt_pipes = ft_split(parse->formated_input, '|');
@@ -58,20 +67,34 @@ void	minishell(t_parse *parse)
 		i = 0;
 		while (parse->splt_pipes[i])
 			i++;
-		parse->pipe_data = ft_calloc(i + 1, sizeof(t_pipe_data *));
+		parse->pipe_data = ft_calloc(i + 1, sizeof(t_pipe_data *), TRUE, "Minishell");
 		i = -1;
 		while (parse->splt_pipes[++i])
 		{
 			parse->no_splt = handling_quotes(parse->splt_pipes[i], ' ', -1);
 			parse->tokens = spliting_with_spaces(parse->no_splt);
-			analyse_init_count(parse);
-			token_and_type(parse);
-			g_glbl_data.parse_error = check_parse_errors(parse);
-			if (g_glbl_data.parse_error == 1)
+			init_analyse_and_count(parse);
+			g_data.parse_error = check_parse_errors(parse);
+			if (g_data.parse_error)
 				break ;
 			parse->pipe_data[i] = get_pipe_data(parse);
 		}
 		execution(parse->pipe_data);
+	}
+}
+
+void	ft_lstclear(t_alloc_lst **lst)
+{
+	t_alloc_lst	*temp;
+
+	while (*lst)
+	{
+		temp = (*lst)->next;
+		if (*lst && (*lst)->content)
+			free((*lst)->content);
+		if (*lst)
+			free(*lst);
+		(*lst) = temp;
 	}
 }
 
@@ -81,8 +104,10 @@ int	main(int ac, char **av, char **env)
 
 	(void) ac;
 	(void) av;
+	g_data.alloc_list = malloc(sizeof(t_alloc_lst *));
+	*(g_data.alloc_list) = NULL;
 	parse = malloc(sizeof(t_parse));
-	g_glbl_data.errno_cp = 0;
+	g_data.errno_cp = 0;
 	signal(SIGINT, parent_sigint);
 	signal(SIGQUIT, SIG_IGN);
 	env_dup(env);
@@ -91,8 +116,11 @@ int	main(int ac, char **av, char **env)
 		init_glbl_data();
 		parse->line = readline("Mini-0.0$ ");
 		if (!parse->line)
-			exit(g_glbl_data.errno_cp);
+			exit(g_data.errno_cp);
 		add_history(parse->line);
 		minishell(parse);
+		ft_lstclear(g_data.alloc_list);
+		if (parse->line)
+			free(parse->line);
 	}
 }

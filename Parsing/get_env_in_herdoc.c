@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_env_in_herdoc.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: otoufah <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:49:01 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/26 15:29:19 by otoufah          ###   ########.fr       */
+/*   Updated: 2022/08/28 15:40:29 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,20 @@ char	*till_dollar(char *str)
 
 	i = 0;
 	if (str[i] == '$')
-		return (ft_strdup("$"));
+		return (ft_strdup("$", TRUE));
 	while (str[i] && str[i] != '$')
 		i++;
 	return (ft_substr(str, 0, i));
+}
+
+char	*exp_cases(char cases, char	*variable, char	*output)
+{
+	if (cases == '?')
+	{
+		variable = ft_itoa(g_data.errno_cp);
+		return (ft_strjoin(output, variable));
+	}
+	return (NULL);
 }
 
 char	*get_env_in_herdoc(char *target)
@@ -31,15 +41,14 @@ char	*get_env_in_herdoc(char *target)
 	char	*variable;
 
 	i = 0;
-	output = ft_strdup("");
+	output = ft_strdup("", TRUE);
 	while (target[i])
 	{
 		if (target[i] == '$')
 		{
 			if (target[i + 1] == '?')
 			{
-				variable = ft_itoa(g_glbl_data.errno_cp);
-				output = ft_strjoin(output, variable);
+				output = exp_cases('?', ft_itoa(g_data.errno_cp), output);
 				i += 2;
 			}
 			else
