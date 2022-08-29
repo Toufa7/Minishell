@@ -1,0 +1,706 @@
+ ✗  "echo $" 
+
+Your output : 
+--------------------
+$ ; exit
+--------------------
+Expected output : 
+--------------------
+$
+--------------------
+
+ ✗  "echo $" 
+
+Your output : 
+--------------------
+$ ; exit
+--------------------
+Expected output : 
+--------------------
+$
+--------------------
+
+ ✗  "echo $" 
+
+Your output : 
+--------------------
+$ ; exit
+--------------------
+Expected output : 
+--------------------
+$
+--------------------
+
+ ✗  "echo test$" 
+
+Your output : 
+--------------------
+test$ ; exit
+--------------------
+Expected output : 
+--------------------
+test$
+--------------------
+
+ ✗  "echo test.sh" 
+
+Your output : 
+--------------------
+test.sh ; exit
+--------------------
+Expected output : 
+--------------------
+test.sh
+--------------------
+
+ ✗  "echo 23456" 
+
+Your output : 
+--------------------
+23456 ; exit
+--------------------
+Expected output : 
+--------------------
+23456
+--------------------
+
+ ✗  "echo" 
+
+Your output : 
+--------------------
+; exit
+--------------------
+Expected output : 
+--------------------
+
+--------------------
+
+ ✗  "echo echo" 
+
+Your output : 
+--------------------
+echo ; exit
+--------------------
+Expected output : 
+--------------------
+echo
+--------------------
+
+ ✗  "eCho" 
+
+Your output : 
+--------------------
+; exit
+--------------------
+Expected output : 
+--------------------
+
+--------------------
+
+ ✗  "eChO" 
+
+Your output : 
+--------------------
+; exit
+--------------------
+Expected output : 
+--------------------
+
+--------------------
+
+ ✗  "eCHO" 
+
+Your output : 
+--------------------
+; exit
+--------------------
+Expected output : 
+--------------------
+
+--------------------
+
+ ✗  "echo $" 
+
+Your output : 
+--------------------
+$ ; exit
+--------------------
+Expected output : 
+--------------------
+$
+--------------------
+
+ ✗  "echo $ $" clear
+ 
+
+Your output : 
+--------------------
+$ $ ; exit
+--------------------
+Expected output : 
+--------------------
+$ $
+--------------------
+
+ ✗  "echo" 
+
+Your output : 
+--------------------
+; exit
+--------------------
+Expected output : 
+--------------------
+
+--------------------
+
+ ✗  "echo rhobebou" 
+
+Your output : 
+--------------------
+rhobebou ; exit
+--------------------
+Expected output : 
+--------------------
+rhobebou
+--------------------
+
+ ✗  "echo stop barking" 
+
+Your output : 
+--------------------
+stop barking ; exit
+--------------------
+Expected output : 
+--------------------
+stop barking
+--------------------
+
+ ✗  "echo bonjour" 
+
+Your output : 
+--------------------
+bonjour ; exit
+--------------------
+Expected output : 
+--------------------
+bonjour
+--------------------
+
+ ✗  "echo bonjour" 
+
+Your output : 
+--------------------
+bonjour ; exit
+--------------------
+Expected output : 
+--------------------
+bonjour
+--------------------
+
+ ✗  "echo bonjour" 
+
+Your output : 
+--------------------
+bonjour ; exit
+--------------------
+Expected output : 
+--------------------
+bonjour
+--------------------
+
+ ✗  "echo -n bonjour" 
+
+Your output : 
+--------------------
+bonjour ; exit
+--------------------
+Expected output : 
+--------------------
+bonjour
+--------------------
+
+ ✗  "echo -nn bonjour" 
+
+Your output : 
+--------------------
+bonjour ; exit
+--------------------
+Expected output : 
+--------------------
+bonjour
+--------------------
+
+ ✗  "echo -n -n -n bonjour" 
+
+Your output : 
+--------------------
+bonjour ; exit
+--------------------
+Expected output : 
+--------------------
+bonjour
+--------------------
+
+ ✗  "echo -n bonjour" 
+
+Your output : 
+--------------------
+bonjour ; exit
+--------------------
+Expected output : 
+--------------------
+bonjour
+--------------------
+
+ ✗  "echo -n-n bonjour" 
+
+Your output : 
+--------------------
+-n-n bonjour ; exit
+--------------------
+Expected output : 
+--------------------
+-n-n bonjour
+--------------------
+
+ ✗  "echo -nnnn bonjour" 
+
+Your output : 
+--------------------
+bonjour ; exit
+--------------------
+Expected output : 
+--------------------
+bonjour
+--------------------
+
+ ✗  "echo -nnnn -n bonjour" 
+
+Your output : 
+--------------------
+bonjour ; exit
+--------------------
+Expected output : 
+--------------------
+bonjour
+--------------------
+
+ ✗  "echo -n -n -n-n bonjour" 
+
+Your output : 
+--------------------
+-n-n bonjour ; exit
+--------------------
+Expected output : 
+--------------------
+-n-n bonjour
+--------------------
+
+ ✗  "echo -n '-n' bonjour" 
+
+Your output : 
+--------------------
+-n bonjour ; exit
+--------------------
+Expected output : 
+--------------------
+bonjour
+--------------------
+
+ ✗  "echo otoufah" 
+
+Your output : 
+--------------------
+otoufah ; exit
+--------------------
+Expected output : 
+--------------------
+otoufah
+--------------------
+
+ ✗  "echo otoufah" 
+
+Your output : 
+--------------------
+otoufah ; exit
+--------------------
+Expected output : 
+--------------------
+otoufah
+--------------------
+
+ ✗  "echo 'otoufah'" 
+
+Your output : 
+--------------------
+otoufah ; exit
+--------------------
+Expected output : 
+--------------------
+otoufah
+--------------------
+
+ ✗  "echo  'otoufah' " 
+
+Your output : 
+--------------------
+otoufah ; exit
+--------------------
+Expected output : 
+--------------------
+otoufah
+--------------------
+
+ ✗  "echo textotoufah" 
+
+Your output : 
+--------------------
+textotoufah ; exit
+--------------------
+Expected output : 
+--------------------
+textotoufah
+--------------------
+
+ ✗  "echo text'otoufah'  $USER " 
+
+Your output : 
+--------------------
+textotoufah otoufah ; exit
+--------------------
+Expected output : 
+--------------------
+textotoufah otoufah
+--------------------
+
+ ✗  "echo text otoufah otoufah" 
+
+Your output : 
+--------------------
+text otoufah otoufah ; exit
+--------------------
+Expected output : 
+--------------------
+text otoufah otoufah
+--------------------
+
+ ✗  "echo               $USER          " 
+
+Your output : 
+--------------------
+otoufah ; exit
+--------------------
+Expected output : 
+--------------------
+otoufah
+--------------------
+
+ ✗  "echo text otoufah otoufahtext" 
+
+Your output : 
+--------------------
+text otoufah otoufahtext ; exit
+--------------------
+Expected output : 
+--------------------
+text otoufah otoufahtext
+--------------------
+
+ ✗  "echo otoufah" 
+
+Your output : 
+--------------------
+otoufah ; exit
+--------------------
+Expected output : 
+--------------------
+otoufah
+--------------------
+
+ ✗  "echo otoufah" 
+
+Your output : 
+--------------------
+otoufah ; exit
+--------------------
+Expected output : 
+--------------------
+otoufah
+--------------------
+
+ ✗  "echo otoufah$USERtext oui oui oui oui otoufah oui otoufah " 
+
+Your output : 
+--------------------
+otoufahUSERtext oui oui oui oui otoufah oui otoufah ; exit
+--------------------
+Expected output : 
+--------------------
+otoufah oui oui oui oui otoufah oui otoufah
+--------------------
+
+ ✗  "echo otoufah  otoufah otoufah  otoufah  otoufah -n otoufah" 
+
+Your output : 
+--------------------
+otoufah otoufah otoufah otoufah otoufah -n otoufah ; exit
+--------------------
+Expected output : 
+--------------------
+otoufah otoufah otoufah otoufah otoufah -n otoufah
+--------------------
+
+ ✗  "echo  \  " 
+
+Your output : 
+--------------------
+\ \ ; exit
+--------------------
+Expected output : 
+--------------------
+  
+--------------------
+
+ ✗  "echo "   """ 
+
+Your output : 
+--------------------
+
+--------------------
+Expected output : 
+--------------------
+" 
+--------------------
+
+
+Your exit status : 1
+Expected exit status : 0
+
+ ✗  "echo " " " """ '''" 
+
+Your output : 
+--------------------
+
+--------------------
+Expected output : 
+--------------------
+" " " """ '''
+--------------------
+
+
+Your exit status : 1
+Expected exit status : 0
+
+ ✗  "echo otoufahotoufahotoufah" 
+
+Your output : 
+--------------------
+otoufahotoufahotoufah ; exit
+--------------------
+Expected output : 
+--------------------
+otoufahotoufahotoufah
+--------------------
+
+ ✗  "echo textotoufahtest" 
+
+Your output : 
+--------------------
+textotoufahtest ; exit
+--------------------
+Expected output : 
+--------------------
+textotoufahtest
+--------------------
+
+ ✗  "echo $USER otoufah text ' text" 
+
+Your output : 
+--------------------
+
+--------------------
+Expected output : 
+--------------------
+otoufah otoufah text ' text
+--------------------
+
+
+Your exit status : 1
+Expected exit status : 0
+
+ ✗  "echo $USER" 
+
+Your output : 
+--------------------
+otoufah ; exit
+--------------------
+Expected output : 
+--------------------
+otoufah
+--------------------
+
+ ✗  "echo otoufah  " 
+
+Your output : 
+--------------------
+otoufah ; exit
+--------------------
+Expected output : 
+--------------------
+otoufah
+--------------------
+
+ ✗  "echo otoufahUsers/otoufah/file'otoufah'$USER" 
+
+Your output : 
+--------------------
+otoufahUsers/otoufah/fileotoufahotoufah ; exit
+--------------------
+Expected output : 
+--------------------
+otoufahUsers/otoufah/fileotoufahotoufah
+--------------------
+
+ ✗  "echo otoufahotoufahotoufah" 
+
+Your output : 
+--------------------
+otoufahotoufahotoufah ; exit
+--------------------
+Expected output : 
+--------------------
+otoufahotoufahotoufah
+--------------------
+
+ ✗  "echo $USERotoufah$USER" 
+
+Your output : 
+--------------------
+USERotoufahotoufah ; exit
+--------------------
+Expected output : 
+--------------------
+otoufah
+--------------------
+
+ ✗  "echo "$USER"$USERotoufah" 
+
+Your output : 
+--------------------
+otoufahUSERotoufah ; exit
+--------------------
+Expected output : 
+--------------------
+otoufah
+--------------------
+
+ ✗  "echo  otoufah  $PWD" 
+
+Your output : 
+--------------------
+otoufah /Users/otoufah/Desktop/Herewego ; exit
+--------------------
+Expected output : 
+--------------------
+otoufah /Users/otoufah/Desktop/Herewego
+--------------------
+
+ ✗  "echo  otoufah  $ $PWD" 
+
+Your output : 
+--------------------
+otoufah $ /Users/otoufah/Desktop/Herewego ; exit
+--------------------
+Expected output : 
+--------------------
+otoufah $ /Users/otoufah/Desktop/Herewego
+--------------------
+
+ ✗  "echo otoufah=4" 
+
+Your output : 
+--------------------
+otoufah=4 ; exit
+--------------------
+Expected output : 
+--------------------
+otoufah=4
+--------------------
+
+ ✗  "echo otoufah=thallard" 
+
+Your output : 
+--------------------
+otoufah=thallard ; exit
+--------------------
+Expected output : 
+--------------------
+otoufah=thallard
+--------------------
+
+ ✗  "echo otoufah" 
+
+Your output : 
+--------------------
+otoufah ; exit
+--------------------
+Expected output : 
+--------------------
+otoufah
+--------------------
+
+ ✗  "echo 0" 
+
+Your output : 
+--------------------
+0 ; exit
+--------------------
+Expected output : 
+--------------------
+0
+--------------------
+
+ ✗  "echo /Users/otoufah/Desktop/Herewego/file" 
+
+Your output : 
+--------------------
+/Users/otoufah/Desktop/Herewego/file ; exit
+--------------------
+Expected output : 
+--------------------
+/Users/otoufah/Desktop/Herewego/file
+--------------------
+
+ ✗  "echo /Users/otoufah/Desktop/Herewego/file" 
+
+Your output : 
+--------------------
+/Users/otoufah/Desktop/Herewego/file ; exit
+--------------------
+Expected output : 
+--------------------
+/Users/otoufah/Desktop/Herewego/file
+--------------------
+
+ ✗  "echo text textotoufah ... otoufah" 
+
+Your output : 
+--------------------
+text textotoufah ... otoufah ; exit
+--------------------
+Expected output : 
+--------------------
+text textotoufah ... otoufah
+--------------------
+
+ ✗  "echo /Users/otoufah/Desktop/Herewego" 
+
+Your output : 
+--------------------
+/Users/otoufah/Desktop/Herewego ; exit
+--------------------
+Expected output : 
+--------------------
+/Users/otoufah/Desktop/Herewego
+--------------------
+

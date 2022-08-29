@@ -1,1 +1,182 @@
-/bin/ls$$
+printf "%s$ECHO\n"
+
+testing echo "$"
+testing eChO ""$""					
+testing echo '$'
+testing echo ''$''
+testing echo "$_" #Last Command actually not required
+testing echo $"test"$
+testing echo "$0"
+testing echo $1337
+testing echo																
+testing echo echo															
+testing echo ""																
+testing eCHO ''																
+testing echo $																
+testing echo $ $															
+testing echo																
+testing echo wow														
+testing echo Hello World													
+testing echo "Salam Alikoum"														
+testing echo Salam Alikoum														
+testing echo 'Salam Alikoum'														
+testing echo -n Salam Alikoum														
+testing echo -nn Salam Alikoum													
+testing echo -n -n -n Salam Alikoum												
+testing echo "-n" Salam Alikoum													
+testing echo -n"-n" Salam Alikoum													
+testing echo "-nnnn" Salam Alikoum												
+testing echo "-nnnn" -n Salam Alikoum												
+testing echo "-n -n -n"-n Salam Alikoum											
+testing echo "-n '-n'" Salam Alikoum												
+testing echo $USER															
+testing echo "$USER"														
+testing echo "'$USER'"														
+testing echo " '$USER' "													
+testing echo text"$USER"													
+testing echo text"'$USER'" ' $USER '										
+testing echo "text"   "$USER"    "$USER"									
+testing echo '              $USER          '								
+testing echo               text "$USER"            "$USER"text				
+testing echo ''''''''''$USER''''''''''										
+testing echo """"""""$USER""""""""											
+testing echo $USER'$USER'Once a gunner always a gunner $USER COYG      $USER ''	
+testing echo $USER '' $USER $USER '' $USER '' $USER -n $USER				
+testing echo ' \' ' \'														
+testing echo '\" ' " \"\""													
+testing echo \\\" \\\" \\\" \\\"\\\"\\\" \\\'\\\'\\\'						
+testing echo "$USER""$USER""$USER"											
+testing echo text"$USER"test												
+testing echo '$USER' "$USER" "text \' text"									
+testing echo '$USER'														
+testing echo $USER " "														
+testing echo "$USER""Users/$USER/file""'$USER'"'$USER'						
+testing echo "$USER$USER$USER"												
+testing echo '$USER'"$USER"'$USER'											
+testing echo '"$USER"''$USER'"""$USER"										
+testing echo " $USER  "'$PWD'												
+testing echo " $USER  \$ "'$PWD'											
+testing echo $USER=4														
+testing echo $USER=POMS 												
+testing echo $USER															
+testing echo $?																
+testing echo $PWD/file														
+testing echo "$PWD/file"													
+testing echo "text" "text$USER" ... "$USER"									
+testing echo $PWD															
+
+printf "%s$EXIT\n"
+
+testing exit 42 42															
+testing exit -42 -24														
+testing exit 42																
+testing exit 42 53 68														
+testing exit 259															
+testing exit -12030															
+testing exit --1239312														
+testing exit ++++1203020103													
+testing exit +0															
+testing exit ++++++0													
+testing exit -----0														
+testing exit azerty														
+testing exit kewkwqke														
+testing exit a																
+testing exit z																
+testing exit "1"															
+testing exit "2"															
+testing exit "+102"															
+testing exit "1230"															
+testing exit "+++1230"
+testing exit "1"23															
+testing exit "2"32"32"
+testing exit "'42'"															
+testing exit '42'"42"42
+testing exit +'42'"42"42
+testing exit -'42'"42"42
+testing exit 9223372036854775807 											
+testing exit 9223372036854775808
+testing exit -4																
+testing exit 1																
+testing exit -1																
+testing exit 42																
+testing exit 0																
+testing exit --000															
+testing exit +++++++000														
+testing exit ++++3193912939													
+testing exit ---31232103012													
+testing exit "something"													
+testing exit echo															
+testing exit cd ..															
+testing exit 0 0															
+testing exit 42 42 42 42 42													
+testing exit echo something													
+testing exit exit
+
+
+
+
+printf "%s\n$PIPES"
+testing "ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls"
+testing "env | grep \"_=\""
+testing "env | grep \"SHLVL\""
+testing "echo oui | cat -e"
+testing "echo oui | echo non | echo P0MS | grep oui"
+testing "echo oui | echo non | echo P0MS | grep non"
+testing "echo oui | echo non | echo P0MS | grep P0MS"
+testing "cd .. | echo \"P0MS\""
+testing "cd .. | echo \"P0MS\""
+testing "cd / | echo \"P0MS\""
+testing "cd .. | pwd"
+testing "ifconfig | grep \":\""
+testing "ifconfig | grep nothing"
+testing "whoami | grep $USER"
+testing "whoami | grep $USER > tmp/file			"
+testing "whoami | cat -e | cat -e > tmp/file		"
+testing "cat Makefile | grep "FLAGS"	"
+testing "cat Makefile | cat -e | cat -e"
+testing "cat Makefile | grep "FLAGS" | grep "FLAGS" | cat -e	"
+testing "export TEST=123 | cat -e | cat -e		"
+testing "unset TEST | cat -e	"
+testing "echo test | cat -e | cat -e | cat -e	"
+testing "whereis ls | cat -e | cat -e > test		"
+testing "echo test | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e | cat -e"
+testing "ls -la | grep "."						"
+testing "whereis grep > tmp/file"
+testing "whereis grep > tmp/file"
+testing "ls -la > tmp/file	"
+
+
+
+
+function test()
+{
+	MINISHELL=$(echo $@ | ./minishell 2>&-)
+	MINISHELL_EXIT_STATUS=$?
+	BASH=$(echo $* | bash 2>&-)
+	BASH_EXIT_STATUS=$?
+	if [ "$MINISHELL" == "$BASH" ] && [ "$MINISHELL_EXIT_STATUS" == "$BASH_EXIT_STATUS" ];
+    then
+		printf " $GREEN%s$RESET" "Valid ✅ "
+	else
+		printf " $RED%s\n$RESET" "              Wrong ❌"
+	fi
+	printf "$CYAN \"$*\" $RESET"
+	if [ "$MINISHELL" != "$BASH" ];
+    then
+    {
+		echo
+		printf $RED"Minishell output  => $MINISHELL\n $SEPARATOR $RESET"
+		echo
+		printf $GREEN"Bash output       => $BASH\n $SEPARATOR $RESET\n"
+        sleep 2
+    }
+	fi
+	if [ "$MINISHELL_EXIT_STATUS" != "$BASH_EXIT_STATUS" ]; then
+		echo
+		echo
+		printf $RED"Minishell exit status   => $RED$MINISHELL_EXIT_STATUS$RESET\n"
+		printf $GREEN"Bash exit status        => $GREEN$BASH_EXIT_STATUS$RESET\n"
+	fi
+	echo
+	sleep 0.1
+}

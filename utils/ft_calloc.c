@@ -20,7 +20,6 @@ void	*ft_calloc(size_t count, size_t size, t_bool use_alloc, char *source)
 
 	i = 0;
 	memory = count * size;
-	printf("Count => %zu Size => %zu Spirce => %s\n", count, size, source);
 	if (use_alloc)
 		booked = alloc(memory, "ft_calloc");
 	else
