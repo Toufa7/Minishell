@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/28 15:55:44 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/30 16:49:09 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,8 @@
 
 typedef int	t_bool;
 
-typedef struct s_tokens
+typedef struct s_counter
 {
-	char	*token;
-	char	*type;
-	char	*cmp_red_in;
-	char	*cmp_h_doc;
-	char	*cmp_red_out;
-	char	*cmp_append;
-	int		set_as_cmd;
 	size_t	red_in;
 	size_t	red_out;
 	size_t	here_do;
@@ -62,7 +55,14 @@ typedef struct s_tokens
 	size_t	env_var;
 	size_t	option;
 	size_t	total;
-}	t_tokens;
+} t_couner;
+
+typedef struct s_pipe_token
+{
+	char	*token;
+	char	*type;
+	int		set_as_cmd;
+}	t_pipe_token;
 
 typedef struct s_alloc_lst
 {
@@ -96,7 +96,6 @@ typedef struct s_g_glbl_data
 	t_alloc_lst	**alloc_list;
 	t_bool		parse_error;
 	pid_t		last_child_id;
-	t_bool		is_in_herdoc;
 	t_bool		redirection_error;
 }	t_glbl_data;
 
@@ -109,39 +108,40 @@ typedef struct s_pipe_data
 	t_bool			out_fd_set;
 	t_bool			in_fd_set;
 	t_bool			is_herdoc;
+	t_couner		counter;
 	t_redirections	**redirections;
 }	t_pipe_data;
 
 typedef struct s_parse
 {
-	char		*line;
-	char		**splt_pipes;
-	char		*orginal_string;
-	char		*formated_input;
-	char		*line_double_quotes;
-	char		*no_splt;
-	char		pipe;
-	char		space;
-	t_pipe_data	**pipe_data;
-	t_tokens	*tokens;
+	char			*line;
+	char			**splt_pipes;
+	char			*orginal_string;
+	char			*formated_input;
+	char			*line_double_quotes;
+	char			*no_splt;
+	char			pipe;
+	char			space;
+	t_pipe_data		**pipes_data;
+	t_pipe_token	**pipe_tokens;
 }	t_parse;
 
 // ----------- Parsing --------------------------
 
-char		**pipes(char	*str);
-char		*s_d_quotes(char *str);
-char		*handling_quotes(char *str, char replaced_1, char replace_by);
-char		*input_formating(char	*str);
-char		*getting_back_original_input(char *str);
-char		*get_env_variables(char *target, t_bool flag);
-char		*get_env_in_herdoc(char *target);
-void		token_counter_init(t_tokens	*tokens);
-void		input_analyse(t_tokens	*tokens);
-void		token_and_type(t_parse *parse);
-void		input_counter(t_tokens	*tokens);
-t_tokens	*spliting_with_spaces(char	*str);
-t_pipe_data	*get_pipe_data(t_parse	*parse);
-t_bool		check_parse_errors(t_parse *parse);
+char			**pipes(char	*str);
+char			*s_d_quotes(char *str);
+char			*handling_quotes(char *str, char replaced_1, char replace_by);
+char			*input_formating(char	*str);
+char			*getting_back_original_input(char *str);
+char			*get_env_variables(char *target, t_bool flag);
+char			*get_env_in_herdoc(char *target);
+void			token_counter_init(t_pipe_token	*pipe_tokens);
+void			input_analyse(t_pipe_token	*pipe_tokens);
+void			token_and_type(t_parse *parse);
+void			input_counter(t_pipe_token	*pipe_tokens);
+t_pipe_token	**set_pipe_tokens(char *str);
+void			set_pipe_data(t_pipe_data *pipe_data, t_pipe_token **pipe_tokens);
+t_bool			check_parse_errors(t_pipe_token **pipe_tokens);
 
 // ----------- Execution -------------------------
 

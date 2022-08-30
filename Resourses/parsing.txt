@@ -27,22 +27,22 @@ CMD
 
 command : i = 0 -----> len(command):
 
-    if (j == 0 && tokens[i] are not in ("<", ">", "<<", ">>"))
-        tokens[j].type = ARGS
-    else if (tokens[i - 1] == ">>")
-        tokens[j].type = APPEND
+    if (j == 0 && pipe_tokens[i] are not in ("<", ">", "<<", ">>"))
+        pipe_tokens[j].type = ARGS
+    else if (pipe_tokens[i - 1] == ">>")
+        pipe_tokens[j].type = APPEND
         i += 2
 
-    else if (tokens[i] == ">")
-        tokens[j].type = RED_OUTPUT
+    else if (pipe_tokens[i] == ">")
+        pipe_tokens[j].type = RED_OUTPUT
         i++;
 
-    else if (tokens[i - 1] == "<<)
-        tokens[j].type = HERE_DOC
+    else if (pipe_tokens[i - 1] == "<<)
+        pipe_tokens[j].type = HERE_DOC
         i += 2
 
     else if (command[i - 1] == "<")
-        tokens[j].type = RED_INPUT
+        pipe_tokens[j].type = RED_INPUT
         i++;
 
 cat main.c > Makefile > out | ls -l << hla

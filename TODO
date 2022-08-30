@@ -27,7 +27,7 @@ TODO: ✅❓
 	[✅] cat --> Ctrl + C --> exit 130
 	[✅] ctr \ -> quit --> exit 131
 	[✅] ignore cntr C in childs
-	[❓] Built ins is not working with mulitble pipes: I know why and the solution I just need some rest
+	[✅] Built ins is not working with mulitble pipes: I know why and the solution I just need some rest
  
 	                                                                        Parser
 	[✅] if delimiter has quotes don't expand

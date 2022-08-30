@@ -3,7 +3,7 @@ NAME = Minishell
 C_FLAGS = gcc
 
 #READLINE = -lreadline -L /Users/abouchfa/brew/opt/readline/lib -I /Users/abouchfa/brew/opt/readline/include
-READLINE = -lreadline -L /goinfre/otoufah/homebrew/opt/readline/lib -I /goinfre/otoufah/homebrew/opt/readline/include
+READLINE = -lreadline# -L /goinfre/otoufah/homebrew/opt/readline/lib -I /goinfre/otoufah/homebrew/opt/readline/include
 
 ADDI_FLAGS = -fsanitize=address -g
 
@@ -42,12 +42,9 @@ C_FILES = 	minishell.c \
 			Parsing/get_env_in_herdoc.c \
 			Parsing/get_env_variables.c \
 			Parsing/input_formating.c \
-			Parsing/spliting_with_spaces.c \
-			Parsing/input_analyse.c \
-			Parsing/input_counter.c \
-			Parsing/get_pipe_data.c \
+			Parsing/set_pipe_tokens.c \
+			Parsing/set_pipe_data.c \
 			Parsing/handling_quotes.c \
-			Parsing/token_and_type.c \
 			Parsing/check_parse_errors.c \
 			Builtins/driver.c \
 			Builtins/mcd.c \
