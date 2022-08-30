@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:19:54 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/27 16:04:53 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/30 13:07:35 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	mexit(char **argv)
 {
 	t_bool	is_valid;
-	// t_bool	is_digit;
 	int		j;
 	int		i;
 
@@ -37,8 +36,6 @@ void	mexit(char **argv)
 		}
 		j++;
 	}
-	while (argv[i])
-		i++;
 	if (!is_valid)
 	{
 		ft_putstr_fd("exit\nexit: ", 2);
@@ -55,9 +52,10 @@ void	mexit(char **argv)
 	}
 	else
 	{
-		if (argv[0])
-			g_data.errno_cp = ft_atoi(argv[0]) % 256;
-		printf("exit\n");
+		if (argv[i])
+			g_data.errno_cp = ft_atoi(argv[i]) % 256;
+		else
+			printf("exit\n");
 		exit(g_data.errno_cp);
 	}
 }

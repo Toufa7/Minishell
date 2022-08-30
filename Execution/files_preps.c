@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 05:23:48 by abouchfa          #+#    #+#             */
-/*   Updated: 2022/08/27 16:04:53 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/30 15:07:24 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	pipe_files_prep(t_pipe_data *pipe_data, t_bool is_builtin)
 	int		i;
 
 	i = -1;
+	// printf("---> %p\n", pipe_data->redirections);
 	while (pipe_data->redirections && pipe_data->redirections[++i])
 	{
 		path = pipe_data->redirections[i]->path;

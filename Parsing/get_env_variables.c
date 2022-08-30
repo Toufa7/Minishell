@@ -61,15 +61,13 @@ char	*gotta_expand(char *variable, char *target, t_bool flag, int *i)
 
 char	*get_env_variables(char *target, t_bool flag)
 {
-	int	i;
-	int		idx;
+	int		i;
 	char	*output;
-	char	*env_var;
 	char	*variable;
 
 	i = 0;
 	output = ft_strdup("", TRUE);
-	while (i < ft_strlen(target))
+	while ((size_t)i < ft_strlen(target))
 	{
 		if (target[i] == '$')
 		{

@@ -27,9 +27,10 @@ TODO: ✅❓
 	[✅] cat --> Ctrl + C --> exit 130
 	[✅] ctr \ -> quit --> exit 131
 	[✅] ignore cntr C in childs
-	[❓] Built ins is not working with mulitble pipes: I know why and the solution I just need some rest
+	[✅] Built ins is not working with mulitble pipes: I know why and the solution I just need some rest
+	[]	 whereis grep > tmp/file
  
-	                                                                    Parser
+	  Parser
 	[✅] if delimiter has quotes don't expand
 	[✅] $fghjm << ls --> cmd should be NUll and ls | "" --> cmd should be empty string : Solution => Simply check if the upcoming input lenght is 0
 	[✅] $NOTEXIT ls --> it should run ls 

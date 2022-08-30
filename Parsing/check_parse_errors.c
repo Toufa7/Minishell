@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:26:08 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/27 16:04:53 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/30 17:41:04 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	compare(char	*t, char	*nxt_t, char	*nxt_tok)
 		return (-1);
 }
 
-t_bool	check_parse_errors(t_parse	*parse)
+t_bool	check_parse_errors(t_pipe_token **pipe_tokens)
 {
 	char	*type;
 	char	*tn;
@@ -52,12 +52,12 @@ t_bool	check_parse_errors(t_parse	*parse)
 	size_t	i;
 
 	i = 0;
-	while (i < parse->tokens->total && parse->tokens[i].token)
+	while (pipe_tokens[i] && pipe_tokens[i + 1])
 	{
-		type = parse->tokens[i].type;
-		tn = parse->tokens[i].token;
-		next_token = parse->tokens[i + 1].token;
-		next_type = parse->tokens[i + 1].type;
+		type = pipe_tokens[i]->type;
+		tn = pipe_tokens[i]->token;
+		next_token = pipe_tokens[i + 1]->token;
+		next_type = pipe_tokens[i + 1]->type;
 		if (compare(type, next_type, next_token) == 1)
 			return (err("Mini: no delimiter in front of ", tn, "\n"));
 		else if (compare(type, next_type, next_token) == 2)

@@ -380,7 +380,8 @@ testing echo $"test"$
 # testing export TEST+=100
 
 # printf "%s$ERRORS\n"
-# testing_errors cat '<$k'
-# testing_errors '<<'
-# testing_errors `ls`
-# testing_errors cat file.txt
+
+testing_errors cat '<$k'
+testing_errors '<<'
+testing_errors `ls`
+
