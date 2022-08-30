@@ -194,7 +194,7 @@ int			ft_strcmp(const char *s1, const char *s2);
 int			ft_isalpha(int c);
 int			ft_isdigit(int c);
 size_t		ft_strlen(const char *s);
-
+void		ft_lstclear(t_alloc_lst **lst);
 t_glbl_data	g_data;
 
 #endif

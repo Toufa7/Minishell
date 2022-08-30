@@ -50,7 +50,6 @@ char	*replace_them(char *str, char replaced)
 char	*s_d_quotes(char *str)
 {
 	int		i;
-	int		j;
 	int		len;
 	char	selected;
 	char	replaced;

@@ -18,6 +18,7 @@ void	*ft_calloc(size_t count, size_t size, t_bool use_alloc, char *source)
 	size_t	memory;
 	size_t	i;
 
+	(void) source;
 	i = 0;
 	memory = count * size;
 	if (use_alloc)

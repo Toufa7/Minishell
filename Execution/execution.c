@@ -19,7 +19,6 @@ void	get_herdoc(t_pipe_data *pipe_data)
 	int		fd;
 	int		j;
 	int		id;
-	sig_t	sig;
 
 	j = -1;
 	id = fork();

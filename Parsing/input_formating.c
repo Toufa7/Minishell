@@ -47,8 +47,6 @@ char	*input_formating(char *str)
 	char	*spcs;
 
 	spcs = alloc(sizeof(char) * (ft_strlen(str) + (spc(str) * 2) + 1), "frmt");
-	if (!spcs)
-		return (NULL);
 	i = -1;
 	j = 0;
 	while (str[++i])
@@ -80,3 +78,9 @@ char	*input_formating(char *str)
 	spcs[j] = '\0';
 	return (spcs);
 }
+
+// int main()
+// {
+// 	char *s = "omar>toufah>>me";
+// 	printf("%s\n",input_formating(s));
+// }

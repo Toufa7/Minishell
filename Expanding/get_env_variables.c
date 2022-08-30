@@ -31,37 +31,9 @@ char	*until_dollar(char *str)
 	return (ft_substr(str, 0, i));
 }
 
-
-char	*gotta_expand(char *variable, char *target, t_bool flag, int *i)
-{
-	char *output;
-	int idx;
-
-	output = 0;
-	variable = ft_substr(&target[(*i)] + 1, 0, validate_var_name(&target[(*i)] + 1));
-	idx = get_var_index(add_something(variable, "="));
-	if (idx != -1)
-	{
-		output = ft_strjoin(output, get_var_val(idx));
-		(*i) += validate_var_name(&target[(*i)] + 1) + 1;
-	}
-	else if (flag == TRUE)
-	{
-		output = ft_strjoin(output, add_something("$", variable));
-		(*i) += validate_var_name(&target[(*i)] + 1) + 1;
-	}
-	else
-	{
-		variable = until_dollar(&target[(*i) + 1]);
-		output = ft_strjoin(output, "");
-		(*i) += ft_strlen(variable) + 1;
-	}
-	return (output);
-}
-
 char	*get_env_variables(char *target, t_bool flag)
 {
-	int	i;
+	size_t	i;
 	int		idx;
 	char	*output;
 	char	*env_var;
@@ -107,7 +79,26 @@ char	*get_env_variables(char *target, t_bool flag)
 			}
 			else
 			{
-				output = ft_strjoin(output, gotta_expand(variable, target, flag, &i));
+				variable = ft_substr(&target[i] + 1, 0,
+						validate_var_name(&target[i] + 1));
+				env_var = add_something(variable, "=");
+				idx = get_var_index(add_something(variable, "="));
+				if (idx != -1)
+				{
+					output = ft_strjoin(output, get_var_val(idx));
+					i += validate_var_name(&target[i] + 1) + 1;
+				}
+				else if (flag == TRUE)
+				{
+					output = ft_strjoin(output, add_something("$", variable));
+					i += validate_var_name(&target[i] + 1) + 1;
+				}
+				else
+				{
+					variable = until_dollar(&target[i + 1]);
+					output = ft_strjoin(output, "");
+					i += ft_strlen(variable) + 1;
+				}
 			}
 		}
 		else

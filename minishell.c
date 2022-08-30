@@ -67,7 +67,7 @@ void	minishell(t_parse *parse)
 		i = 0;
 		while (parse->splt_pipes[i])
 			i++;
-		parse->pipe_data = ft_calloc(i + 1, sizeof(t_pipe_data *), TRUE, "Minishell");
+		parse->pipe_data = ft_calloc(i + 1, sizeof(t_pipe_data *), TRUE, "Min");
 		i = -1;
 		while (parse->splt_pipes[++i])
 		{
@@ -80,21 +80,6 @@ void	minishell(t_parse *parse)
 			parse->pipe_data[i] = get_pipe_data(parse);
 		}
 		execution(parse->pipe_data);
-	}
-}
-
-void	ft_lstclear(t_alloc_lst **lst)
-{
-	t_alloc_lst	*temp;
-
-	while (*lst)
-	{
-		temp = (*lst)->next;
-		if (*lst && (*lst)->content)
-			free((*lst)->content);
-		if (*lst)
-			free(*lst);
-		(*lst) = temp;
 	}
 }
 

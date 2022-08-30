@@ -15,7 +15,7 @@
 void	mexit(char **argv)
 {
 	t_bool	is_valid;
-	t_bool	is_digit;
+	// t_bool	is_digit;
 	int		j;
 	int		i;
 
@@ -55,8 +55,8 @@ void	mexit(char **argv)
 	}
 	else
 	{
-		if (argv[i])
-			g_data.errno_cp = ft_atoi(argv[i]) % 256;
+		if (argv[0])
+			g_data.errno_cp = ft_atoi(argv[0]) % 256;
 		printf("exit\n");
 		exit(g_data.errno_cp);
 	}

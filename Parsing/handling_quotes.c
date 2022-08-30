@@ -21,53 +21,57 @@ t_bool	checking_quotes(char *str)
 	{
 		ft_putstr_fd("Unclosed Quotes\n", 2);
 		g_data.errno_cp = 1;
-		// rl_on_new_line();
+		rl_on_new_line();
 		// rl_replace_line("", 0);
 		return (TRUE);
 	}
 	return (FALSE);
 }
 
-char	*allocate_mem(char *str)
+char	*check_and_replace(char *dup, char *str, char replaced, char replace_by)
 {
-	char	*dup;
+	size_t	i;
+	char	d_or_s;
 
-	dup = ft_calloc((ft_strlen(str) + 1), sizeof(char), TRUE,
-			"handling_quotes");
-	if (!dup)
-		return (NULL);
+	i = -1;
+	while (++i < ft_strlen(str))
+	{
+		if (str[i] == DOUBLES_QUOTES || str[i] == SING_QUOTES)
+		{
+			dup[i] = str[i];
+			d_or_s = dup[i];
+			while (str[++i] && str[i] != d_or_s)
+			{
+				if (str[i] == replaced)
+					dup[i] = replace_by;
+				else
+					dup[i] = str[i];
+			}
+			if (str[i] == DOUBLES_QUOTES || str[i] == SING_QUOTES)
+				dup[i] = str[i];
+		}
+		else
+			dup[i] = str[i];
+	}
 	return (dup);
 }
 
 char	*handling_quotes(char *str, char replaced, char replace_by)
 {
-	int		i;
 	char	*dup;
 
 	g_data.parse_error = checking_quotes(str);
 	dup = NULL;
 	if (!g_data.parse_error)
 	{
-		dup = allocate_mem(str);
-		i = -1;
-		while (++i < ft_strlen(str))
-		{
-			if (str[i] == DOUBLES_QUOTES || str[i] == SING_QUOTES)
-			{
-				dup[i] = str[i];
-				while (str[++i] && str[i] != dup[i])
-				{
-					if (str[i] == replaced)
-						dup[i] = replace_by;
-					else
-						dup[i] = str[i];
-				}
-				if (str[i] == DOUBLES_QUOTES || str[i] == SING_QUOTES)
-					dup[i] = str[i];
-			}
-			else
-				dup[i] = str[i];
-		}
+		dup = ft_calloc((ft_strlen(str) + 1), sizeof(char), TRUE,
+				"handling_quotes");
+		return (check_and_replace(dup, str, replaced, replace_by));
 	}
 	return (dup);
 }
+
+// int main()
+// {
+// 	printf("%s\n",handling_quotes("omar toufah me", ' ', '*'));
+// }

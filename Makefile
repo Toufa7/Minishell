@@ -2,8 +2,7 @@ NAME = Minishell
 
 C_FLAGS = gcc
 
-#READLINE = -lreadline -L /Users/abouchfa/brew/opt/readline/lib -I /Users/abouchfa/brew/opt/readline/include
-READLINE = -lreadline -L /goinfre/otoufah/homebrew/opt/readline/lib -I /goinfre/otoufah/homebrew/opt/readline/include
+READLINE = -lreadline -L /Users/$(USER)/brew/opt/readline/lib -I /Users/$(USER)/brew/opt/readline/include
 
 ADDI_FLAGS = -fsanitize=address -g
 
@@ -31,6 +30,7 @@ C_FILES = 	minishell.c \
 			Utils/ft_strncmp.c \
 			Utils/ft_strdup.c \
 			Utils/ft_calloc.c \
+			Utils/ft_lstclear.c \
 			Utils/ft_strchr.c \
 			Utils/ft_realloc.c \
 			Utils/ft_isalpha.c \
@@ -64,7 +64,7 @@ C_FILES = 	minishell.c \
 all: $(NAME)
 
 $(NAME): $(C_FILES)
-		$(C_FLAGS) $(ADDI_FLAGS) $(READLINE) $(C_FILES) -o $(NAME)
+		$(C_FLAGS) $(READLINE) $(C_FILES) -o $(NAME)
 
 clean:
 	rm -rf $(NAME)
