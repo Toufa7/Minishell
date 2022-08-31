@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:36:38 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/31 18:34:21 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/31 20:05:05 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	set_pipe_data(t_pipe_data *pipe_data)
 
 	i = -1;
 	j = -1;
-	pipe_tokens = pipe_data->pipe_tokens;
+	pipe_tokens = pipe_data->tokens;
 	var_init(pipe_data);
 	pipe_data->redirections = ft_calloc(pipe_data->counter.redirections + 1,
 			sizeof(t_redirections *), TRUE, "get_pipe_dada");

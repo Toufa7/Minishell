@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 16:17:46 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/30 22:50:12 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/31 20:39:14 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	child_process(t_pipe_data *pipe_data, int pipe_nb, int builtin_nb)
 			if (execve(pipe_data->cmd_path, pipe_data->argv, g_data.envp) == -1)
 			{
 				ft_putstr_fd(strerror(errno), 2);
+				ft_putstr_fd("\n", 2);
 				exit(errno);
 			}
 		}

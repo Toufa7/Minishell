@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/31 18:42:27 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/31 20:05:11 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,6 @@ typedef struct s_pipe_token
 {
 	char	*token;
 	char	*type;
-	int		set_as_cmd;
-	t_bool	next_is_option;
 }	t_pipe_token;
 
 typedef struct s_alloc_lst
@@ -112,7 +110,7 @@ typedef struct s_pipe_data
 	t_bool			is_herdoc;
 	t_couner		counter;
 	t_redirections	**redirections;
-	t_pipe_token	**pipe_tokens;
+	t_pipe_token	**tokens;
 }	t_pipe_data;
 
 typedef struct s_parse

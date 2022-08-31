@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/31 18:46:35 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/31 20:06:33 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,33 +48,33 @@ void	check_nbr_of_delimiters(int delimiters)
 	}
 }
 
-void	count_pipe_tokens(t_pipe_token **pipe_tokens, t_pipe_data *pipe_data)
+void	count_pipe_tokens(t_pipe_data *pipe_data)
 {
 	int	i;
 
 	i = -1;
 	init_pipe_counter(pipe_data);
-	while (pipe_tokens[++i])
+	while (pipe_data->tokens[++i])
 	{
-		if (ft_strcmp(pipe_tokens[i]->type, "red_input") == 0)
+		if (ft_strcmp(pipe_data->tokens[i]->type, "red_input") == 0)
 			pipe_data->counter.red_in++;
-		else if (ft_strcmp(pipe_tokens[i]->type, "red_out") == 0)
+		else if (ft_strcmp(pipe_data->tokens[i]->type, "red_out") == 0)
 			pipe_data->counter.red_out++;
-		else if (ft_strcmp(pipe_tokens[i]->type, "here_doc") == 0)
+		else if (ft_strcmp(pipe_data->tokens[i]->type, "here_doc") == 0)
 			pipe_data->counter.here_do++;
-		else if (ft_strcmp(pipe_tokens[i]->type, "append") == 0)
+		else if (ft_strcmp(pipe_data->tokens[i]->type, "append") == 0)
 			pipe_data->counter.app++;
-		else if (ft_strcmp(pipe_tokens[i]->type, "command") == 0)
+		else if (ft_strcmp(pipe_data->tokens[i]->type, "command") == 0)
 			pipe_data->counter.cmd++;
-		else if (ft_strcmp(pipe_tokens[i]->type, "infile") == 0)
+		else if (ft_strcmp(pipe_data->tokens[i]->type, "infile") == 0)
 			pipe_data->counter.redirections++;
-		else if (ft_strcmp(pipe_tokens[i]->type, "outfile") == 0)
+		else if (ft_strcmp(pipe_data->tokens[i]->type, "outfile") == 0)
 			pipe_data->counter.redirections++;
-		else if (ft_strcmp(pipe_tokens[i]->type, "app_outfile") == 0)
+		else if (ft_strcmp(pipe_data->tokens[i]->type, "app_outfile") == 0)
 			pipe_data->counter.redirections++;
-		else if (ft_strcmp(pipe_tokens[i]->type, "option") == 0)
+		else if (ft_strcmp(pipe_data->tokens[i]->type, "option") == 0)
 			pipe_data->counter.option++;
-		else if (ft_strcmp(pipe_tokens[i]->type, "delimiter") == 0)
+		else if (ft_strcmp(pipe_data->tokens[i]->type, "delimiter") == 0)
 		{
 			pipe_data->counter.delimiter++;
 			check_nbr_of_delimiters(pipe_data->counter.delimiter);
@@ -111,10 +111,10 @@ void	minishell(t_parse *parse)
 		{
 			parse->pipes_data[i] = alloc(sizeof(t_pipe_data), "pipe_data");
 			parse->no_splt = handling_quotes(parse->splt_pipes[i], ' ', -1);
-			parse->pipes_data[i]->pipe_tokens = set_pipe_tokens(parse->no_splt);
-			count_pipe_tokens(parse->pipes_data[i]->pipe_tokens , parse->pipes_data[i]);
-			// token_and_type(parse->pipes_data[i]->pipe_tokens);
-			g_data.parse_error = check_parse_errors(parse->pipes_data[i]->pipe_tokens );
+			parse->pipes_data[i]->tokens = set_pipe_tokens(parse->no_splt);
+			count_pipe_tokens(parse->pipes_data[i]);
+			// token_and_type(parse->pipes_data[i]->tokens);
+			g_data.parse_error = check_parse_errors(parse->pipes_data[i]->tokens );
 			if (g_data.parse_error)
 				break ;
 			set_pipe_data(parse->pipes_data[i]);
