@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/30 16:49:09 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/31 18:42:27 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct s_pipe_token
 	char	*token;
 	char	*type;
 	int		set_as_cmd;
+	t_bool	next_is_option;
 }	t_pipe_token;
 
 typedef struct s_alloc_lst
@@ -97,6 +98,7 @@ typedef struct s_g_glbl_data
 	t_bool		parse_error;
 	pid_t		last_child_id;
 	t_bool		redirection_error;
+	t_bool		is_buit_in;
 }	t_glbl_data;
 
 typedef struct s_pipe_data
@@ -110,6 +112,7 @@ typedef struct s_pipe_data
 	t_bool			is_herdoc;
 	t_couner		counter;
 	t_redirections	**redirections;
+	t_pipe_token	**pipe_tokens;
 }	t_pipe_data;
 
 typedef struct s_parse
@@ -123,7 +126,6 @@ typedef struct s_parse
 	char			pipe;
 	char			space;
 	t_pipe_data		**pipes_data;
-	t_pipe_token	**pipe_tokens;
 }	t_parse;
 
 // ----------- Parsing --------------------------
@@ -140,10 +142,9 @@ char			*add_something(char *str, char *add);
 char			*until_dollar(char *str);
 void			token_counter_init(t_pipe_token	*pipe_tokens);
 void			input_analyse(t_pipe_token	*pipe_tokens);
-void			token_and_type(t_parse *parse);
+void			token_and_type(t_pipe_token **tokens);
 void			input_counter(t_pipe_token	*pipe_tokens);
-void			set_pipe_data(t_pipe_data	*pipe_data,
-					t_pipe_token	**pipe_tokens);
+void			set_pipe_data(t_pipe_data	*pipe_data);
 t_pipe_token	**set_pipe_tokens(char *str);
 t_bool			check_parse_errors(t_pipe_token **pipe_tokens);
 char			*gotta_expand(char *target, t_bool flag, int *i);

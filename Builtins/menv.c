@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:19:50 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/27 16:04:53 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/30 22:29:46 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	menv(char **argv, char *prefix, t_bool is_export)
 			while (g_data.envp[i][++j])
 			{
 				write(1, g_data.envp[i] + j, g_data.out_fd);
-				if (g_data.envp[i][j] == '=' && is_export)
+				if (g_data.envp[i][j] == '=' && is_export && !eq)
 				{
 					write(1, "\"", g_data.out_fd);
 					eq = 1;

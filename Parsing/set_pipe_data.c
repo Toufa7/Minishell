@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:36:38 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/30 17:46:59 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/31 18:34:21 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,17 @@ t_redirections	*get_redirection(char *path, int type)
 	return (new_redrcs);
 }
 
-void	set_pipe_data(t_pipe_data *pipe_data, t_pipe_token **pipe_tokens)
+void	set_pipe_data(t_pipe_data *pipe_data)
 {
 	int			i;
 	int			j;
 	char		*quotes;
 	char		*replaced;
+	t_pipe_token **pipe_tokens;
 
 	i = -1;
 	j = -1;
+	pipe_tokens = pipe_data->pipe_tokens;
 	var_init(pipe_data);
 	pipe_data->redirections = ft_calloc(pipe_data->counter.redirections + 1,
 			sizeof(t_redirections *), TRUE, "get_pipe_dada");

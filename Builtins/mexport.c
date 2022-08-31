@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:19:59 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/28 15:55:02 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/30 22:54:20 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*get_key(char *str)
 	key = NULL;
 	while (str[i] && str[i] != '=' && str[i] != '+')
 	{
-		if (!(ft_isalpha(str[i]) || (ft_isdigit(str[i]) && i != 0)))
+		if (!(ft_isalpha(str[i]) || str[i] == BACKSLASH || (ft_isdigit(str[i]) && i != 0) || str[i] == '_'))
 			break ;
 		i++;
 	}
@@ -68,7 +68,7 @@ int	get_op_type(char *str)
 	type = -1;
 	if (!str || !str[0])
 		type = 2;
-	if (str[0] && str[0] == '=')
+	if (str[0] && str[0] == '=' && str[1] != '=')
 		type = 0;
 	if (str[0] && str[1] && str[0] == '+' && str[1] == '=')
 		type = 1;
@@ -119,10 +119,10 @@ void	create_final_var(int op_type, char *key, char *new_val)
 t_bool	check_errors(char *str, char **key, char **val, int *op_type)
 {
 	*key = get_key(str);
-	if (key)
+	if (*key)
 		*op_type = get_op_type(str + ft_strlen(*key));
 	*val = get_val(str);
-	if (!key || *op_type == -1)
+	if (!*key || *op_type == -1)
 	{
 		ft_putstr_fd("export: '", 2);
 		ft_putstr_fd(str, 2);
@@ -151,7 +151,15 @@ void	mexport(char **argv)
 	}
 	while (argv[++i])
 	{
-		if (check_errors(argv[i], &key, &val, &op_type))
+		if (argv[i][0] == '-')
+		{
+			ft_putstr_fd("export: ", 2);
+			ft_putstr_fd(argv[i], 2);
+			ft_putstr_fd(": invalid option\n", 2);
+			g_data.errno_cp = 2;
+			break;
+		}
+		else if (check_errors(argv[i], &key, &val, &op_type))
 			create_final_var(op_type, key, val);
 	}
 }

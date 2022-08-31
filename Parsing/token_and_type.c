@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_utils.c                                  :+:      :+:    :+:   */
+/*   token_and_type.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: otoufah <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 19:56:17 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/26 19:56:18 by otoufah          ###   ########.fr       */
+/*   Updated: 2022/08/31 18:36:57 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	token_and_type(t_parse *parse)
+void	token_and_type(t_pipe_token **tokens)
 {
 	int	i;
 
 	i = 0;
-	while (parse->pipe_tokens[i])
+	while (tokens[i])
 	{
-		printf("Token -> %s -> Type -> %s\n",
-			parse->pipe_tokens[i]->token, parse->pipe_tokens[i]->type);
+		printf("Token -> %s | Type -> %s\n", tokens[i]->token, tokens[i]->type);
 		i++;
 	}
 }
