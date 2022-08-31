@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/30 16:49:09 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/30 22:49:02 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ typedef struct s_g_glbl_data
 	t_bool		parse_error;
 	pid_t		last_child_id;
 	t_bool		redirection_error;
+	t_bool		is_buit_in;
 }	t_glbl_data;
 
 typedef struct s_pipe_data

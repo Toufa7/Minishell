@@ -171,13 +171,13 @@ function testing_errors()
 
 printf "%s$ECHO\n"
                                  
-testing echo \"$\"
-testing echo \'$\'
-testing echo $abc$
-testing eChO "\"$"\"	
-testing echo \'\'$\'\'
+# testing echo \"$\"
+# testing echo \'$\'
+# testing echo $abc$
+# testing eChO "\"$"\"	
+# testing echo \'\'$\'\'
 # testing echo "$_" #Last Command actually not required
-testing echo $"test"$ 
+# testing echo $"test"$ 
 # testing echo "$0" # Not pretty much work check it by ur self sorry 
 # testing echo "$1337"
 # testing 'e'"c"'h'o	"POMS"
@@ -319,65 +319,65 @@ testing echo $"test"$
 
 # printf "%s$EXPORT\n"
 
-# testing "env | grep \"_="\"
-# testing "export | grep \"SHLVL"\""
-# testing "export | grep \"OLDPWD"\""
-# testing "export | grep \"PWD"\"	
-# testing export $?
-# testing export TEST
-# testing export TEST=		
-# testing export TEST=123		
-# testing export ___TEST=123	
-# testing export --TEST=123	
-# testing export ""=""		
-# testing export ''=''		
-# testing export "="="="		
-# testing export '='='='		
-# testing export TE\\\ST=100	
-# testing export TE-ST=100	
-# testing export -TEST=100	
-# testing export TEST-=100	
-# testing export _TEST=100	
-# testing export TEST
-# testing export ==========	
-# testing export 1TEST=		
-# testing export TEST
-# testing export ""=""		
-# testing export TES=T=""		
-# testing export TE+S=T=""	
-# testing export TES\\\\T=123
-# testing export TES.T=123
-# testing export TES\\\$T=123
-# testing export TES\\\\T
-# testing export TES.T=123
-# testing export TES+T=123
-# testing export TES=T=123
-# testing export TES}T=123
-# testing export TES{T=123
-# testing export TES-T=123
-# testing export -TEST=123
-# testing export _TEST=123
-# testing export TES_T=123
-# testing export TEST_=123
-# testing export TE*ST=123
-# testing export TES#T=123
-# testing export TES@T=123
-# testing export TES!T=123
-# testing export TES$?T=123
-# testing export =============123
-# testing export +++++++=123
-# testing export ________=123
-# testing export export
-# testing export echo
-# testing export pwd
-# testing export cd
-# testing export export
-# testing export unset
-# testing export sudo
-# testing export TES^T=123
-# testing export TES!T=123
-# testing export TES\~T=123
-# testing export TEST+=100
+testing "env | grep \"_="\"
+testing "export | grep \"SHLVL"\""
+testing "export | grep \"OLDPWD"\""
+testing "export | grep \"PWD"\"	
+testing export $?
+testing export TEST
+testing export TEST=		
+testing export TEST=123		
+testing export ___TEST=123	
+testing export --TEST=123	
+testing export ""=""		
+testing export ''=''		
+testing export "="="="		
+testing export '='='='		
+testing export TE\\\ST=100	
+testing export TE-ST=100	
+testing export -TEST=100	
+testing export TEST-=100	
+testing export _TEST=100	
+testing export TEST
+testing export ==========	
+testing export 1TEST=		
+testing export TEST
+testing export ""=""		
+testing export TES=T=""		
+testing export TE+S=T=""	
+testing export TES\\\\T=123
+testing export TES.T=123
+testing export TES\\\$T=123
+testing export TES\\\\T
+testing export TES.T=123
+testing export TES+T=123
+testing export TES=T=123
+testing export TES}T=123
+testing export TES{T=123
+testing export TES-T=123
+testing export -TEST=123
+testing export _TEST=123
+testing export TES_T=123
+testing export TEST_=123
+testing export TE*ST=123
+testing export TES#T=123
+testing export TES@T=123
+testing export TES!T=123
+testing export TES$?T=123
+testing export =============123
+testing export +++++++=123
+testing export ________=123
+testing export export
+testing export echo
+testing export pwd
+testing export cd
+testing export export
+testing export unset
+testing export sudo
+testing export TES^T=123
+testing export TES!T=123
+testing export TES\~T=123
+testing export TEST+=100
 
 # printf "%s$ERRORS\n"
 
