@@ -93,7 +93,7 @@ void	getting_back(char **str)
 
 void	minishell(t_parse *parse)
 {
-	int	i;
+	int				i;
 	t_pipe_token	**pipe_tokens;
 
 	parse->line_double_quotes = handling_quotes(parse->line, '|', -1);
@@ -105,7 +105,8 @@ void	minishell(t_parse *parse)
 		i = 0;
 		while (parse->splt_pipes[i])
 			i++;
-		parse->pipes_data = ft_calloc(i + 1, sizeof(t_pipe_data *), TRUE, "Min");
+		parse->pipes_data = ft_calloc(i + 1,
+				sizeof(t_pipe_data *), TRUE, "Min");
 		i = -1;
 		while (parse->splt_pipes[++i])
 		{

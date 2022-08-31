@@ -55,7 +55,7 @@ typedef struct s_counter
 	size_t	env_var;
 	size_t	option;
 	size_t	total;
-} t_couner;
+}	t_couner;
 
 typedef struct s_pipe_token
 {
@@ -132,69 +132,77 @@ char			**pipes(char	*str);
 char			*s_d_quotes(char *str);
 char			*handling_quotes(char *str, char replaced_1, char replace_by);
 char			*input_formating(char	*str);
+int				spc(char *str);
 char			*getting_back_original_input(char *str);
 char			*get_env_variables(char *target, t_bool flag);
-char			*get_env_in_herdoc(char *target);
+char			*get_env_in_herdoc(char *target, t_bool flag);
+char			*add_something(char *str, char *add);
+char			*until_dollar(char *str);
 void			token_counter_init(t_pipe_token	*pipe_tokens);
 void			input_analyse(t_pipe_token	*pipe_tokens);
 void			token_and_type(t_parse *parse);
 void			input_counter(t_pipe_token	*pipe_tokens);
+void			set_pipe_data(t_pipe_data	*pipe_data,
+					t_pipe_token	**pipe_tokens);
 t_pipe_token	**set_pipe_tokens(char *str);
-void			set_pipe_data(t_pipe_data *pipe_data, t_pipe_token **pipe_tokens);
 t_bool			check_parse_errors(t_pipe_token **pipe_tokens);
+char			*gotta_expand(char *target, t_bool flag, int *i);
+char			*digit(char *target, int *i);
+char			*special_cases(char *target, int *i);
+char			*exit_status(char *variable, int *i);
+char			*just_copy(char *target, int *i);
 
 // ----------- Execution -------------------------
 
-void		mcd(char *path);
-void		mpwd(void);
-void		menv(char **argv, char *prefix, t_bool is_export);
-void		mecho(char **argv);
-void		mexit(char **argv);
-void		munset(char **argv);
-void		mexport(char **argv);
-void		validate_cmd(t_pipe_data *pipe_data);
-void		pipe_files_prep(t_pipe_data *pipe_data, t_bool is_builtin);
-void		execution(t_pipe_data **pipe_data);
-char		*get_cmd_path(char	*cmd, char	**exec_programs_dirs);
-int			check_builtin(t_pipe_data *pipe_data);
-void		exec_builtin(int builtin_nb, t_pipe_data *pipe_data);
+void			mcd(char *path);
+void			mpwd(void);
+void			menv(char **argv, char *prefix, t_bool is_export);
+void			mecho(char **argv);
+void			mexit(char **argv);
+void			munset(char **argv);
+void			mexport(char **argv);
+void			validate_cmd(t_pipe_data *pipe_data);
+void			pipe_files_prep(t_pipe_data *pipe_data, t_bool is_builtin);
+void			execution(t_pipe_data **pipe_data);
+char			*get_cmd_path(char	*cmd, char	**exec_programs_dirs);
+int				check_builtin(t_pipe_data *pipe_data);
+void			exec_builtin(int builtin_nb, t_pipe_data *pipe_data);
 
 // ----------- Shared Functions ------------------
 
-void		*alloc(size_t size, char *source);
-void		ft_close(int n, int s);
-void		free_str(void	*ptr);
-void		free_arr(void **arr);
-
-void		parent_sigint(int sig);
-void		herdoc_sigint(int sig);
-void		void_sig(int sig);
-// void		child_sigquit(int sig)
-// void		child_sigint(int sig);
-int			ft_isalnum(int c);
-void		env_dup(char **env);
-char		**ft_realloc(char **dist, char *str, t_bool use_alloc);
-void		*ft_calloc(size_t count, size_t size, t_bool use_alloc, char *src);
-char		*ft_strdup(const char *s1, t_bool use_alloc);
-char		*ft_itoa(int n);
-char		*get_var_val(int var_index);
-char		*ft_strnstr(const char *haystack, const char *needle, size_t len);
-void		ft_putstr_fd(char *s, int fd);
-void		ft_strncpy(char *dest, char *src, int n);
-char		**ft_split(char const *s, char c);
-char		*ft_strstr(const char *haystack, const char *needle);
-char		*ft_strjoin(char const *s1, char const *s2);
-char		*ft_strchr(const char *s, int c);
-char		*ft_substr(char const *s, unsigned int start, size_t len);
-int			validate_var_name(char *var);
-int			get_var_index(char *var);
-int			ft_atoi(const char *str);
-int			ft_strncmp(const char *s1, const char *s2, size_t n);
-int			ft_strcmp(const char *s1, const char *s2);
-int			ft_isalpha(int c);
-int			ft_isdigit(int c);
-size_t		ft_strlen(const char *s);
-void		ft_lstclear(t_alloc_lst **lst);
+void			*alloc(size_t size, char *source);
+void			ft_close(int n, int s);
+void			free_str(void	*ptr);
+void			free_arr(void **arr);
+void			parent_sigint(int sig);
+void			herdoc_sigint(int sig);
+void			void_sig(int sig);
+int				ft_isalnum(int c);
+void			env_dup(char **env);
+char			**ft_realloc(char **dist, char *str, t_bool use_alloc);
+void			*ft_calloc(size_t count, size_t size,
+					t_bool use_alloc, char *src);
+char			*ft_strdup(const char *s1, t_bool use_alloc);
+char			*ft_itoa(int n);
+char			*get_var_val(int var_index);
+char			*ft_strnstr(const char *haystack,
+					const char *needle, size_t len);
+void			ft_putstr_fd(char *s, int fd);
+void			ft_strncpy(char *dest, char *src, int n);
+char			**ft_split(char const *s, char c);
+char			*ft_strstr(const char *haystack, const char *needle);
+char			*ft_strjoin(char const *s1, char const *s2);
+char			*ft_strchr(const char *s, int c);
+char			*ft_substr(char const *s, unsigned int start, size_t len);
+int				validate_var_name(char *var);
+int				get_var_index(char *var);
+int				ft_atoi(const char *str);
+int				ft_strncmp(const char *s1, const char *s2, size_t n);
+int				ft_strcmp(const char *s1, const char *s2);
+int				ft_isalpha(int c);
+int				ft_isdigit(int c);
+size_t			ft_strlen(const char *s);
+void			ft_lstclear(t_alloc_lst **lst);
 t_glbl_data	g_data;
 
 #endif

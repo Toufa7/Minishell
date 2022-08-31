@@ -12,16 +12,16 @@
 
 #include "../minishell.h"
 
-void	type_define(t_pipe_token *toekn, char *str, t_bool flag)
+void	type_define(t_pipe_token *token, char *str, t_bool flag)
 {
-	toekn->type = str;
-	toekn->token = get_env_variables(toekn->token, flag);
+	token->type = str;
+	token->token = get_env_variables(token->token, flag);
 }
 
 void	set_token_type(t_pipe_token *token, t_pipe_token *pre_toekn)
 {
-	if (ft_strcmp(token->token,  "<<") == 0)
-			token->type = "here_doc";
+	if (ft_strcmp(token->token, "<<") == 0)
+		token->type = "here_doc";
 	else if (ft_strcmp(token->token, "<") == 0)
 		token->type = "red_input";
 	else if (ft_strcmp(token->token, ">") == 0)

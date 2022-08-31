@@ -12,58 +12,30 @@
 
 #include "../minishell.h"
 
-char	*till_dollar(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (str[i] == '$')
-		return (ft_strdup("$", TRUE));
-	while (str[i] && str[i] != '$')
-		i++;
-	return (ft_substr(str, 0, i));
-}
-
-char	*exp_cases(char cases, char	*variable, char	*output)
-{
-	if (cases == '?')
-	{
-		variable = ft_itoa(g_data.errno_cp);
-		return (ft_strjoin(output, variable));
-	}
-	return (NULL);
-}
-
-char	*get_env_in_herdoc(char *target)
+char	*get_env_in_herdoc(char *target, t_bool flag)
 {
 	int		i;
 	char	*output;
-	char	*variable;
 
 	i = 0;
 	output = ft_strdup("", TRUE);
-	while (target[i])
+	while ((size_t)i < ft_strlen(target))
 	{
 		if (target[i] == '$')
 		{
 			if (target[i + 1] == '?')
-			{
-				output = exp_cases('?', ft_itoa(g_data.errno_cp), output);
-				i += 2;
-			}
+				output = ft_strjoin(output,
+						exit_status(ft_itoa(g_data.errno_cp), &i));
+			else if (!ft_isalnum(target[i + 1]) && target[i + 1] != '_')
+				output = ft_strjoin(output, special_cases(target, &i));
+			else if (ft_isdigit(target[i + 1]) == 1)
+				output = ft_strjoin(output, digit(target, &i));
 			else
-			{
-				variable = ft_substr(target + i + 1, 0,
-						validate_var_name(target + i + 1));
-				output = ft_strjoin(output, getenv(variable));
-				i += validate_var_name(target + i + 1) + 1;
-			}
+				output = ft_strjoin(output, gotta_expand(target, flag, &i));
 		}
 		else
 		{
-			variable = till_dollar(target + i);
-			i += ft_strlen(variable);
-			output = ft_strjoin(output, variable);
+			output = ft_strjoin(output, just_copy(target, &i));
 		}
 	}
 	return (output);

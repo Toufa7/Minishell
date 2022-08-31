@@ -5,7 +5,7 @@ C_FLAGS = gcc
 READLINE = -lreadline -L /Users/$(USER)/brew/opt/readline/lib -I /Users/$(USER)/brew/opt/readline/include
 READ = -lreadline# -L /goinfre/otoufah/homebrew/opt/readline/lib -I /goinfre/otoufah/homebrew/opt/readline/include
 
-ADDI_FLAGS = -Wall -Wextra -Werror -fsanitize=address -g
+ADDI_FLAGS = -fsanitize=address -g
 
 
 F_REMOVE = rm -rf
@@ -40,9 +40,13 @@ C_FILES = 	minishell.c \
 			Utils/ft_strnstr.c \
 			Utils/get_var_val.c \
 			Parsing/s_d_quotes.c \
+			Parsing/token_and_type.c \
 			Parsing/get_env_in_herdoc.c \
 			Parsing/get_env_variables.c \
+			Parsing/get_env_utils.c	\
+			Parsing/get_env_utils_2.c	\
 			Parsing/input_formating.c \
+			Parsing/input_formating_utils.c \
 			Parsing/set_pipe_tokens.c \
 			Parsing/set_pipe_data.c \
 			Parsing/handling_quotes.c \

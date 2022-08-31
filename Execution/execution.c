@@ -34,7 +34,7 @@ void	get_herdoc(t_pipe_data *pipe_data)
 			{
 				if (line)
 				{
-					expand = get_env_in_herdoc(line);
+					expand = get_env_in_herdoc(line, FALSE);
 					write(fd, expand, ft_strlen(expand));
 					write(fd, "\n", 1);
 					free_str(expand);

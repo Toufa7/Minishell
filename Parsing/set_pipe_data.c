@@ -58,7 +58,8 @@ void	set_pipe_data(t_pipe_data *pipe_data, t_pipe_token **pipe_tokens)
 		}
 		else if (ft_strcmp(pipe_tokens[i]->type, "delimiter") == 0)
 		{
-			pipe_data->delimiter = ft_realloc(pipe_data->delimiter, quotes, TRUE);
+			pipe_data->delimiter = ft_realloc(pipe_data->delimiter,
+					quotes, TRUE);
 			pipe_data->is_herdoc = TRUE;
 		}
 		else if (ft_strcmp(pipe_tokens[i]->type, "infile") == 0)
