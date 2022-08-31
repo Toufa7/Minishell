@@ -17,7 +17,8 @@ MAGENTA="\033[35m"
 CYAN="\033[36m"
 WHITE="\033[37m"
 SEPARATOR="------------------------------------"
-
+BOLD=$(tput bold)
+NORMAL=$(tput sgr0)
 
 ECHO="
 ███████╗ ██████╗██╗  ██╗ ██████╗ 
@@ -80,27 +81,25 @@ ERRORS="
 ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝                                            
 "
 
+
+
 function	usage()
 {
-	bold=$(tput bold)
-	normal=$(tput sgr0)
-	# echo "${bold}bold${normal} but this isn't"
-
 	echo '\033[1mNAME\033[0m'
-	echo "\033[1;37m	Minishell Tester" "${normal} -- A Simple Minishell tester Good Luck 🤞 "
+	echo "\033[1;37m	Minishell Tester" "${NORMAL} -- A Simple Minishell tester Good Luck 🤞 "
 	echo ""
 	echo '\033[1mSYNOPSIS\033[0m'
 	echo "\033[1;37m	./Tester [-a|h|e|p|x|t]"
-	echo "${normal}"
+	echo "${NORMAL}"
 	echo '\033[1mDESCRIPTION\033[0m'
 	echo ""
-	echo "${normal} The following options are available:"
-	echo "\033[1;37m	-a	${normal}All"
-	echo "\033[1;37m	-h	${normal}Help"
-	echo "\033[1;37m	-E	${normal}Echo"
-	echo "\033[1;37m	-p	${normal}Pipes"
-	echo "\033[1;37m	-x	${normal}Exit"
-	echo "\033[1;37m	-e	${normal}Export"
+	echo "${NORMAL} The following options are available:"
+	echo "\033[1;37m	-a	${NORMAL}All"
+	echo "\033[1;37m	-h	${NORMAL}Help"
+	echo "\033[1;37m	-E	${NORMAL}Echo"
+	echo "\033[1;37m	-p	${NORMAL}Pipes"
+	echo "\033[1;37m	-x	${NORMAL}Exit"
+	echo "\033[1;37m	-e	${NORMAL}Export"
 }
 
 
@@ -115,12 +114,16 @@ function testing()
 	if [ "$MINISHELL" == "$BASH" ] && [ "$MINISHELL_EXIT_STATUS" == "$BASH_EXIT_STATUS" ];
     then
 	{
-		printf "$GREEN%s""[OK]	"$RESET
-		printf "$CYAN\"$*\"	$RESET"
+		let 	"i++"
+		printf	"$GREEN%s""\033[1m[OK]\033[0m	${NORMAL}"$RESET
+		printf 	"$CYAN\"$*\"	$RESET"
+		# printf "\nMini =>	$MINISHELL%s\n"
+		# printf "Bash => $BASH%s\n"
+		# sleep 1
 	}
 	else
 	{
-		printf "$RED%s""[KO]	"$RESET
+		printf "$RED%s""\033[1m[KO]\033[0m	${NORMAL}"$RESET
 		printf "$CYAN\"$*\"	$RESET"
         sleep 2
 	}
@@ -128,11 +131,11 @@ function testing()
 	if [ "$MINISHELL" != "$BASH" ];
     then
     {
-		echo "\n"
-		echo $RED$SEPARATOR$RESET
-		printf $RED"	Minishell output  	$ $MINISHELL	$RESET\n"
-		printf $GREEN"	Bash output       	$ $BASH		$RESET\n"
-		echo $RED$SEPARATOR$RESET
+		echo 	"\n"
+		echo 	$RED$SEPARATOR$RESET
+		printf	$RED"	Minishell output  	$ $MINISHELL	$RESET\n"
+		printf	$GREEN"	Bash output       	$ $BASH		$RESET\n"
+		echo	$RED$SEPARATOR$RESET
         sleep 2
     }
 	fi
@@ -140,13 +143,21 @@ function testing()
 	then
 	{
 		echo
-		printf $RED"Minishell exit status   => $RED$MINISHELL_EXIT_STATUS$RESET"
+		printf	$RED"Minishell exit status   => $RED$MINISHELL_EXIT_STATUS$RESET"
 		echo
-		printf $GREEN"Bash exit status        => $GREEN$BASH_EXIT_STATUS$RESET\n"
+		printf	$GREEN"Bash exit status        => $GREEN$BASH_EXIT_STATUS$RESET\n"
 	}
 	fi
-	echo
+	# {
+	# 	total_test=69
+	# 	percent=100
+	# 	idx=$i
+	# 	grade=$((idx / total_test))
+	# 	# final_graade=$((grade * percent))
+	# 	echo $i/$total_test
+	# }
 	sleep 0.1
+	echo
 }
 
 function testing_errors()
@@ -188,28 +199,28 @@ function testing_errors()
 		printf $GREEN"Bash exit status        => $GREEN$BASH_EXIT_STATUS$RESET\n"
 	}
 	fi
-	echo
 	sleep 0.1
 }
 
-# printf "%s$ECHO\n"
 
-if  [[ $1 = "-h" ]] || [[ !$1 ]]; then
+if  [[ $1 = "-h" ]];
+then
 {
 	usage 
 }
 fi
 if  [[ $1 = "-E" ]]; then
 {
+	printf "%s$ECHO\n"
 	testing echo \"$\"
 	testing echo \'$\'
 	testing echo $abc$
 	testing eChO "\"$"\"	
 	testing echo \'\'$\'\'
 	testing echo "$_" #Last Command actually not required
-	testing echo $"test"$ 
+	testing echo '$1337' 
 	testing echo "$0" # Not pretty much work check it by ur self sorry 
-	testing echo "$1337"
+	testing echo "$0"
 	testing 'e'"c"'h'o	"POMS"
 	testing echo echo
 	testing echo "			a"	
@@ -245,13 +256,10 @@ if  [[ $1 = "-E" ]]; then
 	testing echo """"""""$USER""""""""		
 	testing echo $USER'$USER'Once a gunner always a gunner $USER COYG      $USER ''	
 	testing echo $USER '' $USER $USER '' $USER '' $USER -n $USER	
-	testing echo ' \' ' \'		
-	testing echo '\" ' " \"\""	# Not Working for me
-	testing echo \\\" \\\" \\\" \\\"\\\"\\\" \\\'\\\'\\\'
 	testing echo "$USER""$USER""$USER"		
 	testing echo	guess whos back "$USER"
-	testing echo '$USER' "$USER" "text \' text"
-	testing echo '$USER'		
+	testing echo '$USER' "$USER" "text ' text"
+	testing echo '"'$USER'"'
 	testing echo $USER " "		
 	testing echo "$USER""Users/$USER/file""'$USER'"'$USER'
 	testing echo "$USER$USER$USER"
@@ -262,11 +270,9 @@ if  [[ $1 = "-E" ]]; then
 	testing echo $USER=4		
 	testing echo "${NOT_EXIT} POMS"		
 	testing echo "${USER} POMS"		
-	testing echo -e "$USER"		
-	testing echo -e 'The only true wisdom is in knowing you know nothing.\nSocrates' >> /tmp/file.txt
+	testing echo "$USER"		
+	testing echo 'The only true wisdom is in knowing you know nothing.\nSocrates' >> /tmp/file.txt
 	testing echo $USER=POMS 
-	testing echo -e "\033[1;37mWHITE" 
-	testing	echo -e "\033[0;31mRED"
 	testing echo $USER
 	testing echo $?	
 	testing echo $PWD/file		

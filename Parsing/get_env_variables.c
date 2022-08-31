@@ -26,6 +26,11 @@ char	*get_env_variables(char *target, t_bool flag)
 			if (target[i + 1] == '?')
 				output = ft_strjoin(output,
 						exit_status(ft_itoa(g_data.errno_cp), &i));
+			else if ((target[i + 1] == '\"' && target[i + 2] != '\"') || (target[i + 1] == '\'' && target[i + 2] != '\''))
+				{
+					output = ft_strjoin(output, "$");
+					i+=1;
+				}
 			else if (!ft_isalnum(target[i + 1]) && target[i + 1] != '_')
 				output = ft_strjoin(output, special_cases(target, &i));
 			else if (ft_isdigit(target[i + 1]) == 1)
