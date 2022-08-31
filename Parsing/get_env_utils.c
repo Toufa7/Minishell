@@ -85,15 +85,3 @@ char	*exit_status(char *variable, int *i)
 	(*i) += 2;
 	return (output);
 }
-
-char	*just_copy(char *target, int *i)
-{
-	char	*output;
-	char	*variable;
-
-	output = "";
-	variable = until_dollar(&target[(*i)]);
-	output = ft_strjoin(output, variable);
-	(*i) += ft_strlen(variable);
-	return (output);
-}

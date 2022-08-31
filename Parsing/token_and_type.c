@@ -16,10 +16,11 @@ void	token_and_type(t_parse *parse)
 {
 	int	i;
 
-	i = -1;
-	while (parse->pipe_tokens[++i])
+	i = 0;
+	while (parse->pipe_tokens[i])
 	{
 		printf("Token -> %s -> Type -> %s\n",
 			parse->pipe_tokens[i]->token, parse->pipe_tokens[i]->type);
+		i++;
 	}
 }

@@ -38,3 +38,11 @@ char	*get_env_variables(char *target, t_bool flag)
 	}
 	return (output);
 }
+
+/*
+	else if ((target[i + 1] == '\"' && target[i + 2] != '\"') || (target[i + 1] == '\'' && target[i + 2] != '\''))
+	{
+		output = ft_strjoin(output, "$");
+		i+=1;
+	}
+*/

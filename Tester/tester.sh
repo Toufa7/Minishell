@@ -169,7 +169,7 @@ function testing_errors()
 	sleep 0.1
 }
 
-printf "%s$ECHO\n"
+# printf "%s$ECHO\n"
                                  
 # testing echo \"$\"
 # testing echo \'$\'
@@ -202,34 +202,34 @@ printf "%s$ECHO\n"
 # testing echo "-n -n -n"-n Salam Alikoum		
 # testing echo "-n '-n'" Salam Alikoum
 # testing echo $string" | sed -e "s/^$prefix//" -e "s/$suffix$//
-# testing echo $USER
-# testing echo "$USER"		
-# testing echo "'$USER'"		
-# testing echo " '$USER' "	
-# testing echo text"$USER"	
-# testing echo text"'$USER'" ' $USER '	
-# testing echo "Bensouda"   "$USER"    "$USER"
-# testing echo '              $USER          '		
-# testing echo               Bensouda "$USER"            "$USER"Bensouda	
-# testing echo ''''''''''$USER''''''''''	
-# testing echo """"""""$USER""""""""		
-# testing echo $USER'$USER'Once a gunner always a gunner $USER COYG      $USER ''	
-# testing echo $USER '' $USER $USER '' $USER '' $USER -n $USER	
-# testing echo ' \' ' \'		
-# testing echo '\" ' " \"\""	# Not Working for me
-# testing echo \\\" \\\" \\\" \\\"\\\"\\\" \\\'\\\'\\\'
-# testing echo "$USER""$USER""$USER"		
-# testing echo	guess whos back "$USER"
-# testing echo '$USER' "$USER" "text \' text"
-# testing echo '$USER'		
-# testing echo $USER " "		
-# testing echo "$USER""Users/$USER/file""'$USER'"'$USER'
-# testing echo "$USER$USER$USER"
-# testing echo '$USER'"$USER"'$USER'		
-# testing echo '"$USER"''$USER'"""$USER"	
-# testing echo " $USER  "'$PWD'
-# testing echo " $USER  \$ "'$PWD'		
-# testing echo $USER=4		
+testing echo $USER
+testing echo "$USER"		
+testing echo "'$USER'"		
+testing echo " '$USER' "	
+testing echo text"$USER"	
+testing echo text"'$USER'" ' $USER '	
+testing echo "Bensouda"   "$USER"    "$USER"
+testing echo '              $USER          '		
+testing echo               Bensouda "$USER"            "$USER"Bensouda	
+testing echo ''''''''''$USER''''''''''	
+testing echo """"""""$USER""""""""		
+testing echo $USER'$USER'Once a gunner always a gunner $USER COYG      $USER ''	
+testing echo $USER '' $USER $USER '' $USER '' $USER -n $USER	
+testing echo ' \' ' \'		
+testing echo '\" ' " \"\""	# Not Working for me
+testing echo \\\" \\\" \\\" \\\"\\\"\\\" \\\'\\\'\\\'
+testing echo "$USER""$USER""$USER"		
+testing echo	guess whos back "$USER"
+testing echo '$USER' "$USER" "text \' text"
+testing echo '$USER'		
+testing echo $USER " "		
+testing echo "$USER""Users/$USER/file""'$USER'"'$USER'
+testing echo "$USER$USER$USER"
+testing echo '$USER'"$USER"'$USER'		
+testing echo '"$USER"''$USER'"""$USER"	
+testing echo " $USER  "'$PWD'
+testing echo " $USER  \$ "'$PWD'		
+testing echo $USER=4		
 testing echo "${NOT_EXIT} POMS"		
 testing echo "${USER} POMS"		
 testing echo -e "$USER"		

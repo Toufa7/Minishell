@@ -37,7 +37,9 @@ void	set_token_type(t_pipe_token *token, t_pipe_token *pre_toekn)
 	else if (pre_toekn && ft_strcmp(pre_toekn->type, "here_doc") == 0)
 		token->type = "delimiter";
 	else if (pre_toekn && pre_toekn->set_as_cmd == 1)
+	{
 		type_define(token, "option", FALSE);
+	}
 	else
 	{
 		token->set_as_cmd = 1;
