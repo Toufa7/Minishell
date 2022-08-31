@@ -67,7 +67,6 @@ void	pipe_files_prep(t_pipe_data *pipe_data, t_bool is_builtin)
 	int		i;
 
 	i = -1;
-	// printf("---> %p\n", pipe_data->redirections);
 	while (pipe_data->redirections && pipe_data->redirections[++i])
 	{
 		path = pipe_data->redirections[i]->path;

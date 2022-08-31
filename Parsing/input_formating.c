@@ -12,22 +12,6 @@
 
 #include "../minishell.h"
 
-int	spc(char *str)
-{
-	int	i;
-	int	mem;
-
-	i = -1;
-	mem = 0;
-	while (str[++i])
-	{
-		if ((str[i] == '<' && str[i + 1] != '<')
-			|| (str[i] == '>' && str[i + 1] != '>') || str[i] == '|')
-		mem++;
-	}
-	return (mem);
-}
-
 int	check_conditions(char current, char next)
 {
 	if ((current == '<' && next == '<')
@@ -39,6 +23,34 @@ int	check_conditions(char current, char next)
 	return (-1);
 }
 
+void	here_doc_or_append(char *new, char *old, int *i, int *j)
+{
+	new[(*j)++] = ' ';
+	new[(*j)++] = old[(*i)];
+	new[(*j)++] = old[(*i)];
+	new[(*j)++] = ' ';
+}
+
+void	redin_or_redout_or_pipe(char *new, char *old, int *i, int *j)
+{
+	new[(*j)++] = ' ';
+	new[(*j)++] = old[(*i)];
+	new[(*j)++] = ' ';
+}
+
+void	check_inside_d_s_q(char *new, char *old, int *i, int *j)
+{
+	char	sing;
+
+	if (old[(*i)] == DOUBLES_QUOTES || old[(*i)] == SING_QUOTES)
+	{
+		sing = old[(*i)];
+		new[(*j)++] = old[(*i)];
+		while (old[++(*i)] != sing && old[(*i)])
+			new[(*j)++] = old[(*i)];
+	}
+}
+
 char	*input_formating(char *str)
 {
 	int		i;
@@ -46,41 +58,24 @@ char	*input_formating(char *str)
 	char	sing;
 	char	*spcs;
 
-	spcs = alloc(sizeof(char) * (ft_strlen(str) + (spc(str) * 2) + 1), "frmt");
+	spcs = malloc(sizeof(char) * (ft_strlen(str) + (spc(str) * 2) + 1));
+	if (!spcs)
+		return (NULL);
 	i = -1;
 	j = 0;
 	while (str[++i])
 	{
-		if (str[i] == DOUBLES_QUOTES || str[i] == SING_QUOTES)
-		{
-			sing = str[i];
-			spcs[j++] = str[i];
-			while (str[++i] != sing && str[i])
-				spcs[j++] = str[i];
-		}
+		check_inside_d_s_q(spcs, str, &i, &j);
 		if (check_conditions(str[i], str[i + 1]) == 1)
 		{
-			spcs[j++] = ' ';
-			spcs[j++] = str[i];
-			spcs[j++] = str[i];
-			spcs[j++] = ' ';
+			here_doc_or_append(spcs, str, &i, &j);
 			i++;
 		}
 		else if (check_conditions(str[i], str[i + 1]) == 2)
-		{
-			spcs[j++] = ' ';
-			spcs[j++] = str[i];
-			spcs[j++] = ' ';
-		}
+			redin_or_redout_or_pipe(spcs, str, &i, &j);
 		else
 			spcs[j++] = str[i];
 	}
 	spcs[j] = '\0';
 	return (spcs);
 }
-
-// int main()
-// {
-// 	char *s = "omar>toufah>>me";
-// 	printf("%s\n",input_formating(s));
-// }

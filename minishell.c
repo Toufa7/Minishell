@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/30 17:40:31 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/08/31 18:46:35 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,7 @@ void	getting_back(char **str)
 
 void	minishell(t_parse *parse)
 {
-	int	i;
-	t_pipe_token	**pipe_tokens;
+	int				i;
 
 	parse->line_double_quotes = handling_quotes(parse->line, '|', -1);
 	if (!g_data.parse_error)
@@ -105,18 +104,20 @@ void	minishell(t_parse *parse)
 		i = 0;
 		while (parse->splt_pipes[i])
 			i++;
-		parse->pipes_data = ft_calloc(i + 1, sizeof(t_pipe_data *), TRUE, "Min");
+		parse->pipes_data = ft_calloc(i + 1,
+				sizeof(t_pipe_data *), TRUE, "Min");
 		i = -1;
 		while (parse->splt_pipes[++i])
 		{
 			parse->pipes_data[i] = alloc(sizeof(t_pipe_data), "pipe_data");
 			parse->no_splt = handling_quotes(parse->splt_pipes[i], ' ', -1);
-			pipe_tokens = set_pipe_tokens(parse->no_splt);
-			count_pipe_tokens(pipe_tokens, parse->pipes_data[i]);
-			g_data.parse_error = check_parse_errors(pipe_tokens);
+			parse->pipes_data[i]->pipe_tokens = set_pipe_tokens(parse->no_splt);
+			count_pipe_tokens(parse->pipes_data[i]->pipe_tokens , parse->pipes_data[i]);
+			// token_and_type(parse->pipes_data[i]->pipe_tokens);
+			g_data.parse_error = check_parse_errors(parse->pipes_data[i]->pipe_tokens );
 			if (g_data.parse_error)
 				break ;
-			set_pipe_data(parse->pipes_data[i], pipe_tokens);
+			set_pipe_data(parse->pipes_data[i]);
 		}
 		execution(parse->pipes_data);
 	}
