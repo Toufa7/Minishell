@@ -163,17 +163,11 @@ function grade()
 	mia=100
 	tmi=80
 	if [$grade -eq 100];then
-	{
-		printf $CYAN"Naddi"$NORMAL
-	}
+		echo "Naddi"
 	elif [$grade -ge 80];then
-	{
 		printf $GREEN"Mabikech"$NORMAL
-	}
-	elif [$grade -lt 100];then
-	{
+	else
 		printf $RED"Rak 3yaan"$NORMAL
-	}
 	fi
 }
 
