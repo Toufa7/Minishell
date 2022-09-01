@@ -18,7 +18,6 @@ int	should_not_be_expanded(char	**str)
 	int	j;
 
 	i = 0;
-
 	while (str[i])
 	{
 		j = 0;
@@ -47,11 +46,12 @@ int	should_not_be_expanded(char	**str)
 
 char	*get_env_in_herdoc(char *target, t_bool flag, t_pipe *pipe_data)
 {
-	int		i = 0;
+	int		i;
 	char	*output;
 	int		yes_or_no;
 
 	output = ft_strdup("", TRUE);
+	i = 0;
 	yes_or_no = should_not_be_expanded(&pipe_data->delimiter[0]);
 	while ((size_t)i < ft_strlen(target))
 	{
@@ -68,9 +68,7 @@ char	*get_env_in_herdoc(char *target, t_bool flag, t_pipe *pipe_data)
 				output = ft_strjoin(output, gotta_expand(target, flag, &i));
 		}
 		else
-		{
 			output = ft_strjoin(output, just_copy(target, &i));
-		}
 	}
 	return (output);
 }

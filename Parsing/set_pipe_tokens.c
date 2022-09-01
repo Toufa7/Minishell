@@ -31,8 +31,6 @@ t_bool	check_cmd_exist(t_token **tokens)
 
 void	set_token_type(t_token *token, t_token *pre_toekn, t_token **tokens)
 {
-	int	f;
-
 	if (ft_strcmp(token->token, "<<") == 0)
 		token->type = "here_doc";
 	else if (ft_strcmp(token->token, "<") == 0)
@@ -52,10 +50,7 @@ void	set_token_type(t_token *token, t_token *pre_toekn, t_token **tokens)
 	else if (pre_toekn && check_cmd_exist(tokens))
 		type_define(token, "option", FALSE);
 	else
-	{
 		type_define(token, "command", TRUE);
-		f = 1;
-	}
 }
 
 t_token	**set_tokens(char *str)
@@ -70,7 +65,7 @@ t_token	**set_tokens(char *str)
 	line = ft_split(str, ' ');
 	while (line[i])
 		i++;
-	tokens = ft_calloc( (i + 1), sizeof(t_token *), TRUE, "set_tokens");
+	tokens = ft_calloc((i + 1), sizeof(t_token *), TRUE, "set_tokens");
 	i = -1;
 	while (line[++i])
 	{

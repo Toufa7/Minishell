@@ -47,7 +47,15 @@ void	count_helper(t_pipe *pipe_data, t_token *token)
 		pipe_data->counter.delimiter++;
 		check_herdoc_limit(pipe_data->counter.delimiter);
 	}
-	pipe_data->counter.total = pipe_data->counter.red_in + pipe_data->counter.red_out + pipe_data->counter.here_do + pipe_data->counter.app + pipe_data->counter.cmd + pipe_data->counter.redirections + pipe_data->counter.option + pipe_data->counter.delimiter;
+}
+
+void	total_tokens(t_pipe *pipe_data)
+{
+	pipe_data->counter.total = pipe_data->counter.red_in
+		+ pipe_data->counter.red_out + pipe_data->counter.here_do
+		+ pipe_data->counter.app + pipe_data->counter.cmd
+		+ pipe_data->counter.redirections + pipe_data->counter.option
+		+ pipe_data->counter.delimiter;
 }
 
 void	count_tokens(t_pipe *pipe_data)
@@ -58,4 +66,5 @@ void	count_tokens(t_pipe *pipe_data)
 	init_pipe_counter(pipe_data);
 	while (pipe_data->tokens[++i])
 		count_helper(pipe_data, pipe_data->tokens[i]);
+	total_tokens(pipe_data);
 }

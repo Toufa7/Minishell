@@ -153,7 +153,7 @@ function testing()
 
 function grade()
 {
-	total_test=3
+	total_test=69
 	percent=100
 	idx=$i
 	echo $idx
@@ -162,17 +162,15 @@ function grade()
 	echo $grade
 	mia=100
 	tmi=80
-	if ["$grade" -eq "$mia"];
-	then
+	if [$grade -eq 100];then
 	{
 		printf $CYAN"Naddi"$NORMAL
 	}
-	elif ["$grade" -ge "$tmi"];
-	then
+	elif [$grade -ge 80];then
 	{
 		printf $GREEN"Mabikech"$NORMAL
 	}
-	elif ["$grade" -lt "$mia"]; then
+	elif [$grade -lt 100];then
 	{
 		printf $RED"Rak 3yaan"$NORMAL
 	}

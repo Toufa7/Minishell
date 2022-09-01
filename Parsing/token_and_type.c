@@ -19,7 +19,8 @@ void	token_and_type(t_token **tokens)
 	i = 0;
 	while (tokens[i])
 	{
-		printf("Token -> %s | Type -> %s\n", tokens[i]->token,	tokens[i]->type);
+		printf("Token -> %s | Type -> %s\n",
+			tokens[i]->token, tokens[i]->type);
 		i++;
 	}
 }

@@ -61,10 +61,10 @@ void	conditions(t_pipe *pipe_data, t_token *token,
 
 void	set_pipe(t_pipe *pipe_data)
 {
-	int				i;
-	int				j;
-	char			*quotes;
-	char			*replaced;
+	int		i;
+	int		j;
+	char	*quotes;
+	char	*replaced;
 	t_token	**pipe_tokens;
 
 	i = -1;

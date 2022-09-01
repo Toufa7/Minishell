@@ -135,7 +135,8 @@ char			*input_formating(char	*str);
 int				spc(char *str);
 char			*getting_back_original_input(char *str);
 char			*get_env_variables(char *target, t_bool flag);
-char			*get_env_in_herdoc(char *target, t_bool flag, t_pipe *pipe_data);
+char			*get_env_in_herdoc(char *target, t_bool flag,
+					t_pipe *pipe_data);
 char			*add_something(char *str, char *add);
 char			*until_dollar(char *str);
 void			token_counter_init(t_token	*pipe_tokens);
@@ -143,7 +144,7 @@ void			input_analyse(t_token	*pipe_tokens);
 void			token_and_type(t_token **tokens);
 void			input_counter(t_token	*pipe_tokens);
 void			set_pipe(t_pipe	*pipe_data);
-t_token	**set_tokens(char *str);
+t_token			**set_tokens(char *str);
 t_bool			check_parse_errors(t_token **pipe_tokens);
 char			*gotta_expand(char *target, t_bool flag, int *i);
 char			*digit(char *target, int *i);
@@ -157,10 +158,9 @@ void			execution(t_pipe **pipe_data);
 int				check_builtin(t_pipe *pipe_data);
 void			exec_builtin(int builtin_nb, t_pipe *pipe_data);
 void			sig_wait(t_pipe **pipes);
-void			read_herdoc(char *delimiter,t_pipe *pipe_data);
+void			read_herdoc(char *delimiter, t_pipe *pipe_data);
 void			execs(t_pipe *pipe_data, int builtin_nb);
 t_bool			check_file_errors(char *path, t_bool is_builtin);
-
 void			mcd(char *path);
 void			mpwd(void);
 void			menv(char **argv, char *prefix, t_bool is_export);
@@ -171,7 +171,6 @@ void			mexport(char **argv);
 char			*get_key(char *str);
 char			*get_val(char *str);
 int				get_op_type(char *str);
-
 void			validate_cmd(t_pipe *pipe_data);
 void			pipe_files_prep(t_pipe *pipe_data, t_bool is_builtin);
 

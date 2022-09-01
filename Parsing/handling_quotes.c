@@ -15,7 +15,7 @@
 t_bool	checking_quotes(char *str)
 {
 	char	*check;
-	// printf("Str -> %s\n", str);
+
 	check = ft_strdup(str, TRUE);
 	if (s_d_quotes(check) == NULL)
 	{
