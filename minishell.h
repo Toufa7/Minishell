@@ -55,7 +55,7 @@ typedef struct s_counter
 	size_t	env_var;
 	size_t	option;
 	size_t	total;
-}	t_couner;
+}	t_counter;
 
 typedef struct s_pipe_token
 {
@@ -108,7 +108,7 @@ typedef struct s_pipe_data
 	t_bool			out_fd_set;
 	t_bool			in_fd_set;
 	t_bool			is_herdoc;
-	t_couner		counter;
+	t_counter		counter;
 	t_redirections	**redirections;
 	t_pipe_token	**tokens;
 }	t_pipe_data;
@@ -135,12 +135,12 @@ char			*input_formating(char	*str);
 int				spc(char *str);
 char			*getting_back_original_input(char *str);
 char			*get_env_variables(char *target, t_bool flag);
-char			*get_env_in_herdoc(char *target, t_bool flag);
+char			*get_env_in_herdoc(char *target, t_bool flag, t_pipe_data *pipe_data);
 char			*add_something(char *str, char *add);
 char			*until_dollar(char *str);
 void			token_counter_init(t_pipe_token	*pipe_tokens);
 void			input_analyse(t_pipe_token	*pipe_tokens);
-void			token_and_type(t_pipe_token **tokens);
+void			token_and_type(t_pipe_token **tokens, t_pipe_data *pipe_data);
 void			input_counter(t_pipe_token	*pipe_tokens);
 void			set_pipe_data(t_pipe_data	*pipe_data);
 t_pipe_token	**set_pipe_tokens(char *str);
@@ -157,7 +157,7 @@ void			execution(t_pipe_data **pipe_data);
 int				check_builtin(t_pipe_data *pipe_data);
 void			exec_builtin(int builtin_nb, t_pipe_data *pipe_data);
 void			sig_wait(t_pipe_data **pipes_data);
-void			read_herdoc(char *delimiter);
+void			read_herdoc(char *delimiter,t_pipe_data *pipe_data);
 void			execs(t_pipe_data *pipe_data, int builtin_nb);
 t_bool			check_file_errors(char *path, t_bool is_builtin);
 

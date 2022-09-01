@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-void	token_and_type(t_pipe_token **tokens)
+void	token_and_type(t_pipe_token **tokens, t_pipe_data *pipe_data)
 {
 	int	i;
 

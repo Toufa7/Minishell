@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 05:14:07 by abouchfa          #+#    #+#             */
-/*   Updated: 2022/09/01 06:08:43 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/09/01 21:52:57 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ char	*get_key(char *str)
 			break ;
 		i++;
 	}
-	if (i > 0)
+	printf("str: %s")
+	if (i > 0 && (!str[i] || str[i] == '=' || str[i] == '+'))
 	{
 		key = alloc(sizeof(char) * (i + 1), "export val");
 		ft_strncpy(key, str, i);

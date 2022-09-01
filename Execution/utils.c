@@ -37,20 +37,22 @@ void	sig_wait(t_pipe_data **pipes_data)
 	signal(SIGQUIT, SIG_IGN);
 }
 
-void	read_herdoc(char *delimiter)
+void	read_herdoc(char *delimiter, t_pipe_data *pipe_data)
 {
 	char	*line;
+	char	*without_d_s;
 	char	*expand;
 	int		fd;
 
 	fd = open("/tmp/herdoc", O_CREAT | O_RDWR | O_TRUNC, 0777);
 	line = readline("> ");
+	without_d_s = s_d_quotes(ft_strdup(delimiter, TRUE));
 	expand = NULL;
-	while (!line || ft_strcmp(line, delimiter))
+	while (!line || ft_strcmp(line, without_d_s))
 	{
 		if (line)
 		{
-			expand = get_env_in_herdoc(line, FALSE);
+			expand = get_env_in_herdoc(line, FALSE, pipe_data);
 			write(fd, expand, ft_strlen(expand));
 			write(fd, "\n", 1);
 			free_str(expand);

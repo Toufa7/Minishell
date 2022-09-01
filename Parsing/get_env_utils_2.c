@@ -28,7 +28,7 @@ char	*until_dollar(char *str)
 		return (ft_strdup("$", TRUE));
 	while (str[i])
 	{
-		if (flag == 1 && (str[i] == '\'' || str[i] == '\"'))
+		if (!flag && (str[i] == '\'' || str[i] == '\"'))
 			flag = str[i];
 		else if (flag && str[i] == flag)
 			flag = 0;

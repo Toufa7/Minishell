@@ -32,7 +32,16 @@ TODO: ✅❓
 	[✅]	 |  => BAD ADDRESS
 	[✅]	 echo with 2 option : echo Hello World
 	[✅]	 'spaces' cd .. / You Should Protect ur ft_strncmp
-		you need to check the delimeter of herdoc is accept expanding or not Mr abdejlil
+	you need to check the delimeter of herdoc is accept expanding or not Mr abdejlil
+
+{
+	> test echo test
+	unvalid directory | cd NONEXIT | exit_status = 1 not 2
+	Heredoc in multiple pipes dosen't send tought the pipes
+	[❓]	echo hello > "${NotExist}" ==> bash: : No such file or directory 
+	cat >> test << ss
+	cat << ss >> test
+}
 
  
 	  Parser
@@ -74,6 +83,15 @@ TODO: ✅❓
 	[❓] env ls => not required
 	[❓] pipes : check syntax errors
 	[❓] $NONEXIT cmd
+
+
+
+
+
+
+
+
+
 		when we do export a="o'k'p'" and echo $a just do test
 		don't expand variables inside single quote Mr omar
 		echo imad>ok "im here for reason" comapre it to bash

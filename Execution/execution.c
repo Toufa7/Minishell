@@ -23,7 +23,7 @@ void	herdocs(t_pipe_data *pipe_data)
 	{
 		signal(SIGINT, herdoc_sigint);
 		while (pipe_data->delimiter && pipe_data->delimiter[++j])
-			read_herdoc(pipe_data->delimiter[j]);
+			read_herdoc(pipe_data->delimiter[j], pipe_data);
 		exit(0);
 	}
 	signal(SIGINT, SIG_IGN);

@@ -46,7 +46,7 @@ void	conditions(t_pipe_data *pipe_data, t_pipe_token *token,
 	}
 	else if (ft_strcmp(token->type, "delimiter") == 0)
 	{
-		pipe_data->delimiter = ft_realloc(pipe_data->delimiter, quotes, TRUE);
+		pipe_data->delimiter = ft_realloc(pipe_data->delimiter, token->token, TRUE);
 		pipe_data->is_herdoc = TRUE;
 	}
 	else if (ft_strcmp(token->type, "infile") == 0)
@@ -55,9 +55,6 @@ void	conditions(t_pipe_data *pipe_data, t_pipe_token *token,
 		pipe_data->redirections[++(*j)] = get_redirection(quotes, OUTFILE);
 	else if (ft_strcmp(token->type, "app_outfile") == 0)
 		pipe_data->redirections[++(*j)] = get_redirection(quotes, APPENDFILE);
-	else if (ft_strcmp(token->type, "env_var") == 0)
-		pipe_data->argv = ft_realloc(pipe_data->argv, s_d_quotes(
-					get_env_variables(token->token, FALSE)), TRUE);
 	else if (ft_strcmp(token->type, "option") == 0)
 		pipe_data->argv = ft_realloc(pipe_data->argv, quotes, TRUE);
 }
