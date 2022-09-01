@@ -54,6 +54,7 @@ void	minishell(t_parse *parse)
 			if (g_data.parse_error)
 				break ;
 			set_pipe_data(parse->pipes_data[i]);
+			token_and_type(parse->pipes_data[i]->tokens, parse->pipes_data[i]);
 		}
 		if (!g_data.parse_error)
 			execution(parse->pipes_data);

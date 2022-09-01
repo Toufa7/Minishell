@@ -36,7 +36,7 @@ char	*gotta_expand(char *target, t_bool flag, int *i)
 	{
 		variable = until_dollar(&target[(*i) + 1]);
 		output = ft_strjoin(output, "");
-		(*i) += ft_strlen(variable) + 1;
+		(*i) += validate_var_name(&target[(*i)] + 1) + 1;
 	}
 	return (output);
 }

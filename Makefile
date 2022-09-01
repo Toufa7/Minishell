@@ -3,11 +3,11 @@ NAME = Minishell
 
 C_FLAGS = gcc
 
-READLINE = -lreadline -L /Users/$(USER)/brew/opt/readline/lib -I /Users/$(USER)/brew/opt/readline/include
-READ = -lreadline# -L /goinfre/otoufah/homebrew/opt/readline/lib -I /goinfre/otoufah/homebrew/opt/readline/include
+C_READLINE_POMS = -L /Users/otoufah/goinfre/homebrew/opt/readline/lib -I /Users/otoufah/goinfre/homebrew/opt/readline/include
 
-ADDI_FLAGS = #-fsanitize=address -g
+# C_READLINE_ABOU = -L /goinfre/abouchfa/.brew/opt/readline/lib -I /goinfre/abouchfa/.brew/opt/readline/include
 
+ADDI_FLAGS = -lreadline
 
 F_REMOVE = rm -rf
 
@@ -73,8 +73,8 @@ all: $(NAME)
 
 $(NAME): $(C_FILES)
 		@./loading.sh
-		$(sig)
-		@$(C_FLAGS) $(ADDI_FLAGS) $(READLINE) $(C_FILES) -o $(NAME)
+		@$(sig)
+		@$(C_FLAGS) $(C_FILES) $(C_READLINE_POMS) $(ADDI_FLAGS) -o $(NAME)
 
 clean:
 	@rm -rf $(NAME)

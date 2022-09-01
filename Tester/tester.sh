@@ -103,6 +103,7 @@ function	usage()
 }
 
 
+
 function testing()
 {
 	# Put you Minishell's path down here
@@ -125,7 +126,6 @@ function testing()
 	{
 		printf "$RED%s""\033[1m[KO]\033[0m	${NORMAL}"$RESET
 		printf "$CYAN\"$*\"	$RESET"
-        sleep 2
 	}
 	fi
 	if [ "$MINISHELL" != "$BASH" ];
@@ -136,7 +136,6 @@ function testing()
 		printf	$RED"	Minishell output  	$ $MINISHELL	$RESET\n"
 		printf	$GREEN"	Bash output       	$ $BASH		$RESET\n"
 		echo	$RED$SEPARATOR$RESET
-        sleep 2
     }
 	fi
 	if [ "$MINISHELL_EXIT_STATUS" != "$BASH_EXIT_STATUS" ];
@@ -148,16 +147,36 @@ function testing()
 		printf	$GREEN"Bash exit status        => $GREEN$BASH_EXIT_STATUS$RESET\n"
 	}
 	fi
-	# {
-	# 	total_test=69
-	# 	percent=100
-	# 	idx=$i
-	# 	grade=$((idx / total_test))
-	# 	# final_graade=$((grade * percent))
-	# 	echo $i/$total_test
-	# }
 	sleep 0.1
 	echo
+}
+
+function grade()
+{
+	total_test=3
+	percent=100
+	idx=$i
+	echo $idx
+	final_graade=$((idx * percent))
+	grade=$((final_graade / total_test))
+	echo $grade
+	mia=100
+	tmi=80
+	if ["$grade" -eq "$mia"];
+	then
+	{
+		printf $CYAN"Naddi"$NORMAL
+	}
+	elif ["$grade" -ge "$tmi"];
+	then
+	{
+		printf $GREEN"Mabikech"$NORMAL
+	}
+	elif ["$grade" -lt "$mia"]; then
+	{
+		printf $RED"Rak 3yaan"$NORMAL
+	}
+	fi
 }
 
 function testing_errors()
@@ -212,74 +231,75 @@ fi
 if  [[ $1 = "-E" ]]; then
 {
 	printf "%s$ECHO\n"
-	testing echo \"$\"
-	testing echo \'$\'
-	testing echo $abc$
-	testing eChO "\"$"\"	
-	testing echo \'\'$\'\'
-	testing echo "$_" #Last Command actually not required
-	testing echo '$1337' 
-	testing echo "$0" # Not pretty much work check it by ur self sorry 
-	testing echo "$0"
-	testing 'e'"c"'h'o	"POMS"
-	testing echo echo
-	testing echo "			a"	
-	testing eCHO ''	
-	testing echo $	
-	testing echo $ $
-	testing echo	
-	testing echo wow		
-	testing echo Hello World	
-	testing echo "Salam Alikoum"		
-	testing echo Salam Alikoum		
-	testing echo 'Salam Alikoum'		
-	testing echo -n Salam Alikoum		
-	testing echo -nn Salam Alikoum	
-	testing echo -n -n -n Salam Alikoum
-	testing echo "-n" Salam Alikoum	
-	testing echo -n "-n" Salam Alikoum	
-	testing echo "-nnnn" Salam Alikoum
-	testing echo "-nnnn" -n Salam Alikoum
-	testing echo "-n -n -n"-n Salam Alikoum		
-	testing echo "-n '-n'" Salam Alikoum
-	testing echo $string" | sed -e "s/^$prefix//" -e "s/$suffix$//
-	testing echo $USER
-	testing echo "$USER"		
-	testing echo "'$USER'"		
-	testing echo " '$USER' "	
-	testing echo text"$USER"	
-	testing echo text"'$USER'" ' $USER '	
-	testing echo "Bensouda"   "$USER"    "$USER"
-	testing echo '              $USER          '		
-	testing echo               Bensouda "$USER"            "$USER"Bensouda	
-	testing echo ''''''''''$USER''''''''''	
-	testing echo """"""""$USER""""""""		
-	testing echo $USER'$USER'Once a gunner always a gunner $USER COYG      $USER ''	
-	testing echo $USER '' $USER $USER '' $USER '' $USER -n $USER	
-	testing echo "$USER""$USER""$USER"		
-	testing echo	guess whos back "$USER"
-	testing echo '$USER' "$USER" "text ' text"
-	testing echo '"'$USER'"'
-	testing echo $USER " "		
-	testing echo "$USER""Users/$USER/file""'$USER'"'$USER'
-	testing echo "$USER$USER$USER"
-	testing echo '$USER'"$USER"'$USER'		
-	testing echo '"$USER"''$USER'"""$USER"	
-	testing echo " $USER  "'$PWD'
-	testing echo " $USER  \$ "'$PWD'		
-	testing echo $USER=4		
-	testing echo "${NOT_EXIT} POMS"		
-	testing echo "${USER} POMS"		
-	testing echo "$USER"		
-	testing echo 'The only true wisdom is in knowing you know nothing.\nSocrates' >> /tmp/file.txt
-	testing echo $USER=POMS 
-	testing echo $USER
-	testing echo $?	
-	testing echo $PWD/file		
-	testing echo "$PWD/file"	
-	testing echo "Nothing" "Nothing$USER_ANA" ... "$USER.ANA"
+	testing "env ls"
+	# testing echo \'$\'
+	# testing echo $abc$
+	# testing eChO "\"$"\"	
+	# testing echo \'\'$\'\'
+	# testing echo "$_" #Last Command actually not required
+	# testing echo '$1337' 
+	# testing echo "$0" # Not pretty much work check it by ur self sorry 
+	# testing echo "$0"
+	# testing 'e'"c"'h'o	"POMS"
+	# testing echo echo
+	# testing echo "			a"	
+	# testing eCHO ''	
+	# testing echo $	
+	# testing echo $ $
+	# testing echo	
+	# testing echo wow		
+	# testing echo Hello World	
+	# testing echo "Salam Alikoum"		
+	# testing echo Salam Alikoum		
+	# testing echo 'Salam Alikoum'		
+	# testing echo -n Salam Alikoum		
+	# testing echo -nn Salam Alikoum	
+	# testing echo -n -n -n Salam Alikoum
+	# testing echo "-n" Salam Alikoum	
+	# testing echo -n "-n" Salam Alikoum	
+	# testing echo "-nnnn" Salam Alikoum
+	# testing echo "-nnnn" -n Salam Alikoum
+	# testing echo "-n -n -n"-n Salam Alikoum		
+	# testing echo "-n '-n'" Salam Alikoum
+	# testing echo $string" | sed -e "s/^$prefix//" -e "s/$suffix$//
+	# testing echo $USER
+	# testing echo "$USER"		
+	# testing echo "'$USER'"		
+	# testing echo " '$USER' "	
+	# testing echo text"$USER"	
+	# testing echo text"'$USER'" ' $USER '	
+	# testing echo "Bensouda"   "$USER"    "$USER"
+	# testing echo '              $USER          '		
+	# testing echo               Bensouda "$USER"            "$USER"Bensouda	
+	# testing echo ''''''''''$USER''''''''''	
+	# testing echo """"""""$USER""""""""		
+	# testing echo $USER'$USER'Once a gunner always a gunner $USER COYG      $USER ''	
+	# testing echo $USER '' $USER $USER '' $USER '' $USER -n $USER	
+	# testing echo "$USER""$USER""$USER"		
+	# testing echo	guess whos back "$USER"
+	# testing echo '$USER' "$USER" "text ' text"
+	# testing echo '"'$USER'"'
+	# testing echo $USER " "		
+	# testing echo "$USER""Users/$USER/file""'$USER'"'$USER'
+	# testing echo "$USER$USER$USER"
+	# testing echo '$USER'"$USER"'$USER'		
+	# testing echo '"$USER"''$USER'"""$USER"	
+	# testing echo " $USER  "'$PWD'
+	# testing echo " $USER  \$ "'$PWD'		
+	# testing echo $USER=4		
+	# testing echo "${NOT_EXIT} POMS"		
+	# testing echo "${USER} POMS"		
+	# testing echo "$USER"		
+	# testing echo 'The only true wisdom is in knowing you know nothing.\nSocrates' >> /tmp/file.txt
+	# testing echo $USER=POMS 
+	# testing echo $USER
+	# testing echo $?	
+	# testing echo $PWD/file		
+	# testing echo "$PWD/file"	
+	# testing echo "Nothing" "Nothing$USER_ANA" ... "$USER.ANA"
 	testing echo "Nothing" "Nothing$USER9WHO" ... "$USER-9"
 	testing echo $PWD
+	grade
 }  
 fi                            
 if  [[ $1 = "-p" ]]; then
