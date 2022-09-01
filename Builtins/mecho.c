@@ -6,11 +6,24 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:19:46 by otoufah           #+#    #+#             */
-/*   Updated: 2022/09/01 02:04:57 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/09/01 04:19:16 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+void	write_args(char **argv, int j, t_bool new_line)
+{
+	while (argv[j])
+	{
+		ft_putstr_fd(argv[j++], g_data.out_fd);
+		if (argv[j])
+			ft_putstr_fd(" ", g_data.out_fd);
+	}
+	if (!new_line)
+		ft_putstr_fd("\n", g_data.out_fd);
+	g_data.errno_cp = 0;
+}
 
 void	mecho(char **argv)
 {
@@ -38,13 +51,5 @@ void	mecho(char **argv)
 	}
 	if ((!valid_arg || i == 1) && j > 0)
 		j--;
-	while (argv[j])
-	{
-		ft_putstr_fd(argv[j++], g_data.out_fd);
-		if (argv[j])
-			ft_putstr_fd(" ", g_data.out_fd);
-	}
-	if (!new_line)
-		ft_putstr_fd("\n", g_data.out_fd);
-	g_data.errno_cp = 0;
+	write_args(argv, j, new_line);
 }

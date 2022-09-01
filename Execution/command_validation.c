@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 19:09:57 by abouchfa          #+#    #+#             */
-/*   Updated: 2022/09/01 02:09:55 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/09/01 04:59:03 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void	check_cmd_path(t_pipe_data *pipe_data)
 			}
 			else
 			{
+				ft_putstr_fd("Mini: ", 2);
 				perror(pipe_data->command);
 				exit(errno);
 			}

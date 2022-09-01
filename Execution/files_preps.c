@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 05:23:48 by abouchfa          #+#    #+#             */
-/*   Updated: 2022/09/01 02:10:49 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/09/01 06:29:45 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	in_file_prep(t_pipe_data *pipe_data, char *path, t_bool is_builtin)
 	{
 		g_data.errno_cp = errno;
 		g_data.redirection_error = TRUE;
+		ft_putstr_fd("Mini: ", 2);
 		perror(path);
 		if (!is_builtin)
 			exit(errno);
@@ -68,26 +69,26 @@ t_bool	check_path(char *path, t_bool is_builtin)
 	int			i;
 
 	if (ft_strchr(path, '/') == 0)
-		return TRUE;
+		return (TRUE);
 	i = ft_strlen(path);
-	while(i != 0 && path[i] != '/')
+	while (i != 0 && path[i] != '/')
 		i--;
 	folders = alloc(i + 2, "check_path");
 	ft_strncpy(folders, path, i + 1);
 	if (stat(folders, &statbuf) == -1)
 	{
-		printf("folders: %s\n", folders);
+		ft_putstr_fd("Mini: ", 2);
 		perror(path);
 		if (is_builtin)
 		{
 			g_data.redirection_error = TRUE;
 			g_data.errno_cp = 1;
-			return FALSE;
+			return (FALSE);
 		}
 		else
 			exit(1);
 	}
-	return TRUE;
+	return (TRUE);
 }
 
 void	pipe_files_prep(t_pipe_data *pipe_data, t_bool is_builtin)
@@ -99,24 +100,9 @@ void	pipe_files_prep(t_pipe_data *pipe_data, t_bool is_builtin)
 	while (pipe_data->redirections && pipe_data->redirections[++i])
 	{
 		path = pipe_data->redirections[i]->path;
-		if (path && path[0] == '$')
-		{
-			g_data.redirection_error = TRUE;
-			g_data.errno_cp = 1;
-			if (path[0] == '$' && path[1])
-			{
-				ft_putstr_fd("Mini: ", 2);
-				ft_putstr_fd(path, 2);
-				ft_putstr_fd(" ambiguous redirect\n", 2);
-			}
-			else
-				ft_putstr_fd("Mini: No such file or directory\n", 2);
-			if (is_builtin)
-				break ;
-			else
-				exit(1);
-		}
-		else if (!check_path(path, is_builtin))
+		if (check_file_errors(path, is_builtin))
+			break ;
+		if (!check_path(path, is_builtin))
 			break ;
 		if (pipe_data->redirections[i]->type == INFILE)
 			in_file_prep(pipe_data, path, is_builtin);

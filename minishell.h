@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/31 20:05:11 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/09/01 06:31:08 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ typedef struct s_redirections
 	int		type;
 }	t_redirections;
 
-typedef struct s_g_glbl_data
+typedef struct s_g_data
 {
 	int			errno_cp;
 	int			in_fd;
@@ -97,7 +97,7 @@ typedef struct s_g_glbl_data
 	pid_t		last_child_id;
 	t_bool		redirection_error;
 	t_bool		is_buit_in;
-}	t_glbl_data;
+}	t_g_data;
 
 typedef struct s_pipe_data
 {
@@ -153,6 +153,14 @@ char			*just_copy(char *target, int *i);
 
 // ----------- Execution -------------------------
 
+void			execution(t_pipe_data **pipe_data);
+int				check_builtin(t_pipe_data *pipe_data);
+void			exec_builtin(int builtin_nb, t_pipe_data *pipe_data);
+void			sig_wait(t_pipe_data **pipes_data);
+void			read_herdoc(char *delimiter);
+void			execs(t_pipe_data *pipe_data, int builtin_nb);
+t_bool			check_file_errors(char *path, t_bool is_builtin);
+
 void			mcd(char *path);
 void			mpwd(void);
 void			menv(char **argv, char *prefix, t_bool is_export);
@@ -160,15 +168,19 @@ void			mecho(char **argv);
 void			mexit(char **argv);
 void			munset(char **argv);
 void			mexport(char **argv);
+char			*get_key(char *str);
+char			*get_val(char *str);
+int				get_op_type(char *str);
+
 void			validate_cmd(t_pipe_data *pipe_data);
-void			pipe_files_prep(t_pipe_data *pipe_data, t_bool is_builtin);
-void			execution(t_pipe_data **pipe_data);
 char			*get_cmd_path(char	*cmd, char	**exec_programs_dirs);
-int				check_builtin(t_pipe_data *pipe_data);
-void			exec_builtin(int builtin_nb, t_pipe_data *pipe_data);
+void			pipe_files_prep(t_pipe_data *pipe_data, t_bool is_builtin);
 
 // ----------- Shared Functions ------------------
 
+void			init_g_data(void);
+void			count_pipe_tokens(t_pipe_data *pipe_data);
+void			init_pipe_counter(t_pipe_data *pipe_data);
 void			*alloc(size_t size, char *source);
 void			ft_close(int n, int s);
 void			free_str(void	*ptr);
@@ -202,6 +214,6 @@ int				ft_isalpha(int c);
 int				ft_isdigit(int c);
 size_t			ft_strlen(const char *s);
 void			ft_lstclear(t_alloc_lst **lst);
-t_glbl_data	g_data;
+t_g_data	g_data;
 
 #endif

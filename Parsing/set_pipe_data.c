@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:36:38 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/31 20:05:05 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/09/01 03:31:17 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 void	var_init(t_pipe_data *pipe_data)
 {
+	pipe_data->redirections = ft_calloc(pipe_data->counter.redirections + 1,
+			sizeof(t_redirections *), TRUE, "get_pipe_dada");
 	pipe_data->delimiter = NULL;
-	pipe_data->redirections = NULL;
 	pipe_data->command = NULL;
 	pipe_data->argv = NULL;
 	pipe_data->is_herdoc = FALSE;
@@ -35,46 +36,48 @@ t_redirections	*get_redirection(char *path, int type)
 	return (new_redrcs);
 }
 
+void	conditions(t_pipe_data *pipe_data, t_pipe_token *token,
+			char *quotes, int *j)
+{
+	if (ft_strcmp(token->type, "command") == 0)
+	{
+		pipe_data->command = quotes;
+		pipe_data->argv = ft_realloc(pipe_data->argv, quotes, TRUE);
+	}
+	else if (ft_strcmp(token->type, "delimiter") == 0)
+	{
+		pipe_data->delimiter = ft_realloc(pipe_data->delimiter, quotes, TRUE);
+		pipe_data->is_herdoc = TRUE;
+	}
+	else if (ft_strcmp(token->type, "infile") == 0)
+		pipe_data->redirections[++(*j)] = get_redirection(quotes, INFILE);
+	else if (ft_strcmp(token->type, "outfile") == 0)
+		pipe_data->redirections[++(*j)] = get_redirection(quotes, OUTFILE);
+	else if (ft_strcmp(token->type, "app_outfile") == 0)
+		pipe_data->redirections[++(*j)] = get_redirection(quotes, APPENDFILE);
+	else if (ft_strcmp(token->type, "env_var") == 0)
+		pipe_data->argv = ft_realloc(pipe_data->argv, s_d_quotes(
+					get_env_variables(token->token, FALSE)), TRUE);
+	else if (ft_strcmp(token->type, "option") == 0)
+		pipe_data->argv = ft_realloc(pipe_data->argv, quotes, TRUE);
+}
+
 void	set_pipe_data(t_pipe_data *pipe_data)
 {
-	int			i;
-	int			j;
-	char		*quotes;
-	char		*replaced;
-	t_pipe_token **pipe_tokens;
+	int				i;
+	int				j;
+	char			*quotes;
+	char			*replaced;
+	t_pipe_token	**pipe_tokens;
 
 	i = -1;
 	j = -1;
 	pipe_tokens = pipe_data->tokens;
 	var_init(pipe_data);
-	pipe_data->redirections = ft_calloc(pipe_data->counter.redirections + 1,
-			sizeof(t_redirections *), TRUE, "get_pipe_dada");
 	while (pipe_tokens[++i])
 	{
 		replaced = handling_quotes(pipe_tokens[i]->token, -1, ' ');
 		quotes = s_d_quotes(replaced);
-		if (ft_strcmp(pipe_tokens[i]->type, "command") == 0)
-		{
-			pipe_data->command = quotes;
-			pipe_data->argv = ft_realloc(pipe_data->argv, quotes, TRUE);
-		}
-		else if (ft_strcmp(pipe_tokens[i]->type, "delimiter") == 0)
-		{
-			pipe_data->delimiter = ft_realloc(pipe_data->delimiter,
-					quotes, TRUE);
-			pipe_data->is_herdoc = TRUE;
-		}
-		else if (ft_strcmp(pipe_tokens[i]->type, "infile") == 0)
-			pipe_data->redirections[++j] = get_redirection(quotes, INFILE);
-		else if (ft_strcmp(pipe_tokens[i]->type, "outfile") == 0)
-			pipe_data->redirections[++j] = get_redirection(quotes, OUTFILE);
-		else if (ft_strcmp(pipe_tokens[i]->type, "app_outfile") == 0)
-			pipe_data->redirections[++j] = get_redirection(quotes, APPENDFILE);
-		else if (ft_strcmp(pipe_tokens[i]->type, "env_var") == 0)
-			pipe_data->argv = ft_realloc(pipe_data->argv, s_d_quotes(
-						get_env_variables(pipe_tokens[i]->token, FALSE)), TRUE);
-		else if (ft_strcmp(pipe_tokens[i]->type, "option") == 0)
-			pipe_data->argv = ft_realloc(pipe_data->argv, quotes, TRUE);
-		pipe_tokens[i]->token = 0;
+		conditions(pipe_data, pipe_tokens[i], quotes, &j);
 	}
 }

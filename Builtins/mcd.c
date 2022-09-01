@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:19:40 by otoufah           #+#    #+#             */
-/*   Updated: 2022/09/01 02:07:26 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/09/01 03:36:53 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	update_oldpwd(void)
 	{
 		if (i != -1)
 		{
-			//free(g_data.envp[i]);
-			g_data.envp[i] = ft_strjoin("OLDPWD=", buff);
+			free_str(g_data.envp[i]);
+			g_data.envp[i] = ft_strdup(ft_strjoin("OLDPWD=", buff), FALSE);
 		}
 	}
 }
@@ -48,14 +48,14 @@ void	update_pwd(void)
 	{
 		if (i != -1)
 		{
-			//free(g_data.envp[i]);
-			g_data.envp[i] = ft_strjoin("PWD=", buff);
+			free_str(g_data.envp[i]);
+			g_data.envp[i] = ft_strdup(ft_strjoin("PWD=", buff), FALSE);
 		}
 	}
 	else
 	{
-		ft_putstr_fd("Mini: cd: error retrieving current directory: getcwd: ", 2);
-		ft_putstr_fd("cannot access parent directories", 2);
+		ft_putstr_fd("Mini: cd: error retrieving current directory:", 2);
+		ft_putstr_fd(" getcwd: cannot access parent directories", 2);
 		ft_putstr_fd("No such file or directory\n", 2);
 	}
 }

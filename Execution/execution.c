@@ -6,17 +6,14 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 16:17:46 by otoufah           #+#    #+#             */
-/*   Updated: 2022/09/01 02:10:29 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/09/01 06:20:40 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	get_herdoc(t_pipe_data *pipe_data)
+void	herdocs(t_pipe_data *pipe_data)
 {
-	char	*line;
-	char	*expand;
-	int		fd;
 	int		j;
 	int		id;
 
@@ -26,26 +23,7 @@ void	get_herdoc(t_pipe_data *pipe_data)
 	{
 		signal(SIGINT, herdoc_sigint);
 		while (pipe_data->delimiter && pipe_data->delimiter[++j])
-		{
-			fd = open("/tmp/herdoc", O_CREAT | O_RDWR | O_TRUNC, 0777);
-			line = readline("> ");
-			expand = NULL;
-			while (!line || ft_strcmp(line, pipe_data->delimiter[j]))
-			{
-				if (line)
-				{
-					expand = get_env_in_herdoc(line, FALSE);
-					write(fd, expand, ft_strlen(expand));
-					write(fd, "\n", 1);
-					free_str(expand);
-				}
-				else
-					break ;
-				line = readline("> ");
-			}
-			free_str(line);
-			ft_close(fd, 3);
-		}
+			read_herdoc(pipe_data->delimiter[j]);
 		exit(0);
 	}
 	signal(SIGINT, SIG_IGN);
@@ -55,7 +33,7 @@ void	get_herdoc(t_pipe_data *pipe_data)
 
 void	child_process(t_pipe_data *pipe_data, int pipe_nb, int builtin_nb)
 {
-	int fd;
+	int	fd;
 
 	g_data.last_child_id = fork();
 	if (g_data.last_child_id == 0)
@@ -78,23 +56,7 @@ void	child_process(t_pipe_data *pipe_data, int pipe_nb, int builtin_nb)
 			dup2(g_data.cmd_pipe_fds[1], 1);
 		ft_close(g_data.cmd_pipe_fds[1], 5);
 		ft_close(g_data.cmd_pipe_fds[0], 4);
-		if (builtin_nb != -1)
-		{
-			exec_builtin(builtin_nb, pipe_data);
-			exit(0);
-		}
-		else if (pipe_data->cmd_path)
-		{
-			if (execve(pipe_data->cmd_path, pipe_data->argv, g_data.envp) == -1)
-			{
-				ft_putstr_fd("Mini: ", 2);
-				ft_putstr_fd(strerror(errno), 2);
-				ft_putstr_fd("\n", 2);
-				exit(errno);
-			}
-		}
-		else
-			exit(0);
+		execs(pipe_data, builtin_nb);
 	}
 }
 
@@ -131,7 +93,7 @@ void	execution(t_pipe_data **pipes_data)
 		g_data.errno_cp = 0;
 		if (pipes_data[i]->is_herdoc)
 		{
-			get_herdoc(pipes_data[i]);
+			herdocs(pipes_data[i]);
 			if (!g_data.errno_cp)
 				exec_pipe(pipes_data[i], i);
 		}
@@ -141,22 +103,5 @@ void	execution(t_pipe_data **pipes_data)
 		if (!pipes_data[i]->is_herdoc)
 			exec_pipe(pipes_data[i], i);
 	ft_close(g_data.pre_pipe_infd, 1);
-	i = -1;
-	signal(SIGINT, SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
-	while (pipes_data[++i] && (g_data.size > 1 || check_builtin(pipes_data[0]) == -1))
-	{
-		if (i == 0)
-		{
-			waitpid(g_data.last_child_id, &g_data.errno_cp, 0);
-			if (WIFEXITED(g_data.errno_cp))
-				g_data.errno_cp = WEXITSTATUS(g_data.errno_cp);
-			else if (g_data.errno_cp == 3 || g_data.errno_cp == 2)
-				g_data.errno_cp += 128;
-		}
-		else
-			waitpid(-1, NULL, 0);
-	}
-	signal(SIGINT, parent_sigint);
-	signal(SIGQUIT, SIG_IGN);
+	sig_wait(pipes_data);
 }

@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_funcs.c                                       :+:      :+:    :+:   */
+/*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/23 16:40:32 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/28 15:23:54 by abouchfa         ###   ########.fr       */
+/*   Created: 2022/08/23 16:41:30 by otoufah           #+#    #+#             */
+/*   Updated: 2022/09/01 03:04:00 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	free_str(void *ptr)
+void	parent_sigint(int sig)
 {
-	if (ptr)
-		free(ptr);
+	(void) sig;
+	printf("\n");
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+	g_data.errno_cp = 1;
 }
 
-void	free_arr(void **arr)
+void	herdoc_sigint(int sig)
 {
-	int	i;
+	(void) sig;
+	exit(1);
+}
 
-	i = -1;
-	while (arr && arr[++i])
-		free_str(arr[i]);
-	free_str(arr);
+void	void_sig(int sig)
+{
+	(void) sig;
 }
