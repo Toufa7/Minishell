@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:19:59 by otoufah           #+#    #+#             */
-/*   Updated: 2022/09/01 06:10:29 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/09/01 12:15:08 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	mexport(char **argv)
 		{
 			ft_putstr_fd("Mini: export: ", 2);
 			ft_putstr_fd(argv[i], 2);
-			ft_putstr_fd("invalid option\n", 2);
+			ft_putstr_fd(" invalid option\n", 2);
 			g_data.errno_cp = 2;
 			break ;
 		}

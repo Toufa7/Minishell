@@ -112,12 +112,12 @@ function testing()
 	MINISHELL_EXIT_STATUS=$?
 	BASH=$(echo $* | bash 2>&1)
 	BASH_EXIT_STATUS=$?
-	if [ "$MINISHELL" == "$BASH" ] && [ "$MINISHELL_EXIT_STATUS" == "$BASH_EXIT_STATUS" ];
+	printf 	"$CYAN\"$*\"	$RESET"
+	if [ "$MINISHELL_EXIT_STATUS" == "$BASH_EXIT_STATUS" ];
     then
 	{
 		let 	"i++"
 		printf	"$GREEN%s""\033[1m[OK]\033[0m	${NORMAL}"$RESET
-		printf 	"$CYAN\"$*\"	$RESET"
 		# printf "\nMini =>	$MINISHELL%s\n"
 		# printf "Bash => $BASH%s\n"
 		# sleep 1
@@ -125,30 +125,70 @@ function testing()
 	else
 	{
 		printf "$RED%s""\033[1m[KO]\033[0m	${NORMAL}"$RESET
-		printf "$CYAN\"$*\"	$RESET"
+        # sleep 2
 	}
 	fi
-	if [ "$MINISHELL" != "$BASH" ];
-    then
-    {
-		echo 	"\n"
-		echo 	$RED$SEPARATOR$RESET
-		printf	$RED"	Minishell output  	$ $MINISHELL	$RESET\n"
-		printf	$GREEN"	Bash output       	$ $BASH		$RESET\n"
-		echo	$RED$SEPARATOR$RESET
-    }
-	fi
-	if [ "$MINISHELL_EXIT_STATUS" != "$BASH_EXIT_STATUS" ];
-	then
-	{
-		echo
-		printf	$RED"Minishell exit status   => $RED$MINISHELL_EXIT_STATUS$RESET"
-		echo
-		printf	$GREEN"Bash exit status        => $GREEN$BASH_EXIT_STATUS$RESET\n"
-	}
-	fi
-	sleep 0.1
-	echo
+	echo	"\n"
+	printf	$MAGENTA"	Mini exit status: "$RESET
+	printf	$WHITE"$MINISHELL_EXIT_STATUS\n"$RESET
+	printf	$MAGENTA"	Bash exit status: "$RESET
+	printf	$WHITE"$BASH_EXIT_STATUS\n"$RESET
+	echo 	"\n"
+	printf	$MAGENTA"	Minishell output: "$RESET
+	printf	$WHITE"$MINISHELL\n"$RESET
+	printf	$MAGENTA"	Bash output     : "$RESET
+	printf	$WHITE"$BASH\n\n"$RESET
+	# if [ "$MINISHELL" != "$BASH" ];
+    # then
+    # {
+	# 	echo 	"\n"
+	# 	printf	$RED"	Minishell output  	$ $MINISHELL	$RESET\n"
+	# 	printf	$GREEN"	Bash output       	$ $BASH		$RESET\n"
+    #     sleep 2
+    # }
+	# fi
+	# if [ "$MINISHELL_EXIT_STATUS" != "$BASH_EXIT_STATUS" ];
+	# then
+	# {
+	# 	echo
+	# 	printf	$RED"Minishell exit status   => $RED$MINISHELL_EXIT_STATUS$RESET"
+	# 	echo
+	# 	printf	$GREEN"Bash exit status        => $GREEN$BASH_EXIT_STATUS$RESET\n"
+	# }
+	# fi
+	# {
+	# 	total_test=69
+	# 	percent=100
+	# 	idx=$i
+	# 	grade=$((idx / total_test))
+	# 	# final_graade=$((grade * percent))
+	# 	echo $i/$total_test
+	# }
+	printf $YELLOW$BOLD"===============================================================================\n"
+	sleep 1
+	# 	printf "$CYAN\"$*\"	$RESET"
+	# }
+	# if [ "$MINISHELL" != "$BASH" ];
+    # then
+    # {
+	# 	echo 	"\n"
+	# 	echo 	$RED$SEPARATOR$RESET
+	# 	printf	$RED"	Minishell output  	$ $MINISHELL	$RESET\n"
+	# 	printf	$GREEN"	Bash output       	$ $BASH		$RESET\n"
+	# 	echo	$RED$SEPARATOR$RESET
+    # }
+	# fi
+	# if [ "$MINISHELL_EXIT_STATUS" != "$BASH_EXIT_STATUS" ];
+	# then
+	# {
+	# 	echo
+	# 	printf	$RED"Minishell exit status   => $RED$MINISHELL_EXIT_STATUS$RESET"
+	# 	echo
+	# 	printf	$GREEN"Bash exit status        => $GREEN$BASH_EXIT_STATUS$RESET\n"
+	# }
+	# fi
+	# sleep 0.1
+	# echo
 }
 
 function grade()
@@ -194,10 +234,8 @@ function testing_errors()
     then
     {
 		echo "\n"
-		echo $RED$SEPARATOR$RESET
 		printf $RED"	Minishell output  	$ $MINISHELL	$RESET\n"
 		printf $GREEN"	Bash output       	$ $BASH		$RESET\n"
-		echo $RED$SEPARATOR$RESET
         sleep 2
     }
 	fi
@@ -210,6 +248,7 @@ function testing_errors()
 		printf $GREEN"Bash exit status        => $GREEN$BASH_EXIT_STATUS$RESET\n"
 	}
 	fi
+	printf "\n%s\n" "---------------------------------------------------------"
 	sleep 0.1
 }
 

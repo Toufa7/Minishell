@@ -5,7 +5,7 @@ C_FLAGS = gcc
 
 C_READLINE_POMS = -L /Users/otoufah/goinfre/homebrew/opt/readline/lib -I /Users/otoufah/goinfre/homebrew/opt/readline/include
 
-# C_READLINE_ABOU = -L /goinfre/abouchfa/.brew/opt/readline/lib -I /goinfre/abouchfa/.brew/opt/readline/include
+C_READLINE_ABOU = -L /goinfre/abouchfa/.brew/opt/readline/lib -I /goinfre/abouchfa/.brew/opt/readline/include
 
 ADDI_FLAGS = -lreadline
 
@@ -74,7 +74,7 @@ all: $(NAME)
 $(NAME): $(C_FILES)
 		@./loading.sh
 		@$(sig)
-		@$(C_FLAGS) $(C_FILES) $(C_READLINE_POMS) $(ADDI_FLAGS) -o $(NAME)
+		@$(C_FLAGS) $(C_FILES) $(ADDI_FLAGS) -o $(NAME)
 
 clean:
 	@rm -rf $(NAME)
