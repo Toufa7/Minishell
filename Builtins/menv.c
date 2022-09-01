@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:19:50 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/30 22:29:46 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/09/01 02:05:15 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void	menv(char **argv, char *prefix, t_bool is_export)
 	i = -1;
 	if (argv && *argv)
 	{
-		ft_putstr_fd("env: ", 2);
+		ft_putstr_fd("Mini: env: ", 2);
 		ft_putstr_fd(*argv, 2);
-		ft_putstr_fd(": No such file or directory\n", 2);
+		ft_putstr_fd(" No such file or directory\n", 2);
 		g_data.errno_cp = 127;
 	}
 	else

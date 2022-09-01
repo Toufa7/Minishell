@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 05:23:48 by abouchfa          #+#    #+#             */
-/*   Updated: 2022/09/01 01:26:34 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/09/01 02:10:49 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,11 +105,12 @@ void	pipe_files_prep(t_pipe_data *pipe_data, t_bool is_builtin)
 			g_data.errno_cp = 1;
 			if (path[0] == '$' && path[1])
 			{
+				ft_putstr_fd("Mini: ", 2);
 				ft_putstr_fd(path, 2);
-				ft_putstr_fd(": ambiguous redirect\n", 2);
+				ft_putstr_fd(" ambiguous redirect\n", 2);
 			}
 			else
-				ft_putstr_fd(": No such file or directory\n", 2);
+				ft_putstr_fd("Mini: No such file or directory\n", 2);
 			if (is_builtin)
 				break ;
 			else

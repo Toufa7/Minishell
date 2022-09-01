@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 16:17:46 by otoufah           #+#    #+#             */
-/*   Updated: 2022/09/01 01:49:40 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/09/01 02:10:29 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void	child_process(t_pipe_data *pipe_data, int pipe_nb, int builtin_nb)
 		{
 			if (execve(pipe_data->cmd_path, pipe_data->argv, g_data.envp) == -1)
 			{
+				ft_putstr_fd("Mini: ", 2);
 				ft_putstr_fd(strerror(errno), 2);
 				ft_putstr_fd("\n", 2);
 				exit(errno);
@@ -113,7 +114,7 @@ void	exec_pipe(t_pipe_data *pipe_data, int index)
 			pipe(g_data.cmd_pipe_fds);
 		child_process(pipe_data, index, builtin_nb);
 		ft_close(g_data.cmd_pipe_fds[1], 5);
-		ft_close(g_data.pre_pipe_infd, 2);
+		ft_close(g_data.pre_pipe_infd, 3);
 		g_data.pre_pipe_infd = g_data.cmd_pipe_fds[0];
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/31 20:06:33 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/09/01 02:32:49 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	check_nbr_of_delimiters(int delimiters)
 {
 	if (delimiters > 16)
 	{
-		ft_putstr_fd("Mini-0.0: maximum here-document count exceeded", 2);
+		ft_putstr_fd("Mini: maximum here-document count exceeded", 2);
 		g_data.errno_cp = 2;
 		exit(2);
 	}
@@ -119,7 +119,8 @@ void	minishell(t_parse *parse)
 				break ;
 			set_pipe_data(parse->pipes_data[i]);
 		}
-		execution(parse->pipes_data);
+		if (!g_data.parse_error)
+			execution(parse->pipes_data);
 	}
 }
 

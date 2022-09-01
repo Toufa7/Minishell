@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:55:08 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/28 15:16:23 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/09/01 01:56:14 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*input_formating(char *str)
 	char	sing;
 	char	*spcs;
 
-	spcs = alloc(sizeof(char) * (ft_strlen(str) + (spc(str) * 2) + 1), "if");
+	spcs = alloc(sizeof(char) * ((ft_strlen(str) + (spc(str) * 2) + 1)), "if");
 	if (!spcs)
 		return (NULL);
 	i = -1;

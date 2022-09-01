@@ -8,4 +8,7 @@ Minishell
 /*/*.o
 /.vscode/*
 /.vscode
+.vscode/*
+.vscode/
+.vscode
 */*.out

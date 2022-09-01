@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:19:54 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/30 13:07:35 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/09/01 02:05:43 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	mexit(char **argv)
 	{
 		ft_putstr_fd("exit\nexit: ", 2);
 		ft_putstr_fd(argv[0], 2);
-		ft_putstr_fd(": numeric argument required\n", 2);
+		ft_putstr_fd("numeric argument required\n", 2);
 		g_data.errno_cp = 255;
 		exit(255);
 	}

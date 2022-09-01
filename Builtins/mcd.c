@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:19:40 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/28 10:37:32 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/09/01 02:07:26 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	print_error(char *path)
 {
-	ft_putstr_fd("cd: ", 2);
+	ft_putstr_fd("Mini: cd: ", 2);
 	ft_putstr_fd(path, 2);
-	ft_putstr_fd(": ", 2);
+	ft_putstr_fd(" ", 2);
 	ft_putstr_fd(strerror(errno), 2);
 	ft_putstr_fd("\n", 2);
 	g_data.errno_cp = errno;
@@ -54,9 +54,9 @@ void	update_pwd(void)
 	}
 	else
 	{
-		ft_putstr_fd("cd: error retrieving current directory: getcwd: ", 2);
+		ft_putstr_fd("Mini: cd: error retrieving current directory: getcwd: ", 2);
 		ft_putstr_fd("cannot access parent directories", 2);
-		ft_putstr_fd(": No such file or directory\n", 2);
+		ft_putstr_fd("No such file or directory\n", 2);
 	}
 }
 

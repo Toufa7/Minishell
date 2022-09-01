@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:20:03 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/27 16:04:53 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/09/01 02:08:44 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	mpwd(void)
 	}
 	else
 	{
+		ft_putstr_fd("Mini: ", 2);
 		ft_putstr_fd(strerror(errno), 2);
 		ft_putstr_fd("\n", 2);
 		g_data.errno_cp = errno;

@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:20:07 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/28 15:41:35 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/09/01 02:09:01 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	munset(char **argv)
 		j = validate_var_name(argv[i]);
 		if (argv[i][j])
 		{
-			ft_putstr_fd("unset: '", 2);
+			ft_putstr_fd("Mini: unset: '", 2);
 			ft_putstr_fd(argv[i], 2);
 			ft_putstr_fd("': not a valid identifier\n", 2);
 			g_data.errno_cp = 1;
