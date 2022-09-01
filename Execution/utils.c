@@ -12,15 +12,15 @@
 
 #include "../minishell.h"
 
-void	sig_wait(t_pipe_data **pipes_data)
+void	sig_wait(t_pipe **pipes)
 {
 	int	i;
 
 	i = -1;
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
-	while (pipes_data[++i] && (g_data.size > 1
-			|| check_builtin(pipes_data[0]) == -1))
+	while (pipes[++i] && (g_data.size > 1
+			|| check_builtin(pipes[0]) == -1))
 	{
 		if (i == 0)
 		{
@@ -37,7 +37,7 @@ void	sig_wait(t_pipe_data **pipes_data)
 	signal(SIGQUIT, SIG_IGN);
 }
 
-void	read_herdoc(char *delimiter, t_pipe_data *pipe_data)
+void	read_herdoc(char *delimiter, t_pipe *pipe_data)
 {
 	char	*line;
 	char	*without_d_s;
@@ -65,7 +65,7 @@ void	read_herdoc(char *delimiter, t_pipe_data *pipe_data)
 	ft_close(fd, 3);
 }
 
-void	execs(t_pipe_data *pipe_data, int builtin_nb)
+void	execs(t_pipe *pipe_data, int builtin_nb)
 {
 	if (builtin_nb != -1)
 	{
@@ -88,7 +88,7 @@ void	execs(t_pipe_data *pipe_data, int builtin_nb)
 
 t_bool	check_file_errors(char *path, t_bool is_builtin)
 {
-	if (path && path[0] == '$')
+	if (path && (path[0] == '$' || (path[0] == '"' && path[0] == '$')))
 	{
 		g_data.redirection_error = TRUE;
 		g_data.errno_cp = 1;

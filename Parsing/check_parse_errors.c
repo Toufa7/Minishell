@@ -43,7 +43,7 @@ int	compare(char	*t, char	*nxt_t, char	*nxt_tok)
 		return (-1);
 }
 
-t_bool	is_error(t_pipe_token **pipe_tokens, int i)
+t_bool	is_error(t_token **pipe_tokens, int i)
 {
 	char	*type;
 	char	*token;
@@ -70,7 +70,7 @@ t_bool	is_error(t_pipe_token **pipe_tokens, int i)
 	return (FALSE);
 }
 
-t_bool	check_parse_errors(t_pipe_token **pipe_tokens)
+t_bool	check_parse_errors(t_token **pipe_tokens)
 {
 	size_t	i;
 

@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-void	in_file_prep(t_pipe_data *pipe_data, char *path, t_bool is_builtin)
+void	in_file_prep(t_pipe *pipe_data, char *path, t_bool is_builtin)
 {
 	int	fd;
 
@@ -32,7 +32,7 @@ void	in_file_prep(t_pipe_data *pipe_data, char *path, t_bool is_builtin)
 	ft_close(fd, 8);
 }
 
-void	out_file_prep(t_pipe_data *pipe_data, char *path, t_bool is_builtin)
+void	out_file_prep(t_pipe *pipe_data, char *path, t_bool is_builtin)
 {
 	int	fd;
 
@@ -47,7 +47,7 @@ void	out_file_prep(t_pipe_data *pipe_data, char *path, t_bool is_builtin)
 		g_data.out_fd = fd;
 }
 
-void	append_file_prep(t_pipe_data *pipe_data, char *path, t_bool is_builtin)
+void	append_file_prep(t_pipe *pipe_data, char *path, t_bool is_builtin)
 {
 	int	fd;
 
@@ -91,7 +91,7 @@ t_bool	check_path(char *path, t_bool is_builtin)
 	return (TRUE);
 }
 
-void	pipe_files_prep(t_pipe_data *pipe_data, t_bool is_builtin)
+void	pipe_files_prep(t_pipe *pipe_data, t_bool is_builtin)
 {
 	char	*path;
 	int		i;
@@ -102,6 +102,7 @@ void	pipe_files_prep(t_pipe_data *pipe_data, t_bool is_builtin)
 		path = pipe_data->redirections[i]->path;
 		if (check_file_errors(path, is_builtin))
 			break ;
+		path = s_d_quotes(pipe_data->redirections[i]->path);
 		if (!check_path(path, is_builtin))
 			break ;
 		if (pipe_data->redirections[i]->type == INFILE)

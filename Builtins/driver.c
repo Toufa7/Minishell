@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-int	check_builtin(t_pipe_data *pipe_data)
+int	check_builtin(t_pipe *pipe_data)
 {
 	if (!ft_strcmp("cd", pipe_data->command))
 		return (1);
@@ -32,7 +32,7 @@ int	check_builtin(t_pipe_data *pipe_data)
 		return (-1);
 }
 
-void	exec_builtin(int builtin_nb, t_pipe_data *pipe_data)
+void	exec_builtin(int builtin_nb, t_pipe *pipe_data)
 {
 	if (builtin_nb == 1 && !g_data.redirection_error)
 		mcd(*(pipe_data->argv + 1));

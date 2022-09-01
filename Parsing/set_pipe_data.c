@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_pipe_data.c                                    :+:      :+:    :+:   */
+/*   set_pipe.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-void	var_init(t_pipe_data *pipe_data)
+void	var_init(t_pipe *pipe_data)
 {
 	pipe_data->redirections = ft_calloc(pipe_data->counter.redirections + 1,
 			sizeof(t_redirections *), TRUE, "get_pipe_dada");
@@ -36,7 +36,7 @@ t_redirections	*get_redirection(char *path, int type)
 	return (new_redrcs);
 }
 
-void	conditions(t_pipe_data *pipe_data, t_pipe_token *token,
+void	conditions(t_pipe *pipe_data, t_token *token,
 			char *quotes, int *j)
 {
 	if (ft_strcmp(token->type, "command") == 0)
@@ -50,22 +50,22 @@ void	conditions(t_pipe_data *pipe_data, t_pipe_token *token,
 		pipe_data->is_herdoc = TRUE;
 	}
 	else if (ft_strcmp(token->type, "infile") == 0)
-		pipe_data->redirections[++(*j)] = get_redirection(quotes, INFILE);
+		pipe_data->redirections[++(*j)] = get_redirection(token->token, INFILE);
 	else if (ft_strcmp(token->type, "outfile") == 0)
-		pipe_data->redirections[++(*j)] = get_redirection(quotes, OUTFILE);
+		pipe_data->redirections[++(*j)] = get_redirection(token->token, OUTFILE);
 	else if (ft_strcmp(token->type, "app_outfile") == 0)
-		pipe_data->redirections[++(*j)] = get_redirection(quotes, APPENDFILE);
+		pipe_data->redirections[++(*j)] = get_redirection(token->token, APPENDFILE);
 	else if (ft_strcmp(token->type, "option") == 0)
 		pipe_data->argv = ft_realloc(pipe_data->argv, quotes, TRUE);
 }
 
-void	set_pipe_data(t_pipe_data *pipe_data)
+void	set_pipe(t_pipe *pipe_data)
 {
-	int				i;
-	int				j;
-	char			*quotes;
-	char			*replaced;
-	t_pipe_token	**pipe_tokens;
+	int		i;
+	int		j;
+	char	*quotes;
+	char	*replaced;
+	t_token	**pipe_tokens;
 
 	i = -1;
 	j = -1;

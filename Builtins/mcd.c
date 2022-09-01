@@ -19,7 +19,7 @@ void	print_error(char *path)
 	ft_putstr_fd(" ", 2);
 	ft_putstr_fd(strerror(errno), 2);
 	ft_putstr_fd("\n", 2);
-	g_data.errno_cp = errno;
+	g_data.errno_cp = 1;
 }
 
 void	update_oldpwd(void)

@@ -12,14 +12,15 @@
 
 #include "../minishell.h"
 
-void	token_and_type(t_pipe_token **tokens, t_pipe_data *pipe_data)
+void	token_and_type(t_token **tokens)
 {
 	int	i;
 
 	i = 0;
 	while (tokens[i])
 	{
-		printf("Token -> %s | Type -> %s\n", tokens[i]->token, tokens[i]->type);
+		printf("Token -> %s | Type -> %s\n",
+			tokens[i]->token, tokens[i]->type);
 		i++;
 	}
 }

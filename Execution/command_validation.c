@@ -61,7 +61,7 @@ char	*get_cmd_path(char *cmd, char **exec_programs_dirs)
 	return (put_cmd_status(status, cmd_path, cmd));
 }
 
-void	check_cmd_path(t_pipe_data *pipe_data)
+void	check_cmd_path(t_pipe *pipe_data)
 {
 	struct stat	statbuf;
 
@@ -84,7 +84,7 @@ void	check_cmd_path(t_pipe_data *pipe_data)
 		print_perror(pipe_data->command, TRUE);
 }
 
-void	check_command_name(t_pipe_data *pipe_data)
+void	check_command_name(t_pipe *pipe_data)
 {
 	int		i;
 	char	**execps_paths;
@@ -101,7 +101,7 @@ void	check_command_name(t_pipe_data *pipe_data)
 		check_cmd_path(pipe_data);
 }
 
-void	validate_cmd(t_pipe_data *pipe_data)
+void	validate_cmd(t_pipe *pipe_data)
 {
 	if (ft_strchr(pipe_data->command, '/'))
 		check_cmd_path(pipe_data);
