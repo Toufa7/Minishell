@@ -58,7 +58,7 @@ char	*input_formating(char *str)
 	char	sing;
 	char	*spcs;
 
-	spcs = malloc(sizeof(char) * (ft_strlen(str) + (spc(str) * 2) + 1));
+	spcs = alloc(sizeof(char) * (ft_strlen(str) + (spc(str) * 2) + 1), "if");
 	if (!spcs)
 		return (NULL);
 	i = -1;
