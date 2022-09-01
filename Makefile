@@ -1,3 +1,4 @@
+sig = `stty -echoctl`
 NAME = Minishell
 
 C_FLAGS = gcc
@@ -72,6 +73,7 @@ all: $(NAME)
 
 $(NAME): $(C_FILES)
 		@./loading.sh
+		$(sig)
 		@$(C_FLAGS) $(ADDI_FLAGS) $(READLINE) $(C_FILES) -o $(NAME)
 
 clean:
