@@ -67,7 +67,7 @@ all: $(NAME)
 
 $(NAME): $(C_FILES)
 		@./loading.sh
-		@$(C_FLAGS) $(ADDI_FLAGS) $(READ) $(C_FILES) -o $(NAME)
+		@$(C_FLAGS) $(ADDI_FLAGS) $(READLINE) $(C_FILES) -o $(NAME)
 
 clean:
 	@rm -rf $(NAME)

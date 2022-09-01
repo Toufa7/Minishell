@@ -28,10 +28,10 @@ TODO: ✅❓
 	[✅] ctr \ -> quit --> exit 131
 	[✅] ignore cntr C in childs
 	[✅] Built ins is not working with mulitble pipes: I know why and the solution I just need some rest
-	[❓]	 whereis grep > tmp/file
-	[❓]	 |  => BAD ADDRESS
-	[❓]	 echo with 2 option : echo Hello World
-	[❓]	 'spaces' cd .. / You Should Protect ur ft_strncmp
+	[✅]	 whereis grep > tmp/file
+	[✅]	 |  => BAD ADDRESS
+	[✅]	 echo with 2 option : echo Hello World
+	[✅]	 'spaces' cd .. / You Should Protect ur ft_strncmp
 
  
 	  Parser

@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 16:17:46 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/31 20:39:14 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/09/01 01:49:40 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,18 +143,19 @@ void	execution(t_pipe_data **pipes_data)
 	i = -1;
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
-	while (pipes_data[++i])
+	while (pipes_data[++i] && (g_data.size > 1 || check_builtin(pipes_data[0]) == -1))
 	{
 		if (i == 0)
 		{
 			waitpid(g_data.last_child_id, &g_data.errno_cp, 0);
-			g_data.errno_cp %= 255;
+			if (WIFEXITED(g_data.errno_cp))
+				g_data.errno_cp = WEXITSTATUS(g_data.errno_cp);
+			else if (g_data.errno_cp == 3 || g_data.errno_cp == 2)
+				g_data.errno_cp += 128;
 		}
 		else
 			waitpid(-1, NULL, 0);
 	}
-	if ((g_data.errno_cp == 3 || g_data.errno_cp == 2) &&  check_builtin(pipes_data[g_data.size - 1]) == -1)
-		g_data.errno_cp += 128;
 	signal(SIGINT, parent_sigint);
 	signal(SIGQUIT, SIG_IGN);
 }

@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 05:23:48 by abouchfa          #+#    #+#             */
-/*   Updated: 2022/08/30 15:07:24 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/09/01 01:26:34 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,35 @@ void	append_file_prep(t_pipe_data *pipe_data, char *path, t_bool is_builtin)
 		g_data.out_fd = fd;
 }
 
+t_bool	check_path(char *path, t_bool is_builtin)
+{
+	char		*folders;
+	struct stat	statbuf;
+	int			i;
+
+	if (ft_strchr(path, '/') == 0)
+		return TRUE;
+	i = ft_strlen(path);
+	while(i != 0 && path[i] != '/')
+		i--;
+	folders = alloc(i + 2, "check_path");
+	ft_strncpy(folders, path, i + 1);
+	if (stat(folders, &statbuf) == -1)
+	{
+		printf("folders: %s\n", folders);
+		perror(path);
+		if (is_builtin)
+		{
+			g_data.redirection_error = TRUE;
+			g_data.errno_cp = 1;
+			return FALSE;
+		}
+		else
+			exit(1);
+	}
+	return TRUE;
+}
+
 void	pipe_files_prep(t_pipe_data *pipe_data, t_bool is_builtin)
 {
 	char	*path;
@@ -86,6 +115,8 @@ void	pipe_files_prep(t_pipe_data *pipe_data, t_bool is_builtin)
 			else
 				exit(1);
 		}
+		else if (!check_path(path, is_builtin))
+			break ;
 		if (pipe_data->redirections[i]->type == INFILE)
 			in_file_prep(pipe_data, path, is_builtin);
 		else if (pipe_data->redirections[i]->type == OUTFILE)
