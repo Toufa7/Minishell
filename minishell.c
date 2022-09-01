@@ -31,7 +31,7 @@ void	set_parse_data(t_parse *parse)
 	getting_back(parse->splt_pipes);
 	while (parse->splt_pipes[i])
 		i++;
-	parse->pipes_data = ft_calloc(i + 1, sizeof(t_pipe_data *), TRUE, "Min");
+	parse->pipes = ft_calloc(i + 1, sizeof(t_pipe *), TRUE, "Min");
 }
 
 void	minishell(t_parse *parse)
@@ -45,19 +45,24 @@ void	minishell(t_parse *parse)
 		set_parse_data(parse);
 		while (parse->splt_pipes[++i])
 		{
-			parse->pipes_data[i] = alloc(sizeof(t_pipe_data), "pipe_data");
+			parse->pipes[i] = alloc(sizeof(t_pipe), "pipe_data");
 			parse->no_splt = handling_quotes(parse->splt_pipes[i], ' ', -1);
-			parse->pipes_data[i]->tokens = set_pipe_tokens(parse->no_splt);
-			count_pipe_tokens(parse->pipes_data[i]);
-			g_data.parse_error = check_parse_errors(
-					parse->pipes_data[i]->tokens);
+			parse->pipes[i]->tokens = set_tokens(parse->no_splt);
+			count_tokens(parse->pipes[i]);
+			g_data.parse_error = check_parse_errors(parse->pipes[i]->tokens);
 			if (g_data.parse_error)
 				break ;
-			set_pipe_data(parse->pipes_data[i]);
-			token_and_type(parse->pipes_data[i]->tokens, parse->pipes_data[i]);
+			set_pipe(parse->pipes[i]);
+			if (parse->pipes[i]->counter.total == 0)
+			{
+				printf("Mini: syntax error near unexpected token `|'\n");
+				g_data.errno_cp = 258;
+				return ;
+			}
+			token_and_type(parse->pipes[i]->tokens);
 		}
 		if (!g_data.parse_error)
-			execution(parse->pipes_data);
+			execution(parse->pipes);
 	}
 }
 

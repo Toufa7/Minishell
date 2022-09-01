@@ -55,13 +55,13 @@ typedef struct s_counter
 	size_t	env_var;
 	size_t	option;
 	size_t	total;
-}	t_counter;
+}	t_couner;
 
-typedef struct s_pipe_token
+typedef struct s_token
 {
 	char	*token;
 	char	*type;
-}	t_pipe_token;
+}	t_token;
 
 typedef struct s_alloc_lst
 {
@@ -99,7 +99,7 @@ typedef struct s_g_data
 	t_bool		is_buit_in;
 }	t_g_data;
 
-typedef struct s_pipe_data
+typedef struct s_pipe
 {
 	char			*command;
 	char			*cmd_path;
@@ -108,10 +108,10 @@ typedef struct s_pipe_data
 	t_bool			out_fd_set;
 	t_bool			in_fd_set;
 	t_bool			is_herdoc;
-	t_counter		counter;
+	t_couner		counter;
 	t_redirections	**redirections;
-	t_pipe_token	**tokens;
-}	t_pipe_data;
+	t_token			**tokens;
+}	t_pipe;
 
 typedef struct s_parse
 {
@@ -123,7 +123,7 @@ typedef struct s_parse
 	char			*no_splt;
 	char			pipe;
 	char			space;
-	t_pipe_data		**pipes_data;
+	t_pipe			**pipes;
 }	t_parse;
 
 // ----------- Parsing --------------------------
@@ -135,16 +135,16 @@ char			*input_formating(char	*str);
 int				spc(char *str);
 char			*getting_back_original_input(char *str);
 char			*get_env_variables(char *target, t_bool flag);
-char			*get_env_in_herdoc(char *target, t_bool flag, t_pipe_data *pipe_data);
+char			*get_env_in_herdoc(char *target, t_bool flag, t_pipe *pipe_data);
 char			*add_something(char *str, char *add);
 char			*until_dollar(char *str);
-void			token_counter_init(t_pipe_token	*pipe_tokens);
-void			input_analyse(t_pipe_token	*pipe_tokens);
-void			token_and_type(t_pipe_token **tokens, t_pipe_data *pipe_data);
-void			input_counter(t_pipe_token	*pipe_tokens);
-void			set_pipe_data(t_pipe_data	*pipe_data);
-t_pipe_token	**set_pipe_tokens(char *str);
-t_bool			check_parse_errors(t_pipe_token **pipe_tokens);
+void			token_counter_init(t_token	*pipe_tokens);
+void			input_analyse(t_token	*pipe_tokens);
+void			token_and_type(t_token **tokens);
+void			input_counter(t_token	*pipe_tokens);
+void			set_pipe(t_pipe	*pipe_data);
+t_token	**set_tokens(char *str);
+t_bool			check_parse_errors(t_token **pipe_tokens);
 char			*gotta_expand(char *target, t_bool flag, int *i);
 char			*digit(char *target, int *i);
 char			*special_cases(char *target, int *i);
@@ -153,12 +153,12 @@ char			*just_copy(char *target, int *i);
 
 // ----------- Execution -------------------------
 
-void			execution(t_pipe_data **pipe_data);
-int				check_builtin(t_pipe_data *pipe_data);
-void			exec_builtin(int builtin_nb, t_pipe_data *pipe_data);
-void			sig_wait(t_pipe_data **pipes_data);
-void			read_herdoc(char *delimiter,t_pipe_data *pipe_data);
-void			execs(t_pipe_data *pipe_data, int builtin_nb);
+void			execution(t_pipe **pipe_data);
+int				check_builtin(t_pipe *pipe_data);
+void			exec_builtin(int builtin_nb, t_pipe *pipe_data);
+void			sig_wait(t_pipe **pipes);
+void			read_herdoc(char *delimiter,t_pipe *pipe_data);
+void			execs(t_pipe *pipe_data, int builtin_nb);
 t_bool			check_file_errors(char *path, t_bool is_builtin);
 
 void			mcd(char *path);
@@ -172,15 +172,15 @@ char			*get_key(char *str);
 char			*get_val(char *str);
 int				get_op_type(char *str);
 
-void			validate_cmd(t_pipe_data *pipe_data);
-void			pipe_files_prep(t_pipe_data *pipe_data, t_bool is_builtin);
+void			validate_cmd(t_pipe *pipe_data);
+void			pipe_files_prep(t_pipe *pipe_data, t_bool is_builtin);
 
 // ----------- Shared Functions ------------------
 
 void			init_g_data(void);
 void			print_perror(char *str, t_bool exitt);
-void			count_pipe_tokens(t_pipe_data *pipe_data);
-void			init_pipe_counter(t_pipe_data *pipe_data);
+void			count_tokens(t_pipe *pipe_data);
+void			init_pipe_counter(t_pipe *pipe_data);
 void			*alloc(size_t size, char *source);
 void			ft_close(int n, int s);
 void			free_str(void	*ptr);

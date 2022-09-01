@@ -8,7 +8,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This program built for i386-apple-darwin11.3.0
  
 
-# Make data base, printed on Thu Sep  1 20:14:21 2022
+# Make data base, printed on Thu Sep  1 20:33:03 2022
 
 # Variables
 
@@ -69,6 +69,7 @@ LOGNAME = otoufah
 # environment
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # environment
+ 
 ZSH = /Users/otoufah/.oh-my-zsh
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
@@ -163,9 +164,9 @@ VSCODE_PID = 4291
 
 # Directories
 
-# . (device 16777227, inode 1803793): 20 files, no impossibilities.
+# . (device 16777227, inode 1803793): 19 files, no impossibilities.
 
-# 20 files, no impossibilities in 1 directories.
+# 19 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -185,7 +186,7 @@ Builtins/munset.c:
 # Not a target:
 Parsing/set_pipe_tokens.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-01 17:16:58
+#  Last modified 2022-09-01 20:26:19
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -227,7 +228,7 @@ Shared/system_calls_protection.c:
 # Not a target:
 Parsing/get_env_in_herdoc.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-01 16:41:29
+#  Last modified 2022-09-01 20:29:04
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -245,7 +246,7 @@ Builtins/mexport_utils.c:
 # Not a target:
 Parsing/token_and_type.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-01 15:13:06
+#  Last modified 2022-09-01 20:27:20
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -280,7 +281,6 @@ Shared/ft_substr.c:
 #  Implicit rule search has been done.
 #  Last modified 2022-09-01 11:59:12
 #  File has been updated.
- 
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
@@ -288,7 +288,7 @@ Shared/ft_substr.c:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-01 17:06:25
+#  Last modified 2022-09-01 20:32:56
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -306,7 +306,7 @@ Parsing/get_env_utils.c:
 # Not a target:
 Execution/utils.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-01 16:42:00
+#  Last modified 2022-09-01 20:29:04
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -333,7 +333,7 @@ Shared/get_var_val.c:
 # Not a target:
 Builtins/driver.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-31 10:00:21
+#  Last modified 2022-09-01 20:29:04
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -342,7 +342,7 @@ Builtins/driver.c:
 # Not a target:
 Execution/execution.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-01 14:48:50
+#  Last modified 2022-09-01 20:29:04
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -354,8 +354,8 @@ Shared/ft_strncpy.c:
 #  Last modified 2022-09-01 11:59:12
 #  File has been updated.
 #  Successfully updated.
-# variable set hash-table stats:
  
+# variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
@@ -388,7 +388,7 @@ Parsing/handling_quotes.c:
 Minishell: minishell.c Shared/count_pipe_tokens.c Shared/init_funcs.c Shared/print_perror.c Shared/memmory_utils.c Shared/system_calls_protection.c Shared/signals.c Shared/ft_itoa.c Shared/validate_var_name.c Shared/free_funcs.c Shared/env_dup.c Shared/get_var_index.c Shared/ft_putstr_fd.c Shared/ft_atoi.c Shared/ft_strncpy.c Shared/ft_split.c Shared/ft_substr.c Shared/ft_strlen.c Shared/ft_strstr.c Shared/ft_strjoin.c Shared/ft_strcmp.c Shared/ft_strncmp.c Shared/ft_strdup.c Shared/ft_calloc.c Shared/ft_lstclear.c Shared/ft_strchr.c Shared/ft_realloc.c Shared/ft_isalpha.c Shared/ft_isdigit.c Shared/ft_isalnum.c Shared/ft_strnstr.c Shared/get_var_val.c Parsing/s_d_quotes.c Parsing/token_and_type.c Parsing/get_env_in_herdoc.c Parsing/get_env_variables.c Parsing/get_env_utils.c Parsing/get_env_utils_2.c Parsing/input_formating.c Parsing/input_formating_utils.c Parsing/set_pipe_tokens.c Parsing/set_pipe_data.c Parsing/handling_quotes.c Parsing/check_parse_errors.c Builtins/driver.c Builtins/mcd.c Builtins/mecho.c Builtins/menv.c Builtins/mexit.c Builtins/mexport.c Builtins/mexport_utils.c Builtins/mpwd.c Builtins/munset.c Execution/execution.c Execution/command_validation.c Execution/files_preps.c Execution/utils.c
 #  Implicit rule search has not been done.
 #  Implicit/static pattern stem: `'
-#  Last modified 2022-09-01 19:28:04
+#  File does not exist.
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # automatic
@@ -406,7 +406,7 @@ Minishell: minishell.c Shared/count_pipe_tokens.c Shared/init_funcs.c Shared/pri
 # automatic
 # ^ := minishell.c Shared/count_pipe_tokens.c Shared/init_funcs.c Shared/print_perror.c Shared/memmory_utils.c Shared/system_calls_protection.c Shared/signals.c Shared/ft_itoa.c Shared/validate_var_name.c Shared/free_funcs.c Shared/env_dup.c Shared/get_var_index.c Shared/ft_putstr_fd.c Shared/ft_atoi.c Shared/ft_strncpy.c Shared/ft_split.c Shared/ft_substr.c Shared/ft_strlen.c Shared/ft_strstr.c Shared/ft_strjoin.c Shared/ft_strcmp.c Shared/ft_strncmp.c Shared/ft_strdup.c Shared/ft_calloc.c Shared/ft_lstclear.c Shared/ft_strchr.c Shared/ft_realloc.c Shared/ft_isalpha.c Shared/ft_isdigit.c Shared/ft_isalnum.c Shared/ft_strnstr.c Shared/get_var_val.c Parsing/s_d_quotes.c Parsing/token_and_type.c Parsing/get_env_in_herdoc.c Parsing/get_env_variables.c Parsing/get_env_utils.c Parsing/get_env_utils_2.c Parsing/input_formating.c Parsing/input_formating_utils.c Parsing/set_pipe_tokens.c Parsing/set_pipe_data.c Parsing/handling_quotes.c Parsing/check_parse_errors.c Builtins/driver.c Builtins/mcd.c Builtins/mecho.c Builtins/menv.c Builtins/mexit.c Builtins/mexport.c Builtins/mexport_utils.c Builtins/mpwd.c Builtins/munset.c Execution/execution.c Execution/command_validation.c Execution/files_preps.c Execution/utils.c
 # automatic
-# ? := Shared/validate_var_name.c Parsing/get_env_variables.c Parsing/get_env_utils.c
+# ? := minishell.c Shared/count_pipe_tokens.c Shared/init_funcs.c Shared/print_perror.c Shared/memmory_utils.c Shared/system_calls_protection.c Shared/signals.c Shared/ft_itoa.c Shared/validate_var_name.c Shared/free_funcs.c Shared/env_dup.c Shared/get_var_index.c Shared/ft_putstr_fd.c Shared/ft_atoi.c Shared/ft_strncpy.c Shared/ft_split.c Shared/ft_substr.c Shared/ft_strlen.c Shared/ft_strstr.c Shared/ft_strjoin.c Shared/ft_strcmp.c Shared/ft_strncmp.c Shared/ft_strdup.c Shared/ft_calloc.c Shared/ft_lstclear.c Shared/ft_strchr.c Shared/ft_realloc.c Shared/ft_isalpha.c Shared/ft_isdigit.c Shared/ft_isalnum.c Shared/ft_strnstr.c Shared/get_var_val.c Parsing/s_d_quotes.c Parsing/token_and_type.c Parsing/get_env_in_herdoc.c Parsing/get_env_variables.c Parsing/get_env_utils.c Parsing/get_env_utils_2.c Parsing/input_formating.c Parsing/input_formating_utils.c Parsing/set_pipe_tokens.c Parsing/set_pipe_data.c Parsing/handling_quotes.c Parsing/check_parse_errors.c Builtins/driver.c Builtins/mcd.c Builtins/mecho.c Builtins/menv.c Builtins/mexit.c Builtins/mexport.c Builtins/mexport_utils.c Builtins/mpwd.c Builtins/munset.c Execution/execution.c Execution/command_validation.c Execution/files_preps.c Execution/utils.c
 # variable set hash-table stats:
 # Load=8/32=25%, Rehash=0, Collisions=1/16=6%
 #  commands to execute (from `Makefile', line 75):
@@ -487,6 +487,7 @@ Builtins/mecho.c:
 # Not a target:
 Builtins/mpwd.c:
 #  Implicit rule search has been done.
+ 
 #  Last modified 2022-09-01 11:59:12
 #  File has been updated.
 #  Successfully updated.
@@ -530,7 +531,6 @@ Shared/ft_putstr_fd.c:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
- 
 Shared/ft_strstr.c:
 #  Implicit rule search has been done.
 #  Last modified 2022-09-01 11:59:12
@@ -548,7 +548,7 @@ Shared/ft_strstr.c:
 # Not a target:
 Parsing/check_parse_errors.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-01 11:59:12
+#  Last modified 2022-09-01 20:26:19
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -599,7 +599,7 @@ Shared/free_funcs.c:
 # Not a target:
 minishell.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-01 17:34:04
+#  Last modified 2022-09-01 20:29:04
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -608,7 +608,7 @@ minishell.c:
 # Not a target:
 Parsing/set_pipe_data.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-01 16:29:44
+#  Last modified 2022-09-01 20:29:04
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -626,7 +626,7 @@ Shared/ft_itoa.c:
 # Not a target:
 Shared/init_funcs.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-01 11:59:12
+#  Last modified 2022-09-01 20:29:04
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -653,7 +653,7 @@ Builtins/menv.c:
 # Not a target:
 Parsing/s_d_quotes.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-01 15:10:10
+#  Last modified 2022-09-01 20:21:24
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -671,7 +671,7 @@ Builtins/mexit.c:
 # Not a target:
 Shared/count_pipe_tokens.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-01 11:59:12
+#  Last modified 2022-09-01 20:29:04
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -689,7 +689,7 @@ Parsing/input_formating.c:
 # Not a target:
 Execution/files_preps.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-01 11:59:12
+#  Last modified 2022-09-01 20:29:04
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -698,7 +698,7 @@ Execution/files_preps.c:
 # Not a target:
 Parsing/get_env_variables.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-01 19:28:56
+#  Last modified 2022-09-01 20:14:46
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -752,7 +752,7 @@ Shared/signals.c:
 # Not a target:
 Execution/command_validation.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-01 11:59:12
+#  Last modified 2022-09-01 20:29:04
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -789,6 +789,6 @@ Shared/print_perror.c:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Thu Sep  1 20:14:21 2022
+# Finished Make data base on Thu Sep  1 20:33:04 2022
 
  

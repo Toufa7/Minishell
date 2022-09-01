@@ -24,7 +24,7 @@ void	init_g_data(void)
 	g_data.redirection_error = FALSE;
 }
 
-void	init_pipe_counter(t_pipe_data *pipe_data)
+void	init_pipe_counter(t_pipe *pipe_data)
 {
 	pipe_data->counter.app = 0;
 	pipe_data->counter.cmd = 0;

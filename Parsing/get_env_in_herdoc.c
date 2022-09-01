@@ -35,7 +35,7 @@ int	should_not_be_expanded(char	**str)
 	return (-1);
 }
 
-// void	loop_and_check(t_pipe_data *pipe_data)
+// void	loop_and_check(t_pipe *pipe_data)
 // {
 // 	int i = 0;
 // 	while (i < pipe_data->counter.delimiter)
@@ -45,7 +45,7 @@ int	should_not_be_expanded(char	**str)
 // 	}
 // }
 
-char	*get_env_in_herdoc(char *target, t_bool flag, t_pipe_data *pipe_data)
+char	*get_env_in_herdoc(char *target, t_bool flag, t_pipe *pipe_data)
 {
 	int		i = 0;
 	char	*output;

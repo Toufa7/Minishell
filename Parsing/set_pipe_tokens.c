@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_pipe_tokens.c                             :+:      :+:    :+:   */
+/*   set_tokens.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,13 +12,24 @@
 
 #include "../minishell.h"
 
-void	type_define(t_pipe_token *token, char *str, t_bool flag)
+void	type_define(t_token *token, char *str, t_bool flag)
 {
 	token->type = str;
 	token->token = get_env_variables(token->token, flag);
 }
 
-void	set_token_type(t_pipe_token *token, t_pipe_token *pre_toekn)
+t_bool	check_cmd_exist(t_token **tokens)
+{
+	int	i;
+
+	i = -1;
+	while (tokens[++i])
+		if (ft_strcmp(tokens[i]->type, "command") == 0)
+			return (TRUE);
+	return (FALSE);
+}
+
+void	set_token_type(t_token *token, t_token *pre_toekn, t_token **tokens)
 {
 	int	f;
 
@@ -38,7 +49,7 @@ void	set_token_type(t_pipe_token *token, t_pipe_token *pre_toekn)
 		type_define(token, "app_outfile", TRUE);
 	else if (pre_toekn && ft_strcmp(pre_toekn->type, "here_doc") == 0)
 		token->type = "delimiter";
-	else if (pre_toekn)
+	else if (pre_toekn && check_cmd_exist(tokens))
 		type_define(token, "option", FALSE);
 	else
 	{
@@ -47,31 +58,31 @@ void	set_token_type(t_pipe_token *token, t_pipe_token *pre_toekn)
 	}
 }
 
-t_pipe_token	**set_pipe_tokens(char *str)
+t_token	**set_tokens(char *str)
 {
 	int				i;
 	char			**line;
-	t_pipe_token	**pipe_tokens;
-	t_pipe_token	*token;
-	t_pipe_token	*pre_token;
+	t_token			**tokens;
+	t_token			*token;
+	t_token			*pre_token;
 
 	i = 0;
 	line = ft_split(str, ' ');
 	while (line[i])
 		i++;
-	pipe_tokens = alloc(sizeof(t_pipe_token *) * (i + 1), "set_pipe_tokens");
+	tokens = ft_calloc( (i + 1), sizeof(t_token *), TRUE, "set_tokens");
 	i = -1;
 	while (line[++i])
 	{
-		token = alloc(sizeof(t_pipe_token), "set_pipe_tokens");
+		token = alloc(sizeof(t_token), "set_tokens");
 		token->token = line[i];
 		if (i <= 0)
 			pre_token = NULL;
 		else
-			pre_token = pipe_tokens[i - 1];
-		set_token_type(token, pre_token);
-		pipe_tokens[i] = token;
+			pre_token = tokens[i - 1];
+		set_token_type(token, pre_token, tokens);
+		tokens[i] = token;
 	}
-	pipe_tokens[i] = NULL;
-	return (pipe_tokens);
+	tokens[i] = NULL;
+	return (tokens);
 }

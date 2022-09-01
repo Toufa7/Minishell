@@ -35,12 +35,6 @@ TODO: ✅❓
 	you need to check the delimeter of herdoc is accept expanding or not Mr abdejlil
 
 {
-	> test echo test
-	unvalid directory | cd NONEXIT | exit_status = 1 not 2
-	Heredoc in multiple pipes dosen't send tought the pipes
-	[❓]	echo hello > "${NotExist}" ==> bash: : No such file or directory 
-	cat >> test << ss
-	cat << ss >> test
 }
 
  

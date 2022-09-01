@@ -2,7 +2,9 @@
   "makefile.extensionOutputFolder": "./.vscode",
   "files.associations": {
     "minishell.h": "c",
-    "fcntl.h": "c"
+    "fcntl.h": "c",
+    "stdlib.h": "c",
+    "readline.h": "c"
   },
   "C_Cpp_Runner.cCompilerPath": "/usr/bin/gcc",
   "C_Cpp_Runner.cppCompilerPath": "g++",

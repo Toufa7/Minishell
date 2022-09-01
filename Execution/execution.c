@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-void	herdocs(t_pipe_data *pipe_data)
+void	herdocs(t_pipe *pipe_data)
 {
 	int		j;
 	int		id;
@@ -31,7 +31,7 @@ void	herdocs(t_pipe_data *pipe_data)
 	signal(SIGINT, parent_sigint);
 }
 
-void	child_process(t_pipe_data *pipe_data, int pipe_nb, int builtin_nb)
+void	child_process(t_pipe *pipe_data, int pipe_nb, int builtin_nb)
 {
 	int	fd;
 
@@ -60,7 +60,7 @@ void	child_process(t_pipe_data *pipe_data, int pipe_nb, int builtin_nb)
 	}
 }
 
-void	exec_pipe(t_pipe_data *pipe_data, int index)
+void	exec_pipe(t_pipe *pipe_data, int index)
 {
 	int	builtin_nb;
 
@@ -81,27 +81,27 @@ void	exec_pipe(t_pipe_data *pipe_data, int index)
 	}
 }
 
-void	execution(t_pipe_data **pipes_data)
+void	execution(t_pipe **pipes)
 {
 	int		i;
 
-	while (pipes_data[g_data.size])
+	while (pipes[g_data.size])
 		g_data.size++;
 	i = -1;
-	while (pipes_data[++i])
+	while (pipes[++i])
 	{
 		g_data.errno_cp = 0;
-		if (pipes_data[i]->is_herdoc)
+		if (pipes[i]->is_herdoc)
 		{
-			herdocs(pipes_data[i]);
+			herdocs(pipes[i]);
 			if (!g_data.errno_cp)
-				exec_pipe(pipes_data[i], i);
+				exec_pipe(pipes[i], i);
 		}
 	}
 	i = -1;
-	while (pipes_data[++i])
-		if (!pipes_data[i]->is_herdoc)
-			exec_pipe(pipes_data[i], i);
+	while (pipes[++i])
+		if (!pipes[i]->is_herdoc)
+			exec_pipe(pipes[i], i);
 	ft_close(g_data.pre_pipe_infd, 1);
-	sig_wait(pipes_data);
+	sig_wait(pipes);
 }

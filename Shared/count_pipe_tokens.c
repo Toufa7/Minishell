@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   count_pipe_tokens.c                                :+:      :+:    :+:   */
+/*   count_tokens.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -22,7 +22,7 @@ void	check_herdoc_limit(int delimiters)
 	}
 }
 
-void	count_helper(t_pipe_data *pipe_data, t_pipe_token *token)
+void	count_helper(t_pipe *pipe_data, t_token *token)
 {
 	if (ft_strcmp(token->type, "red_input") == 0)
 		pipe_data->counter.red_in++;
@@ -47,9 +47,10 @@ void	count_helper(t_pipe_data *pipe_data, t_pipe_token *token)
 		pipe_data->counter.delimiter++;
 		check_herdoc_limit(pipe_data->counter.delimiter);
 	}
+	pipe_data->counter.total = pipe_data->counter.red_in + pipe_data->counter.red_out + pipe_data->counter.here_do + pipe_data->counter.app + pipe_data->counter.cmd + pipe_data->counter.redirections + pipe_data->counter.option + pipe_data->counter.delimiter;
 }
 
-void	count_pipe_tokens(t_pipe_data *pipe_data)
+void	count_tokens(t_pipe *pipe_data)
 {
 	int	i;
 
