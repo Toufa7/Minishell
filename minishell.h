@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/09/01 06:31:08 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/09/01 09:40:28 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,12 +173,12 @@ char			*get_val(char *str);
 int				get_op_type(char *str);
 
 void			validate_cmd(t_pipe_data *pipe_data);
-char			*get_cmd_path(char	*cmd, char	**exec_programs_dirs);
 void			pipe_files_prep(t_pipe_data *pipe_data, t_bool is_builtin);
 
 // ----------- Shared Functions ------------------
 
 void			init_g_data(void);
+void			print_perror(char *str, t_bool exitt);
 void			count_pipe_tokens(t_pipe_data *pipe_data);
 void			init_pipe_counter(t_pipe_data *pipe_data);
 void			*alloc(size_t size, char *source);

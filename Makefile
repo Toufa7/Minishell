@@ -13,6 +13,7 @@ F_REMOVE = rm -rf
 C_FILES = 	minishell.c \
 			Shared/count_pipe_tokens.c \
 			Shared/init_funcs.c \
+			Shared/print_perror.c \
 			Shared/memmory_utils.c \
 			Shared/system_calls_protection.c \
 			Shared/signals.c \
