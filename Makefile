@@ -64,7 +64,7 @@ C_FILES = 	minishell.c \
 			Builtins/munset.c \
 			Execution/execution.c \
 			Execution/command_validation.c \
-			Execution/pipe_redirections.c \
+			Execution/files_redirections.c \
 			Execution/exec_utils.c \
 
 all: $(NAME)

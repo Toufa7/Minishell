@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipe_redirections.c                                :+:      :+:    :+:   */
+/*   files_redirections.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -94,7 +94,7 @@ t_bool	check_path(char *path, t_bool is_builtin)
 	return (TRUE);
 }
 
-void	pipe_redirections(t_pipe *pipe_data, t_bool is_builtin)
+void	files_redirections(t_pipe *pipe_data, t_bool is_builtin)
 {
 	char	*path;
 	int		i;
