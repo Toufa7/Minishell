@@ -17,7 +17,7 @@ t_bool	checking_quotes(char *str)
 	char	*check;
 
 	check = ft_strdup(str, TRUE);
-	if (s_d_quotes(check) == NULL)
+	if (remove_quotes(check) == NULL)
 	{
 		ft_putstr_fd("Mini: Unclosed Quotes\n", 2);
 		g_data.errno_cp = 1;

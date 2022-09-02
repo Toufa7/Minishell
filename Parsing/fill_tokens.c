@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_pipe.c                                    :+:      :+:    :+:   */
+/*   fill_tokens.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -59,7 +59,7 @@ void	conditions(t_pipe *pipe_data, t_token *token,
 		pipe_data->argv = ft_realloc(pipe_data->argv, quotes, TRUE);
 }
 
-void	set_pipe(t_pipe *pipe_data)
+void	fill_tokens(t_pipe *pipe_data)
 {
 	int		i;
 	int		j;
@@ -74,7 +74,7 @@ void	set_pipe(t_pipe *pipe_data)
 	while (pipe_tokens[++i])
 	{
 		replaced = handling_quotes(pipe_tokens[i]->token, -1, ' ');
-		quotes = s_d_quotes(replaced);
+		quotes = remove_quotes(replaced);
 		conditions(pipe_data, pipe_tokens[i], quotes, &j);
 	}
 }

@@ -43,7 +43,7 @@ C_FILES = 	minishell.c \
 			Shared/ft_isalnum.c \
 			Shared/ft_strnstr.c \
 			Shared/get_var_val.c \
-			Parsing/s_d_quotes.c \
+			Parsing/remove_quotes.c \
 			Parsing/token_and_type.c \
 			Parsing/get_env_in_herdoc.c \
 			Parsing/get_env_variables.c \
@@ -51,8 +51,8 @@ C_FILES = 	minishell.c \
 			Parsing/get_env_utils_2.c	\
 			Parsing/input_formating.c \
 			Parsing/input_formating_utils.c \
-			Parsing/set_pipe_tokens.c \
-			Parsing/set_pipe_data.c \
+			Parsing/input_analyse.c \
+			Parsing/fill_tokens.c \
 			Parsing/handling_quotes.c \
 			Parsing/check_parse_errors.c \
 			Builtins/driver.c \
@@ -84,5 +84,4 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
-
 

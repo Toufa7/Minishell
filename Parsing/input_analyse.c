@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_tokens.c                             :+:      :+:    :+:   */
+/*   input_analyse.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -29,7 +29,7 @@ t_bool	check_cmd_exist(t_token **tokens)
 	return (FALSE);
 }
 
-void	set_token_type(t_token *token, t_token *pre_toekn, t_token **tokens)
+void	set_tokens_type(t_token *token, t_token *pre_toekn, t_token **tokens)
 {
 	if (ft_strcmp(token->token, "<<") == 0)
 		token->type = "here_doc";
@@ -53,7 +53,7 @@ void	set_token_type(t_token *token, t_token *pre_toekn, t_token **tokens)
 		type_define(token, "command", TRUE);
 }
 
-t_token	**set_tokens(char *str)
+t_token	**input_analyse(char *str)
 {
 	int				i;
 	char			**line;
@@ -65,17 +65,17 @@ t_token	**set_tokens(char *str)
 	line = ft_split(str, ' ');
 	while (line[i])
 		i++;
-	tokens = ft_calloc((i + 1), sizeof(t_token *), TRUE, "set_tokens");
+	tokens = ft_calloc((i + 1), sizeof(t_token *), TRUE, "input_analyse");
 	i = -1;
 	while (line[++i])
 	{
-		token = alloc(sizeof(t_token), "set_tokens");
+		token = alloc(sizeof(t_token), "input_analyse");
 		token->token = line[i];
 		if (i <= 0)
 			pre_token = NULL;
 		else
 			pre_token = tokens[i - 1];
-		set_token_type(token, pre_token, tokens);
+		set_tokens_type(token, pre_token, tokens);
 		tokens[i] = token;
 	}
 	tokens[i] = NULL;

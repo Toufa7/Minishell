@@ -47,12 +47,13 @@ void	minishell(t_parse *parse)
 		{
 			parse->pipes[i] = alloc(sizeof(t_pipe), "pipe_data");
 			parse->no_splt = handling_quotes(parse->splt_pipes[i], ' ', -1);
-			parse->pipes[i]->tokens = set_tokens(parse->no_splt);
+			printf("no -> %s\n", parse->no_splt);
+			parse->pipes[i]->tokens = input_analyse(parse->no_splt);
 			count_tokens(parse->pipes[i]);
 			g_data.parse_error = check_parse_errors(parse->pipes[i]->tokens);
 			if (g_data.parse_error)
 				break ;
-			set_pipe(parse->pipes[i]);
+			fill_tokens(parse->pipes[i]);
 			if (parse->pipes[i]->counter.total == 0)
 			{
 				printf("Mini: syntax error near unexpected token `|'\n");
