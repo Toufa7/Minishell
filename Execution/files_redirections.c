@@ -23,7 +23,7 @@ void	in_file_prep(t_pipe *pipe_data, char *path, t_bool is_builtin)
 		ft_putstr_fd("Mini: ", 2);
 		perror(path);
 		if (!is_builtin || g_data.size > 1)
-			exit(errno);
+			exit(1);
 	}
 	else
 	{

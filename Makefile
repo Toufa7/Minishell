@@ -3,7 +3,7 @@ NAME = Minishell
 
 C_FLAGS = gcc
 
-C_READLINE = -L .readline/lib -I .readline/include
+C_READLINE = -lreadline -L /Users/otoufah/brew/opt/readline/lib -I /Users/otoufah/brew/opt/readline/include
 
 ADDI_FLAGS = -lreadline
 

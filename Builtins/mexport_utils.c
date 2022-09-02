@@ -26,7 +26,7 @@ char	*get_key(char *str)
 			break ;
 		i++;
 	}
-	if (i > 0 && (!str[i] || str[i] == '=' || str[i] == '+'))
+	if (i > 0)
 	{
 		key = alloc(sizeof(char) * (i + 1), "export val");
 		ft_strncpy(key, str, i);

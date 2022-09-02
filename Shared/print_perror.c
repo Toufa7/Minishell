@@ -16,7 +16,7 @@ void	print_perror(char *str, t_bool exitt)
 {
 	ft_putstr_fd("Mini: ", 2);
 	perror(str);
-	g_data.errno_cp = errno;
+	g_data.errno_cp = 127;
 	if (exitt)
-		exit(errno);
+		exit(127);
 }
