@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 05:23:48 by abouchfa          #+#    #+#             */
-/*   Updated: 2022/09/01 06:29:45 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/09/02 17:10:36 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,22 @@ void	in_file_prep(t_pipe *pipe_data, char *path, t_bool is_builtin)
 		g_data.redirection_error = TRUE;
 		ft_putstr_fd("Mini: ", 2);
 		perror(path);
-		if (!is_builtin)
+		if (!is_builtin || g_data.size > 1)
 			exit(errno);
 	}
-	fd = open(path, O_RDONLY);
-	pipe_data->in_fd_set = TRUE;
-	if (!pipe_data->is_herdoc && !is_builtin)
-		dup2(fd, 0);
-	ft_close(fd, 8);
-}
+	else
+	{
+		fd = open(path, O_RDONLY);
+		pipe_data->in_fd_set = TRUE;
+		if (!pipe_data->is_herdoc && !is_builtin)
+			dup2(fd, 0);
+		ft_close(fd, 8);
+	}
+}	
 
-void	out_file_prep(t_pipe *pipe_data, char *path, t_bool is_builtin)
-{
-	int	fd;
+void		out_file_prep(t_pipe *pipe_data, char *path, t_bool is_builtin)
+{	
+		int	fd;
 
 	fd = open(path, O_CREAT | O_WRONLY | O_TRUNC, 0777);
 	pipe_data->out_fd_set = TRUE;

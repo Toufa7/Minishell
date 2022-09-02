@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/09/01 09:40:28 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/09/02 16:59:08 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ typedef struct s_redirections
 typedef struct s_g_data
 {
 	int			errno_cp;
-	int			in_fd;
 	int			out_fd;
 	int			size;
 	int			cmd_pipe_fds[2];
@@ -159,7 +158,7 @@ int				check_builtin(t_pipe *pipe_data);
 void			exec_builtin(int builtin_nb, t_pipe *pipe_data);
 void			sig_wait(t_pipe **pipes);
 void			read_herdoc(char *delimiter, t_pipe *pipe_data);
-void			execs(t_pipe *pipe_data, int builtin_nb);
+void			execs(t_pipe *pipe_data, t_bool is_builtin);
 t_bool			check_file_errors(char *path, t_bool is_builtin);
 void			mcd(char *path);
 void			mpwd(void);

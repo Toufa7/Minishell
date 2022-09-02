@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 16:17:46 by otoufah           #+#    #+#             */
-/*   Updated: 2022/09/01 06:20:40 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/09/02 17:09:25 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	child_process(t_pipe *pipe_data, int pipe_nb, int builtin_nb)
 		if (pipe_data->is_herdoc)
 		{
 			fd = open("/tmp/herdoc", O_RDWR, 0004);
-			dup2(g_data.cmd_pipe_fds[1], 1);
 			dup2(fd, 0);
 			ft_close(fd, 1);
 		}
@@ -60,7 +59,7 @@ void	child_process(t_pipe *pipe_data, int pipe_nb, int builtin_nb)
 	}
 }
 
-void	exec_pipe(t_pipe *pipe_data, int index)
+void	exec_pipe(t_pipe *pipe_data, int pipe_nb)
 {
 	int	builtin_nb;
 
@@ -72,9 +71,9 @@ void	exec_pipe(t_pipe *pipe_data, int index)
 	}
 	else
 	{
-		if (g_data.size != index + 1)
+		if (g_data.size != pipe_nb + 1)
 			pipe(g_data.cmd_pipe_fds);
-		child_process(pipe_data, index, builtin_nb);
+		child_process(pipe_data, pipe_nb, builtin_nb);
 		ft_close(g_data.cmd_pipe_fds[1], 5);
 		ft_close(g_data.pre_pipe_infd, 3);
 		g_data.pre_pipe_infd = g_data.cmd_pipe_fds[0];
