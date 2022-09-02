@@ -46,7 +46,7 @@ void	read_herdoc(char *delimiter, t_pipe *pipe_data)
 
 	fd = open("/tmp/herdoc", O_CREAT | O_RDWR | O_TRUNC, 0777);
 	line = readline("> ");
-	without_d_s = s_d_quotes(ft_strdup(delimiter, TRUE));
+	without_d_s = remove_quotes(ft_strdup(delimiter, TRUE));
 	expand = NULL;
 	while (!line || ft_strcmp(line, without_d_s))
 	{

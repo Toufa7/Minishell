@@ -35,6 +35,7 @@ TODO: ✅❓
 	you need to check the delimeter of herdoc is accept expanding or not Mr abdejlil
 
 {
+	cat << ss >> test
 }
 
  

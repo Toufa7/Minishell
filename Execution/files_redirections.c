@@ -105,7 +105,7 @@ void	files_redirections(t_pipe *pipe_data, t_bool is_builtin)
 		path = pipe_data->redirections[i]->path;
 		if (check_file_errors(path, is_builtin))
 			break ;
-		path = s_d_quotes(pipe_data->redirections[i]->path);
+		path = remove_quotes(pipe_data->redirections[i]->path);
 		if (!check_path(path, is_builtin))
 			break ;
 		if (pipe_data->redirections[i]->type == INFILE)

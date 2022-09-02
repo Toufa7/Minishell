@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   s_d_quotes.c                           :+:      :+:    :+:   */
+/*   remove_quotes.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: otoufah <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -47,7 +47,7 @@ char	*replace_them(char *str, char replaced)
 	return (str);
 }
 
-char	*s_d_quotes(char *str)
+char	*remove_quotes(char *str)
 {
 	int		i;
 	int		len;

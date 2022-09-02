@@ -52,7 +52,6 @@ typedef struct s_counter
 	size_t	redirections;
 	size_t	delimiter;
 	size_t	cmd;
-	size_t	env_var;
 	size_t	option;
 	size_t	total;
 }	t_couner;
@@ -128,7 +127,7 @@ typedef struct s_parse
 // ----------- Parsing --------------------------
 
 char			**pipes(char	*str);
-char			*s_d_quotes(char *str);
+char			*remove_quotes(char *str);
 char			*handling_quotes(char *str, char replaced_1, char replace_by);
 char			*input_formating(char	*str);
 int				spc(char *str);
@@ -139,9 +138,11 @@ char			*get_env_in_herdoc(char *target, t_bool flag,
 char			*add_something(char *str, char *add);
 char			*until_dollar(char *str);
 void			token_counter_init(t_token	*pipe_tokens);
-void			input_analyse(t_token	*pipe_tokens);
+// void			input_analyse(t_token	*pipe_tokens);
 void			token_and_type(t_token **tokens);
 void			input_counter(t_token	*pipe_tokens);
+void			fill_tokens(t_pipe	*pipe_data);
+t_token			**input_analyse(char *str);
 void			set_pipe(t_pipe	*pipe_data);
 t_token			**set_tokens(char *str);
 t_bool			check_parse_errors(t_pipe *pipe);

@@ -28,7 +28,6 @@ void	init_pipe_counter(t_pipe *pipe_data)
 	pipe_data->counter.app = 0;
 	pipe_data->counter.cmd = 0;
 	pipe_data->counter.delimiter = 0;
-	pipe_data->counter.env_var = 0;
 	pipe_data->counter.here_do = 0;
 	pipe_data->counter.option = 0;
 	pipe_data->counter.red_in = 0;

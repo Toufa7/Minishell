@@ -47,13 +47,12 @@ void	minishell(t_parse *parse)
 		{
 			parse->pipes[i] = alloc(sizeof(t_pipe), "pipe_data");
 			parse->no_splt = handling_quotes(parse->splt_pipes[i], ' ', -1);
-			parse->pipes[i]->tokens = set_tokens(parse->no_splt);
+			parse->pipes[i]->tokens = input_analyse(parse->no_splt);
 			count_tokens(parse->pipes[i]);
 			g_data.parse_error = check_parse_errors(parse->pipes[i]);
 			if (g_data.parse_error)
 				break ;
-			set_pipe(parse->pipes[i]);
-			token_and_type(parse->pipes[i]->tokens);
+			fill_tokens(parse->pipes[i]);
 		}
 		if (!g_data.parse_error)
 			execution(parse->pipes);
