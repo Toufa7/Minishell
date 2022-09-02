@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 02:35:31 by abouchfa          #+#    #+#             */
-/*   Updated: 2022/09/01 03:03:39 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/09/02 16:48:55 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	init_g_data(void)
 {
 	g_data.pre_pipe_infd = -1;
 	g_data.size = 0;
-	g_data.in_fd = 0;
 	g_data.out_fd = 1;
 	g_data.pre_pipe_infd = -1;
 	g_data.last_child_id = 0;
@@ -29,7 +28,6 @@ void	init_pipe_counter(t_pipe *pipe_data)
 	pipe_data->counter.app = 0;
 	pipe_data->counter.cmd = 0;
 	pipe_data->counter.delimiter = 0;
-	pipe_data->counter.env_var = 0;
 	pipe_data->counter.here_do = 0;
 	pipe_data->counter.option = 0;
 	pipe_data->counter.red_in = 0;

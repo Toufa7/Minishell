@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/09/01 09:40:28 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/09/02 17:29:40 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ typedef struct s_counter
 	size_t	redirections;
 	size_t	delimiter;
 	size_t	cmd;
-	size_t	env_var;
 	size_t	option;
 	size_t	total;
 }	t_couner;
@@ -86,7 +85,6 @@ typedef struct s_redirections
 typedef struct s_g_data
 {
 	int			errno_cp;
-	int			in_fd;
 	int			out_fd;
 	int			size;
 	int			cmd_pipe_fds[2];
@@ -145,7 +143,9 @@ void			token_and_type(t_token **tokens);
 void			input_counter(t_token	*pipe_tokens);
 void			fill_tokens(t_pipe	*pipe_data);
 t_token			**input_analyse(char *str);
-t_bool			check_parse_errors(t_token **pipe_tokens);
+void			set_pipe(t_pipe	*pipe_data);
+t_token			**set_tokens(char *str);
+t_bool			check_parse_errors(t_pipe *pipe);
 char			*gotta_expand(char *target, t_bool flag, int *i);
 char			*digit(char *target, int *i);
 char			*special_cases(char *target, int *i);
@@ -159,7 +159,7 @@ int				check_builtin(t_pipe *pipe_data);
 void			exec_builtin(int builtin_nb, t_pipe *pipe_data);
 void			sig_wait(t_pipe **pipes);
 void			read_herdoc(char *delimiter, t_pipe *pipe_data);
-void			execs(t_pipe *pipe_data, int builtin_nb);
+void			execs(t_pipe *pipe_data, t_bool is_builtin);
 t_bool			check_file_errors(char *path, t_bool is_builtin);
 void			mcd(char *path);
 void			mpwd(void);
@@ -172,7 +172,7 @@ char			*get_key(char *str);
 char			*get_val(char *str);
 int				get_op_type(char *str);
 void			validate_cmd(t_pipe *pipe_data);
-void			pipe_files_prep(t_pipe *pipe_data, t_bool is_builtin);
+void			pipe_redirections(t_pipe *pipe_data, t_bool is_builtin);
 
 // ----------- Shared Functions ------------------
 

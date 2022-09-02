@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 06:00:08 by abouchfa          #+#    #+#             */
-/*   Updated: 2022/08/30 12:47:29 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/09/02 16:48:50 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ void	exec_builtin(int builtin_nb, t_pipe *pipe_data)
 		mpwd();
 	else if (builtin_nb == 7 && !g_data.redirection_error)
 		munset(pipe_data->argv + 1);
-	ft_close(g_data.in_fd, 1);
 	ft_close(g_data.out_fd, 1);
-	g_data.in_fd = 0;
 	g_data.out_fd = 1;
 }

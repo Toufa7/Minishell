@@ -46,15 +46,18 @@ void	conditions(t_pipe *pipe_data, t_token *token,
 	}
 	else if (ft_strcmp(token->type, "delimiter") == 0)
 	{
-		pipe_data->delimiter = ft_realloc(pipe_data->delimiter, token->token, TRUE);
+		pipe_data->delimiter = ft_realloc(pipe_data->delimiter,
+				token->token, TRUE);
 		pipe_data->is_herdoc = TRUE;
 	}
 	else if (ft_strcmp(token->type, "infile") == 0)
 		pipe_data->redirections[++(*j)] = get_redirection(token->token, INFILE);
 	else if (ft_strcmp(token->type, "outfile") == 0)
-		pipe_data->redirections[++(*j)] = get_redirection(token->token, OUTFILE);
+		pipe_data->redirections[++(*j)] = get_redirection(token->token,
+				OUTFILE);
 	else if (ft_strcmp(token->type, "app_outfile") == 0)
-		pipe_data->redirections[++(*j)] = get_redirection(token->token, APPENDFILE);
+		pipe_data->redirections[++(*j)] = get_redirection(token->token,
+				APPENDFILE);
 	else if (ft_strcmp(token->type, "option") == 0)
 		pipe_data->argv = ft_realloc(pipe_data->argv, quotes, TRUE);
 }
