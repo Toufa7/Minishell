@@ -34,12 +34,14 @@ void	set_parse_data(t_parse *parse)
 	parse->pipes = ft_calloc(i + 1, sizeof(t_pipe *), TRUE, "Min");
 }
 
+
+
 void	minishell(t_parse *parse)
 {
 	int		i;
 
 	i = -1;
-	parse->line_double_quotes = handling_quotes(parse->line, '|', -1);
+	parse->line_double_quotes = handling_quotes(parse->tab, '|', -1);
 	if (!g_data.parse_error)
 	{
 		set_parse_data(parse);
@@ -53,10 +55,25 @@ void	minishell(t_parse *parse)
 			if (g_data.parse_error)
 				break ;
 			fill_tokens(parse->pipes[i]);
+			// token_and_type(parse->pipes[i]->tokens);
 		}
 		if (!g_data.parse_error)
 			execution(parse->pipes);
 	}
+}
+
+int		check(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != ' ' && str[i] != TAB)
+			return (1);
+		i++;
+	}
+	return (0);
 }
 
 int	main(int ac, char **av, char **env)
@@ -79,6 +96,9 @@ int	main(int ac, char **av, char **env)
 		if (!parse->line)
 			exit(g_data.errno_cp);
 		add_history(parse->line);
+		if (check(parse->line) == 0)
+			continue ; 
+		parse->tab = prevent_tabs(parse->line);
 		minishell(parse);
 		ft_lstclear(g_data.alloc_list);
 		if (parse->line)

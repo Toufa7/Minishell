@@ -70,11 +70,14 @@ t_bool	is_error(t_token **pipe_tokens, int i)
 	return (FALSE);
 }
 
+
+
 t_bool	check_parse_errors(t_pipe *pipe)
 {
 	size_t	i;
 
 	i = 0;
+
 	if (pipe->counter.total == 0)
 	{
 		printf("Mini: syntax error near unexpected token `|'\n");

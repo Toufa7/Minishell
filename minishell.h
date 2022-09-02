@@ -119,6 +119,7 @@ typedef struct s_parse
 	char			*formated_input;
 	char			*line_double_quotes;
 	char			*no_splt;
+	char			*tab;
 	char			pipe;
 	char			space;
 	t_pipe			**pipes;
@@ -143,6 +144,8 @@ void			input_counter(t_token	*pipe_tokens);
 void			fill_tokens(t_pipe	*pipe_data);
 t_token			**input_analyse(char *str);
 void			set_pipe(t_pipe	*pipe_data);
+char			*ft_strchrr(const char *s, int c);
+char			*prevent_tabs(char *str);
 t_token			**set_tokens(char *str);
 t_bool			check_parse_errors(t_pipe *pipe);
 char			*gotta_expand(char *target, t_bool flag, int *i);

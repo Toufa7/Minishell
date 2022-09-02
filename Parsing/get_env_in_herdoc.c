@@ -28,16 +28,6 @@ int	should_not_be_expanded(char	*str)
 	return (-1);
 }
 
-// void	loop_and_check(t_pipe *pipe_data)
-// {
-// 	int i = 0;
-// 	while (i < pipe_data->counter.delimiter)
-// 	{
-// 		printf("Rslt => %d\n", should_not_be_expanded(&pipe_data->delimiter[i]));
-// 		i++;
-// 	}
-// }
-
 char	*get_env_in_herdoc(char *target, t_bool flag, char *delimiter)
 {
 	int		i;
