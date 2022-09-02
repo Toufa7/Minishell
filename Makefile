@@ -3,9 +3,7 @@ NAME = Minishell
 
 C_FLAGS = gcc
 
-C_READLINE_POMS = -L /Users/otoufah/goinfre/homebrew/opt/readline/lib -I /Users/otoufah/goinfre/homebrew/opt/readline/include
-
-C_READLINE_ABOU = -L /goinfre/abouchfa/.brew/opt/readline/lib -I /goinfre/abouchfa/.brew/opt/readline/include
+C_READLINE = -L .readline/lib -I .readline/include
 
 ADDI_FLAGS = -lreadline
 
@@ -66,15 +64,15 @@ C_FILES = 	minishell.c \
 			Builtins/munset.c \
 			Execution/execution.c \
 			Execution/command_validation.c \
-			Execution/files_preps.c \
-			Execution/utils.c \
+			Execution/pipe_redirections.c \
+			Execution/exec_utils.c \
 
 all: $(NAME)
 
 $(NAME): $(C_FILES)
 		@./loading.sh
 		@$(sig)
-		@$(C_FLAGS) $(C_FILES) $(ADDI_FLAGS) -o $(NAME)
+		@$(C_FLAGS) $(C_FILES) $(C_READLINE) $(ADDI_FLAGS) -o $(NAME)
 
 clean:
 	@rm -rf $(NAME)

@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 16:26:08 by otoufah           #+#    #+#             */
-/*   Updated: 2022/09/01 03:11:31 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/09/02 17:29:53 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,20 @@ t_bool	is_error(t_token **pipe_tokens, int i)
 	return (FALSE);
 }
 
-t_bool	check_parse_errors(t_token **pipe_tokens)
+t_bool	check_parse_errors(t_pipe *pipe)
 {
 	size_t	i;
 
 	i = 0;
-	while (pipe_tokens[i])
+	if (pipe->counter.total == 0)
 	{
-		if (is_error(pipe_tokens, i))
+		printf("Mini: syntax error near unexpected token `|'\n");
+		g_data.errno_cp = 258;
+		return (TRUE);
+	}
+	while (pipe->tokens[i])
+	{
+		if (is_error(pipe->tokens, i))
 			return (TRUE);
 		i++;
 	}

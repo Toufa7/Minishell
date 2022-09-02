@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/09/02 16:59:08 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/09/02 17:29:40 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ void			token_and_type(t_token **tokens);
 void			input_counter(t_token	*pipe_tokens);
 void			set_pipe(t_pipe	*pipe_data);
 t_token			**set_tokens(char *str);
-t_bool			check_parse_errors(t_token **pipe_tokens);
+t_bool			check_parse_errors(t_pipe *pipe);
 char			*gotta_expand(char *target, t_bool flag, int *i);
 char			*digit(char *target, int *i);
 char			*special_cases(char *target, int *i);
@@ -171,7 +171,7 @@ char			*get_key(char *str);
 char			*get_val(char *str);
 int				get_op_type(char *str);
 void			validate_cmd(t_pipe *pipe_data);
-void			pipe_files_prep(t_pipe *pipe_data, t_bool is_builtin);
+void			pipe_redirections(t_pipe *pipe_data, t_bool is_builtin);
 
 // ----------- Shared Functions ------------------
 

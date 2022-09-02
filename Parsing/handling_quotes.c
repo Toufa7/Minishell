@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 10:10:15 by otoufah           #+#    #+#             */
-/*   Updated: 2022/09/01 12:12:49 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/09/02 17:13:41 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_bool	checking_quotes(char *str)
 		ft_putstr_fd("Mini: Unclosed Quotes\n", 2);
 		g_data.errno_cp = 1;
 		rl_on_new_line();
-		//rl_replace_line("", 0);
+		rl_replace_line("", 0);
 		return (TRUE);
 	}
 	return (FALSE);
