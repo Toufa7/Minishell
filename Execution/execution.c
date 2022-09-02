@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/28 16:17:46 by otoufah           #+#    #+#             */
-/*   Updated: 2022/09/02 17:17:20 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/09/02 19:18:03 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	child_process(t_pipe *pipe_data, int pipe_nb, int builtin_nb)
 	{
 		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_DFL);
-		pipe_redirections(pipe_data, builtin_nb != -1);
+		files_redirections(pipe_data, builtin_nb != -1);
 		if (builtin_nb == -1)
 			validate_cmd(pipe_data);
 		if (pipe_data->is_herdoc)
@@ -66,7 +66,7 @@ void	exec_pipe(t_pipe *pipe_data, int pipe_nb)
 	builtin_nb = check_builtin(pipe_data);
 	if (g_data.size == 1 && builtin_nb != -1)
 	{
-		pipe_redirections(pipe_data, TRUE);
+		files_redirections(pipe_data, TRUE);
 		exec_builtin(builtin_nb, pipe_data);
 	}
 	else

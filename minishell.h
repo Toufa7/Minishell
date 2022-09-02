@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/09/02 17:29:40 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/09/02 19:18:03 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,7 @@ char			*get_key(char *str);
 char			*get_val(char *str);
 int				get_op_type(char *str);
 void			validate_cmd(t_pipe *pipe_data);
-void			pipe_redirections(t_pipe *pipe_data, t_bool is_builtin);
+void			files_redirections(t_pipe *pipe_data, t_bool is_builtin);
 
 // ----------- Shared Functions ------------------
 

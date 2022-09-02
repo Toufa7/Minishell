@@ -64,13 +64,12 @@ C_FILES = 	minishell.c \
 			Builtins/munset.c \
 			Execution/execution.c \
 			Execution/command_validation.c \
-			Execution/pipe_redirections.c \
+			Execution/files_redirections.c \
 			Execution/exec_utils.c \
 
 all: $(NAME)
 
 $(NAME): $(C_FILES)
-		@./loading.sh
 		@$(sig)
 		@$(C_FLAGS) $(C_FILES) $(ADDI_FLAGS) -o $(NAME)
 
