@@ -21,7 +21,7 @@
 
   ],
   "source": {
-    "path": "/Users/abouchfa/brew/Library/Taps/homebrew/homebrew-core/Formula/readline.rb",
+    "path": "",
     "tap": "homebrew/core",
     "tap_git_head": "f57d9a04fbea9e0f475ceb45f756d6d8b5d38115",
     "spec": "stable",
