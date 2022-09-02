@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 06:20:42 by abouchfa          #+#    #+#             */
-/*   Updated: 2022/09/02 16:55:29 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/09/02 21:10:09 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	read_herdoc(char *delimiter, t_pipe *pipe_data)
 	{
 		if (line)
 		{
-			expand = get_env_in_herdoc(line, FALSE, pipe_data);
+			expand = get_env_in_herdoc(line, FALSE, delimiter);
 			write(fd, expand, ft_strlen(expand));
 			write(fd, "\n", 1);
 			free_str(expand);

@@ -6,28 +6,22 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 16:49:01 by otoufah           #+#    #+#             */
-/*   Updated: 2022/08/28 15:40:29 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/09/02 21:14:50 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	should_not_be_expanded(char	**str)
+int	should_not_be_expanded(char	*str)
 {
 	int	i;
-	int	j;
 
 	i = 0;
 	while (str[i])
 	{
-		j = 0;
-		while (str[i][j])
+		if (str[i] == SING_QUOTES || str[i] == DOUBLES_QUOTES)
 		{
-			if (str[i][j] == SING_QUOTES || str[i][j] == DOUBLES_QUOTES)
-			{
-				return (1);
-			}
-			j++;
+			return (1);
 		}
 		i++;
 	}
@@ -44,7 +38,7 @@ int	should_not_be_expanded(char	**str)
 // 	}
 // }
 
-char	*get_env_in_herdoc(char *target, t_bool flag, t_pipe *pipe_data)
+char	*get_env_in_herdoc(char *target, t_bool flag, char *delimiter)
 {
 	int		i;
 	char	*output;
@@ -54,7 +48,7 @@ char	*get_env_in_herdoc(char *target, t_bool flag, t_pipe *pipe_data)
 	i = 0;
 	while ((size_t)i < ft_strlen(target))
 	{
-		yes_or_no = should_not_be_expanded(&pipe_data->delimiter[i]);
+		yes_or_no = should_not_be_expanded(delimiter);
 		if (target[i] == '$' && yes_or_no != 1)
 		{
 			if (target[i + 1] == '?')

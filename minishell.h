@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/09/02 19:18:03 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/09/02 21:11:14 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,8 +133,7 @@ char			*input_formating(char	*str);
 int				spc(char *str);
 char			*getting_back_original_input(char *str);
 char			*get_env_variables(char *target, t_bool flag);
-char			*get_env_in_herdoc(char *target, t_bool flag,
-					t_pipe *pipe_data);
+char			*get_env_in_herdoc(char *target, t_bool flag, char *delimiter);
 char			*add_something(char *str, char *add);
 char			*until_dollar(char *str);
 void			token_counter_init(t_token	*pipe_tokens);

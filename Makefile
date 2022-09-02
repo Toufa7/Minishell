@@ -71,7 +71,7 @@ all: $(NAME)
 
 $(NAME): $(C_FILES)
 		@$(sig)
-		@$(C_FLAGS) $(C_FILES) $(ADDI_FLAGS) -o $(NAME)
+		@$(C_FLAGS) $(C_FILES) $(C_READLINE) $(ADDI_FLAGS) -o $(NAME)
 
 clean:
 	@rm -rf $(NAME)
