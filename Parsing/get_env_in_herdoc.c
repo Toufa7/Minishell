@@ -52,9 +52,9 @@ char	*get_env_in_herdoc(char *target, t_bool flag, t_pipe *pipe_data)
 
 	output = ft_strdup("", TRUE);
 	i = 0;
-	yes_or_no = should_not_be_expanded(&pipe_data->delimiter[0]);
 	while ((size_t)i < ft_strlen(target))
 	{
+		yes_or_no = should_not_be_expanded(&pipe_data->delimiter[i]);
 		if (target[i] == '$' && yes_or_no != 1)
 		{
 			if (target[i + 1] == '?')
