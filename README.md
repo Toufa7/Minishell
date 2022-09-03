@@ -5,7 +5,7 @@ Realizing a simplified version of the shell program
 
 *   Parsing
 
-<img src="Algo/Flowcharts_img.jpeg" width="1000"/>
+<img src="Algo/Minishell_Parsing.jpeg" width="1000"/>
 
 *   Execution
 
