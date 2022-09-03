@@ -16,13 +16,14 @@ t_bool	checking_quotes(char *str)
 {
 	char	*check;
 
+	// printf("Check -> %s\n", str);
 	check = ft_strdup(str, TRUE);
 	if (remove_quotes(check) == NULL)
 	{
 		ft_putstr_fd("Mini: Unclosed Quotes\n", 2);
 		g_data.errno_cp = 1;
 		rl_on_new_line();
-		// rl_replace_line("", 0);
+		rl_replace_line("", 0);
 		return (TRUE);
 	}
 	return (FALSE);
@@ -70,8 +71,3 @@ char	*handling_quotes(char *str, char replaced, char replace_by)
 	}
 	return (dup);
 }
-
-// int main()
-// {
-// 	printf("%s\n",handling_quotes("omar toufah me", ' ', '*'));
-// }

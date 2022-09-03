@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   prevent_tabs.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: otoufah <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/03 01:09:18 by otoufah           #+#    #+#             */
+/*   Updated: 2022/09/03 01:09:19 by otoufah          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 char	*ft_strchrr(const char *s, int c)
@@ -24,7 +36,7 @@ char	*ft_strchrr(const char *s, int c)
 
 char	ft_until(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -38,8 +50,8 @@ char	ft_until(char *str)
 
 char	*prevent_tabs(char *str)
 {
-	char    until;
+	char	until;
 
 	until = ft_until(str);
-	return(ft_strchrr(str, until));
+	return (ft_strchrr(str, until));
 }

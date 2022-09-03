@@ -41,7 +41,7 @@ void	minishell(t_parse *parse)
 	int		i;
 
 	i = -1;
-	parse->line_double_quotes = handling_quotes(parse->tab, '|', -1);
+	parse->line_double_quotes = handling_quotes(prevent_tabs(parse->line), '|', -1);
 	if (!g_data.parse_error)
 	{
 		set_parse_data(parse);
@@ -98,7 +98,6 @@ int	main(int ac, char **av, char **env)
 		add_history(parse->line);
 		if (check(parse->line) == 0)
 			continue ; 
-		parse->tab = prevent_tabs(parse->line);
 		minishell(parse);
 		ft_lstclear(g_data.alloc_list);
 		if (parse->line)

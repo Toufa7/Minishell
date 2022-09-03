@@ -70,8 +70,6 @@ t_bool	is_error(t_token **pipe_tokens, int i)
 	return (FALSE);
 }
 
-
-
 t_bool	check_parse_errors(t_pipe *pipe)
 {
 	size_t	i;
