@@ -6,11 +6,63 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 06:20:42 by abouchfa          #+#    #+#             */
-/*   Updated: 2022/09/02 21:10:09 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/09/03 03:47:52 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+void	read_herdoc(char *delimiter)
+{
+	char	*line;
+	char	*without_d_s;
+	char	*expand;
+	int		fd;
+
+	fd = open_heredoc_file(FALSE);
+	line = readline("> ");
+	without_d_s = remove_quotes(ft_strdup(delimiter, TRUE));
+	expand = NULL;
+	while (!line || ft_strcmp(line, without_d_s))
+	{
+		if (line)
+		{
+			expand = get_env_in_herdoc(line, FALSE, delimiter);
+			write(fd, expand, ft_strlen(expand));
+			write(fd, "\n", 1);
+			free_str(expand);
+		}
+		else
+			break ;
+		line = readline("> ");
+	}
+	free_str(line);
+	ft_close(fd, 3);
+}
+
+void	herdocs(t_pipe *pipe_data)
+{
+	int		j;
+	int		id;
+
+	j = -1;
+	id = ft_fork();
+	if (id != 0)
+		g_data.heredoc_file = ft_strjoin("/tmp/heredoc_file", ft_itoa(id));
+	else
+		exit(0);
+	id = ft_fork();
+	if (id == 0)
+	{
+		signal(SIGINT, herdoc_sigint);
+		while (pipe_data->delimiter && pipe_data->delimiter[++j])
+			read_herdoc(pipe_data->delimiter[j]);
+		exit(0);
+	}
+	signal(SIGINT, SIG_IGN);
+	waitpid(id, &g_data.errno_cp, 0);
+	signal(SIGINT, parent_sigint);
+}
 
 void	sig_wait(t_pipe **pipes)
 {
@@ -35,34 +87,6 @@ void	sig_wait(t_pipe **pipes)
 	}
 	signal(SIGINT, parent_sigint);
 	signal(SIGQUIT, SIG_IGN);
-}
-
-void	read_herdoc(char *delimiter, t_pipe *pipe_data)
-{
-	char	*line;
-	char	*without_d_s;
-	char	*expand;
-	int		fd;
-
-	fd = open("/tmp/herdoc", O_CREAT | O_RDWR | O_TRUNC, 0777);
-	line = readline("> ");
-	without_d_s = remove_quotes(ft_strdup(delimiter, TRUE));
-	expand = NULL;
-	while (!line || ft_strcmp(line, without_d_s))
-	{
-		if (line)
-		{
-			expand = get_env_in_herdoc(line, FALSE, delimiter);
-			write(fd, expand, ft_strlen(expand));
-			write(fd, "\n", 1);
-			free_str(expand);
-		}
-		else
-			break ;
-		line = readline("> ");
-	}
-	free_str(line);
-	ft_close(fd, 3);
 }
 
 void	execs(t_pipe *pipe_data, int builtin_nb)

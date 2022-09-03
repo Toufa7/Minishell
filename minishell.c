@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/09/02 17:28:35 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/09/03 01:53:36 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	minishell(t_parse *parse)
 				break ;
 			fill_tokens(parse->pipes[i]);
 		}
+		g_data.size = i;
 		if (!g_data.parse_error)
 			execution(parse->pipes);
 	}

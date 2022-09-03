@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 02:35:31 by abouchfa          #+#    #+#             */
-/*   Updated: 2022/09/02 16:48:55 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/09/03 00:01:59 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 void	init_g_data(void)
 {
-	g_data.pre_pipe_infd = -1;
-	g_data.size = 0;
 	g_data.out_fd = 1;
+	g_data.size = 0;
 	g_data.pre_pipe_infd = -1;
 	g_data.last_child_id = 0;
 	g_data.parse_error = FALSE;
 	g_data.redirection_error = FALSE;
+	g_data.is_heredoc_last = FALSE;
 }
 
 void	init_pipe_counter(t_pipe *pipe_data)

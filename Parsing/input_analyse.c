@@ -12,6 +12,14 @@
 
 #include "../minishell.h"
 
+void	update_haerdoc_pos(char *type)
+{
+	if (ft_strcmp(type, "delimiter") == 0)
+		g_data.is_heredoc_last = TRUE;
+	else
+		g_data.is_heredoc_last = FALSE;
+}
+
 void	type_define(t_token *token, char *str, t_bool flag)
 {
 	token->type = str;
@@ -51,6 +59,7 @@ void	set_tokens_type(t_token *token, t_token *pre_toekn, t_token **tokens)
 		type_define(token, "option", FALSE);
 	else
 		type_define(token, "command", TRUE);
+	update_haerdoc_pos(token->type);
 }
 
 t_token	**input_analyse(char *str)

@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 01:22:42 by abouchfa          #+#    #+#             */
-/*   Updated: 2022/08/28 17:52:54 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/09/03 02:16:24 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@ void	*alloc(size_t size, char *source)
 
 	(void) source;
 	content = malloc(size);
+	if (!content)
+	{
+		perror("");
+		exit(errno);
+	}
 	ft_lstadd_front(g_data.alloc_list, ft_lstnew(content));
 	return (content);
 }

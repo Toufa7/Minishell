@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:39:43 by otoufah           #+#    #+#             */
-/*   Updated: 2022/09/02 21:11:14 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/09/03 03:50:18 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,17 +84,17 @@ typedef struct s_redirections
 
 typedef struct s_g_data
 {
+	char		*heredoc_file;
 	int			errno_cp;
 	int			out_fd;
 	int			size;
-	int			cmd_pipe_fds[2];
 	int			pre_pipe_infd;
 	char		**envp;
 	t_alloc_lst	**alloc_list;
-	t_bool		parse_error;
 	pid_t		last_child_id;
+	t_bool		parse_error;
 	t_bool		redirection_error;
-	t_bool		is_buit_in;
+	t_bool		is_heredoc_last;
 }	t_g_data;
 
 typedef struct s_pipe
@@ -109,6 +109,7 @@ typedef struct s_pipe
 	t_couner		counter;
 	t_redirections	**redirections;
 	t_token			**tokens;
+	int				cmd_pipe_fds[2];
 }	t_pipe;
 
 typedef struct s_parse
@@ -137,7 +138,6 @@ char			*get_env_in_herdoc(char *target, t_bool flag, char *delimiter);
 char			*add_something(char *str, char *add);
 char			*until_dollar(char *str);
 void			token_counter_init(t_token	*pipe_tokens);
-// void			input_analyse(t_token	*pipe_tokens);
 void			token_and_type(t_token **tokens);
 void			input_counter(t_token	*pipe_tokens);
 void			fill_tokens(t_pipe	*pipe_data);
@@ -157,7 +157,7 @@ void			execution(t_pipe **pipe_data);
 int				check_builtin(t_pipe *pipe_data);
 void			exec_builtin(int builtin_nb, t_pipe *pipe_data);
 void			sig_wait(t_pipe **pipes);
-void			read_herdoc(char *delimiter, t_pipe *pipe_data);
+void			herdocs(t_pipe *pipe_data);
 void			execs(t_pipe *pipe_data, t_bool is_builtin);
 t_bool			check_file_errors(char *path, t_bool is_builtin);
 void			mcd(char *path);
@@ -180,9 +180,13 @@ void			print_perror(char *str, t_bool exitt);
 void			count_tokens(t_pipe *pipe_data);
 void			init_pipe_counter(t_pipe *pipe_data);
 void			*alloc(size_t size, char *source);
+
 void			ft_close(int n, int s);
+int				ft_fork(void);
+int				open_heredoc_file(t_bool read_only);
 void			free_str(void	*ptr);
 void			free_arr(void **arr);
+
 void			parent_sigint(int sig);
 void			herdoc_sigint(int sig);
 void			void_sig(int sig);

@@ -1,9 +1,11 @@
 sig = `stty -echoctl`
 NAME = Minishell
 
-C_FLAGS = gcc
+C_FLAGS = gcc -Wall -Wextra -Werror
 
 C_READLINE = -lreadline -L /Users/otoufah/brew/opt/readline/lib -I /Users/otoufah/brew/opt/readline/include
+
+C_ABOU_READLINE = #-L .readline/lib -I .readline/include
 
 ADDI_FLAGS = -lreadline
 
@@ -18,7 +20,6 @@ C_FILES = 	minishell.c \
 			Shared/signals.c \
 			Shared/ft_itoa.c \
 			Shared/validate_var_name.c \
-			Shared/free_funcs.c \
 			Shared/env_dup.c \
 			Shared/get_var_index.c \
 			Shared/ft_putstr_fd.c \
@@ -71,7 +72,7 @@ all: $(NAME)
 
 $(NAME): $(C_FILES)
 		@$(sig)
-		@$(C_FLAGS) $(C_FILES) $(C_READLINE) $(ADDI_FLAGS) -o $(NAME)
+		@$(C_FLAGS) $(C_FILES) $(C_ABOU_READLINE) $(ADDI_FLAGS) -o $(NAME)
 
 clean:
 	@rm -rf $(NAME)
