@@ -1,6 +1,16 @@
 # Minishell
 Realizing a simplified version of the shell program
 
+#   Flowcharts and Algorithme
+
+*   Parsing
+
+<img src="Algo/Flowcharts_img.jpeg" width="1000"/>
+
+*   Execution
+
+<img src="Algo/Flowchart_Execution.jpeg" width="1000"/>
+
 # Built-in Functions
 
 A builtin (or builtin command, or shell builtin) is a command or function that is part of the shell itself.
