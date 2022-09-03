@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/03 14:44:31 by otoufah           #+#    #+#             */
-/*   Updated: 2022/09/03 01:53:36 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/09/03 03:55:52 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void	minishell(t_parse *parse)
 	int		i;
 
 	i = -1;
-	parse->line_double_quotes = handling_quotes(parse->line, '|', -1);
+	parse->line_double_quotes = handling_quotes(prevent_tabs(parse->line),
+			'|', -1);
 	if (!g_data.parse_error)
 	{
 		set_parse_data(parse);
@@ -58,6 +59,20 @@ void	minishell(t_parse *parse)
 		if (!g_data.parse_error)
 			execution(parse->pipes);
 	}
+}
+
+int	check(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != ' ' && str[i] != TAB)
+			return (1);
+		i++;
+	}
+	return (0);
 }
 
 int	main(int ac, char **av, char **env)
@@ -80,6 +95,8 @@ int	main(int ac, char **av, char **env)
 		if (!parse->line)
 			exit(g_data.errno_cp);
 		add_history(parse->line);
+		if (check(parse->line) == 0)
+			continue ;
 		minishell(parse);
 		ft_lstclear(g_data.alloc_list);
 		if (parse->line)

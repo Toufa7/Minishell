@@ -3,11 +3,9 @@ NAME = Minishell
 
 C_FLAGS = gcc -Wall -Wextra -Werror
 
-C_READLINE = -lreadline -L /Users/otoufah/brew/opt/readline/lib -I /Users/otoufah/brew/opt/readline/include
+C_ABOU_READLINE = -lreadline -L .readline/lib -I .readline/include
 
-C_ABOU_READLINE = #-L .readline/lib -I .readline/include
-
-ADDI_FLAGS = -lreadline
+C_READLINE = -lreadline -L /Users/otoufah/goinfre/homebrew/opt/readline/lib -I /Users/otoufah/goinfre/homebrew/opt/readline/include
 
 F_REMOVE = rm -rf
 
@@ -42,6 +40,7 @@ C_FILES = 	minishell.c \
 			Shared/ft_isalnum.c \
 			Shared/ft_strnstr.c \
 			Shared/get_var_val.c \
+			Shared/prevent_tabs.c \
 			Parsing/remove_quotes.c \
 			Parsing/token_and_type.c \
 			Parsing/get_env_in_herdoc.c \

@@ -6,7 +6,7 @@
 /*   By: abouchfa <abouchfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 10:10:15 by otoufah           #+#    #+#             */
-/*   Updated: 2022/09/03 03:49:50 by abouchfa         ###   ########.fr       */
+/*   Updated: 2022/09/03 03:54:09 by abouchfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,3 @@ char	*handling_quotes(char *str, char replaced, char replace_by)
 	}
 	return (dup);
 }
-
-// int main()
-// {
-// 	printf("%s\n",handling_quotes("omar toufah me", ' ', '*'));
-// }
