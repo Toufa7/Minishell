@@ -95,9 +95,8 @@ int	main(int ac, char **av, char **env)
 		if (!parse->line)
 			exit(g_data.errno_cp);
 		add_history(parse->line);
-		if (check(parse->line) == 0)
-			continue ;
-		minishell(parse);
+		if (check(parse->line) != 0)
+			minishell(parse);
 		ft_lstclear(g_data.alloc_list);
 		if (parse->line)
 			free(parse->line);
