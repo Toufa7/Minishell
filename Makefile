@@ -3,9 +3,7 @@ NAME = Minishell
 
 C_FLAGS = gcc -Wall -Wextra -Werror
 
-C_ABOU_READLINE = -lreadline -L .readline/lib -I .readline/include
-
-C_READLINE = -lreadline -L /Users/otoufah/goinfre/homebrew/opt/readline/lib -I /Users/otoufah/goinfre/homebrew/opt/readline/include
+C_READLINE = -lreadline -L /Users/$USER/goinfre/homebrew/opt/readline/lib -I /Users/$USER/goinfre/homebrew/opt/readline/include
 
 F_REMOVE = rm -rf
 
@@ -71,7 +69,7 @@ all: $(NAME)
 
 $(NAME): $(C_FILES)
 		@$(sig)
-		@$(C_FLAGS) $(C_FILES) $(C_ABOU_READLINE) $(ADDI_FLAGS) -o $(NAME)
+		$(C_FLAGS) $(C_FILES) $(C_READLINE) $(ADDI_FLAGS) -o $(NAME)
 
 clean:
 	@rm -rf $(NAME)
