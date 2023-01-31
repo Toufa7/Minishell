@@ -46,12 +46,6 @@ Categories of signals :
     -   Realtime signals :  which are used by the kernel to notify processes or events (1 -> 31)
 
 
-
-Walkthrough Signal to Process :
-
-    -   
-
-
 Process answers to a signal :
 
 -   Ignored : The process never even knows that it occurred
