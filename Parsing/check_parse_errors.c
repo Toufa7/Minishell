@@ -23,21 +23,13 @@ t_bool	err(char *str_1, char *str_2, char *str_3)
 
 int	compare(char	*t, char	*nxt_t, char	*nxt_tok)
 {
-	if ((ft_strcmp(t, "here_doc") == 0 && !nxt_tok)
-		|| (ft_strcmp(t, "here_doc") == 0
-			&& (ft_strcmp(nxt_t, "delimiter") != 0)))
+	if ((ft_strcmp(t, "here_doc") == 0 && !nxt_tok) || (ft_strcmp(t, "here_doc") == 0 && (ft_strcmp(nxt_t, "delimiter") != 0)))
 		return (1);
-	else if ((ft_strcmp(t, "red_out") == 0 && !nxt_tok)
-		|| (ft_strcmp(t, "red_out") == 0
-			&& (ft_strcmp(nxt_t, "outfile") != 0)))
+	else if ((ft_strcmp(t, "red_out") == 0 && !nxt_tok) || (ft_strcmp(t, "red_out") == 0 && (ft_strcmp(nxt_t, "outfile") != 0)))
 		return (2);
-	else if ((ft_strcmp(t, "append") == 0 && !nxt_tok)
-		|| (ft_strcmp(t, "append") == 0
-			&& (ft_strcmp(nxt_t, "app_outfile") != 0)))
+	else if ((ft_strcmp(t, "append") == 0 && !nxt_tok) || (ft_strcmp(t, "append") == 0 && (ft_strcmp(nxt_t, "app_outfile") != 0)))
 		return (3);
-	else if ((ft_strcmp(t, "red_input") == 0 && !nxt_tok)
-		|| ((ft_strcmp(t, "red_input") == 0)
-			&& (ft_strcmp(nxt_t, "infile") != 0)))
+	else if ((ft_strcmp(t, "red_input") == 0 && !nxt_tok) || ((ft_strcmp(t, "red_input") == 0) && (ft_strcmp(nxt_t, "infile") != 0)))
 		return (4);
 	else
 		return (-1);
